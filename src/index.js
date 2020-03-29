@@ -1,9 +1,12 @@
-class DSA {
+const { address, ABI } = require("./constant.js");
+const helpers = require("./helpers.js");
+
+export default class DSA {
+
   constructor() {
     this.address = address;
     this.ABI = ABI;
     this.helpers = helpers;
-    this.compound = helpers;
   }
 
   /**
