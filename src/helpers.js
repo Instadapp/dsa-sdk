@@ -1,4 +1,4 @@
-const helpers = {
+export const helpers = {
   cleanAddress: function (address) {
     return address.slice(0, 4) + "..." + address.slice(-4);
   },
