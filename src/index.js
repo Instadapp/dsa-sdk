@@ -3,6 +3,7 @@ class DSA {
     this.address = address;
     this.ABI = ABI;
     this.helpers = helpers;
+    this.compound = helpers;
   }
 
   /**
@@ -14,7 +15,7 @@ class DSA {
     if (!_d.owner) _d.owner = _a;
     if (!_d.version) _d.version = 1;
     if (!_d.origin) _d.origin = address.genesis;
-    var _c = new web3.eth.Contract(ABI.INDEX_CORE, address.index);
+    var _c = new web3.eth.Contract(ABI.INDEX_CORE, address.core.index);
     return _c.methods
       .build(_d.owner, _d.version, _d.origin)
       .send({
@@ -30,7 +31,7 @@ class DSA {
    * Global number of DSAs
    */
   async count() {
-    var _c = new web3.eth.Contract(ABI.LIST_CORE, address.list);
+    var _c = new web3.eth.Contract(ABI.LIST_CORE, address.core.list);
     return _c.methods
       .accounts()
       .call()
@@ -43,7 +44,7 @@ class DSA {
    * returns accounts in an simple array of objects
    */
   async getAccounts(_owner) {
-    var _c = new web3.eth.Contract(ABI.CORE_RESOLVER, address.core);
+    var _c = new web3.eth.Contract(ABI.CORE_RESOLVER, address.resolver.core);
     return _c.methods
       .getOwnerDetails(_owner)
       .call({ from: address.genesis })
@@ -70,7 +71,7 @@ class DSA {
    * returns authentications by accountID
    */
   async getAuthentications(_id) {
-    var _c = new web3.eth.Contract(ABI.CORE_RESOLVER, address.instaread);
+    var _c = new web3.eth.Contract(ABI.CORE_RESOLVER, address.resolver.core);
     return _c.methods.getIDOwners(_id).call({ from: address.genesis });
   }
 
