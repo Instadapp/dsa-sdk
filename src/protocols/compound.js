@@ -1,5 +1,5 @@
 export const compound = {
-  hey: () => {
-    console.log("HEY");
+  name: () => {
+    console.log("COMPOUND");
   },
 };

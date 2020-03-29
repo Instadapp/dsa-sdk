@@ -1,4 +1,5 @@
-export const helpers = {
+const helpers = {
+  
   cleanAddress: function (address) {
     return address.slice(0, 4) + "..." + address.slice(-4);
   },
@@ -44,5 +45,6 @@ export const helpers = {
       }
     }
     return x;
-  },
+  }
+
 };

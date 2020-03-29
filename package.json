@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack",
     "prepare": "npm run build",
-    "trypublish": "npm publish || true"
+    "trypublish": "npm publish || true",
+    "bundle": "gulp scripts"
   },
   "repository": {
     "type": "git",
@@ -36,5 +37,10 @@
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"
   },
-  "dependencies": {}
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-uglify-es": "^2.0.0"
+  }
 }

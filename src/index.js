@@ -1,12 +1,8 @@
-import helpers from "./helpers.js";
-import { address, ABI } from "./constant.js";
-import compound from "./protocols/compound.js";
-
-export default class DSA {
+class DSA {
   constructor() {
-    constant = constant;
-    helpers = helpers;
-    compound = compound;
+    this.address = address;
+    this.ABI = ABI;
+    this.helpers = helpers;
   }
 
   /**
@@ -77,4 +73,5 @@ export default class DSA {
     var _c = new web3.eth.Contract(ABI.CORE_RESOLVER, address.instaread);
     return _c.methods.getIDOwners(_id).call({ from: address.genesis });
   }
+
 }
