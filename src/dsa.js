@@ -1,4 +1,14 @@
-export default class Core {
+import helpers from "./helpers.js";
+import { address, ABI } from "./constant.js";
+import compound from "./protocols/compound.js";
+
+export default class DSA {
+  constructor() {
+    constant = constant;
+    helpers = helpers;
+    compound = compound;
+  }
+
   /**
    * Build new DSA
    */
@@ -7,8 +17,8 @@ export default class Core {
     if (!_d) _d = {};
     if (!_d.owner) _d.owner = _a;
     if (!_d.version) _d.version = 1;
-    if (!_d.origin) _d.origin = this.address.genesis;
-    var _c = new web3.eth.Contract(this.ABI.INDEX_CORE, this.address.index);
+    if (!_d.origin) _d.origin = address.genesis;
+    var _c = new web3.eth.Contract(ABI.INDEX_CORE, address.index);
     return _c.methods
       .build(_d.owner, _d.version, _d.origin)
       .send({
@@ -24,7 +34,7 @@ export default class Core {
    * Global number of DSAs
    */
   async count() {
-    var _c = new web3.eth.Contract(this.ABI.LIST_CORE, this.address.list);
+    var _c = new web3.eth.Contract(ABI.LIST_CORE, address.list);
     return _c.methods
       .accounts()
       .call()
@@ -37,10 +47,10 @@ export default class Core {
    * returns accounts in an simple array of objects
    */
   async getAccounts(_owner) {
-    var _c = new web3.eth.Contract(this.ABI.CORE_RESOLVER, this.address.core);
+    var _c = new web3.eth.Contract(ABI.CORE_RESOLVER, address.core);
     return _c.methods
       .getOwnerDetails(_owner)
-      .call({ from: this.address.genesis })
+      .call({ from: address.genesis })
       .then((raw_data) => {
         numberOfAccounts = raw_data.IDs.length;
         accounts = new Array(numberOfAccounts);
@@ -64,10 +74,7 @@ export default class Core {
    * returns authentications by accountID
    */
   async getAuthentications(_id) {
-    var _c = new web3.eth.Contract(
-      this.ABI.CORE_RESOLVER,
-      this.address.instaread
-    );
-    return _c.methods.getIDOwners(_id).call({ from: this.address.genesis });
+    var _c = new web3.eth.Contract(ABI.CORE_RESOLVER, address.instaread);
+    return _c.methods.getIDOwners(_id).call({ from: address.genesis });
   }
 }

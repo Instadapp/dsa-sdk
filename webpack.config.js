@@ -23,9 +23,9 @@ const banner = `
 
 module.exports = {
   mode: "production",
-  entry: './src/index.js',
+  entry: './src/dsa.js',
   output: {
-    filename: 'index.js',
+    filename: 'dsa.min.js',
     path: path.resolve(__dirname, 'build'),
     library: 'DSA',
     libraryTarget: 'umd'
