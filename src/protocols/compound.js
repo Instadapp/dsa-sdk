@@ -1,5 +1,7 @@
-export const compound = {
-  name: () => {
+module.exports = class Compound {
+  
+  name() {
     console.log("COMPOUND");
-  },
+  }
+
 };
