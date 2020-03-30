@@ -19,7 +19,7 @@ module.exports = class DSA {
     if (!_d.owner) _d.owner = _a;
     if (!_d.version) _d.version = 1;
     if (!_d.origin) _d.origin = address.genesis;
-    var _c = new web3.eth.Contract(ABI.INDEX_CORE, address.core.index);
+    var _c = await new web3.eth.Contract(ABI.INDEX_CORE, address.core.index);
     return _c.methods
       .build(_d.owner, _d.version, _d.origin)
       .send({
@@ -36,7 +36,7 @@ module.exports = class DSA {
    */
   async count() {
     var _c = new web3.eth.Contract(ABI.LIST_CORE, address.core.list);
-    return _c.methods
+    return await _c.methods
       .accounts()
       .call()
       .then((count) => {
@@ -49,7 +49,7 @@ module.exports = class DSA {
    */
   async getAccounts(_owner) {
     var _c = new web3.eth.Contract(ABI.CORE_RESOLVER, address.resolver.core);
-    return _c.methods
+    return await _c.methods
       .getOwnerDetails(_owner)
       .call({ from: address.genesis })
       .then((raw_data) => {
@@ -76,6 +76,6 @@ module.exports = class DSA {
    */
   async getAuthentications(_id) {
     var _c = new web3.eth.Contract(ABI.CORE_RESOLVER, address.resolver.core);
-    return _c.methods.getIDOwners(_id).call({ from: address.genesis });
+    return await _c.methods.getIDOwners(_id).call({ from: address.genesis });
   }
-}
+};

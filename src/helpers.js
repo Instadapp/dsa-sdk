@@ -45,4 +45,4 @@ module.exports = class Helpers {
     }
     return x;
   }
-}
+};
