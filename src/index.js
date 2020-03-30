@@ -1,12 +1,13 @@
+const Helpers = require("./helpers.js");
+const Compound = require("./protocols/compound.js");
 const { address, ABI } = require("./constant.js");
-const helpers = require("./helpers.js");
 
-export default class DSA {
-
+module.exports = class DSA {
   constructor() {
     this.address = address;
     this.ABI = ABI;
-    this.helpers = helpers;
+    this.helpers = new Helpers();
+    this.compound = new Compound();
   }
 
   /**
@@ -77,5 +78,4 @@ export default class DSA {
     var _c = new web3.eth.Contract(ABI.CORE_RESOLVER, address.resolver.core);
     return _c.methods.getIDOwners(_id).call({ from: address.genesis });
   }
-
 }
