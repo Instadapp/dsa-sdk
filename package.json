@@ -1,6 +1,6 @@
 {
   "name": "dsa-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "DSA Starter Kit for building DeFi dapps",
   "main": "build/index.js",
   "scripts": {
