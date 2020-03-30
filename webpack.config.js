@@ -28,7 +28,8 @@ module.exports = {
     filename: 'dsa.js',
     path: path.resolve(__dirname, 'build'),
     library: 'DSA',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
+    globalObject: 'this'
   },
   module: {
     rules: [
