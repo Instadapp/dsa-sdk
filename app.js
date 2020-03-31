@@ -3,4 +3,10 @@
 const DSA = require("./build/dsa.js");
 
 const dsa = new DSA();
-console.log(dsa.compound.name(""));
+console.log(dsa);
+
+// const obj = {
+//     connector: "compound",
+//     method: "deposit"
+// }
+// console.log(dsa.getInterface(obj));
