@@ -1,13 +1,14 @@
+// add checks - if user
+
 const Helpers = require("./helpers.js");
 const { address, ABI } = require("./constant.js");
 
 module.exports = class DSA {
   constructor() {
     this.user = {};
-    this.address = address;
     this.ABI = ABI;
+    this.address = address;
     this.helpers = new Helpers();
-    
   }
 
   /**
@@ -21,8 +22,8 @@ module.exports = class DSA {
    * sets the current DSA ID
    */
   setUser(_o) {
-    this.user.id = _o.id;
-    this.user.address = _o.address;
+    if (_o.id) this.user.id = _o.id;
+    if (_o.account) this.user.account = _o.account;
   }
 
   /**
@@ -66,12 +67,13 @@ module.exports = class DSA {
    * returns accounts in a simple array of objects
    */
   async getAccounts(_owner) {
+    if (!_owner) _owner = web3.currentProvider.selectedAddress;
     var _c = new web3.eth.Contract(ABI.resolvers.core, address.resolvers.core);
     return await _c.methods
       .getOwnerDetails(_owner)
       .call({ from: address.genesis })
       .then((raw_data) => {
-        numberOfAccounts = raw_data.IDs.length;
+        var numberOfAccounts = raw_data.IDs.length;
         accounts = new Array(numberOfAccounts);
         for (var i = 0; i < numberOfAccounts; i++) {
           accounts[i] = [];
@@ -95,7 +97,8 @@ module.exports = class DSA {
   /**
    * returns authentications by accountID
    */
-  async getAuthentications(_id) {
+  async getAuthorities(_id) {
+    if (!_id) _id = this.user.id;
     var _c = new web3.eth.Contract(ABI.resolvers.core, address.resolvers.core);
     await _c.methods
       .getIDOwners(_id)
@@ -111,9 +114,7 @@ module.exports = class DSA {
   /**
    * returns the input interface required for cast()
    */
-  getInterface(_o) {
-    const _co = _o.connector;
-    const _m = _o.method;
+  getInterface(_co, _m) {
     const _abi = ABI.connectors[_co];
     for (let i = 0; i < _abi.length; i++) {
       if (_abi[i].name == _m) {
@@ -126,9 +127,8 @@ module.exports = class DSA {
   /**
    * returns the input interface required for cast()
    */
-  getTarget(_o) {
-    const _co = _o.connector;
-    const _t = this.address.connectors[_co];
+  getTarget(_co) {
+    const _t = address.connectors[_co];
     if (_t) return _t;
     else return console.error(`${_co} is invalid connector.`);
   }
@@ -137,11 +137,11 @@ module.exports = class DSA {
    * returns encoded data of delegate call
    * mostly used internally with cast
    */
-  async encodeMethod(_d) {
+  encodeMethod(_d) {
     const _co = _d.connector;
     const _m = _d.method;
     const _a = _d.args; // []
-    const _i = getInterface({ connector: _co, method: _m });
+    const _i = this.getInterface(_co, _m);
     return web3.eth.abi.encodeFunctionCall(_i, _a);
   }
 
@@ -154,11 +154,11 @@ module.exports = class DSA {
     let _ta = [];
     let _da = [];
     for (let i = 0; i < spells.length; i++) {
-      _ta.push(getTarget(spells[i]));
-      _da.push(encodeMethod(spells[i]));
+      _ta.push(this.getTarget(spells[i]));
+      _da.push(this.encodeMethod(spells[i]));
     }
     var _a = web3.currentProvider.selectedAddress;
-    var _c = await new web3.eth.Contract(ABI.core.account, this.user.address);
+    var _c = await new web3.eth.Contract(ABI.core.account, this.user.account);
     return _c.methods
       .cast(_ta, _da, _d.origin)
       .send({ from: _a })
