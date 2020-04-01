@@ -24,6 +24,7 @@ module.exports = class DSA {
   setUser(_o) {
     if (_o.id) this.user.id = _o.id;
     if (_o.account) this.user.account = _o.account;
+    if (_o.verion) this.user.verion = _o.verion;
   }
 
   /**
@@ -36,7 +37,7 @@ module.exports = class DSA {
     if (!_d.version) _d.version = 1;
     if (!_d.origin) _d.origin = address.genesis;
     var _c = await new web3.eth.Contract(ABI.core.index, address.core.index);
-    return _c.methods
+    return await _c.methods
       .build(_d.owner, _d.version, _d.origin)
       .send({ from: _a })
       .on("error", (err) => {
@@ -145,16 +146,16 @@ module.exports = class DSA {
    */
   async cast(_d) {
     if (!_d.origin) _d.origin = address.genesis;
-    const spells = _d.spells;
+    const _s = _d.spells;
     let _ta = [];
     let _da = [];
-    for (let i = 0; i < spells.length; i++) {
-      _ta.push(this.getTarget(spells[i]));
-      _da.push(this.encodeMethod(spells[i]));
+    for (let i = 0; i < _s.length; i++) {
+      _ta.push(this.getTarget(_s[i].connector));
+      _da.push(this.encodeMethod(_s[i]));
     }
     var _a = web3.currentProvider.selectedAddress;
     var _c = await new web3.eth.Contract(ABI.core.account, this.user.account);
-    return _c.methods
+    return await _c.methods
       .cast(_ta, _da, _d.origin)
       .send({ from: _a })
       .on("error", (err) => {
