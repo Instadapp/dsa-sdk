@@ -72,21 +72,16 @@ module.exports = class DSA {
     return await _c.methods
       .getOwnerDetails(_owner)
       .call({ from: address.genesis })
-      .then((raw_data) => {
-        var numberOfAccounts = raw_data.IDs.length;
-        accounts = new Array(numberOfAccounts);
-        for (var i = 0; i < numberOfAccounts; i++) {
-          accounts[i] = [];
+      .then((_d) => {
+        var _l = _d.IDs.length;
+        var accounts = [];
+        for (var i = 0; i < _l; i++) {
+          accounts.push({
+            id: _d.IDs[i],
+            account: _d.accounts[i],
+            version: _d.versions[i],
+          });
         }
-        raw_data.IDs.forEach((v, i) => {
-          accounts[i].id = v;
-        });
-        raw_data.accounts.forEach((v, i) => {
-          accounts[i].account_id = v;
-        });
-        raw_data.versions.forEach((v, i) => {
-          accounts[i].version = v;
-        });
         return accounts;
       })
       .catch((err) => {
@@ -100,7 +95,7 @@ module.exports = class DSA {
   async getAuthorities(_id) {
     if (!_id) _id = this.user.id;
     var _c = new web3.eth.Contract(ABI.resolvers.core, address.resolvers.core);
-    await _c.methods
+    return await _c.methods
       .getIDOwners(_id)
       .call({ from: address.genesis })
       .then((data) => {
