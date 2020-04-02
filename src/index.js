@@ -1,11 +1,14 @@
-// add checks - if user
-
 const Helpers = require("./helpers.js");
 const { address, ABI } = require("./constant.js");
 
 module.exports = class DSA {
   constructor() {
-    this.user = {};
+    this.user = {
+      id: 0,
+      account: address.genesis,
+      version: 0,
+      origin: address.genesis,
+    };
     this.ABI = ABI;
     this.address = address;
     this.helpers = new Helpers();
@@ -22,9 +25,10 @@ module.exports = class DSA {
    * sets the current DSA ID
    */
   setUser(_o) {
-    if (_o.id) this.user.id = _o.id;
+    if (_o.id) this.user.id = _o.id; // DSA ID
     if (_o.account) this.user.account = _o.account;
     if (_o.verion) this.user.verion = _o.verion;
+    if (_o.origin) this.user.origin = _o.origin;
   }
 
   /**
@@ -36,6 +40,7 @@ module.exports = class DSA {
     if (!_d.owner) _d.owner = _a;
     if (!_d.version) _d.version = 1;
     if (!_d.origin) _d.origin = address.genesis;
+    if (!_d.origin && this.user.origin) _d.origin = this.user.origin;
     var _c = await new web3.eth.Contract(ABI.core.index, address.core.index);
     return await _c.methods
       .build(_d.owner, _d.version, _d.origin)
@@ -141,12 +146,19 @@ module.exports = class DSA {
     return web3.eth.abi.encodeFunctionCall(_i, _a);
   }
 
+  new() {
+    this.spells = [];
+  }
+
+  add(_s) {
+    this.spells.push(_s);
+  }
+
   /**
    * init money lego txns
    */
-  async cast(_d) {
-    if (!_d.origin) _d.origin = address.genesis;
-    const _s = _d.spells;
+  async cast() {
+    const _s = this.spells;
     let _ta = [];
     let _da = [];
     for (let i = 0; i < _s.length; i++) {
@@ -156,7 +168,7 @@ module.exports = class DSA {
     var _a = web3.currentProvider.selectedAddress;
     var _c = await new web3.eth.Contract(ABI.core.account, this.user.account);
     return await _c.methods
-      .cast(_ta, _da, _d.origin)
+      .cast(_ta, _da, this.user.origin)
       .send({ from: _a })
       .on("error", (err) => {
         return err;
