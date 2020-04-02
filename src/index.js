@@ -9,8 +9,10 @@ module.exports = class DSA {
       version: 0,
       origin: address.genesis,
     };
+    this.spells = [];
     this.ABI = ABI;
     this.address = address;
+    this.tokens = tokens;
     this.helpers = new Helpers();
   }
 
@@ -136,7 +138,6 @@ module.exports = class DSA {
 
   /**
    * returns encoded data of delegate call
-   * mostly used internally with cast
    */
   encodeMethod(_d) {
     const _co = _d.connector;
@@ -146,16 +147,22 @@ module.exports = class DSA {
     return web3.eth.abi.encodeFunctionCall(_i, _a);
   }
 
+  /**
+   * empty spells array
+   */
   new() {
     this.spells = [];
   }
 
+  /**
+   * add new spells
+   */
   add(_s) {
     this.spells.push(_s);
   }
 
   /**
-   * init money lego txns
+   * execute all the spells
    */
   async cast() {
     const _s = this.spells;
@@ -174,6 +181,7 @@ module.exports = class DSA {
         return err;
       })
       .on("transactionHash", (txHash) => {
+        this.spells = [];
         return txHash;
       });
   }
