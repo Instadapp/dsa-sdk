@@ -1,5 +1,5 @@
 const Helpers = require("./helpers.js");
-const { address, ABI } = require("./constant.js");
+const { address, ABI, tokens } = require("./constant.js");
 
 module.exports = class DSA {
   constructor() {
