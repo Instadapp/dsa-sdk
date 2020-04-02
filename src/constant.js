@@ -30,7 +30,7 @@ module.exports.ABI = {
   },
 };
 
-module.exports.tokens = {
+module.exports.token = {
   eth: {
     symbol: "ETH",
     name: "Ethereum",

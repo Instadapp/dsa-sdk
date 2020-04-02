@@ -1,5 +1,5 @@
 const Helpers = require("./helpers.js");
-const { address, ABI, tokens } = require("./constant.js");
+const { address, ABI, token } = require("./constant.js");
 
 module.exports = class DSA {
   constructor() {
@@ -12,7 +12,7 @@ module.exports = class DSA {
     this.spells = [];
     this.ABI = ABI;
     this.address = address;
-    this.tokens = tokens;
+    this.token = token;
     this.helpers = new Helpers();
   }
 
