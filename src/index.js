@@ -176,7 +176,7 @@ module.exports = class DSA {
       _da.push(this.encodeMethod(_s[i]));
     }
     var _a = web3.currentProvider.selectedAddress;
-    var _c = await new web3.eth.Contract(ABI.core.account, this.user.account);
+    var _c = new web3.eth.Contract(ABI.core.account, this.user.account);
     return await _c.methods
       .cast(_ta, _da, this.user.origin)
       .send({ from: _a })
