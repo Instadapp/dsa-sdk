@@ -158,6 +158,9 @@ module.exports = class DSA {
    * add new spells
    */
   add(_s) {
+    if (!_s.connector) return console.error(`connector not defined.`);
+    if (!_s.method) return console.error(`method not defined.`);
+    if (!_s.args) return console.error(`args not defined.`);
     this.spells.push(_s);
   }
 

@@ -1,0 +1,44 @@
+[{
+    "inputs": [{
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+    }, {
+        "internalType": "address[]",
+        "name": "cAddress",
+        "type": "address[]"
+    }],
+    "name": "getCompTokensData",
+    "outputs": [{
+        "components": [{
+            "internalType": "uint256",
+            "name": "tokenPrice",
+            "type": "uint256"
+        }, {
+            "internalType": "uint256",
+            "name": "exchangeRateStored",
+            "type": "uint256"
+        }, {
+            "internalType": "uint256",
+            "name": "balanceOfUser",
+            "type": "uint256"
+        }, {
+            "internalType": "uint256",
+            "name": "borrowBalanceStoredUser",
+            "type": "uint256"
+        }, {
+            "internalType": "uint256",
+            "name": "supplyRatePerBlock",
+            "type": "uint256"
+        }, {
+            "internalType": "uint256",
+            "name": "borrowRatePerBlock",
+            "type": "uint256"
+        }],
+        "internalType": "struct Helpers.CompData[]",
+        "name": "",
+        "type": "tuple[]"
+    }],
+    "stateMutability": "view",
+    "type": "function"
+}]
