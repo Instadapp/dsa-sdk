@@ -8,7 +8,7 @@ module.exports.address = {
     basic: "0x9370236a085A99Aa359f4bD2f0424b8c3bf25C99",
     auth: "0x627cd0DbD5eE33F8456Aa8143aCd68a13d641588",
     compound: "0x547f1508A2a1AB0cB84DCe4b3e09beB560Bb44Cb",
-    maker: "0x0a7493f31a23Ff79Eda30B12e6BA49f011B06e36",
+    makerdao: "0x0a7493f31a23Ff79Eda30B12e6BA49f011B06e36",
   },
   resolvers: {
     core: "0xD6fB4fd8b595d0A1dE727C35fe6F1D4aE5B60F51",
