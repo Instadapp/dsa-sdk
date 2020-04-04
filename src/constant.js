@@ -9,7 +9,7 @@ module.exports.address = {
     basic: "0x9370236a085A99Aa359f4bD2f0424b8c3bf25C99",
     auth: "0x627cd0DbD5eE33F8456Aa8143aCd68a13d641588",
     compound: "0x547f1508A2a1AB0cB84DCe4b3e09beB560Bb44Cb",
-    makerdao: "0x0a7493f31a23Ff79Eda30B12e6BA49f011B06e36",
+    maker: "0x0a7493f31a23Ff79Eda30B12e6BA49f011B06e36",
   },
   resolvers: {
     core: "0xD6fB4fd8b595d0A1dE727C35fe6F1D4aE5B60F51",
@@ -18,7 +18,7 @@ module.exports.address = {
   },
   read: {
     compound: "0xe2d035519f0247ed4b946f0ab74e8347052c020f",
-    makerdao: "0x8af8aD861337456375604d482D9B9594540C7611"
+    maker: "0x8af8aD861337456375604d482D9B9594540C7611"
   }
 };
 
@@ -34,11 +34,12 @@ module.exports.ABI = {
   connectors: {
     basic: require("./abi/connectors/basic.json"),
     auth: require("./abi/connectors/auth.json"),
-    compound: require("./abi/connectors/compound.json")
+    compound: require("./abi/connectors/compound.json"),
+    maker: require("./abi/connectors/maker.json")
   },
   read: {
     compound: require("./abi/read/compound.json"),
-    makerdao: require("./abi/read/makerdao.json"),
+    maker: require("./abi/read/maker.json"),
   }
 };
 
