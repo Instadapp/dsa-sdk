@@ -193,7 +193,10 @@ module.exports = class DSA {
    * to call read functions and get raw data return
    */
   async read(_s) {
-    var _c = new web3.eth.Contract(ABI.read[_s.protocol], address.read[_s.protocol]);
+    var _c = new web3.eth.Contract(
+      ABI.read[_s.protocol],
+      address.read[_s.protocol]
+    );
     return await _c.methods[_s.method](..._s.args)
       .call()
       .then((res) => {

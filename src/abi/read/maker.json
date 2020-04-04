@@ -1,232 +1,305 @@
-[{
-    "inputs": [{
+[
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "owner",
         "type": "address"
-    }],
+      }
+    ],
     "name": "getDaiDeposited",
-    "outputs": [{
+    "outputs": [
+      {
         "internalType": "uint256",
         "name": "amt",
         "type": "uint256"
-    }],
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
-}, {
+  },
+  {
     "inputs": [],
     "name": "getDsrRate",
-    "outputs": [{
+    "outputs": [
+      {
         "internalType": "uint256",
         "name": "dsr",
         "type": "uint256"
-    }],
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
-}, {
-    "inputs": [{
+  },
+  {
+    "inputs": [
+      {
         "internalType": "bytes32",
         "name": "ilk",
         "type": "bytes32"
-    }],
+      }
+    ],
     "name": "getFee",
-    "outputs": [{
+    "outputs": [
+      {
         "internalType": "uint256",
         "name": "fee",
         "type": "uint256"
-    }],
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
-}, {
-    "inputs": [{
+  },
+  {
+    "inputs": [
+      {
         "internalType": "bytes32[]",
         "name": "ilks",
         "type": "bytes32[]"
-    }],
+      }
+    ],
     "name": "getIlkData",
-    "outputs": [{
-        "components": [{
+    "outputs": [
+      {
+        "components": [
+          {
             "internalType": "uint256",
             "name": "fee",
             "type": "uint256"
-        }, {
+          },
+          {
             "internalType": "uint256",
             "name": "price",
             "type": "uint256"
-        }, {
+          },
+          {
             "internalType": "uint256",
             "name": "ratio",
             "type": "uint256"
-        }],
+          }
+        ],
         "internalType": "struct Helpers.IlkData[]",
         "name": "",
         "type": "tuple[]"
-    }],
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
-}, {
-    "inputs": [{
+  },
+  {
+    "inputs": [
+      {
         "internalType": "bytes32",
         "name": "ilk",
         "type": "bytes32"
-    }],
+      }
+    ],
     "name": "getIlkPrice",
-    "outputs": [{
+    "outputs": [
+      {
         "internalType": "uint256",
         "name": "price",
         "type": "uint256"
-    }],
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
-}, {
-    "inputs": [{
+  },
+  {
+    "inputs": [
+      {
         "internalType": "bytes32",
         "name": "ilk",
         "type": "bytes32"
-    }],
+      }
+    ],
     "name": "getIlkRatio",
-    "outputs": [{
+    "outputs": [
+      {
         "internalType": "uint256",
         "name": "ratio",
         "type": "uint256"
-    }],
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
-}, {
+  },
+  {
     "inputs": [],
     "name": "getMcdAddresses",
-    "outputs": [{
+    "outputs": [
+      {
         "internalType": "address",
         "name": "",
         "type": "address"
-    }],
+      }
+    ],
     "stateMutability": "pure",
     "type": "function"
-}, {
-    "inputs": [{
+  },
+  {
+    "inputs": [
+      {
         "internalType": "uint256",
         "name": "id",
         "type": "uint256"
-    }],
+      }
+    ],
     "name": "getVaultById",
-    "outputs": [{
-        "components": [{
+    "outputs": [
+      {
+        "components": [
+          {
             "internalType": "uint256",
             "name": "id",
             "type": "uint256"
-        }, {
+          },
+          {
             "internalType": "address",
             "name": "owner",
             "type": "address"
-        }, {
+          },
+          {
             "internalType": "bytes32",
             "name": "ilk",
             "type": "bytes32"
-        }, {
+          },
+          {
             "internalType": "uint256",
             "name": "collateral",
             "type": "uint256"
-        }, {
+          },
+          {
             "internalType": "uint256",
             "name": "art",
             "type": "uint256"
-        }, {
+          },
+          {
             "internalType": "uint256",
             "name": "debt",
             "type": "uint256"
-        }, {
+          },
+          {
             "internalType": "uint256",
             "name": "liquidatedCol",
             "type": "uint256"
-        }, {
+          },
+          {
             "internalType": "uint256",
             "name": "stabiltyRate",
             "type": "uint256"
-        }, {
+          },
+          {
             "internalType": "uint256",
             "name": "price",
             "type": "uint256"
-        }, {
+          },
+          {
             "internalType": "uint256",
             "name": "liquidationRatio",
             "type": "uint256"
-        }, {
+          },
+          {
             "internalType": "address",
             "name": "urn",
             "type": "address"
-        }],
+          }
+        ],
         "internalType": "struct Helpers.VaultData",
         "name": "",
         "type": "tuple"
-    }],
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
-}, {
-    "inputs": [{
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "owner",
         "type": "address"
-    }],
+      }
+    ],
     "name": "getVaultsByAddress",
-    "outputs": [{
-        "components": [{
+    "outputs": [
+      {
+        "components": [
+          {
             "internalType": "uint256",
             "name": "id",
             "type": "uint256"
-        }, {
+          },
+          {
             "internalType": "address",
             "name": "owner",
             "type": "address"
-        }, {
+          },
+          {
             "internalType": "bytes32",
             "name": "ilk",
             "type": "bytes32"
-        }, {
+          },
+          {
             "internalType": "uint256",
             "name": "collateral",
             "type": "uint256"
-        }, {
+          },
+          {
             "internalType": "uint256",
             "name": "art",
             "type": "uint256"
-        }, {
+          },
+          {
             "internalType": "uint256",
             "name": "debt",
             "type": "uint256"
-        }, {
+          },
+          {
             "internalType": "uint256",
             "name": "liquidatedCol",
             "type": "uint256"
-        }, {
+          },
+          {
             "internalType": "uint256",
             "name": "stabiltyRate",
             "type": "uint256"
-        }, {
+          },
+          {
             "internalType": "uint256",
             "name": "price",
             "type": "uint256"
-        }, {
+          },
+          {
             "internalType": "uint256",
             "name": "liquidationRatio",
             "type": "uint256"
-        }, {
+          },
+          {
             "internalType": "address",
             "name": "urn",
             "type": "address"
-        }],
+          }
+        ],
         "internalType": "struct Helpers.VaultData[]",
         "name": "",
         "type": "tuple[]"
-    }],
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
-}, {
+  },
+  {
     "inputs": [],
     "name": "name",
-    "outputs": [{
+    "outputs": [
+      {
         "internalType": "string",
         "name": "",
         "type": "string"
-    }],
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
-}]
+  }
+]
