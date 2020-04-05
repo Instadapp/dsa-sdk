@@ -29,7 +29,7 @@ module.exports = class DSA {
   setUser(_o) {
     if (_o.id) this.user.id = _o.id; // DSA ID
     if (_o.account) this.user.account = _o.account;
-    if (_o.verion) this.user.verion = _o.verion;
+    if (_o.version) this.user.version = _o.version;
     if (_o.origin) this.user.origin = _o.origin;
   }
 
@@ -41,8 +41,7 @@ module.exports = class DSA {
     if (!_d) _d = {};
     if (!_d.owner) _d.owner = _a;
     if (!_d.version) _d.version = 1;
-    if (!_d.origin) _d.origin = address.genesis;
-    if (!_d.origin && this.user.origin) _d.origin = this.user.origin;
+    if (!_d.origin) _d.origin = this.user.origin;
     var _c = await new web3.eth.Contract(ABI.core.index, address.core.index);
     return await _c.methods
       .build(_d.owner, _d.version, _d.origin)
