@@ -100,7 +100,6 @@ module.exports = class DSA {
           reject(err);
         });
     });
-      
   }
 
   /**
@@ -196,7 +195,7 @@ module.exports = class DSA {
         .on("error", (err) => {
           reject(err);
         });
-      });
+    });
   }
 
   /**
