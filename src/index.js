@@ -42,12 +42,12 @@ module.exports = class DSA {
     if (!_d.owner) _d.owner = _a;
     if (!_d.version) _d.version = 1;
     if (!_d.origin) _d.origin = this.user.origin;
-    if (!_d.txnObj) _d.txnObj = { from: _a };
+    if (!_d.from) _d.from = _a;
     var _c = await new web3.eth.Contract(ABI.core.index, address.core.index);
     return new Promise(async function (resolve, reject) {
       return await _c.methods
         .build(_d.owner, _d.version, _d.origin)
-        .send(_d.txnObj)
+        .send(_d)
         .on("transactionHash", (txHash) => {
           resolve(txHash);
         })
@@ -158,14 +158,14 @@ module.exports = class DSA {
   /**
    * empty spells array
    */
-  new() {
+  newSpell() {
     this.spells = [];
   }
 
   /**
    * add new spells
    */
-  add(_s) {
+  addSpell(_s) {
     if (!_s.connector) return console.error(`connector not defined.`);
     if (!_s.method) return console.error(`method not defined.`);
     if (!_s.args) return console.error(`args not defined.`);
@@ -176,28 +176,52 @@ module.exports = class DSA {
    * execute all the spells
    */
   async cast(_d) {
-    if (!_d.txnObj) _d.txnObj = { from: _a };
-    const _s = this.spells;
+    var _a = web3.currentProvider.selectedAddress;
+    if (!_d.from) _d.from = _a;
+    if (!_d.origin) _d.origin = this.user.origin;
+    const _s = _d.spells.data; // required
     let _ta = [];
-    let _da = [];
+    let _eda = [];
     for (let i = 0; i < _s.length; i++) {
       _ta.push(this.getTarget(_s[i].connector));
-      _da.push(this.encodeMethod(_s[i]));
+      _eda.push(this.encodeMethod(_s[i]));
     }
-    var _a = web3.currentProvider.selectedAddress;
     var _c = new web3.eth.Contract(ABI.core.account, this.user.account);
     return new Promise(async function (resolve, reject) {
       return await _c.methods
-        .cast(_ta, _da, this.user.origin)
-        .send(_d.txnObj)
+        .cast(_ta, _eda, _d.origin)
+        .send(_d)
         .on("transactionHash", (txHash) => {
-          this.spells = [];
           resolve(txHash);
         })
         .on("error", (err) => {
           reject(err);
         });
     });
+  }
+
+  /**
+   * creating a new spell instance
+   */
+  Spell() {
+    return new (class Spell {
+      /**
+       * empty spells array
+       */
+      constructor() {
+        this.data = [];
+      }
+
+      /**
+       * add new spells
+       */
+      add(_s) {
+        if (!_s.connector) return console.error(`connector not defined.`);
+        if (!_s.method) return console.error(`method not defined.`);
+        if (!_s.args) return console.error(`args not defined.`);
+        this.data.push(_s);
+      }
+    })();
   }
 
   /**
