@@ -43,15 +43,17 @@ module.exports = class DSA {
     if (!_d.version) _d.version = 1;
     if (!_d.origin) _d.origin = this.user.origin;
     var _c = await new web3.eth.Contract(ABI.core.index, address.core.index);
-    return await _c.methods
-      .build(_d.owner, _d.version, _d.origin)
-      .send({ from: _a })
-      .on("error", (err) => {
-        return err;
-      })
-      .on("transactionHash", (txHash) => {
-        return txHash;
-      });
+    return new Promise(async function (resolve, reject) {
+      return await _c.methods
+        .build(_d.owner, _d.version, _d.origin)
+        .send({ from: _a })
+        .on("transactionHash", (txHash) => {
+          resolve(txHash);
+        })
+        .on("error", (err) => {
+          reject(err);
+        });
+    });
   }
 
   /**
@@ -59,15 +61,17 @@ module.exports = class DSA {
    */
   async count() {
     var _c = new web3.eth.Contract(ABI.core.list, address.core.list);
-    return await _c.methods
-      .accounts()
-      .call()
-      .then((count) => {
-        return count;
-      })
-      .catch((err) => {
-        return err;
-      });
+    return new Promise(async function (resolve, reject) {
+      return await _c.methods
+        .accounts()
+        .call()
+        .then((count) => {
+          resolve(count);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
   }
 
   /**
@@ -76,24 +80,27 @@ module.exports = class DSA {
   async getAccounts(_owner) {
     if (!_owner) _owner = web3.currentProvider.selectedAddress;
     var _c = new web3.eth.Contract(ABI.resolvers.core, address.resolvers.core);
-    return await _c.methods
-      .getOwnerDetails(_owner)
-      .call({ from: address.genesis })
-      .then((_d) => {
-        var _l = _d.IDs.length;
-        var accounts = [];
-        for (var i = 0; i < _l; i++) {
-          accounts.push({
-            id: _d.IDs[i],
-            account: _d.accounts[i],
-            version: _d.versions[i],
-          });
-        }
-        return accounts;
-      })
-      .catch((err) => {
-        return err;
-      });
+    return new Promise(async function (resolve, reject) {
+      return await _c.methods
+        .getOwnerDetails(_owner)
+        .call({ from: address.genesis })
+        .then((_d) => {
+          var _l = _d.IDs.length;
+          var accounts = [];
+          for (var i = 0; i < _l; i++) {
+            accounts.push({
+              id: _d.IDs[i],
+              account: _d.accounts[i],
+              version: _d.versions[i],
+            });
+          }
+          resolve(accounts);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+      
   }
 
   /**
@@ -102,15 +109,17 @@ module.exports = class DSA {
   async getAuthorities(_id) {
     if (!_id) _id = this.user.id;
     var _c = new web3.eth.Contract(ABI.resolvers.core, address.resolvers.core);
-    return await _c.methods
-      .getIDOwners(_id)
-      .call({ from: address.genesis })
-      .then((data) => {
-        return data;
-      })
-      .catch((err) => {
-        return err;
-      });
+    return new Promise(async function (resolve, reject) {
+      return await _c.methods
+        .getIDOwners(_id)
+        .call({ from: address.genesis })
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
   }
 
   /**
@@ -176,15 +185,17 @@ module.exports = class DSA {
     }
     var _a = web3.currentProvider.selectedAddress;
     var _c = new web3.eth.Contract(ABI.core.account, this.user.account);
-    return await _c.methods
-      .cast(_ta, _da, this.user.origin)
-      .send({ from: _a })
-      .on("error", (err) => {
-        return err;
-      })
-      .on("transactionHash", (txHash) => {
-        this.spells = [];
-        return txHash;
+    return new Promise(async function (resolve, reject) {
+      return await _c.methods
+        .cast(_ta, _da, this.user.origin)
+        .send({ from: _a })
+        .on("transactionHash", (txHash) => {
+          this.spells = [];
+          resolve(txHash);
+        })
+        .on("error", (err) => {
+          reject(err);
+        });
       });
   }
 
@@ -196,13 +207,15 @@ module.exports = class DSA {
       ABI.read[_s.protocol],
       address.read[_s.protocol]
     );
-    return await _c.methods[_s.method](..._s.args)
-      .call()
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        return err;
-      });
+    return new Promise(async function (resolve, reject) {
+      return await _c.methods[_s.method](..._s.args)
+        .call()
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
   }
 };
