@@ -42,7 +42,7 @@ module.exports = class DSA {
     if (!_d.owner) _d.owner = _a;
     if (!_d.version) _d.version = 1;
     if (!_d.origin) _d.origin = this.user.origin;
-    if (!_d.txnObj) _d.txnObj = {from: _a};
+    if (!_d.txnObj) _d.txnObj = { from: _a };
     var _c = await new web3.eth.Contract(ABI.core.index, address.core.index);
     return new Promise(async function (resolve, reject) {
       return await _c.methods
@@ -176,7 +176,7 @@ module.exports = class DSA {
    * execute all the spells
    */
   async cast(_d) {
-    if (!_d.txnObj) _d.txnObj = {from: _a};
+    if (!_d.txnObj) _d.txnObj = { from: _a };
     const _s = this.spells;
     let _ta = [];
     let _da = [];
