@@ -91,7 +91,7 @@ module.exports = class DSA {
           for (var i = 0; i < _l; i++) {
             accounts.push({
               id: _d.IDs[i],
-              address: _d.accounts[i],
+              account: _d.accounts[i],
               version: _d.versions[i],
             });
           }
@@ -204,7 +204,7 @@ module.exports = class DSA {
    * creating a new spell instance
    */
   Spell() {
-    return new (class Spell {
+    return (class Spell {
       /**
        * empty spells array
        */
