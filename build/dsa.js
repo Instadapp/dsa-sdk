@@ -1,6 +1,6 @@
 /*!
  * 
- *   dsa-sdk v1.1.12
+ *   dsa-sdk v1.2.0
  *   https://github.com/instadapp/dsa-sdk
  * 
  *   Copyright (c) INSTADAPP LABS LLC 
