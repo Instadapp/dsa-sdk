@@ -156,40 +156,28 @@ module.exports = class DSA {
   }
 
   /**
-   * empty spells array
-   */
-  newSpell() {
-    this.spells = [];
-  }
-
-  /**
-   * add new spells
-   */
-  addSpell(_s) {
-    if (!_s.connector) return console.error(`connector not defined.`);
-    if (!_s.method) return console.error(`method not defined.`);
-    if (!_s.args) return console.error(`args not defined.`);
-    this.spells.push(_s);
-  }
-
-  /**
    * execute all the spells
    */
   async cast(_d) {
+    let _s;
+    if (Array.isArray(_d.spells)) {
+      _s = _d.spells; // required
+    } else {
+      _s = _d.data.spells; // required
+    }
     var _a = web3.currentProvider.selectedAddress;
     if (!_d.from) _d.from = _a;
-    if (!_d.origin) _d.origin = this.instance.origin;
-    const _s = _d.spells.data; // required
     let _ta = [];
     let _eda = [];
     for (let i = 0; i < _s.length; i++) {
       _ta.push(this.getTarget(_s[i].connector));
       _eda.push(this.encodeMethod(_s[i]));
     }
+    let _o = this.instance.origin;
     var _c = new web3.eth.Contract(ABI.core.account, this.instance.account);
     return new Promise(async function (resolve, reject) {
       return await _c.methods
-        .cast(_ta, _eda, _d.origin)
+        .cast(_ta, _eda, _o)
         .send(_d)
         .on("transactionHash", (txHash) => {
           resolve(txHash);
@@ -209,7 +197,7 @@ module.exports = class DSA {
        * empty spells array
        */
       constructor() {
-        this.data = [];
+        this.spells = [];
       }
 
       /**
@@ -219,7 +207,7 @@ module.exports = class DSA {
         if (!_s.connector) return console.error(`connector not defined.`);
         if (!_s.method) return console.error(`method not defined.`);
         if (!_s.args) return console.error(`args not defined.`);
-        this.data.push(_s);
+        this.spells.push(_s);
       }
     })();
   }
