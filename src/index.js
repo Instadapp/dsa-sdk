@@ -204,7 +204,7 @@ module.exports = class DSA {
    * creating a new spell instance
    */
   Spell() {
-    return (class Spell {
+    return new (class Spell {
       /**
        * empty spells array
        */
