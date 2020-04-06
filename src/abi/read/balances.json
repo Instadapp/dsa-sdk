@@ -1,18 +1,25 @@
-[{
+[
+  {
     "constant": true,
-    "inputs": [{
+    "inputs": [
+      {
         "name": "owner",
         "type": "address"
-    }, {
+      },
+      {
         "name": "tknAddress",
         "type": "address[]"
-    }],
+      }
+    ],
     "name": "getTokensBalData",
-    "outputs": [{
+    "outputs": [
+      {
         "name": "",
         "type": "uint256[]"
-    }],
+      }
+    ],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
-}]
+  }
+]

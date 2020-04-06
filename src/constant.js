@@ -33,6 +33,9 @@ module.exports.ABI = {
   },
   resolvers: {
     core: require("./abi/resolvers/core.json"),
+    compound: require("./abi/read/compound.json"),
+    maker: require("./abi/read/maker.json"),
+    balances: require("./abi/read/balances.json"),
   },
   connectors: {
     basic: require("./abi/connectors/basic.json"),
@@ -41,8 +44,10 @@ module.exports.ABI = {
     maker: require("./abi/connectors/maker.json"),
   },
   read: {
+    core: require("./abi/resolvers/core.json"),
     compound: require("./abi/read/compound.json"),
     maker: require("./abi/read/maker.json"),
+    balances: require("./abi/read/balances.json"),
   },
 };
 
