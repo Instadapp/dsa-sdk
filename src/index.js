@@ -91,7 +91,7 @@ module.exports = class DSA {
           for (var i = 0; i < _l; i++) {
             accounts.push({
               id: _d.IDs[i],
-              account: _d.accounts[i],
+              address: _d.accounts[i],
               version: _d.versions[i],
             });
           }
