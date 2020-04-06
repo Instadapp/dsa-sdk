@@ -3,10 +3,10 @@ const { address, ABI, token } = require("./constant.js");
 
 module.exports = class DSA {
   constructor() {
-    this.user = {
+    this.instance = {
       id: 0,
       account: address.genesis,
-      version: 0,
+      version: 1,
       origin: address.genesis,
     };
     this.spells = [];
@@ -19,18 +19,18 @@ module.exports = class DSA {
   /**
    * returns the current DSA ID
    */
-  getUser() {
-    return this.user;
+  getInstance() {
+    return this.instance;
   }
 
   /**
    * sets the current DSA ID
    */
-  setUser(_o) {
-    if (_o.id) this.user.id = _o.id; // DSA ID
-    if (_o.account) this.user.account = _o.account;
-    if (_o.version) this.user.version = _o.version;
-    if (_o.origin) this.user.origin = _o.origin;
+  setInstance(_o) {
+    if (_o.id) this.instance.id = _o.id; // DSA ID
+    if (_o.account) this.instance.account = _o.account;
+    if (_o.version) this.instance.version = _o.version;
+    if (_o.origin) this.instance.origin = _o.origin;
   }
 
   /**
@@ -41,7 +41,7 @@ module.exports = class DSA {
     if (!_d) _d = {};
     if (!_d.owner) _d.owner = _a;
     if (!_d.version) _d.version = 1;
-    if (!_d.origin) _d.origin = this.user.origin;
+    if (!_d.origin) _d.origin = this.instance.origin;
     if (!_d.from) _d.from = _a;
     var _c = await new web3.eth.Contract(ABI.core.index, address.core.index);
     return new Promise(async function (resolve, reject) {
@@ -107,7 +107,7 @@ module.exports = class DSA {
    * returns authentications by accountID
    */
   async getAuthorities(_id) {
-    if (!_id) _id = this.user.id;
+    if (!_id) _id = this.instance.id;
     var _c = new web3.eth.Contract(ABI.resolvers.core, address.resolvers.core);
     return new Promise(async function (resolve, reject) {
       return await _c.methods
@@ -178,7 +178,7 @@ module.exports = class DSA {
   async cast(_d) {
     var _a = web3.currentProvider.selectedAddress;
     if (!_d.from) _d.from = _a;
-    if (!_d.origin) _d.origin = this.user.origin;
+    if (!_d.origin) _d.origin = this.instance.origin;
     const _s = _d.spells.data; // required
     let _ta = [];
     let _eda = [];
@@ -186,7 +186,7 @@ module.exports = class DSA {
       _ta.push(this.getTarget(_s[i].connector));
       _eda.push(this.encodeMethod(_s[i]));
     }
-    var _c = new web3.eth.Contract(ABI.core.account, this.user.account);
+    var _c = new web3.eth.Contract(ABI.core.account, this.instance.account);
     return new Promise(async function (resolve, reject) {
       return await _c.methods
         .cast(_ta, _eda, _d.origin)
