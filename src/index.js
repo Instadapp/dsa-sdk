@@ -14,6 +14,7 @@ module.exports = class DSA {
     this.address = address;
     this.token = token;
     this.helpers = new Helpers();
+    this.internal = new Internal();
   }
 
   /**
@@ -123,56 +124,14 @@ module.exports = class DSA {
   }
 
   /**
-   * returns the input interface required for cast()
-   */
-  getInterface(_co, _m) {
-    const _abi = ABI.connectors[_co];
-    for (let i = 0; i < _abi.length; i++) {
-      if (_abi[i].name == _m) {
-        return _abi[i];
-      }
-    }
-    return console.error(`${_m} is invalid method.`);
-  }
-
-  /**
-   * returns the input interface required for cast()
-   */
-  getTarget(_co) {
-    const _t = address.connectors[_co];
-    if (_t) return _t;
-    else return console.error(`${_co} is invalid connector.`);
-  }
-
-  /**
-   * returns encoded data of delegate call
-   */
-  encodeMethod(_d) {
-    const _co = _d.connector;
-    const _m = _d.method;
-    const _a = _d.args; // []
-    const _i = this.getInterface(_co, _m);
-    return web3.eth.abi.encodeFunctionCall(_i, _a);
-  }
-
-  /**
    * execute all the spells
    */
   async cast(_d) {
-    let _s;
-    if (Array.isArray(_d.spells)) {
-      _s = _d.spells; // required
-    } else {
-      _s = _d.data.spells; // required
-    }
     var _a = web3.currentProvider.selectedAddress;
     if (!_d.from) _d.from = _a;
-    let _ta = [];
-    let _eda = [];
-    for (let i = 0; i < _s.length; i++) {
-      _ta.push(this.getTarget(_s[i].connector));
-      _eda.push(this.encodeMethod(_s[i]));
-    }
+    let _s = this.internal.packSpells(_d);
+    let _ta = _s[0];
+    let _eda = _s[1];
     let _o = this.instance.origin;
     var _c = new web3.eth.Contract(ABI.core.account, this.instance.account);
     return new Promise(async function (resolve, reject) {
@@ -185,6 +144,30 @@ module.exports = class DSA {
         .on("error", (err) => {
           reject(err);
         });
+    });
+  }
+
+  async castGas(_d) {
+    var _args = this.internal.packSpells(_d);
+    let _o = this.instance.origin;
+    _args.push(_o);
+    if (!_d.from) _d.from = _a;
+    if (!_d.value) _d.value = "0";
+    var _abi = this.internal.getInterface("core", "account", "cast");
+    var _o = {
+      abi: _abi,
+      args: _args,
+      from: _d.from,
+      to: _d.to,
+      value: _d.value
+    };
+    return new Promise(async function (resolve, reject) {
+      await this.helpers.getGasLimit(_d)
+      .then(gas => {
+        resolve(gas)
+      }).catch(err => {
+        reject(err)
+      });
     });
   }
 
