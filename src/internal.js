@@ -36,7 +36,7 @@ module.exports = class Internal {
     const _co = _d.connector;
     const _m = _d.method;
     const _a = _d.args; // []
-    const _i = this.getInterface("connector", _co, _m);
+    const _i = this.getInterface("connectors", _co, _m);
     return web3.eth.abi.encodeFunctionCall(_i, _a);
   }
 
@@ -61,5 +61,43 @@ module.exports = class Internal {
     if (address.length == 0)
       return console.error("No ethereum address detected!!!");
     return address[0];
+  }
+
+  // var _d = {
+  //   from:,
+  //   to:,
+  //   abi:,
+  //   args:,
+  //   value:,
+  // }
+  async getGasLimit(_d) {
+    var encodeHash = web3.eth.abi.encodeFunctionCall(_d.abi, _d.args);
+    return new Promise(async function (resolve, reject) {
+      await web3.eth
+        .estimateGas({
+          from: _d.from,
+          to: _d.to,
+          data: encodeHash,
+          value: _d.value,
+        })
+        .then((gas) => {
+          console.log(gas);
+          resolve(gas);
+        })
+        .catch((err) => {
+          reject({
+            error: err,
+            data: {
+              abi: _d.abi,
+              args: _d.args,
+              from: _d.from,
+              to: _d.to,
+              data: encodeHash,
+              value: _d.value,
+            },
+          });
+          console.log(err);
+        });
+    });
   }
 };

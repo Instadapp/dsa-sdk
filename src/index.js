@@ -152,14 +152,15 @@ module.exports = class DSA {
    * estimate cast gas cost
    */
   async castGas(_d) {
-    var _addr = await this.internal.checkAddress();
+    var _internal = this.internal;
+    var _addr = await _internal.checkAddress();
     var _dsa_addr = this.instance.address;
-    var _args = this.internal.encodeSpells(_d);
+    var _args = _internal.encodeSpells(_d);
     _args.push(this.instance.origin);
     if (!_d.to) _d.to = _dsa_addr;
     if (!_d.from) _d.from = _addr;
     if (!_d.value) _d.value = "0";
-    var _abi = this.internal.getInterface("core", "account", "cast");
+    var _abi = _internal.getInterface("core", "account", "cast");
     var _obj = {
       abi: _abi,
       args: _args,
@@ -168,12 +169,14 @@ module.exports = class DSA {
       value: _d.value,
     };
     return new Promise(async function (resolve, reject) {
-      await this.helpers
+      await _internal
         .getGasLimit(_obj)
         .then((gas) => {
+          console.log(gas);
           resolve(gas);
         })
         .catch((err) => {
+          alert(err);
           reject(err);
         });
     });
