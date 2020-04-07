@@ -39,12 +39,12 @@ module.exports = class DSA {
    * build new DSA
    */
   async build(_d) {
-    var _a = (await web3.eth.getAccounts())[0];
+    let _addr = await this.internal.checkAddress();
     if (!_d) _d = {};
-    if (!_d.owner) _d.owner = _a;
+    if (!_d.owner) _d.owner = _addr;
     if (!_d.version) _d.version = 1;
     if (!_d.origin) _d.origin = this.instance.origin;
-    if (!_d.from) _d.from = _a;
+    if (!_d.from) _d.from = _addr;
     var _c = await new web3.eth.Contract(ABI.core.index, address.core.index);
     return new Promise(async function (resolve, reject) {
       return await _c.methods
@@ -67,7 +67,7 @@ module.exports = class DSA {
     return new Promise(async function (resolve, reject) {
       return await _c.methods
         .accounts()
-        .call()
+        .call({ from: address.genesis })
         .then((count) => {
           resolve(count);
         })
@@ -81,7 +81,7 @@ module.exports = class DSA {
    * returns accounts in a simple array of objects
    */
   async getAccounts(_owner) {
-    if (!_owner) _owner = (await web3.eth.getAccounts())[0];
+    if (!_owner) _owner = await this.internal.checkAddress();
     var _c = new web3.eth.Contract(ABI.resolvers.core, address.resolvers.core);
     return new Promise(async function (resolve, reject) {
       return await _c.methods
@@ -106,7 +106,7 @@ module.exports = class DSA {
   }
 
   /**
-   * returns authentications by accountID
+   * returns authentications by DSA ID
    */
   async getAuthorities(_id) {
     if (!_id) _id = this.instance.id;
@@ -128,11 +128,11 @@ module.exports = class DSA {
    * execute all the spells
    */
   async cast(_d) {
-    var _a = (await web3.eth.getAccounts())[0];
-    if (!_d.from) _d.from = _a;
-    let _s = this.internal.packSpells(_d);
-    let _ta = _s[0];
-    let _eda = _s[1];
+    let _addr = await this.internal.checkAddress();
+    if (!_d.from) _d.from = _addr;
+    let _espell = this.internal.encodeSpells(_d);
+    let _ta = _espell[0];
+    let _eda = _espell[1];
     let _o = this.instance.origin;
     var _c = new web3.eth.Contract(ABI.core.account, this.instance.address);
     return new Promise(async function (resolve, reject) {
@@ -148,14 +148,16 @@ module.exports = class DSA {
     });
   }
 
+  /**
+   * estimate cast gas cost
+   */
   async castGas(_d) {
-    var _a = (await web3.eth.getAccounts())[0];
-    var _aa = this.instance.address;
-    var _args = this.internal.packSpells(_d);
-    let _o = this.instance.origin;
-    _args.push(_o);
-    if (!_d.to) _d.to = _aa;
-    if (!_d.from) _d.from = _a;
+    var _addr = await this.internal.checkAddress();
+    var _dsa_addr = this.instance.address;
+    var _args = this.internal.encodeSpells(_d);
+    _args.push(this.instance.origin);
+    if (!_d.to) _d.to = _dsa_addr;
+    if (!_d.from) _d.from = _addr;
     if (!_d.value) _d.value = "0";
     var _abi = this.internal.getInterface("core", "account", "cast");
     var _obj = {

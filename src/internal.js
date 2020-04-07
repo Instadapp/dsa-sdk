@@ -40,7 +40,7 @@ module.exports = class Internal {
     return web3.eth.abi.encodeFunctionCall(_i, _a);
   }
 
-  packSpells(_d) {
+  encodeSpells(_d) {
     let _s;
     if (Array.isArray(_d.spells)) {
       _s = _d.spells; // required
@@ -54,5 +54,12 @@ module.exports = class Internal {
       _eda.push(this.encodeMethod(_s[i]));
     }
     return [_ta, _eda];
+  }
+
+  async checkAddress() {
+    let address = await web3.eth.getAccounts();
+    if (address.length == 0)
+      return console.error("No ethereum address detected!!!");
+    return address[0];
   }
 };
