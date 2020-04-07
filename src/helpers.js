@@ -55,26 +55,29 @@ module.exports = class Helpers {
   // }
   async getGasLimit(_d) {
     var encodeHash = web3.eth.abi.encodeFunctionCall(_d.abi, _d.args);
-    return await web3.eth.estimateGas({
-      from: _d.from,
-      to: _d.to,
-      data: encodeHash,
-      value: _d.value
-    }).then(gas => {
-      resolve(gas)
-    }).catch(err => {
-      reject({
-        error: err,
-        data: {
-          abi: _d.abi,
-          args: _d.args,
-          from: _d.from,
-          to: _d.to,
-          data: encodeHash,
-          value: _d.value
-        }
+    return await web3.eth
+      .estimateGas({
+        from: _d.from,
+        to: _d.to,
+        data: encodeHash,
+        value: _d.value,
       })
-      console.log(err);
-    });
+      .then((gas) => {
+        resolve(gas);
+      })
+      .catch((err) => {
+        reject({
+          error: err,
+          data: {
+            abi: _d.abi,
+            args: _d.args,
+            from: _d.from,
+            to: _d.to,
+            data: encodeHash,
+            value: _d.value,
+          },
+        });
+        console.log(err);
+      });
   }
 };
