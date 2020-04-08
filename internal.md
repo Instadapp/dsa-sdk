@@ -199,7 +199,9 @@ dsa.cast(spells) // or dsa.cast({spells:spells})
 
 ### Parameters
 1. `Instance` - The spell instance.
+ 
 OR
+
 1. `Object`
    * `data` - The spell instance.
    * `from` - `Address` (optional):  The address for the sending account. Uses the web3.eth.getAccounts(), if not specified.
@@ -210,6 +212,16 @@ OR
 
 ### Returns
 `String`: Transaction hash `0x.....`.
+
+## Internals
+
+Following are a few internal functions.
+
+* dsa.internal.getTarget(connector)
+* dsa.internal.getInterface(type, name, method)
+* dsa.internal.getConnectorInterface(connector, method)
+* dsa.internal.encodeMethod(Object)
+* dsa.internal.encodeSpells(Object)
 
 <!-- ## .estimateCastGas()
 
