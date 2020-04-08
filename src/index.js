@@ -11,9 +11,9 @@ module.exports = class DSA {
     this.token = token;
     this.instance = {
       id: 0,
-      address: _address.genesis,
+      address: address.genesis,
       version: 1,
-      origin: _address.genesis,
+      origin: address.genesis,
     };
     this.helpers = new Helpers();
     this.internal = new Internal();
@@ -83,10 +83,11 @@ module.exports = class DSA {
       this.ABI.resolvers.core,
       this.address.resolvers.core
     );
+    var _address = { genesis: this.address.genesis };
     return new Promise(async function (resolve, reject) {
       return await _c.methods
         .getAuthorityDetails(_authority)
-        .call({ from: this.address.genesis })
+        .call({ from: _address.genesis })
         .then((_d) => {
           var _l = _d.IDs.length;
           var accounts = [];
@@ -110,10 +111,11 @@ module.exports = class DSA {
       this.ABI.resolvers.core,
       this.address.resolvers.core
     );
+    var _address = { genesis: this.address.genesis };
     return new Promise(async function (resolve, reject) {
       return await _c.methods
         .getIDAuthorities(_id)
-        .call({ from: this.address.genesis })
+        .call({ from: _address.genesis })
         .then((data) => {
           resolve(data);
         })
