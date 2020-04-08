@@ -1,5 +1,5 @@
 # DSA SDK
 
-This is a main WIP package.
+This is a main DSA SDK package (WIP).
 
-Please read the basic [documentation](https://github.com/InstaDApp/dsa-developers) for more.
+Please read our [developer doc](https://github.com/InstaDApp/dsa-developers) for more.
