@@ -17,7 +17,7 @@ module.exports = class Internal {
   }
 
   /**
-   * returns the input interface required for cast()
+   * returns the ABI interface for any DSA contract 
    */
   getInterface(_type, _co, _m) {
     const _abi = ABI[_type][_co];
@@ -27,6 +27,13 @@ module.exports = class Internal {
       }
     }
     return console.error(`${_m} is invalid method.`);
+  }
+
+  /**
+   * returns the input interface for any connector
+   */
+  getConnectorInterface(_co, _m) {
+    return this.getInterface("connectors", _co, _m);
   }
 
   /**
