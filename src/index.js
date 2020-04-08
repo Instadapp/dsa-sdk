@@ -77,15 +77,15 @@ module.exports = class DSA {
   /**
    * returns accounts in a simple array of objects
    */
-  async getAccounts(_owner) {
-    if (!_owner) _owner = await this.internal.getAddress();
+  async getAccounts(_authority) {
+    if (!_authority) _authority = await this.internal.getAddress();
     var _c = new web3.eth.Contract(
       this.ABI.resolvers.core,
       this.address.resolvers.core
     );
     return new Promise(async function (resolve, reject) {
       return await _c.methods
-        .getOwnerDetails(_owner)
+        .getAuthorityDetails(_authority)
         .call({ from: this.address.genesis })
         .then((_d) => {
           var _l = _d.IDs.length;
@@ -112,7 +112,7 @@ module.exports = class DSA {
     );
     return new Promise(async function (resolve, reject) {
       return await _c.methods
-        .getIDOwners(_id)
+        .getIDAuthorities(_id)
         .call({ from: this.address.genesis })
         .then((data) => {
           resolve(data);
@@ -130,7 +130,7 @@ module.exports = class DSA {
     );
     return new Promise(async function (resolve, reject) {
       return await _c.methods
-        .getAccountOwners(_addr)
+        .getAccountAuthorities(_addr)
         .call({ from: this.address.genesis })
         .then((data) => {
           resolve(data);

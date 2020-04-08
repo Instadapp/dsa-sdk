@@ -20,7 +20,7 @@
     "inputs": [
       { "internalType": "address", "name": "account", "type": "address" }
     ],
-    "name": "getAccountOwners",
+    "name": "getAccountAuthorities",
     "outputs": [
       { "internalType": "address[]", "name": "", "type": "address[]" }
     ],
@@ -59,7 +59,7 @@
   },
   {
     "inputs": [{ "internalType": "uint256", "name": "id", "type": "uint256" }],
-    "name": "getIDOwners",
+    "name": "getIDAuthorities",
     "outputs": [
       { "internalType": "address[]", "name": "", "type": "address[]" }
     ],
@@ -68,9 +68,9 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "owner", "type": "address" }
+      { "internalType": "address", "name": "authority", "type": "address" }
     ],
-    "name": "getOwnerAccounts",
+    "name": "getAuthorityAccounts",
     "outputs": [
       { "internalType": "address[]", "name": "", "type": "address[]" }
     ],
@@ -79,9 +79,9 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "owner", "type": "address" }
+      { "internalType": "address", "name": "authority", "type": "address" }
     ],
-    "name": "getOwnerDetails",
+    "name": "getAuthorityDetails",
     "outputs": [
       {
         "components": [
@@ -106,9 +106,9 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "owner", "type": "address" }
+      { "internalType": "address", "name": "authority", "type": "address" }
     ],
-    "name": "getOwnerIDs",
+    "name": "getAuthorityIDs",
     "outputs": [{ "internalType": "uint64[]", "name": "", "type": "uint64[]" }],
     "stateMutability": "view",
     "type": "function"
