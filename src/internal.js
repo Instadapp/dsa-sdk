@@ -1,16 +1,17 @@
-const { address, ABI } = require("./constant.js");
+const _address = require("./constant/address.js");
+const _abi = require("./constant/abi.js");
 
 module.exports = class Internal {
   constructor() {
-    this.ABI = ABI;
-    this.address = address;
+    this.ABI = _abi;
+    this.address = _address;
   }
 
   /**
    * returns the input interface required for cast()
    */
   getTarget(_co) {
-    const _t = address.connectors[_co];
+    const _t = this.address.connectors[_co];
     if (_t) return _t;
     else return console.error(`${_co} is invalid connector.`);
   }

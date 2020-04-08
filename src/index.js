@@ -1,19 +1,19 @@
 const Helpers = require("./helpers.js");
 const Internal = require("./internal.js");
-const { address, ABI, token } = require("./constant.js");
+const _address = require("./constant/address.js");
+const _abi = require("./constant/abi.js");
 
 module.exports = class DSA {
   constructor() {
+    this.address = _address;
+    this.ABI = _abi;
+    this.token = token;
     this.instance = {
       id: 0,
-      address: address.genesis,
+      address: _address.genesis,
       version: 1,
-      origin: address.genesis,
+      origin: _address.genesis,
     };
-    this.spells = [];
-    this.ABI = ABI;
-    this.address = address;
-    this.token = token;
     this.helpers = new Helpers();
     this.internal = new Internal();
   }
@@ -38,7 +38,7 @@ module.exports = class DSA {
     if (!_d.version) _d.version = 1;
     if (!_d.origin) _d.origin = this.instance.origin;
     if (!_d.from) _d.from = _addr;
-    var _c = await new web3.eth.Contract(ABI.core.index, address.core.index);
+    var _c = await new web3.eth.Contract(this.ABI.core.index, this.address.core.index);
     return new Promise(async function (resolve, reject) {
       return await _c.methods
         .build(_d.owner, _d.version, _d.origin)
@@ -56,11 +56,11 @@ module.exports = class DSA {
    * global number of DSAs
    */
   async count() {
-    var _c = new web3.eth.Contract(ABI.core.list, address.core.list);
+    var _c = new web3.eth.Contract(this.ABI.core.list, this.address.core.list);
     return new Promise(async function (resolve, reject) {
       return await _c.methods
         .accounts()
-        .call({ from: address.genesis })
+        .call({ from: this.address.genesis })
         .then((count) => {
           resolve(count);
         })
@@ -75,11 +75,11 @@ module.exports = class DSA {
    */
   async getAccounts(_owner) {
     if (!_owner) _owner = await this.internal.getAddress();
-    var _c = new web3.eth.Contract(ABI.resolvers.core, address.resolvers.core);
+    var _c = new web3.eth.Contract(this.ABI.resolvers.core, this.address.resolvers.core);
     return new Promise(async function (resolve, reject) {
       return await _c.methods
         .getOwnerDetails(_owner)
-        .call({ from: address.genesis })
+        .call({ from: this.address.genesis })
         .then((_d) => {
           var _l = _d.IDs.length;
           var accounts = [];
@@ -99,11 +99,11 @@ module.exports = class DSA {
   }
 
   async getAuthById(_id) {
-    var _c = new web3.eth.Contract(ABI.resolvers.core, address.resolvers.core);
+    var _c = new web3.eth.Contract(this.ABI.resolvers.core, this.address.resolvers.core);
     return new Promise(async function (resolve, reject) {
       return await _c.methods
         .getIDOwners(_id)
-        .call({ from: address.genesis })
+        .call({ from: this.address.genesis })
         .then((data) => {
           resolve(data);
         })
@@ -114,11 +114,11 @@ module.exports = class DSA {
   }
 
   async getAuthByAddress(_addr) {
-    var _c = new web3.eth.Contract(ABI.resolvers.core, address.resolvers.core);
+    var _c = new web3.eth.Contract(this.ABI.resolvers.core, this.address.resolvers.core);
     return new Promise(async function (resolve, reject) {
       return await _c.methods
         .getAccountOwners(_addr)
-        .call({ from: address.genesis })
+        .call({ from: this.address.genesis })
         .then((data) => {
           resolve(data);
         })
@@ -139,7 +139,7 @@ module.exports = class DSA {
     let _ta = _espell[0];
     let _eda = _espell[1];
     let _o = this.instance.origin;
-    var _c = new web3.eth.Contract(ABI.core.account, this.instance.address);
+    var _c = new web3.eth.Contract(this.ABI.core.account, this.instance.address);
     return new Promise(async function (resolve, reject) {
       return await _c.methods
         .cast(_ta, _eda, _o)
@@ -213,8 +213,8 @@ module.exports = class DSA {
    */
   async read(_s) {
     var _c = new web3.eth.Contract(
-      ABI.read[_s.protocol],
-      address.read[_s.protocol]
+      this.ABI.read[_s.protocol],
+      this.address.read[_s.protocol]
     );
     return new Promise(async function (resolve, reject) {
       return await _c.methods[_s.method](..._s.args)

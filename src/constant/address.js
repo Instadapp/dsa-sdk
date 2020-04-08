@@ -1,0 +1,26 @@
+module.exports.address = {
+  genesis: "0x0000000000000000000000000000000000000000",
+  core: {
+    index: "0x2971AdFa57b20E5a416aE5a708A8655A9c74f723",
+    list: "0x4c8a1BEb8a87765788946D6B19C6C6355194AbEb",
+    connector: "0xD6A602C01a023B98Ecfb29Df02FBA380d3B21E0c",
+  },
+  connectors: {
+    basic: "0x9370236a085A99Aa359f4bD2f0424b8c3bf25C99",
+    auth: "0x627cd0DbD5eE33F8456Aa8143aCd68a13d641588",
+    compound: "0x547f1508A2a1AB0cB84DCe4b3e09beB560Bb44Cb",
+    maker: "0x0a7493f31a23Ff79Eda30B12e6BA49f011B06e36",
+  },
+  resolvers: {
+    core: "0xD6fB4fd8b595d0A1dE727C35fe6F1D4aE5B60F51",
+    balances: "0x22d8d803b8f9938422474b28cccf70da1b51e814",
+    compound: "0xe2d035519f0247ed4b946f0ab74e8347052c020f",
+    maker: "0x8af8aD861337456375604d482D9B9594540C7611",
+  },
+  read: {
+    core: "0xD6fB4fd8b595d0A1dE727C35fe6F1D4aE5B60F51",
+    balances: "0x22d8d803b8f9938422474b28cccf70da1b51e814",
+    compound: "0xe2d035519f0247ed4b946f0ab74e8347052c020f",
+    maker: "0x8af8aD861337456375604d482D9B9594540C7611",
+  },
+};
