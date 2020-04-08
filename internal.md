@@ -44,7 +44,7 @@ if (window.ethereum) {
 }
 ```
 
-## Get Accounts
+## .getAccounts()
 
 Get all the DSA where a specific address is authorised.
 
