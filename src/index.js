@@ -19,13 +19,6 @@ module.exports = class DSA {
   }
 
   /**
-   * returns the current DSA ID
-   */
-  getInstance() {
-    return this.instance;
-  }
-
-  /**
    * sets the current DSA ID
    */
   setInstance(_o) {

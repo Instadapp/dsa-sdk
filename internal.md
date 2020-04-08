@@ -31,7 +31,7 @@ const dsa = require('dsa-sdk');
 const dsa = new DSA();
 ```
 
-DSA only works with web3 library so you also have to instantiate [Web3](https://github.com/ethereum/web3.js/#installation).
+DSA only works with [web3 library](https://github.com/ethereum/web3.js/#installation) so you also have to instantiate Web3.
 
 ```js
 if (window.ethereum) {
@@ -43,9 +43,9 @@ if (window.ethereum) {
 }
 ```
 
-## Get Accounts
+## .getAccounts()
 
-Once connected to a web3 client, get all the DSA where a specific address is authorised.
+Get all the DSA where a specific address is authorised.
 
 ```js
 let address = "0x...";
@@ -75,7 +75,7 @@ dsa.getAccounts(address)
 ]
 ```
 
-## Set Instance
+## .setInstance()
 
 Once you get the DSA(s), set some common values so you don't have to pass similar arguments in further calls.
 
