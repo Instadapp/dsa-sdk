@@ -1,4 +1,4 @@
-module.exports.token = {
+module.exports = {
   eth: {
     symbol: "ETH",
     name: "Ethereum",

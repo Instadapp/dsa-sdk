@@ -1,10 +1,10 @@
-const _address = require("./constant/address.js");
-const _abi = require("./constant/abi.js");
+const address = require("./constant/address.js");
+const abi = require("./constant/abi.js");
 
 module.exports = class Internal {
   constructor() {
-    this.ABI = _abi;
-    this.address = _address;
+    this.ABI = abi;
+    this.address = address;
   }
 
   /**
@@ -17,7 +17,7 @@ module.exports = class Internal {
   }
 
   /**
-   * returns the ABI interface for any DSA contract 
+   * returns the ABI interface for any DSA contract
    */
   getInterface(_type, _co, _m) {
     const _abi = ABI[_type][_co];

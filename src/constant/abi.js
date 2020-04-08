@@ -1,25 +1,25 @@
-module.exports.ABI = {
+module.exports = {
   core: {
-    index: require("./abi/core/index.json"),
-    list: require("./abi/core/list.json"),
-    account: require("./abi/core/account.json"),
+    index: require("../abi/core/index.json"),
+    list: require("../abi/core/list.json"),
+    account: require("../abi/core/account.json"),
   },
   resolvers: {
-    core: require("./abi/resolvers/core.json"),
-    compound: require("./abi/read/compound.json"),
-    maker: require("./abi/read/maker.json"),
-    balances: require("./abi/read/balances.json"),
+    core: require("../abi/resolvers/core.json"),
+    compound: require("../abi/read/compound.json"),
+    maker: require("../abi/read/maker.json"),
+    balances: require("../abi/read/balances.json"),
   },
   connectors: {
-    basic: require("./abi/connectors/basic.json"),
-    auth: require("./abi/connectors/auth.json"),
-    compound: require("./abi/connectors/compound.json"),
-    maker: require("./abi/connectors/maker.json"),
+    basic: require("../abi/connectors/basic.json"),
+    auth: require("../abi/connectors/auth.json"),
+    compound: require("../abi/connectors/compound.json"),
+    maker: require("../abi/connectors/maker.json"),
   },
   read: {
-    core: require("./abi/resolvers/core.json"),
-    compound: require("./abi/read/compound.json"),
-    maker: require("./abi/read/maker.json"),
-    balances: require("./abi/read/balances.json"),
+    core: require("../abi/resolvers/core.json"),
+    compound: require("../abi/read/compound.json"),
+    maker: require("../abi/read/maker.json"),
+    balances: require("../abi/read/balances.json"),
   },
 };

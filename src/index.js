@@ -1,12 +1,13 @@
 const Helpers = require("./helpers.js");
 const Internal = require("./internal.js");
-const _address = require("./constant/address.js");
-const _abi = require("./constant/abi.js");
+const address = require("./constant/address.js");
+const ABI = require("./constant/abi.js");
+const token = require("./constant/token.js");
 
 module.exports = class DSA {
   constructor() {
-    this.address = _address;
-    this.ABI = _abi;
+    this.address = address;
+    this.ABI = ABI;
     this.token = token;
     this.instance = {
       id: 0,
@@ -38,7 +39,10 @@ module.exports = class DSA {
     if (!_d.version) _d.version = 1;
     if (!_d.origin) _d.origin = this.instance.origin;
     if (!_d.from) _d.from = _addr;
-    var _c = await new web3.eth.Contract(this.ABI.core.index, this.address.core.index);
+    var _c = await new web3.eth.Contract(
+      this.ABI.core.index,
+      this.address.core.index
+    );
     return new Promise(async function (resolve, reject) {
       return await _c.methods
         .build(_d.owner, _d.version, _d.origin)
@@ -75,7 +79,10 @@ module.exports = class DSA {
    */
   async getAccounts(_owner) {
     if (!_owner) _owner = await this.internal.getAddress();
-    var _c = new web3.eth.Contract(this.ABI.resolvers.core, this.address.resolvers.core);
+    var _c = new web3.eth.Contract(
+      this.ABI.resolvers.core,
+      this.address.resolvers.core
+    );
     return new Promise(async function (resolve, reject) {
       return await _c.methods
         .getOwnerDetails(_owner)
@@ -99,7 +106,10 @@ module.exports = class DSA {
   }
 
   async getAuthById(_id) {
-    var _c = new web3.eth.Contract(this.ABI.resolvers.core, this.address.resolvers.core);
+    var _c = new web3.eth.Contract(
+      this.ABI.resolvers.core,
+      this.address.resolvers.core
+    );
     return new Promise(async function (resolve, reject) {
       return await _c.methods
         .getIDOwners(_id)
@@ -114,7 +124,10 @@ module.exports = class DSA {
   }
 
   async getAuthByAddress(_addr) {
-    var _c = new web3.eth.Contract(this.ABI.resolvers.core, this.address.resolvers.core);
+    var _c = new web3.eth.Contract(
+      this.ABI.resolvers.core,
+      this.address.resolvers.core
+    );
     return new Promise(async function (resolve, reject) {
       return await _c.methods
         .getAccountOwners(_addr)
@@ -139,7 +152,10 @@ module.exports = class DSA {
     let _ta = _espell[0];
     let _eda = _espell[1];
     let _o = this.instance.origin;
-    var _c = new web3.eth.Contract(this.ABI.core.account, this.instance.address);
+    var _c = new web3.eth.Contract(
+      this.ABI.core.account,
+      this.instance.address
+    );
     return new Promise(async function (resolve, reject) {
       return await _c.methods
         .cast(_ta, _eda, _o)

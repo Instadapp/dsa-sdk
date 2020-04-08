@@ -1,4 +1,4 @@
-module.exports.address = {
+module.exports = {
   genesis: "0x0000000000000000000000000000000000000000",
   core: {
     index: "0x2971AdFa57b20E5a416aE5a708A8655A9c74f723",
