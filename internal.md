@@ -43,12 +43,11 @@ if (window.ethereum) {
 }
 ```
 
-## .getAccounts()
+## Get Accounts
 
 Get all the DSA where a specific address is authorised.
 
 ```js
-let address = "0x...";
 dsa.getAccounts(address)
   .then(data => {
     return data
@@ -62,7 +61,7 @@ dsa.getAccounts(address)
 `address` - An ethereum address.
 
 ### Returns
-`Array` of `Object` with all the DSA where `address` parameter is authorised.
+`Array` of `Object` with all the DSA where `address` parameter is authorised as show below:
 
 ```js
 [
@@ -77,10 +76,9 @@ dsa.getAccounts(address)
 
 ## .setInstance()
 
-Once you get the DSA(s), set some common values so you don't have to pass similar arguments in further calls.
+Set common values so you don't have to pass similar arguments in further calls.
 
 ```js
-let address = "0x...";
 let dsaAccount = dsa.getAccounts(address);
 dsa.setInstance({
   id: dsaAccount[0].id,
@@ -95,8 +93,7 @@ dsa.setInstance({
    * `address` - `String`: The address of DSA.
    * `origin` - `String`: The address to track the transaction origination (affiliates).
 
-
-## Build DSA
+## .build()
 
 Build a new DSA.
 
@@ -121,9 +118,49 @@ dsa.build()
 ### Returns
 `String`: Transaction hash `0x.....`.
 
-## Interact with DSA
+## .getAuthByAddress()
 
-Once the DSA is build, use the following function to make calls to your DSA. This is where you'll interact with other smart contracts like DeFi protocols.
+Get all the authorised address(es) of a DSA by address.
+
+```js
+dsa.getAuthByAddress(address)
+  .then(data => {
+    return data
+  })
+  .catch(error => {
+    return error
+  })
+```
+
+### Parameters
+`address` - An ethereum address.
+
+### Returns
+`Array` of address(es) authorised to make calls the DSA.
+
+## .getAuthById()
+
+Get all the authorised address(es) of a DSA by ID.
+
+```js
+dsa.getAuthById(dsaNum)
+  .then(data => {
+    return data
+  })
+  .catch(error => {
+    return error
+  })
+```
+
+### Parameters
+`Number` - A DSA Number.
+
+### Returns
+`Array` of address(es) authorised to make calls the DSA.
+
+## .spell() & .cast()
+
+Make calls to your DSA to interact with other smart contracts.
 
 Create a new instance.
 ```js
@@ -145,7 +182,7 @@ spells.add({
 });
 ```
 
-Note: You can get the specific input interface by calling `dsa.getInterface(connector, method)`
+Note: You can get the specific input interface by calling `dsa.internal.getConnectorInterface(connector, method)`.
 
 Send the transaction to blockchain. CAST YOUR SPELL.
 
@@ -164,11 +201,37 @@ dsa.cast(spells) // or dsa.cast({spells:spells})
 OR
 1. `Object`
    * `data` - The spell instance.
-   * `from` - `String` (optional): The address transactions should be made from (defaulted to selected address).
-   * `gasPrice` - `String` (optional): The gas price in wei to use for transactions.
-   * `gas` - `Number` (optional): The maximum gas provided for a transaction (gas limit).
+   * `from` - `Address` (optional):  The address for the sending account. Uses the web3.eth.getAccounts(), if not specified.
+   * `to` - `Address` (optional): The destination address of the transaction. Uses the current DSA instance address declared via `.setInstance()`, if not specified.
+   * `value` - `Number|String` (optional): The ETH value transferred for the transaction in wei. 
+   * `gasPrice` - `String` (optional): The price of gas for this transaction in wei, defaults to web3.eth.gasPrice.
+   * `gas` - `Number` (optional): The amount of gas to use for the transaction (unused gas is refunded).
 
 ### Returns
 `String`: Transaction hash `0x.....`.
+
+<!-- ## .estimateCastGas()
+
+Get the gas limit for a specific `cast()` transaction. This types of calls are used to estimate the gas limit beforehand before initiating the call to estimate the transaction failure.
+
+```js
+dsa.estimateCastGas(object)
+  .then(data => {
+    return data
+  })
+  .catch(error => {
+    return error
+  })
+```
+
+### Parameters
+1. `Object`
+   * `data` - The spell instance.
+   * `from` - `Address` (optional):  The address for the sending account. Uses the web3.eth.getAccounts(), if not specified.
+   * `to` - `Address` (optional): The destination address of the transaction. Uses the current DSA instance address declared via `.setInstance()`, if not specified.
+   * `value` - `Number|String` (optional): The ETH value transferred for the transaction in wei.instance address declared via `.setInstance()`, if not specified.
+
+### Returns
+`Array` of address(es) authorised to make calls the DSA. -->
 
 Our team is super active to assist you with all of your queries at our [TG developer group](https://t.me/instadevelopers) or [discord channel](https://discord.gg/83vvrnY).

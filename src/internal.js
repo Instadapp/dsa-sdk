@@ -1,10 +1,9 @@
-const { address, ABI, token } = require("./constant.js");
+const { address, ABI } = require("./constant.js");
 
 module.exports = class Internal {
   constructor() {
     this.ABI = ABI;
     this.address = address;
-    this.token = token;
   }
 
   /**
@@ -37,7 +36,7 @@ module.exports = class Internal {
   }
 
   /**
-   * returns encoded data of delegate call
+   * returns encoded data of any calls
    */
   encodeMethod(_d) {
     const _co = _d.connector;
@@ -47,6 +46,9 @@ module.exports = class Internal {
     return web3.eth.abi.encodeFunctionCall(_i, _a);
   }
 
+  /**
+   * returns encoded data of spells (used via cast() mostly)
+   */
   encodeSpells(_d) {
     let _s;
     if (Array.isArray(_d.spells)) {
@@ -63,21 +65,25 @@ module.exports = class Internal {
     return [_ta, _eda];
   }
 
-  async checkAddress() {
+  /**
+   * returns the input interface required for cast()
+   */
+  async getAddress() {
     let address = await web3.eth.getAccounts();
     if (address.length == 0)
       return console.error("No ethereum address detected!!!");
     return address[0];
   }
 
-  // var _d = {
-  //   from:,
-  //   to:,
-  //   abi:,
-  //   args:,
-  //   value:,
-  // }
-  async getGasLimit(_d) {
+  async estimateGas(_d) {
+    // _d parameters
+    // {
+    //   from: "0x...",
+    //   to: "0x...",
+    //   abi: [],
+    //   args: [],
+    //   value: 0,
+    // }
     var encodeHash = web3.eth.abi.encodeFunctionCall(_d.abi, _d.args);
     return new Promise(async function (resolve, reject) {
       await web3.eth

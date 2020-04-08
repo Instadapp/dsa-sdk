@@ -32,7 +32,7 @@ module.exports = class DSA {
    * build new DSA
    */
   async build(_d) {
-    let _addr = await this.internal.checkAddress();
+    let _addr = await this.internal.getAddress();
     if (!_d) _d = {};
     if (!_d.owner) _d.owner = _addr;
     if (!_d.version) _d.version = 1;
@@ -74,7 +74,7 @@ module.exports = class DSA {
    * returns accounts in a simple array of objects
    */
   async getAccounts(_owner) {
-    if (!_owner) _owner = await this.internal.checkAddress();
+    if (!_owner) _owner = await this.internal.getAddress();
     var _c = new web3.eth.Contract(ABI.resolvers.core, address.resolvers.core);
     return new Promise(async function (resolve, reject) {
       return await _c.methods
@@ -98,11 +98,7 @@ module.exports = class DSA {
     });
   }
 
-  /**
-   * returns authentications by DSA ID
-   */
-  async getAuthorities(_id) {
-    if (!_id) _id = this.instance.id;
+  async getAuthById(_id) {
     var _c = new web3.eth.Contract(ABI.resolvers.core, address.resolvers.core);
     return new Promise(async function (resolve, reject) {
       return await _c.methods
@@ -117,11 +113,27 @@ module.exports = class DSA {
     });
   }
 
+  async getAuthByAddress(_addr) {
+    var _c = new web3.eth.Contract(ABI.resolvers.core, address.resolvers.core);
+    return new Promise(async function (resolve, reject) {
+      return await _c.methods
+        .getAccountOwners(_addr)
+        .call({ from: address.genesis })
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  }
+
   /**
    * execute all the spells
    */
   async cast(_d) {
-    let _addr = await this.internal.checkAddress();
+    let _addr = await this.internal.getAddress();
+    if (!_d.to) _d.to = this.instance.address;
     if (!_d.from) _d.from = _addr;
     let _espell = this.internal.encodeSpells(_d);
     let _ta = _espell[0];
@@ -144,14 +156,12 @@ module.exports = class DSA {
   /**
    * estimate cast gas cost
    */
-  async castGas(_d) {
+  async estimateCastGas(_d) {
     var _internal = this.internal;
-    var _addr = await _internal.checkAddress();
-    var _dsa_addr = this.instance.address;
     var _args = _internal.encodeSpells(_d);
     _args.push(this.instance.origin);
-    if (!_d.to) _d.to = _dsa_addr;
-    if (!_d.from) _d.from = _addr;
+    if (!_d.to) _d.to = this.instance.address;
+    if (!_d.from) _d.from = await _internal.getAddress();
     if (!_d.value) _d.value = "0";
     var _abi = _internal.getInterface("core", "account", "cast");
     var _obj = {
@@ -163,13 +173,12 @@ module.exports = class DSA {
     };
     return new Promise(async function (resolve, reject) {
       await _internal
-        .getGasLimit(_obj)
+        .estimateGas(_obj)
         .then((gas) => {
           console.log(gas);
           resolve(gas);
         })
         .catch((err) => {
-          alert(err);
           reject(err);
         });
     });
