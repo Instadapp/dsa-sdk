@@ -1,6 +1,6 @@
 {
   "name": "dsa-sdk",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "DSA Starter Kit for building DeFi dapps",
   "main": "build/dsa.js",
   "scripts": {
@@ -39,7 +39,6 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
-    "ansicolor": "^1.1.93",
     "axios": "^0.19.2",
     "ethereumjs-tx": "^2.1.2",
     "ololog": "^1.1.155",
