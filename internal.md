@@ -23,11 +23,10 @@ For production, we recommend linking to a specific version number ([jsdeliver](h
 
 ## Usage
 
-Now instantiate Web3 and DSA together. Currently, this SDK only works with [web3 library](https://github.com/ethereum/web3.js/#installation)
-
-In browser:
+Currently, this SDK only works with [web3 library](https://github.com/ethereum/web3.js/#installation)
 
 ```js
+// in browser
 if (window.ethereum) {
   window.web3 = new Web3(window.ethereum)
 } else if (window.web3) {
@@ -36,15 +35,15 @@ if (window.ethereum) {
   window.web3 = new Web3(customProvider)
 }
 
-const dsa = new DSA(window.web3);
+// in node.js
+const Web3 = require('web3')
+const DSA = require('dsa-sdk');
+const web3 = new Web3(new Web3.providers.HttpProvider(ETH_NODE_URL))
 ```
 
-In nodejs:
+Now instantiate DSA.
+ 
 ```js
-const Web3 = require('web3')
-const web3 = new Web3(new Web3.providers.HttpProvider(ETH_NODE_URL))
-
-const DSA = require('dsa-sdk');
 const dsa = new DSA(web3);
 ```
 
