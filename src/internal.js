@@ -119,7 +119,7 @@ module.exports = class Internal {
               value: _d.value,
             },
           });
-          console.log(err);
+          console.error(err);
         });
     });
   }
