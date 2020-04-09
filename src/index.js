@@ -5,7 +5,6 @@ const ABI = require("./constant/abi.js");
 const token = require("./constant/token.js");
 
 module.exports = class DSA {
-
   /**
    * @param config // === web3
    * OR
@@ -23,7 +22,7 @@ module.exports = class DSA {
     };
     this.web3 = config.web3 ? config.web3 : config;
     this.helpers = new Helpers();
-    this.internal = new Internal({web3: this.web3});
+    this.internal = new Internal({ web3: this.web3 });
   }
 
   /**
@@ -72,7 +71,10 @@ module.exports = class DSA {
    * global number of DSAs
    */
   async count() {
-    var _c = new this.web3.eth.Contract(this.ABI.core.list, this.address.core.list);
+    var _c = new this.web3.eth.Contract(
+      this.ABI.core.list,
+      this.address.core.list
+    );
     return new Promise(async function (resolve, reject) {
       return await _c.methods
         .accounts()
@@ -179,9 +181,9 @@ module.exports = class DSA {
    */
   async cast(_d) {
     let _addr = await this.internal.getAddress();
+    let _espell = this.internal.encodeSpells(_d);
     if (!_d.to) _d.to = this.instance.address;
     if (!_d.from) _d.from = _addr;
-    let _espell = this.internal.encodeSpells(_d);
     if (!_d.origin) _d.origin = this.instance.origin;
     var _c = new this.web3.eth.Contract(
       this.ABI.core.account,
@@ -243,11 +245,11 @@ module.exports = class DSA {
    * @param _d.origin (optional) the transaction origin source
    */
   encodeCastABI(_d) {
+    let _enodedSpell = this.internal.encodeSpells(_d);
     if (!_d.to) _d.to = this.instance.address;
     if (!_d.origin) _d.origin = this.instance.origin;
-    let _enodedSpell = encodeSpells(_d);
     let _contract = new this.web3.eth.Contract(this.ABI.core.account, _d.to);
-    return _contract.methods.build(..._enodedSpell, _d.origin).encodeABI();
+    return _contract.methods.cast(..._enodedSpell, _d.origin).encodeABI();
   }
 
   /**

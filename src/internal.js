@@ -2,7 +2,6 @@ const address = require("./constant/address.js");
 const abi = require("./constant/abi.js");
 
 module.exports = class Internal {
-  
   /**
    * @param config.web3
    */
@@ -25,7 +24,7 @@ module.exports = class Internal {
    * returns the ABI interface for any DSA contract
    */
   getInterface(_type, _co, _m) {
-    const _abi = ABI[_type][_co];
+    const _abi = this.ABI[_type][_co];
     for (let i = 0; i < _abi.length; i++) {
       if (_abi[i].name == _m) {
         return _abi[i];
@@ -63,7 +62,7 @@ module.exports = class Internal {
    */
   encodeSpells(_d) {
     let _s;
-    if (Array.isArray(_d.spells)) {
+    if (Array.isArray(_d.data)) {
       _s = _d.data; // required
     } else {
       _s = _d.spells.data; // required
