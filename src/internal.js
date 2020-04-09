@@ -11,10 +11,6 @@ module.exports = class Internal {
     this.web3 = config.web3;
   }
 
-  verion() {
-    return this.web3.verion;
-  }
-
   /**
    * returns the input interface required for cast()
    */
@@ -100,8 +96,9 @@ module.exports = class Internal {
    */
   async estimateGas(_d) {
     let encodeHash = this.web3.eth.abi.encodeFunctionCall(_d.abi, _d.args);
+    let _web3 = this.web3;
     return new Promise(async function (resolve, reject) {
-      await this.web3.eth
+      await _web3.eth
         .estimateGas({
           from: _d.from,
           to: _d.to,
