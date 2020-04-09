@@ -1,8 +1,6 @@
 # DSA SDK documentation
 
-DSA SDK makes easy to build DeFi apps and interact with defi smart account without handling all the complexities like managing addresses, ABIs etc.
-
-Our team is super active to assist with your queries at our [TG developer group](https://t.me/instadevelopers) or [discord channel](https://discord.gg/83vvrnY).
+DSA SDK makes easy to build DeFi apps and interact with defi smart account without handling all the complexities. Our team is super active to assist with your queries at our [TG developer group](https://t.me/instadevelopers) or [discord channel](https://discord.gg/83vvrnY).
 
 ## Get Started
 
@@ -24,17 +22,11 @@ npm install dsa-sdk
 For production, we recommend linking to a specific version number ([jsdeliver](https://www.jsdelivr.com/package/npm/dsa-sdk)).
 
 ## Usage
-Now instantiate DSA.
-```js
-// in node.js
-const dsa = require('dsa-sdk');
 
-const dsa = new DSA();
-```
-
-DSA only works with [web3 library](https://github.com/ethereum/web3.js/#installation) so you also have to instantiate Web3.
+Now instantiate Web3 and DSA together. Currently, this SDK only works with [web3 library](https://github.com/ethereum/web3.js/#installation)
 
 ```js
+// in browser
 if (window.ethereum) {
   window.web3 = new Web3(window.ethereum)
 } else if (window.web3) {
@@ -42,6 +34,15 @@ if (window.ethereum) {
 } else {
   window.web3 = new Web3(customProvider)
 }
+
+const dsa = new DSA(window.web3);
+
+// in nodejs
+const Web3 = require('web3')
+const web3 = new Web3(new Web3.providers.HttpProvider(ETH_NODE_URL))
+
+const DSA = require('dsa-sdk');
+const dsa = new DSA(web3);
 ```
 
 ## .getAccounts()

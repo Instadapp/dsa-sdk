@@ -2,9 +2,14 @@ const address = require("./constant/address.js");
 const abi = require("./constant/abi.js");
 
 module.exports = class Internal {
-  constructor() {
+  
+  /**
+   * @param config.web3
+   */
+  constructor(config) {
     this.ABI = abi;
     this.address = address;
+    this.web3 = config.web3;
   }
 
   /**
@@ -47,7 +52,7 @@ module.exports = class Internal {
     let _m = _d.method;
     let _a = _d.args; // []
     let _i = this.getInterface("connectors", _co, _m);
-    return web3.eth.abi.encodeFunctionCall(_i, _a);
+    return this.web3.eth.abi.encodeFunctionCall(_i, _a);
   }
 
   /**
@@ -76,7 +81,7 @@ module.exports = class Internal {
    * returns the input interface required for cast()
    */
   async getAddress() {
-    let address = await web3.eth.getAccounts();
+    let address = await this.web3.eth.getAccounts();
     if (address.length == 0)
       return console.error("No ethereum address detected!!!");
     return address[0];
@@ -91,9 +96,9 @@ module.exports = class Internal {
    * @param _d.value the call value
    */
   async estimateGas(_d) {
-    let encodeHash = web3.eth.abi.encodeFunctionCall(_d.abi, _d.args);
+    let encodeHash = this.web3.eth.abi.encodeFunctionCall(_d.abi, _d.args);
     return new Promise(async function (resolve, reject) {
-      await web3.eth
+      await this.web3.eth
         .estimateGas({
           from: _d.from,
           to: _d.to,

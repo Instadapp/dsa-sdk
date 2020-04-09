@@ -5,7 +5,13 @@ const ABI = require("./constant/abi.js");
 const token = require("./constant/token.js");
 
 module.exports = class DSA {
-  constructor() {
+
+  /**
+   * @param config // === web3
+   * OR
+   * @param config.web3
+   */
+  constructor(config) {
     this.address = address;
     this.ABI = ABI;
     this.token = token;
@@ -15,8 +21,9 @@ module.exports = class DSA {
       version: 1,
       origin: address.genesis,
     };
+    this.web3 = config.web3 ? config.web3 : config;
     this.helpers = new Helpers();
-    this.internal = new Internal();
+    this.internal = new Internal({web3: this.web3});
   }
 
   /**
@@ -44,7 +51,7 @@ module.exports = class DSA {
     if (!_d.version) _d.version = 1;
     if (!_d.origin) _d.origin = this.instance.origin;
     if (!_d.from) _d.from = _addr;
-    var _c = await new web3.eth.Contract(
+    var _c = await new this.web3.eth.Contract(
       this.ABI.core.index,
       this.address.core.index
     );
@@ -65,7 +72,7 @@ module.exports = class DSA {
    * global number of DSAs
    */
   async count() {
-    var _c = new web3.eth.Contract(this.ABI.core.list, this.address.core.list);
+    var _c = new this.web3.eth.Contract(this.ABI.core.list, this.address.core.list);
     return new Promise(async function (resolve, reject) {
       return await _c.methods
         .accounts()
@@ -85,7 +92,7 @@ module.exports = class DSA {
    */
   async getAccounts(_authority) {
     if (!_authority) _authority = await this.internal.getAddress();
-    var _c = new web3.eth.Contract(
+    var _c = new this.web3.eth.Contract(
       this.ABI.resolvers.core,
       this.address.resolvers.core
     );
@@ -117,7 +124,7 @@ module.exports = class DSA {
    * @param _id the DSA number
    */
   async getAuthById(_id) {
-    var _c = new web3.eth.Contract(
+    var _c = new this.web3.eth.Contract(
       this.ABI.resolvers.core,
       this.address.resolvers.core
     );
@@ -140,7 +147,7 @@ module.exports = class DSA {
    * @param _id the DSA address
    */
   async getAuthByAddress(_addr) {
-    var _c = new web3.eth.Contract(
+    var _c = new this.web3.eth.Contract(
       this.ABI.resolvers.core,
       this.address.resolvers.core
     );
@@ -176,7 +183,7 @@ module.exports = class DSA {
     if (!_d.from) _d.from = _addr;
     let _espell = this.internal.encodeSpells(_d);
     if (!_d.origin) _d.origin = this.instance.origin;
-    var _c = new web3.eth.Contract(
+    var _c = new this.web3.eth.Contract(
       this.ABI.core.account,
       this.instance.address
     );
@@ -239,7 +246,7 @@ module.exports = class DSA {
     if (!_d.to) _d.to = this.instance.address;
     if (!_d.origin) _d.origin = this.instance.origin;
     let _enodedSpell = encodeSpells(_d);
-    let _contract = new web3.eth.Contract(this.ABI.core.account, _d.to);
+    let _contract = new this.web3.eth.Contract(this.ABI.core.account, _d.to);
     return _contract.methods.build(..._enodedSpell, _d.origin).encodeABI();
   }
 
@@ -274,7 +281,7 @@ module.exports = class DSA {
    * to call read functions and get raw data return
    */
   async read(_s) {
-    var _c = new web3.eth.Contract(
+    var _c = new this.web3.eth.Contract(
       this.ABI.read[_s.protocol],
       this.address.read[_s.protocol]
     );
