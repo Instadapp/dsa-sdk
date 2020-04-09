@@ -11,6 +11,10 @@ module.exports = class Internal {
     this.web3 = config.web3;
   }
 
+  verion() {
+    return this.web3.verion;
+  }
+
   /**
    * returns the input interface required for cast()
    */
