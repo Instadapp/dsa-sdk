@@ -31,6 +31,11 @@ module.exports = class DSA {
 
   /**
    * build new DSA
+   * @param _d.owner (optional)
+   * @param _d.origin (optional)
+   * @param _d.from (optional)
+   * @param _d.gasPrice (optional)
+   * @param _d.gas (optional)
    */
   async build(_d) {
     let _addr = await this.internal.getAddress();
@@ -76,6 +81,7 @@ module.exports = class DSA {
 
   /**
    * returns accounts in a simple array of objects
+   * @param _authority the ethereum address
    */
   async getAccounts(_authority) {
     if (!_authority) _authority = await this.internal.getAddress();
@@ -106,6 +112,10 @@ module.exports = class DSA {
     });
   }
 
+  /**
+   * returns accounts in a simple array of objects
+   * @param _id the DSA number
+   */
   async getAuthById(_id) {
     var _c = new web3.eth.Contract(
       this.ABI.resolvers.core,
@@ -125,6 +135,10 @@ module.exports = class DSA {
     });
   }
 
+  /**
+   * returns accounts in a simple array of objects
+   * @param _id the DSA address
+   */
   async getAuthByAddress(_addr) {
     var _c = new web3.eth.Contract(
       this.ABI.resolvers.core,
@@ -146,22 +160,29 @@ module.exports = class DSA {
 
   /**
    * execute all the spells
+   * @param _d the spells instance
+   * OR
+   * @param _d.spells the spells instance
+   * @param _d.origin (optional)
+   * @param _d.to (optional)
+   * @param _d.from (optional)
+   * @param _d.value (optional)
+   * @param _d.gasPrice (optional)
+   * @param _d.gas (optional)
    */
   async cast(_d) {
     let _addr = await this.internal.getAddress();
     if (!_d.to) _d.to = this.instance.address;
     if (!_d.from) _d.from = _addr;
     let _espell = this.internal.encodeSpells(_d);
-    let _ta = _espell[0];
-    let _eda = _espell[1];
-    let _o = this.instance.origin;
+    if (!_d.origin) _d.origin = this.instance.origin;
     var _c = new web3.eth.Contract(
       this.ABI.core.account,
       this.instance.address
     );
     return new Promise(async function (resolve, reject) {
       return await _c.methods
-        .cast(_ta, _eda, _o)
+        .cast(..._espell, _d.origin)
         .send(_d)
         .on("transactionHash", (txHash) => {
           resolve(txHash);
@@ -173,7 +194,10 @@ module.exports = class DSA {
   }
 
   /**
-   * estimate cast gas cost
+   * returns the estimate gas cost
+   * @param _d.connector the from address
+   * @param _d.method the to address
+   * @param _d.args the ABI interface
    */
   async estimateCastGas(_d) {
     var _internal = this.internal;
@@ -204,6 +228,22 @@ module.exports = class DSA {
   }
 
   /**
+   * returns the encoded cast ABI byte code to send via a transaction or call.
+   * @param _d the spells instance
+   * OR
+   * @param _d.spells the spells instance
+   * @param _d.to (optional) the address of the smart contract to call
+   * @param _d.origin (optional) the transaction origin source
+   */
+  encodeCastABI(_d) {
+    if (!_d.to) _d.to = this.instance.address;
+    if (!_d.origin) _d.origin = this.instance.origin;
+    let _enodedSpell = encodeSpells(_d);
+    let _contract = new web3.eth.Contract(this.ABI.core.account, _d.to);
+    return _contract.methods.build(..._enodedSpell, _d.origin).encodeABI();
+  }
+
+  /**
    * creating a new spell instance
    */
   Spell() {
@@ -212,17 +252,20 @@ module.exports = class DSA {
        * empty spells array
        */
       constructor() {
-        this.spells = [];
+        this.data = [];
       }
 
       /**
        * add new spells
+       * @param _d.connector the from address
+       * @param _d.method the to address
+       * @param _d.args the ABI interface
        */
       add(_s) {
         if (!_s.connector) return console.error(`connector not defined.`);
         if (!_s.method) return console.error(`method not defined.`);
         if (!_s.args) return console.error(`args not defined.`);
-        this.spells.push(_s);
+        this.data.push(_s);
       }
     })();
   }

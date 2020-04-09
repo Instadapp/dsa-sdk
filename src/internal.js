@@ -38,24 +38,30 @@ module.exports = class Internal {
 
   /**
    * returns encoded data of any calls
+   * * @param _d.connector
+   * * @param _d.method
+   * * @param _d.args
    */
   encodeMethod(_d) {
-    const _co = _d.connector;
-    const _m = _d.method;
-    const _a = _d.args; // []
-    const _i = this.getInterface("connectors", _co, _m);
+    let _co = _d.connector;
+    let _m = _d.method;
+    let _a = _d.args; // []
+    let _i = this.getInterface("connectors", _co, _m);
     return web3.eth.abi.encodeFunctionCall(_i, _a);
   }
 
   /**
    * returns encoded data of spells (used via cast() mostly)
+   * * @param _d the spells instance
+   * OR
+   * @param _d.spells the spells instance
    */
   encodeSpells(_d) {
     let _s;
     if (Array.isArray(_d.spells)) {
-      _s = _d.spells; // required
+      _s = _d.data; // required
     } else {
-      _s = _d.spells.spells; // required
+      _s = _d.spells.data; // required
     }
     let _ta = [];
     let _eda = [];
@@ -76,16 +82,16 @@ module.exports = class Internal {
     return address[0];
   }
 
+  /**
+   * returns the estimate gas cost
+   * @param _d.from the from address
+   * @param _d.to the to address
+   * @param _d.abi the ABI interface
+   * @param _d.args the method arguments
+   * @param _d.value the call value
+   */
   async estimateGas(_d) {
-    // _d parameters
-    // {
-    //   from: "0x...",
-    //   to: "0x...",
-    //   abi: [],
-    //   args: [],
-    //   value: 0,
-    // }
-    var encodeHash = web3.eth.abi.encodeFunctionCall(_d.abi, _d.args);
+    let encodeHash = web3.eth.abi.encodeFunctionCall(_d.abi, _d.args);
     return new Promise(async function (resolve, reject) {
       await web3.eth
         .estimateGas({
@@ -95,7 +101,6 @@ module.exports = class Internal {
           value: _d.value,
         })
         .then((gas) => {
-          console.log(gas);
           resolve(gas);
         })
         .catch((err) => {

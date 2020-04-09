@@ -39,6 +39,10 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
+    "ansicolor": "^1.1.93",
+    "axios": "^0.19.2",
+    "ethereumjs-tx": "^2.1.2",
+    "ololog": "^1.1.155",
     "web3": "^1.2.6"
   }
 }
