@@ -23,7 +23,7 @@ const banner = `
 
 module.exports = {
   mode: "development",
-  entry: './src/app.js',
+  entry: './dev/app.js',
   output: {
     filename: 'dsa.js',
     path: path.resolve(__dirname, 'dist')
@@ -44,7 +44,7 @@ module.exports = {
       hash: true,
       title: 'Testing Page For SDK',
       header: 'Use the console to test the DSA SDK',
-      template: './src/index.html',
+      template: './dev/index.html',
       filename: 'index.html' 
     }),
     new webpack.BannerPlugin(banner),

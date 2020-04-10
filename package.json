@@ -5,6 +5,7 @@
   "main": "build/dsa.min.js",
   "scripts": {
     "build": "webpack --mode production",
+    "build-dev": "webpack --mode development --config webpack.config.dev.js",
     "dev-server": "webpack-dev-server --mode development --config webpack.config.dev.js",
     "prepare": "npm run build",
     "trypublish": "npm publish || true"
