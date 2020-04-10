@@ -2,16 +2,57 @@
   {
     "inputs": [
       {
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      }
+    ],
+    "name": "getColInfo",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "borrowRate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "price",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "liquidationRatio",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct Helpers.IlkData[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "owner",
         "type": "address"
       }
     ],
-    "name": "getDaiDeposited",
+    "name": "getDaiPosition",
     "outputs": [
       {
         "internalType": "uint256",
         "name": "amt",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "dsr",
         "type": "uint256"
       }
     ],
@@ -29,112 +70,6 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "bytes32",
-        "name": "ilk",
-        "type": "bytes32"
-      }
-    ],
-    "name": "getFee",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "fee",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "bytes32[]",
-        "name": "ilks",
-        "type": "bytes32[]"
-      }
-    ],
-    "name": "getIlkData",
-    "outputs": [
-      {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "fee",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "price",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "ratio",
-            "type": "uint256"
-          }
-        ],
-        "internalType": "struct Helpers.IlkData[]",
-        "name": "",
-        "type": "tuple[]"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "bytes32",
-        "name": "ilk",
-        "type": "bytes32"
-      }
-    ],
-    "name": "getIlkPrice",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "price",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "bytes32",
-        "name": "ilk",
-        "type": "bytes32"
-      }
-    ],
-    "name": "getIlkRatio",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "ratio",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getMcdAddresses",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "pure",
     "type": "function"
   },
   {
@@ -160,9 +95,9 @@
             "type": "address"
           },
           {
-            "internalType": "bytes32",
-            "name": "ilk",
-            "type": "bytes32"
+            "internalType": "string",
+            "name": "colType",
+            "type": "string"
           },
           {
             "internalType": "uint256",
@@ -186,12 +121,12 @@
           },
           {
             "internalType": "uint256",
-            "name": "stabiltyRate",
+            "name": "borrowRate",
             "type": "uint256"
           },
           {
             "internalType": "uint256",
-            "name": "price",
+            "name": "colPrice",
             "type": "uint256"
           },
           {
@@ -201,7 +136,7 @@
           },
           {
             "internalType": "address",
-            "name": "urn",
+            "name": "vaultAddress",
             "type": "address"
           }
         ],
@@ -221,7 +156,7 @@
         "type": "address"
       }
     ],
-    "name": "getVaultsByAddress",
+    "name": "getVaults",
     "outputs": [
       {
         "components": [
@@ -236,9 +171,9 @@
             "type": "address"
           },
           {
-            "internalType": "bytes32",
-            "name": "ilk",
-            "type": "bytes32"
+            "internalType": "string",
+            "name": "colType",
+            "type": "string"
           },
           {
             "internalType": "uint256",
@@ -262,12 +197,12 @@
           },
           {
             "internalType": "uint256",
-            "name": "stabiltyRate",
+            "name": "borrowRate",
             "type": "uint256"
           },
           {
             "internalType": "uint256",
-            "name": "price",
+            "name": "colPrice",
             "type": "uint256"
           },
           {
@@ -277,7 +212,7 @@
           },
           {
             "internalType": "address",
-            "name": "urn",
+            "name": "vaultAddress",
             "type": "address"
           }
         ],

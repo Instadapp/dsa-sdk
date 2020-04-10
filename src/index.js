@@ -56,8 +56,8 @@ module.exports = class DSA {
       this.ABI.core.index,
       this.address.core.index
     );
-    return new Promise( function (resolve, reject) {
-      return  _c.methods
+    return new Promise(function (resolve, reject) {
+      return _c.methods
         .build(_d.owner, _d.version, _d.origin)
         .send(_d)
         .on("transactionHash", (txHash) => {
@@ -77,7 +77,7 @@ module.exports = class DSA {
       this.ABI.core.list,
       this.address.core.list
     );
-    return new Promise( (resolve, reject) => {
+    return new Promise((resolve, reject) => {
       return _c.methods
         .accounts()
         .call({ from: this.address.genesis })
@@ -100,8 +100,8 @@ module.exports = class DSA {
       this.ABI.resolvers.core,
       this.address.resolvers.core
     );
-    return new Promise( (resolve, reject) => {
-      return  _c.methods
+    return new Promise((resolve, reject) => {
+      return _c.methods
         .getAuthorityDetails(_authority)
         .call({ from: this.address.genesis })
         .then((_d) => {
@@ -131,8 +131,8 @@ module.exports = class DSA {
       this.ABI.resolvers.core,
       this.address.resolvers.core
     );
-    return new Promise( (resolve, reject) => {
-      return  _c.methods
+    return new Promise((resolve, reject) => {
+      return _c.methods
         .getIDAuthorities(_id)
         .call({ from: this.address.genesis })
         .then((data) => {
@@ -153,8 +153,8 @@ module.exports = class DSA {
       this.ABI.resolvers.core,
       this.address.resolvers.core
     );
-    return new Promise( (resolve, reject) => {
-      return  _c.methods
+    return new Promise((resolve, reject) => {
+      return _c.methods
         .getAccountAuthorities(_addr)
         .call({ from: this.address.genesis })
         .then((data) => {
@@ -188,8 +188,8 @@ module.exports = class DSA {
       this.ABI.core.account,
       this.instance.address
     );
-    return new Promise( function (resolve, reject) {
-      return  _c.methods
+    return new Promise(function (resolve, reject) {
+      return _c.methods
         .cast(..._espell, _d.origin)
         .send(_d)
         .on("transactionHash", (txHash) => {
@@ -223,7 +223,7 @@ module.exports = class DSA {
       value: _d.value,
     };
     return new Promise(function (resolve, reject) {
-       _internal
+      _internal
         .estimateGas(_obj)
         .then((gas) => {
           console.log(gas);
@@ -287,7 +287,7 @@ module.exports = class DSA {
       this.address.read[_s.protocol]
     );
     return new Promise(function (resolve, reject) {
-      return  _c.methods[_s.method](..._s.args)
+      return _c.methods[_s.method](..._s.args)
         .call()
         .then((res) => {
           resolve(res);
