@@ -1,9 +1,9 @@
 const Helpers = require("./helpers.js");
 const Internal = require("./internal.js");
+const Compound = require("./protocol/compound.js");
 const address = require("./constant/address.js");
 const ABI = require("./constant/abi.js");
 const token = require("./constant/token.js");
-// const Compound = require("./protocol/compound.js");
 
 module.exports = class DSA {
   /**
@@ -23,8 +23,8 @@ module.exports = class DSA {
     };
     this.web3 = config.web3 ? config.web3 : config;
     this.helpers = new Helpers();
-    this.internal = new Internal({ web3: this.web3 });
-    // this.compound = new Compound(this);
+    this.internal = new Internal(this);
+    this.compound = new Compound(this);
   }
 
   /**

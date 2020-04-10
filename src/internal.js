@@ -1,14 +1,11 @@
-const address = require("./constant/address.js");
-const abi = require("./constant/abi.js");
-
 module.exports = class Internal {
   /**
    * @param config.web3
    */
-  constructor(config) {
-    this.ABI = abi;
-    this.address = address;
-    this.web3 = config.web3;
+  constructor(_dsa) {
+    this.ABI = _dsa.ABI;
+    this.address = _dsa.address;
+    this.web3 = _dsa.web3;
   }
 
   /**

@@ -1,15 +1,37 @@
-const compoundMapping = require("../constant/protocol/compound.js");
-
 module.exports = class Compound {
-  constructor(that) {
-    this.data = that;
-    this.data.mapping = compoundMapping;
+  /**
+   * @param {Object} _dsa the dsa instance to access data stores
+   */
+  constructor(_dsa) {
+    this.ABI = _dsa.ABI;
+    this.address = _dsa.address;
+    this.token = _dsa.token;
   }
+
+  /**
+   * get the root underlying token symbol of ctoken
+   * @param {String} cTokenSymbol the ctoken symbol
+   */
+  ctokenMap(cTokenSymbol) {
+    cTokenSymbol = cTokenSymbol.toLowerCase()
+    var tokens = this.token;
+    for (const key in tokens) {
+      if (key == cTokenSymbol) {
+        return tokens[key].root
+      }
+    }
+  };
+
+  /**
+   * get properly formatted compound position details
+   * @param {string} address the owner address
+   * @param {string} cTokens the cToken address
+   */
   getPosition(address, cTokens) {
-      let that = this.data
+    let that = this.data;
     var _c = new that.web3.eth.Contract(
-        that.ABI.read["compound"],
-        that.address.read["compound"]
+      that.ABI.read["compound"],
+      that.address.read["compound"]
     );
     return new Promise(async function (resolve, reject) {
       let compoundRawData = await _c.methods
@@ -31,7 +53,7 @@ module.exports = class Compound {
       let addrSymb = {};
       Object.values(that.token).forEach((token) => {
         if (token.compound) {
-          let _token = that.mapping.ctokenMap[token.symbol.toLowerCase()];
+          let _token = this.ctokenMap[token.symbol.toLowerCase()];
           addrDecimal[token.address] = that.token[_token].decimals;
           addrSymb[token.address] = that.token[_token].symbol;
         }
