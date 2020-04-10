@@ -25,7 +25,7 @@ module.exports = {
   mode: "production",
   entry: './src/index.js',
   output: {
-    filename: 'dsa.js',
+    filename: 'dsa.min.js',
     path: path.resolve(__dirname, 'build'),
     library: 'DSA',
     libraryTarget: 'umd',

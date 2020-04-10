@@ -13,7 +13,7 @@ logs
 results
 tmp
 
-dist
+dist/*
 
 # Optional npm cache directory
 .npm
