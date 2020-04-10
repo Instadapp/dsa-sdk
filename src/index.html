@@ -7,12 +7,20 @@
 
   <body>
     <h1> <%= htmlWebpackPlugin.options.header %> </h1>
+    <a id="initWeb3" href="#">Init Web3</a>
     <h3>type "DSA' into window to get started</h3>
-    
-    <my-app></my-app>
+
     <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.2.6/dist/web3.min.js"></script>
     <script src="https://apis.instadapp.io/js/web3Modal/config.js"></script>
     <script src="https://apis.instadapp.io/js/web3/connect.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
   
+    <script>
+      $("#initWeb3").on("click", function(e) {
+          e.preventDefault();
+          InitWeb3()
+      })    
+    </script>
+
   </body>
 </html>
