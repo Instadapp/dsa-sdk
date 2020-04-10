@@ -77,10 +77,11 @@ module.exports = class DSA {
       this.ABI.core.list,
       this.address.core.list
     );
+    var _from = this.address.genesis
     return new Promise(async function (resolve, reject) {
       return await _c.methods
         .accounts()
-        .call({ from: this.address.genesis })
+        .call({ from: _from })
         .then((count) => {
           resolve(count);
         })
