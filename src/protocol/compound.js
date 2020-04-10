@@ -3,14 +3,14 @@ const compoundMapping = require("../constant/protocol/compound.js");
 module.exports = class Compound {
   constructor(that) {
     this.data = that;
-    this.mapping = compoundMapping;
+    this.data.mapping = compoundMapping;
   }
   getPosition(address, cTokens) {
-    var _c = new this.data.web3.eth.Contract(
-      this.data.ABI.read["compound"],
-      this.data.address.read["compound"]
+      let that = this.data
+    var _c = new that.web3.eth.Contract(
+        that.ABI.read["compound"],
+        that.address.read["compound"]
     );
-    var that = this;
     return new Promise(async function (resolve, reject) {
       let compoundRawData = await _c.methods
         .getCompTokensData(address, cTokens)
@@ -29,11 +29,11 @@ module.exports = class Compound {
 
       let addrDecimal = {};
       let addrSymb = {};
-      Object.values(that.data.token).forEach((token) => {
+      Object.values(that.token).forEach((token) => {
         if (token.compound) {
           let _token = that.mapping.ctokenMap[token.symbol.toLowerCase()];
-          addrDecimal[token.address] = that.data.token[_token].decimals;
-          addrSymb[token.address] = that.data.token[_token].symbol;
+          addrDecimal[token.address] = that.token[_token].decimals;
+          addrSymb[token.address] = that.token[_token].symbol;
         }
       });
 
