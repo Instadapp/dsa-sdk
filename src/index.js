@@ -39,11 +39,11 @@ module.exports = class DSA {
 
   /**
    * build new DSA
-   * @param _d.owner (optional)
-   * @param _d.origin (optional)
-   * @param _d.from (optional)
-   * @param _d.gasPrice (optional)
-   * @param _d.gas (optional)
+   * @param {address} _d.owner (optional)
+   * @param {address} _d.origin (optional)
+   * @param {address} _d.from (optional)
+   * @param {number|string} _d.gasPrice (optional)
+   * @param {number|string} _d.gas (optional)
    */
   async build(_d) {
     let _addr = await this.internal.getAddress();
