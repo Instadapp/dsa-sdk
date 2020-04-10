@@ -10,4 +10,4 @@ Please read our [developer doc](https://github.com/InstaDApp/dsa-developers) for
 2. Run `npm run dev` to start 
 3. Navigate to `localhost:8080`
 4. Call `InitWeb3()` in debugger console
-5. Access the DSA object via `window.DSA`
+5. Access the DSA object via `window.dsa`
