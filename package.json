@@ -2,13 +2,12 @@
   "name": "dsa-sdk",
   "version": "1.2.6",
   "description": "DSA Starter Kit for building DeFi dapps",
-  "main": "build/dsa.js",
+  "main": "build/dsa.min.js",
   "scripts": {
     "build": "webpack --mode production",
-    "dev": "webpack-dev-server --mode development --config webpack.config.dev.js",
+    "dev-server": "webpack-dev-server --mode development --config webpack.config.dev.js",
     "prepare": "npm run build",
-    "trypublish": "npm publish || true",
-    "app": "nodemon app.js"
+    "trypublish": "npm publish || true"
   },
   "repository": {
     "type": "git",

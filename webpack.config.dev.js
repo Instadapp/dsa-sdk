@@ -21,12 +21,11 @@ const banner = `
   LICENSE file in the root directory of this source tree.
 `;
 
-
 module.exports = {
   mode: "development",
   entry: './src/app.js',
   output: {
-    filename: '[name].bundle.js',
+    filename: 'dsa.js',
     path: path.resolve(__dirname, 'dist')
   },
   module: {
