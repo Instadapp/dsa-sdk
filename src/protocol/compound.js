@@ -13,14 +13,14 @@ module.exports = class Compound {
    * @param {String} cTokenSymbol the ctoken symbol
    */
   ctokenMap(cTokenSymbol) {
-    cTokenSymbol = cTokenSymbol.toLowerCase()
+    cTokenSymbol = cTokenSymbol.toLowerCase();
     var tokens = this.token;
     for (const key in tokens) {
       if (key == cTokenSymbol) {
-        return tokens[key].root
+        return tokens[key].root;
       }
     }
-  };
+  }
 
   /**
    * get properly formatted compound position details
