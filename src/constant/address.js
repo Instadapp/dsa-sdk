@@ -13,13 +13,13 @@ module.exports = {
   },
   resolvers: {
     core: "0x37D60F60fcDeA9f4Dcf3fC1799fE4df8e096aa3c",
-    balances: "0x22d8d803b8f9938422474b28cccf70da1b51e814",
+    balances: "0x6B9aE204B9779fbd15Fdbd027c9F0d266A32f0b7",
     compound: "0xe2d035519f0247ed4b946f0ab74e8347052c020f",
     maker: "0x8af8aD861337456375604d482D9B9594540C7611",
   },
   read: {
     core: "0x37D60F60fcDeA9f4Dcf3fC1799fE4df8e096aa3c",
-    balances: "0x22d8d803b8f9938422474b28cccf70da1b51e814",
+    balances: "0x6B9aE204B9779fbd15Fdbd027c9F0d266A32f0b7",
     compound: "0xe2d035519f0247ed4b946f0ab74e8347052c020f",
     maker: "0x8af8aD861337456375604d482D9B9594540C7611",
   },

@@ -1,25 +1,19 @@
-[
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "owner",
-        "type": "address"
-      },
-      {
-        "name": "tknAddress",
-        "type": "address[]"
-      }
-    ],
-    "name": "getTokensBalData",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256[]"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  }
-]
+[{
+  "inputs": [{
+    "internalType": "address",
+    "name": "owner",
+    "type": "address"
+  }, {
+    "internalType": "address[]",
+    "name": "tknAddress",
+    "type": "address[]"
+  }],
+  "name": "getBalances",
+  "outputs": [{
+    "internalType": "uint256[]",
+    "name": "",
+    "type": "uint256[]"
+  }],
+  "stateMutability": "view",
+  "type": "function"
+}]
