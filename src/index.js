@@ -77,11 +77,10 @@ module.exports = class DSA {
       this.ABI.core.list,
       this.address.core.list
     );
-    var _from = this.address.genesis;
-    return new Promise(async function (resolve, reject) {
+    return new Promise(async (resolve, reject) => {
       return await _c.methods
         .accounts()
-        .call({ from: _from })
+        .call({ from: this.address.genesis })
         .then((count) => {
           resolve(count);
         })
@@ -101,11 +100,10 @@ module.exports = class DSA {
       this.ABI.resolvers.core,
       this.address.resolvers.core
     );
-    var _from = this.address.genesis;
-    return new Promise(async function (resolve, reject) {
+    return new Promise(async (resolve, reject) => {
       return await _c.methods
         .getAuthorityDetails(_authority)
-        .call({ from: _from })
+        .call({ from: this.address.genesis })
         .then((_d) => {
           var _l = _d.IDs.length;
           var accounts = [];
@@ -133,11 +131,10 @@ module.exports = class DSA {
       this.ABI.resolvers.core,
       this.address.resolvers.core
     );
-    var _from = this.address.genesis;
-    return new Promise(async function (resolve, reject) {
+    return new Promise(async (resolve, reject) => {
       return await _c.methods
         .getIDAuthorities(_id)
-        .call({ from: _from })
+        .call({ from: this.address.genesis })
         .then((data) => {
           resolve(data);
         })
@@ -156,11 +153,10 @@ module.exports = class DSA {
       this.ABI.resolvers.core,
       this.address.resolvers.core
     );
-    var _from = this.address.genesis;
-    return new Promise(async function (resolve, reject) {
+    return new Promise(async  (resolve, reject) => {
       return await _c.methods
         .getAccountAuthorities(_addr)
-        .call({ from: _from })
+        .call({ from: this.address.genesis })
         .then((data) => {
           resolve(data);
         })
