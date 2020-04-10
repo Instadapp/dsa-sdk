@@ -35,7 +35,7 @@ module.exports = class Compound {
     );
     return new Promise(async function (resolve, reject) {
       let compoundRawData = await _c.methods
-        .getCompTokensData(address, cTokens)
+        .getPosition(address, cTokens)
         .call()
         .then((res) => {
           return res;
