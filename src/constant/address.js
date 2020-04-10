@@ -3,7 +3,9 @@ module.exports = {
   core: {
     index: "0x2971AdFa57b20E5a416aE5a708A8655A9c74f723",
     list: "0x4c8a1BEb8a87765788946D6B19C6C6355194AbEb",
+    account: "0x939Daad09fC4A9B8f8A9352A485DAb2df4F4B3F8",
     connector: "0xD6A602C01a023B98Ecfb29Df02FBA380d3B21E0c",
+    events: "0x2af7ea6Cb911035f3eb1ED895Cb6692C39ecbA97",
   },
   connectors: {
     basic: "0x9370236a085A99Aa359f4bD2f0424b8c3bf25C99",

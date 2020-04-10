@@ -3,6 +3,8 @@ module.exports = {
     index: require("../abi/core/index.json"),
     list: require("../abi/core/list.json"),
     account: require("../abi/core/account.json"),
+    connector: require("../abi/core/connector.json"),
+    events: require("../abi/core/events.json"),
   },
   resolvers: {
     core: require("../abi/resolvers/core.json"),
