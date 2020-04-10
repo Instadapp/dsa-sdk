@@ -17,12 +17,12 @@ module.exports = {
     core: "0x37D60F60fcDeA9f4Dcf3fC1799fE4df8e096aa3c",
     balances: "0x6B9aE204B9779fbd15Fdbd027c9F0d266A32f0b7",
     compound: "0x9E6Dcb5C5A3F17F7400CD63ae6bEC0c74e65687c",
-    maker: "0x3268F6F36D92C0FD8650a1E6F86b0a3304e5F31e",
+    maker: "0xA4cD2ab38B378Fb35AC1a54e76a197A89b57F4D9",
   },
   read: {
     core: "0x37D60F60fcDeA9f4Dcf3fC1799fE4df8e096aa3c",
     balances: "0x6B9aE204B9779fbd15Fdbd027c9F0d266A32f0b7",
     compound: "0x9E6Dcb5C5A3F17F7400CD63ae6bEC0c74e65687c",
-    maker: "0x3268F6F36D92C0FD8650a1E6F86b0a3304e5F31e",
+    maker: "0xA4cD2ab38B378Fb35AC1a54e76a197A89b57F4D9",
   },
 };
