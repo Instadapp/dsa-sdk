@@ -91,7 +91,7 @@ module.exports = class DSA {
   }
 
   /**
-   * returns accounts in a simple array of objects
+   * returns accounts in a simple array of objects for addresses owned by the address
    * @param _authority the ethereum address
    */
   async getAccounts(_authority) {
@@ -120,6 +120,41 @@ module.exports = class DSA {
           reject(err);
         });
     });
+  }
+
+  /**
+   * returns token balance in a mapped object with balance and raw balances
+   * @param _addr the ethereum address to get balances for
+   */
+  async getTokenBalancesByAddress(_addr) {
+    var _c = new this.web3.eth.Contract(
+      this.ABI.resolvers.balances,
+      this.address.resolvers.balances
+    );
+    
+    var tokenSymbols = Object.keys(token)
+    var tokenAddresses =  tokenSymbols.map((sym)=> { return token[sym].address} )
+    return new Promise((resolve, reject) => {
+      return  _c.methods.getBalances(_addr, tokenAddresses)
+        .call({ from: this.address.genesis })
+        .then((rawBalances)=> {
+           var _b =  rawBalances.reduce ((map, rawBalance, index) => {
+            if (rawBalance == 0 ) { return map}
+            var sym = tokenSymbols[index]
+            const info = Object.assign ({}, token[sym])
+            // TODO: more elegant
+            info['rawBalance'] = rawBalance
+            info['balance'] = rawBalance / (10 ** info['decimals']);
+            delete info.decimals
+            map[sym] = info
+            return map
+          },{})
+            resolve(_b)
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    })
   }
 
   /**
