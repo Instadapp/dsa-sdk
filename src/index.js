@@ -1,9 +1,9 @@
 const Helpers = require("./helpers.js");
 const Internal = require("./internal.js");
 const Compound = require("./protocol/compound.js");
-const address = require("./constant/address.js");
-const ABI = require("./constant/abi.js");
-const token = require("./constant/token.js");
+const address = require("./constant/addresses.js");
+const ABI = require("./constant/abis.js");
+const tokens = require("./constant/tokens.js");
 
 module.exports = class DSA {
   /**
@@ -14,7 +14,7 @@ module.exports = class DSA {
   constructor(config) {
     this.address = address;
     this.ABI = ABI;
-    this.token = token;
+    this.tokens = tokens;
     this.instance = {
       id: 0,
       address: address.genesis,
@@ -131,26 +131,31 @@ module.exports = class DSA {
       this.ABI.resolvers.balances,
       this.address.resolvers.balances
     );
-    
-    var tokenSymbols = Object.keys(token)
-    var tokenAddresses =  tokenSymbols.map((sym)=> { return token[sym].address} )
+
+    var tokenSymbols = Object.keys(token);
+    var tokenAddresses = tokenSymbols.map((sym) => {
+      return token[sym].address;
+    });
     return new Promise((resolve, reject) => {
-      return  _c.methods.getBalances(_addr, tokenAddresses)
+      return _c.methods
+        .getBalances(_addr, tokenAddresses)
         .call({ from: this.address.genesis })
-        .then((rawBalances)=> {
-           var _b =  rawBalances.reduce ((map, rawBalance, index) => {
-            if (rawBalance == 0 ) { return map}
-            var sym = tokenSymbols[index]
-            var info = token[sym]
-            map[sym] = rawBalance / (10 ** info['decimals']);
-            return map
-          },{})
-            resolve(_b)
+        .then((rawBalances) => {
+          var _b = rawBalances.reduce((map, rawBalance, index) => {
+            if (rawBalance == 0) {
+              return map;
+            }
+            var sym = tokenSymbols[index];
+            var info = token[sym];
+            map[sym] = rawBalance / 10 ** info["decimals"];
+            return map;
+          }, {});
+          resolve(_b);
         })
         .catch((err) => {
           reject(err);
         });
-    })
+    });
   }
 
   /**

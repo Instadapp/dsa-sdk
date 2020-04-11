@@ -5,7 +5,7 @@ module.exports = class Compound {
   constructor(_dsa) {
     this.ABI = _dsa.ABI;
     this.address = _dsa.address;
-    this.token = _dsa.token;
+    this.tokens = _dsa.tokens;
   }
 
   /**
@@ -14,7 +14,7 @@ module.exports = class Compound {
    */
   ctokenMap(cTokenSymbol) {
     cTokenSymbol = cTokenSymbol.toLowerCase();
-    var tokens = this.token;
+    var tokens = this.tokens;
     for (const key in tokens) {
       if (key == cTokenSymbol) {
         return tokens[key].root;
@@ -51,7 +51,7 @@ module.exports = class Compound {
 
       let addrDecimal = {};
       let addrSymb = {};
-      Object.values(that.token).forEach((token) => {
+      Object.values(that.tokens).forEach((token) => {
         if (token.compound) {
           let _token = this.ctokenMap[token.symbol.toLowerCase()];
           addrDecimal[token.address] = that.token[_token].decimals;
