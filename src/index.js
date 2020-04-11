@@ -141,12 +141,8 @@ module.exports = class DSA {
            var _b =  rawBalances.reduce ((map, rawBalance, index) => {
             if (rawBalance == 0 ) { return map}
             var sym = tokenSymbols[index]
-            const info = Object.assign ({}, token[sym])
-            // TODO: more elegant
-            info['rawBalance'] = rawBalance
-            info['balance'] = rawBalance / (10 ** info['decimals']);
-            delete info.decimals
-            map[sym] = info
+            var info = token[sym]
+            map[sym] = rawBalance / (10 ** info['decimals']);
             return map
           },{})
             resolve(_b)
