@@ -1,4 +1,36 @@
 /**
+ * Returns all tokens of similar type.
+ * if type == "all" then returns whole tokens list.
+ */
+exports.getTokenByType = (type) => {
+  var tokens = this.info;
+  var _tokens = {};
+  if (type == "all") {
+    _tokens = tokens;
+  } else {
+    Object.keys(tokens).forEach((key, i) => {
+      if (tokens[key].type == type) _tokens[key] = tokens[key];
+    });
+  }
+  return _tokens;
+};
+
+/**
+ * Returns token mapping with specific field in it.
+ * @param {String} field - if field is address then below
+ * eg:- {eth: {symbol: "ETH", address: "0x"}} => {eth: "0x"}
+ * @returns {JSON}
+ */
+exports.getTokensField = (field, tokens) => {
+  if (!tokens) tokens = this.info;
+  var _field = {};
+  Object.keys(tokens).forEach((key, i) => {
+    _field[key] = tokens[key][field];
+  });
+  return _field;
+};
+
+/**
  * Returns a list of token objects filtered by the type
  */
 exports.getList = ({ type = null }) => {

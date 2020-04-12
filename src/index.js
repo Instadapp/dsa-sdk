@@ -127,43 +127,6 @@ module.exports = class DSA {
   }
 
   /**
-   * returns token balance in a mapped object with balance and raw balances
-   * @param _addr the ethereum address to get balances for
-   */
-  async getTokenBalancesByAddress(_addr) {
-    var _c = new this.web3.eth.Contract(
-      this.ABI.resolvers.balances,
-      this.address.resolvers.balances
-    );
-
-    const tokensInfo = tokens.getList({ type: "token" });
-    const tokenAddresses = tokens.getDataList({
-      type: "token",
-      field: "address",
-    });
-
-    return new Promise((resolve, reject) => {
-      return _c.methods
-        .getBalances(_addr, tokenAddresses)
-        .call({ from: this.address.genesis })
-        .then((rawBalances) => {
-          var _b = rawBalances.reduce((map, rawBalance, index) => {
-            if (rawBalance == 0) {
-              return map;
-            }
-            var sym = tokensInfo[index].symbol;
-            map[sym] = rawBalance / 10 ** tokensInfo[index].decimals;
-            return map;
-          }, {});
-          resolve(_b);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
-  }
-
-  /**
    * returns accounts in a simple array of objects
    * @param _id the DSA number
    */
