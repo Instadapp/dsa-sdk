@@ -132,10 +132,9 @@ module.exports = class DSA {
       this.address.resolvers.balances
     );
 
-    var tokenSymbols = Object.keys(token);
-    var tokenAddresses = tokenSymbols.map((sym) => {
-      return token[sym].address;
-    });
+    const tokensInfo = tokens.getList({type:"token"})
+    const tokenAddresses = tokens.getDataList({type:"token",field:"address"})
+
     return new Promise((resolve, reject) => {
       return _c.methods
         .getBalances(_addr, tokenAddresses)
@@ -145,9 +144,8 @@ module.exports = class DSA {
             if (rawBalance == 0) {
               return map;
             }
-            var sym = tokenSymbols[index];
-            var info = token[sym];
-            map[sym] = rawBalance / 10 ** info["decimals"];
+            var sym = tokensInfo[index].symbol;
+            map[sym] = rawBalance / 10 ** tokensInfo[index].decimals
             return map;
           }, {});
           resolve(_b);

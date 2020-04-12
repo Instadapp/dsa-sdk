@@ -1,159 +1,36 @@
 /**
+ * Returns a list of token objects filtered by the type
+ */
+exports.getList = ({type=null}) => {
+  return Object.keys(this.info)
+    .reduce((list, key) => {
+        if (this.info[key].type != type) { return list }
+        list.push(this.info[key])
+        return list
+    }, [])
+}
+
+/**
+ * Returns a list filtered by the token type and the field needed
+ * example: getData({type:"ctoken",field:"address"}) will return all the ctoken addresses in a list
+ */
+exports.getDataList = ({type=null, field=null}) => {
+  return Object.values(this.info)
+  .filter((a) =>  { 
+      return type ? a.type == type : true
+  })
+  .map((a) => {
+      return field ? a[field] : a
+  })
+}
+
+
+/**
  * @param type
  * @param symbol
  * @param name
  * @param address
  * @param decimal
- * @param factor (optional) collatreal factor, used in ctokens
+ * @param factor (optional) collateral factor, used in ctokens
  */
-module.exports = {
-  eth: {
-    type: "token",
-    symbol: "ETH",
-    name: "Ethereum",
-    address: "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-    decimals: 18,
-  },
-  dai: {
-    type: "token",
-    symbol: "DAI",
-    name: "DAI Stable",
-    address: "0x6B175474E89094C44Da98b954EedeAC495271d0F",
-    decimals: 18,
-  },
-  usdc: {
-    type: "token",
-    symbol: "USDC",
-    name: "USD Coin",
-    address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
-    decimals: 6,
-  },
-  sai: {
-    type: "token",
-    symbol: "SAI",
-    name: "SAI Stable",
-    address: "0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359",
-    decimals: 18,
-  },
-  mkr: {
-    type: "token",
-    symbol: "MKR",
-    name: "MakerDAO",
-    address: "0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2",
-    decimals: 18,
-  },
-  zrx: {
-    type: "token",
-    symbol: "ZRX",
-    name: "0x Protocol",
-    address: "0xe41d2489571d322189246dafa5ebde1f4699f498",
-    decimals: 18,
-  },
-  rep: {
-    type: "token",
-    symbol: "REP",
-    name: "Augur",
-    address: "0x1985365e9f78359a9b6ad760e32412f4a445e862",
-    decimals: 18,
-  },
-  tusd: {
-    type: "token",
-    symbol: "TUSD",
-    name: "TrueUSD",
-    address: "0x8dd5fbCe2F6a956C3022bA3663759011Dd51e73E",
-    decimals: 18,
-  },
-  bat: {
-    type: "token",
-    symbol: "BAT",
-    name: "Basic Att.",
-    address: "0x0d8775f648430679a709e98d2b0cb6250d2887ef",
-    decimals: 18,
-  },
-  knc: {
-    type: "token",
-    symbol: "KNC",
-    name: "Kyber Network",
-    address: "0xdd974d5c2e2928dea5f71b9825b8b646686bd200",
-    decimals: 18,
-  },
-  wbtc: {
-    type: "token",
-    symbol: "WBTC",
-    name: "Wrapped BTC",
-    address: "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
-    decimals: 8,
-  },
-  ceth: {
-    type: "ctoken",
-    symbol: "CETH",
-    name: "Compound ETH",
-    address: "0x4ddc2d193948926d02f9b1fe9e1daa0718270ed5",
-    decimals: 8,
-    factor: 0.75,
-    root: "eth",
-  },
-  cdai: {
-    type: "ctoken",
-    symbol: "CDAI",
-    name: "Compound DAI",
-    address: "0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643",
-    decimals: 8,
-    factor: 0.75,
-    root: "dai",
-  },
-  cusdc: {
-    type: "ctoken",
-    symbol: "CUSDC",
-    name: "Compound USDC",
-    address: "0x39aa39c021dfbae8fac545936693ac917d5e7563",
-    decimals: 8,
-    factor: 0.75,
-    root: "usdc",
-  },
-  csai: {
-    type: "ctoken",
-    symbol: "CSAI",
-    name: "Compound SAI",
-    address: "0xf5dce57282a584d2746faf1593d3121fcac444dc",
-    decimals: 8,
-    factor: 0,
-    root: "sai",
-  },
-  czrx: {
-    type: "ctoken",
-    symbol: "CZRX",
-    name: "Compound ZRX",
-    address: "0xb3319f5d18bc0d84dd1b4825dcde5d5f7266d407",
-    decimals: 8,
-    factor: 0.6,
-    root: "zrx",
-  },
-  crep: {
-    type: "ctoken",
-    symbol: "CREP",
-    name: "Compound REP",
-    address: "0x158079ee67fce2f58472a96584a73c7ab9ac95c1",
-    decimals: 8,
-    factor: 0.4,
-    root: "rep",
-  },
-  cbat: {
-    type: "ctoken",
-    symbol: "CBAT",
-    name: "Compound BAT",
-    address: "0x6c8c6b02e7b2be14d4fa6022dfd6d75921d90e4e",
-    decimals: 8,
-    factor: 0.6,
-    root: "bat",
-  },
-  cwbtc: {
-    type: "ctoken",
-    symbol: "CWBTC",
-    name: "Compound WBTC",
-    address: "0xc11b1268c1a384e55c48c2391d8d480264a3a7f4",
-    decimals: 8,
-    factor: 0,
-    root: "wbtc",
-  },
-};
+exports.info = require("./tokensInfo.json") 

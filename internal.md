@@ -41,7 +41,7 @@ const DSA = require('dsa-sdk');
 const web3 = new Web3(new Web3.providers.HttpProvider(ETH_NODE_URL))
 ```
 
-Now instantiate DSA.
+Now instantiate DSA. It is important to note that if you are instantiating this before your web3 is connected, you need to re-instantiate after your web3 is connected.
  
 ```js
 const dsa = new DSA(web3);
@@ -122,6 +122,27 @@ dsa.build()
 ### Returns
 `String`: Transaction hash `0x.....`.
 
+## .getTokenBalancesByAddress()
+
+Get the balances for the base tokens 
+
+```js
+dsa.getTokenBalancesByAddress(address)
+  .then(data => {
+    return data
+  })
+  .catch(error => {
+    return error
+  })
+```
+
+### Parameters
+`address` - An ethereum address.
+
+### Returns
+`List` of tokens, where the key is the symbol and the value is the formatted balance {eth: 2, dai: 50.1}
+
+
 ## .getAuthByAddress()
 
 Get all the authorised address(es) of a DSA by address.
@@ -176,13 +197,13 @@ Add the series of transactions details in the instance.
 spells.add({
  connector: "basic", // name
  method: "deposit", // method
- args: [dsa.token.usdc.address, 1000000, 0, 1] // method arguments
+ args: [dsa.tokens.info.usdc.address, 1000000, 0, 1] // method arguments
 });
 
 spells.add({
  connector: "basic",
  method: "withdraw",
- args: [dsa.token.usdc.address, 0, "0x03d70891b8994feB6ccA7022B25c32be92ee3725", 1, 0]
+ args: [dsa.tokens.info.usdc.address, 0, "0x03d70891b8994feB6ccA7022B25c32be92ee3725", 1, 0]
 });
 ```
 
@@ -225,6 +246,11 @@ Following are a few internal functions.
 * dsa.internal.getConnectorInterface(connector, method)
 * dsa.internal.encodeMethod(Object)
 * dsa.internal.encodeSpells(Object)
+
+## Constants
+* dsa.tokens.info (full map of token info)
+* dsa.tokens.getList({type})
+* dsa.tokens.getDataList({type, field})
 
 <!-- ## .estimateCastGas()
 
