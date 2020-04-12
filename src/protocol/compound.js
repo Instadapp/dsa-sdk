@@ -6,6 +6,7 @@ module.exports = class Compound {
     this.ABI = _dsa.ABI;
     this.address = _dsa.address;
     this.tokens = _dsa.tokens;
+    this.web3 = _dsa.web3
   }
 
   /**
@@ -14,8 +15,7 @@ module.exports = class Compound {
    */
   ctokenMap(cTokenSymbol) {
     cTokenSymbol = cTokenSymbol.toLowerCase();
-    var tokens = this.tokens;
-    for (const key in tokens) {
+    for (const key in this.tokens.getList()) {
       if (key == cTokenSymbol) {
         return tokens[key].root;
       }
@@ -28,12 +28,11 @@ module.exports = class Compound {
    * @param {string} cTokens the cToken address
    */
   getPosition(address, cTokens) {
-    let that = this.data;
-    var _c = new that.web3.eth.Contract(
-      that.ABI.read["compound"],
-      that.address.read["compound"]
+    var _c = new this.web3.eth.Contract(
+      this.ABI.read["compound"],
+      this.address.read["compound"]
     );
-    return new Promise(async function (resolve, reject) {
+    return new Promise( async (resolve, reject) => {
       let compoundRawData = await _c.methods
         .getPosition(address, cTokens)
         .call()
@@ -51,7 +50,7 @@ module.exports = class Compound {
 
       let addrDecimal = {};
       let addrSymb = {};
-      Object.values(that.tokens).forEach((token) => {
+      Object.values(this.tokens.info).forEach((token) => {
         if (token.compound) {
           let _token = this.ctokenMap[token.symbol.toLowerCase()];
           addrDecimal[token.address] = that.token[_token].decimals;
