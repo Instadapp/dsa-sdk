@@ -1,7 +1,8 @@
 const Helpers = require("./helpers.js");
 const Internal = require("./internal.js");
-const Compound = require("./protocol/compound.js");
-const Maker = require("./protocol/maker.js");
+const Balances = require("./resolvers/balances.js");
+const Compound = require("./resolvers/compound.js");
+const Maker = require("./resolvers/maker.js");
 const address = require("./constant/addresses.js");
 const ABI = require("./constant/abis.js");
 const tokens = require("./constant/tokens.js");
@@ -25,6 +26,7 @@ module.exports = class DSA {
     this.web3 = config.web3 ? config.web3 : config;
     this.helpers = new Helpers();
     this.internal = new Internal(this);
+    this.balances = new Balances(this);
     this.compound = new Compound(this);
     this.maker = new Maker(this);
   }
