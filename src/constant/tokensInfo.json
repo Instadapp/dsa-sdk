@@ -123,7 +123,7 @@
   },
   "crep": {
     "type": "ctoken",
-    "symbol": "CREP",
+    "symbol": "crep",
     "name": "Compound REP",
     "address": "0x158079ee67fce2f58472a96584a73c7ab9ac95c1",
     "decimals": 8,
@@ -132,7 +132,7 @@
   },
   "cbat": {
     "type": "ctoken",
-    "symbol": "CBAT",
+    "symbol": "cbat",
     "name": "Compound BAT",
     "address": "0x6c8c6b02e7b2be14d4fa6022dfd6d75921d90e4e",
     "decimals": 8,
@@ -141,7 +141,7 @@
   },
   "cwbtc": {
     "type": "ctoken",
-    "symbol": "CWBTC",
+    "symbol": "cwbtc",
     "name": "Compound WBTC",
     "address": "0xc11b1268c1a384e55c48c2391d8d480264a3a7f4",
     "decimals": 8,
