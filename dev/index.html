@@ -12,14 +12,15 @@
 
     <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.2.6/dist/web3.min.js"></script>
     <script src="https://apis.instadapp.io/js/web3Modal/config.js"></script>
-    <script src="https://apis.instadapp.io/js/web3/connect.js"></script>
+    <script src="https://apis.instadapp.io/js/web3Modal/connect.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
   
     <script>
+      // calling this function in web3Modal/connect.js
       $("#initWeb3").on("click", function(e) {
           e.preventDefault();
           InitWeb3()
-      })    
+      })
     </script>
 
   </body>
