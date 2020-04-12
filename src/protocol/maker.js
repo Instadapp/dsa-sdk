@@ -1,7 +1,6 @@
 var colInfo = {
   "ETH-A": {
     token: "ETH",
-    name: "ETH-A",
     ratio: 2 / 3,
     joinAddr: "0x2F0b23f53734252Bda2277357e97e1517d6B042A",
     addr: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
@@ -12,7 +11,6 @@ var colInfo = {
   },
   "BAT-A": {
     token: "BAT",
-    name: "BAT-A",
     ratio: 2 / 3,
     joinAddr: "0x3D0B1912B66114d4096F48A8CEe3A56C231772cA",
     addr: "0x0d8775f648430679a709e98d2b0cb6250d2887ef",
@@ -23,7 +21,6 @@ var colInfo = {
   },
   "USDC-A": {
     token: "USDC",
-    name: "USDC-A",
     ratio: 4 / 5,
     joinAddr: "0xa191e578a6736167326d05c119ce0c90849e84b7",
     addr: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
@@ -99,6 +96,34 @@ module.exports = class Compound {
             userVaults[_id].urn = _userVaults[i][10];
           }
           resolve(userVaults);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  }
+
+  async getCollateralInfo() {
+    var _obj = {
+      protocol: "maker",
+      method: "getColInfo",
+      args: [Object.keys(this.colInfo)],
+    };
+
+    return new Promise(async (resolve, reject) => {
+      await this.dsa
+        .read(_obj)
+        .then((res) => {
+          console.log(res);
+          var _colInfo = {};
+          Object.keys(this.colInfo).forEach((_col, i) => {
+            _colInfo[_col] = {};
+            _colInfo[_col].token = this.colInfo[_col].token;
+            _colInfo[_col].rate = this.calStabilityRate(res[i][0]) * 100; // in percent
+            _colInfo[_col].price = res[i][1] / 1e27;
+            _colInfo[_col].ratio = 1 / (res[i][2] / 1e27);
+          });
+          resolve(_colInfo);
         })
         .catch((err) => {
           reject(err);
