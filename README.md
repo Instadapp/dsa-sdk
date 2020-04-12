@@ -2,10 +2,10 @@
 
 DSA SDK simplify building DeFi apps and interact with defi smart account without handling all the complexities.
 
-- #get-started
-- #test-in-browser
-- #contributing
-- #contact
+- [Get Started](#get-started)
+- [Test in browser](#test-in-browser)
+- [Contributing](#contributing)
+- [Contact](#Contact)
 
 ## Get Started
 
