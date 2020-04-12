@@ -7,7 +7,8 @@ var colInfo = {
     addr: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
     stabiltyRate: 0,
     price: 0,
-    typeBytes: "0x4554482d41000000000000000000000000000000000000000000000000000000"
+    typeBytes:
+      "0x4554482d41000000000000000000000000000000000000000000000000000000",
   },
   "BAT-A": {
     token: "BAT",
@@ -17,7 +18,8 @@ var colInfo = {
     addr: "0x0d8775f648430679a709e98d2b0cb6250d2887ef",
     stabiltyRate: 0,
     price: 0,
-    typeBytes: "0x4241542d41000000000000000000000000000000000000000000000000000000"
+    typeBytes:
+      "0x4241542d41000000000000000000000000000000000000000000000000000000",
   },
   "USDC-A": {
     token: "USDC",
@@ -27,7 +29,8 @@ var colInfo = {
     addr: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
     stabiltyRate: 0,
     price: 0,
-    typeBytes: "0x555344432d410000000000000000000000000000000000000000000000000000"
+    typeBytes:
+      "0x555344432d410000000000000000000000000000000000000000000000000000",
   },
 };
 
@@ -56,10 +59,6 @@ module.exports = class Compound {
    * @param {string} cTokens the cToken address
    */
   async getVaults(_address) {
-    var _c = new this.web3.eth.Contract(
-      this.ABI.read["maker"],
-      this.address.read["maker"]
-    );
     var _obj = {
       protocol: "maker",
       method: "getVaults",
