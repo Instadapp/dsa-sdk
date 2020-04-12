@@ -96,15 +96,6 @@
     "factor": 0.75,
     "root": "usdc"
   },
-  "csai": {
-    "type": "ctoken",
-    "symbol": "csai",
-    "name": "Compound SAI",
-    "address": "0xf5dce57282a584d2746faf1593d3121fcac444dc",
-    "decimals": 8,
-    "factor": 0,
-    "root": "sai"
-  },
   "czrx": {
     "type": "ctoken",
     "symbol": "czrx",
