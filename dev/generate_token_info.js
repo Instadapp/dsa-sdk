@@ -10,7 +10,6 @@ execute().then(()=> console.log("Wrote to " + fileLocation))
 
 async function execute () {
     var csv  = await getLink()
-    console.log(csv)
     var json = convertAndTrim(csv)
     var writeToFile = await writeFile(json)
     return writeToFile

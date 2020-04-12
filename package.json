@@ -7,6 +7,7 @@
     "build": "webpack --mode production",
     "build-dev": "webpack --mode development --config webpack.config.dev.js",
     "dev-server": "webpack-dev-server --mode development --config webpack.config.dev.js",
+    "generate-token-info": "node ./dev/generate_token_info.js",
     "prepare": "npm run build",
     "trypublish": "npm publish || true"
   },
