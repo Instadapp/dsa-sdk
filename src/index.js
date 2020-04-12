@@ -1,6 +1,7 @@
 const Helpers = require("./helpers.js");
 const Internal = require("./internal.js");
 const Compound = require("./protocol/compound.js");
+const Maker = require("./protocol/maker.js");
 const address = require("./constant/addresses.js");
 const ABI = require("./constant/abis.js");
 const tokens = require("./constant/tokens.js");
@@ -25,6 +26,7 @@ module.exports = class DSA {
     this.helpers = new Helpers();
     this.internal = new Internal(this);
     this.compound = new Compound(this);
+    this.maker = new Maker(this);
   }
 
   /**
@@ -132,8 +134,11 @@ module.exports = class DSA {
       this.address.resolvers.balances
     );
 
-    const tokensInfo = tokens.getList({type:"token"})
-    const tokenAddresses = tokens.getDataList({type:"token",field:"address"})
+    const tokensInfo = tokens.getList({ type: "token" });
+    const tokenAddresses = tokens.getDataList({
+      type: "token",
+      field: "address",
+    });
 
     return new Promise((resolve, reject) => {
       return _c.methods
@@ -145,7 +150,7 @@ module.exports = class DSA {
               return map;
             }
             var sym = tokensInfo[index].symbol;
-            map[sym] = rawBalance / 10 ** tokensInfo[index].decimals
+            map[sym] = rawBalance / 10 ** tokensInfo[index].decimals;
             return map;
           }, {});
           resolve(_b);

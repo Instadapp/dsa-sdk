@@ -6,7 +6,7 @@ module.exports = class Compound {
     this.ABI = _dsa.ABI;
     this.address = _dsa.address;
     this.tokens = _dsa.tokens;
-    this.web3 = _dsa.web3
+    this.web3 = _dsa.web3;
   }
 
   /**
@@ -15,7 +15,7 @@ module.exports = class Compound {
    */
   ctokenMap(cTokenSymbol) {
     cTokenSymbol = cTokenSymbol.toLowerCase();
-    for (const key in this.tokens.getList()) {
+    for (const key in this.tokens.getList({})) {
       if (key == cTokenSymbol) {
         return tokens[key].root;
       }
@@ -32,7 +32,7 @@ module.exports = class Compound {
       this.ABI.read["compound"],
       this.address.read["compound"]
     );
-    return new Promise( async (resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       let compoundRawData = await _c.methods
         .getPosition(address, cTokens)
         .call()
