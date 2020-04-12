@@ -4,7 +4,7 @@ This is a main DSA SDK package (WIP).
 
 Please read our [developer doc](https://github.com/InstaDApp/dsa-developers) for more.
 
-# To Test In Browser
+## To Test In Browser
 
 1. Run `npm install` to install needed dependencies
 2. Run `npm run dev-server` to start 
