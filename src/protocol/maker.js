@@ -75,7 +75,7 @@ module.exports = class Compound {
             userVaults[_id].token = this.colInfo[_userVaults[i][2]].token;
             var _col = this.helpers.divWithDec(_userVaults[i][3], 18);
             userVaults[_id].col = _col;
-            var _debt = this.helpers.divWithDec(_userVaults[i][5],18);
+            var _debt = this.helpers.divWithDec(_userVaults[i][5], 18);
             userVaults[_id].debt = _debt;
             userVaults[_id].liquidatedCol = this.helpers.divWithDec(
               _userVaults[i][6],
@@ -109,7 +109,6 @@ module.exports = class Compound {
       await this.dsa
         .read(_obj)
         .then((res) => {
-          console.log(res);
           var _colInfo = {};
           Object.keys(this.colInfo).forEach((_col, i) => {
             _colInfo[_col] = {};
