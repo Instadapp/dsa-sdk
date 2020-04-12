@@ -15,6 +15,11 @@ module.exports = class Helpers {
     return Math.floor(Number(num) * MUL_DIV) / MUL_DIV;
   }
 
+  divWithDec(num, power) {
+    power = power ? power : 0;
+    return Number(num) / 10 ** power;
+  }
+
   cleanNumber(num) {
     if (num > 1000000) {
       var _num = cleanDecimal(num / 1000000);
