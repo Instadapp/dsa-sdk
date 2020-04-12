@@ -52,8 +52,6 @@ module.exports = class Compound {
     !address ? (_address = this.instance.address) : (_address = address);
     var _ctokens = this.getCtokens();
     var _cAddresses = this.getCtokensAddresses(_ctokens);
-    console.log(_address);
-    console.log(_cAddresses);
     var _obj = {
       protocol: "compound",
       method: "getPosition",
@@ -74,6 +72,7 @@ module.exports = class Compound {
             var _priceInEth = _res[0] / 10 ** (18 + (18 - _decimals));
             _position[key].priceInEth = _priceInEth;
             var _exchangeRate = _res[1] / 1e18;
+            _position[key].exchangeRate = _exchangeRate;
             var _supply = (_res[2] * _exchangeRate) / 10 ** _decimals;
             _position[key].supply = _supply;
             _totalSupplyInEth += _supply * _priceInEth;
@@ -94,12 +93,10 @@ module.exports = class Compound {
           _position.totalSupplyInEth = _totalSupplyInEth;
           _position.totalBorrowInEth = _totalBorrowInEth;
           _position.maxBorrowLimitInEth = _maxBorrowLimitInEth;
-          _position.remainingBorrowInEth =
-            _maxBorrowLimitInEth - _totalBorrowInEth;
           var _status = _totalBorrowInEth / _totalSupplyInEth;
           _position.status = _status;
-          var _liquidationPoint = _maxBorrowLimitInEth / _totalSupplyInEth;
-          _position.liquidation = _liquidationPoint;
+          var _liquidation = _maxBorrowLimitInEth / _totalSupplyInEth;
+          _position.liquidation = _liquidation;
           resolve(_position);
         })
         .catch((err) => {

@@ -73,25 +73,20 @@ module.exports = class Compound {
             userVaults[_id].owner = _userVaults[i][1];
             userVaults[_id].colName = _userVaults[i][2];
             userVaults[_id].token = this.colInfo[_userVaults[i][2]].token;
-            userVaults[_id].col = this.helpers.divWithDec(
-              _userVaults[i][3],
-              18
-            );
-            userVaults[_id].debt = this.helpers.divWithDec(
-              _userVaults[i][5],
-              18
-            );
+            var _col = this.helpers.divWithDec(_userVaults[i][3], 18);
+            userVaults[_id].col = _col;
+            var _debt = this.helpers.divWithDec(_userVaults[i][5],18);
+            userVaults[_id].debt = _debt;
             userVaults[_id].liquidatedCol = this.helpers.divWithDec(
               _userVaults[i][6],
               18
             );
             userVaults[_id].rate =
               this.calStabilityRate(_userVaults[i][7]) * 100;
-            userVaults[_id].price = this.helpers.divWithDec(
-              _userVaults[i][8],
-              27
-            );
-            userVaults[_id].ratio =
+            var _price = this.helpers.divWithDec(_userVaults[i][8], 27);
+            userVaults[_id].price = _price;
+            userVaults[_id].status = _debt / (_col * _price);
+            userVaults[_id].liquidation =
               1 / this.helpers.divWithDec(_userVaults[i][9], 27);
             userVaults[_id].urn = _userVaults[i][10];
           }
