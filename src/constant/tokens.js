@@ -31,6 +31,6 @@ exports.getDataList = ({type=null, field=null}) => {
  * @param name
  * @param address
  * @param decimal
- * @param factor (optional) collatreal factor, used in ctokens
+ * @param factor (optional) collateral factor, used in ctokens
  */
 exports.info = require("./tokensInfo.json") 
