@@ -356,7 +356,7 @@ dsa.balances.getCollateralInfo()
 ```
 
 ### Returns
-`List` of all things Compound. Eg:-
+`List` of all Maker's Collateral Types. Eg:-
 * `ETH-A'` - Collateral Name. Eg:- ETH-A, BAT-A, USDC-A, etc.
 * `token` - Collateral token. Eg:- ETH, BAT, USDC, etc.
 * `rate` - Borrow APY.
