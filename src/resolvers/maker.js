@@ -55,7 +55,9 @@ module.exports = class Compound {
    * @param {string} address the owner address
    * @param {string} cTokens the cToken address
    */
-  async getVaults(_address) {
+  async getVaults(address) {
+    var _address;
+    !address ? (_address = this.instance.address) : (_address = address);
     var _obj = {
       protocol: "maker",
       method: "getVaults",
