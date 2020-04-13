@@ -294,7 +294,7 @@ dsa.balances.getBalances(address, type)
 
 ## MakerDAO
 
-## .getVaults()
+### .getVaults()
 
 Get all the vaults details needed for address in one call.
 
@@ -341,7 +341,7 @@ dsa.balances.getVaults(address)
 }
 ```
 
-## .getCollateralInfo()
+### .getCollateralInfo()
 
 Get all the Collerals details needed in one call.
 
@@ -375,7 +375,7 @@ dsa.balances.getCollateralInfo()
 
 ## Compound Finanace
 
-## .getPosition()
+### .getPosition()
 
 Get all the details needed for Compound integration in one call.
 
