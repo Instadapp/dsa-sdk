@@ -10,15 +10,15 @@ module.exports = class Token {
     this.web3 = _dsa.web3;
   }
 
-  /**
-   * Transfer
-   * @param {symbol} _d.token
-   * @param {number|string} _d.amount
-   * @param {address} _d.to
-   * @param {address} _d.from (optional)
-   * @param {number|string} _d.gasPrice (optional)
-   * @param {number|string} _d.gas (optional)
-   */
+    /**
+     * Transfer
+     * @param {symbol} _d.token
+     * @param {number|string} _d.amount
+     * @param {address} _d.to
+     * @param {address} _d.from (optional)
+     * @param {number|string} _d.gasPrice (optional)
+     * @param {number|string} _d.gas (optional)
+    */
     async transfer(_d) {
         let _addr = await this.internal.getAddress();
         let web3 = this.web3;
@@ -51,15 +51,15 @@ module.exports = class Token {
         }
     }
 
-   /**
-   * Approve Token
-   * @param {symbol} _d.token
-   * @param {number|string} _d.amount
-   * @param {address} _d.to
-   * @param {address} _d.from (optional)
-   * @param {number|string} _d.gasPrice (optional)
-   * @param {number|string} _d.gas (optional)
-   */
+    /**
+     * Approve Token
+     * @param {symbol} _d.token
+     * @param {number|string} _d.amount
+     * @param {address} _d.to
+     * @param {address} _d.from (optional)
+     * @param {number|string} _d.gasPrice (optional)
+     * @param {number|string} _d.gas (optional)
+    */
     async approve(_d) {
         let _addr = await this.internal.getAddress();
         let web3 = this.web3;
@@ -84,5 +84,36 @@ module.exports = class Token {
             });
         }
         
+    }
+
+    /**
+     * Get Allowance
+     * @param {symbol} _d.token
+     * @param {address} _d.to
+     * @param {address} _d.from (optional)
+    */
+    async getAllowance(_d) {
+        let _addr = await this.internal.getAddress();
+        let web3 = this.web3;
+        if (!_d.from) _d.from = _addr;
+
+        if (_d.token.toLowerCase() == "eth") {
+            return new Promise((resolve, reject) => {resolve("ETH does not have allowance.")})
+        } else {
+            var _c = await new web3.eth.Contract(
+                this.ABI.basic.erc20,
+                this.tokens.info[_d.token.toLowerCase()].address
+            );
+            return new Promise(function (resolve, reject) {
+                return _c.methods.allowance(_d.from, _d.to)
+                .call()
+                .then((res) => {
+                    resolve(res);
+                })
+                .catch((err) => {
+                    reject(err);
+                });
+            });
+        }
     }
 };
