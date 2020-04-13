@@ -45,9 +45,10 @@ module.exports = class Compound {
   /**
    * get properly formatted compound position details
    * @param {string} address the owner address
+   * @param {string} key (optional) default - "token". Options:- "ctoken", "caddress", "address". key of object to return
    * @param {string} cTokens the cToken address
    */
-  getPosition(address) {
+  getPosition(address, key) {
     var _address;
     !address ? (_address = this.instance.address) : (_address = address);
     var _ctokens = this.getCtokens();
@@ -65,30 +66,39 @@ module.exports = class Compound {
           var _totalSupplyInEth = 0;
           var _totalBorrowInEth = 0;
           var _maxBorrowLimitInEth = 0;
-          Object.keys(_ctokens).forEach((key, i) => {
+          Object.keys(_ctokens).forEach((_ctoken, i) => {
+            var _root = _ctokens[_ctoken].root;
+            var _key;
+            key == "ctoken"
+              ? (_key = _ctoken)
+              : key == "caddress"
+              ? (_key = _ctokens[_ctoken].address)
+              : key == "token"
+              ? (_key = _root)
+              : (_key = this.tokens.info[_root].address);
             var _res = res[i];
-            var _decimals = this.tokens.info[_ctokens[key].root].decimals;
-            _position[key] = {};
+            var _decimals = this.tokens.info[_ctokens[_ctoken].root].decimals;
+            _position[_key] = {};
             var _priceInEth = _res[0] / 10 ** (18 + (18 - _decimals));
-            _position[key].priceInEth = _priceInEth;
+            _position[_key].priceInEth = _priceInEth;
             var _exchangeRate = _res[1] / 1e18;
-            _position[key].exchangeRate = _exchangeRate;
+            _position[_key].exchangeRate = _exchangeRate;
             var _supply = (_res[2] * _exchangeRate) / 10 ** _decimals;
-            _position[key].supply = _supply;
+            _position[_key].supply = _supply;
             _totalSupplyInEth += _supply * _priceInEth;
             _maxBorrowLimitInEth +=
-              _supply * _priceInEth * _ctokens[key].factor;
+              _supply * _priceInEth * _ctokens[_ctoken].factor;
             var _borrow = _res[3] / 10 ** _decimals;
-            _position[key].borrow = _borrow;
+            _position[_key].borrow = _borrow;
             _totalBorrowInEth += _borrow * _priceInEth;
             var _supplyRate = (_res[4] * 2102400) / 1e18;
-            _position[key].supplyRate = _supplyRate * 100; // Multiply with 100 to make it in percent
+            _position[_key].supplyRate = _supplyRate * 100; // Multiply with 100 to make it in percent
             var _supplyYield = (1 + _supplyRate / 365) ** 365 - 1;
-            _position[key].supplyYield = _supplyYield * 100; // Multiply with 100 to make it in percent
+            _position[_key].supplyYield = _supplyYield * 100; // Multiply with 100 to make it in percent
             var _borrowRate = (_res[5] * 2102400) / 1e18;
-            _position[key].borrowRate = _borrowRate * 100; // Multiply with 100 to make it in percent
+            _position[_key].borrowRate = _borrowRate * 100; // Multiply with 100 to make it in percent
             var _borrowYield = (1 + _borrowRate / 365) ** 365 - 1;
-            _position[key].borrowYield = _borrowYield * 100; // Multiply with 100 to make it in percent
+            _position[_key].borrowYield = _borrowYield * 100; // Multiply with 100 to make it in percent
           });
           _position.totalSupplyInEth = _totalSupplyInEth;
           _position.totalBorrowInEth = _totalBorrowInEth;

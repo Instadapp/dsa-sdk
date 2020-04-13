@@ -11,5 +11,5 @@ const dsa = new DSA(web3);
 // console.log(dsa.compound.getCtokens())
 // dsa.maker.getVaults("0x981C549A74Dc36Bd82fEd9097Bc19404E8db14f3").then(console.log)
 // dsa.maker.getCollateralInfo().then(console.log)
-// dsa.compound.getPosition("0x981C549A74Dc36Bd82fEd9097Bc19404E8db14f3").then(console.log)
-dsa.balances.getTokenBalances("0x981C549A74Dc36Bd82fEd9097Bc19404E8db14f3").then(console.log)
+// dsa.compound.getPosition("0x981C549A74Dc36Bd82fEd9097Bc19404E8db14f3", "token").then(console.log)
+// dsa.balances.getTokenBalances("0x981C549A74Dc36Bd82fEd9097Bc19404E8db14f3").then(console.log)
