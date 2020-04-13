@@ -294,7 +294,7 @@ dsa.balances.getBalances(address, type)
 
 ## MakerDAO
 
-## .getPosition()
+## .getVaults()
 
 Get all the vaults details needed for address in one call.
 
@@ -337,6 +337,37 @@ dsa.balances.getVaults(address)
     status: 0.4054280106900535,
     liquidation: 0.6666666666666667,
     urn: '0xcC0e5E76eC81aD472D6Df9fC83eaE22E1000Fe53' },
+  { ... } ...
+}
+```
+
+## .getCollateralInfo()
+
+Get all the Collerals details needed in one call.
+
+```js
+dsa.balances.getCollateralInfo()
+  .then(data => {
+    return data
+  })
+  .catch(error => {
+    return error
+  })
+```
+
+### Returns
+`List` of all things Compound. Eg:-
+* `ETH-A'` - Collateral Name. Eg:- ETH-A, BAT-A, USDC-A, etc.
+* `token` - Collateral token. Eg:- ETH, BAT, USDC, etc.
+* `rate` - Borrow APY.
+* `price` - Collateral Price from Maker's oracle.
+* `ratio` - Liquidation point.
+```js
+{ 'ETH-A':
+  { token: 'ETH',
+    rate: 0.5001431422658964,
+    price: 154.168734,
+    ratio: 0.6666666666666667 }
   { ... } ...
 }
 ```
