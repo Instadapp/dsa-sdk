@@ -3,6 +3,7 @@ const Internal = require("./internal.js");
 const Balances = require("./resolvers/balances.js");
 const Compound = require("./resolvers/compound.js");
 const Maker = require("./resolvers/maker.js");
+const Token = require("./token.js");
 const address = require("./constant/addresses.js");
 const ABI = require("./constant/abis.js");
 const tokens = require("./constant/tokens.js");
@@ -29,6 +30,7 @@ module.exports = class DSA {
     this.balances = new Balances(this);
     this.compound = new Compound(this);
     this.maker = new Maker(this);
+    this.token = new Token(this);
   }
 
   /**

@@ -24,4 +24,7 @@ module.exports = {
     maker: require("../abi/read/maker.json"),
     balances: require("../abi/read/balances.json"),
   },
+  basic: {
+    erc20: require("../abi/basics/erc20.json"),
+  },
 };
