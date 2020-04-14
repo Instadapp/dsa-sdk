@@ -15,7 +15,7 @@ module.exports = class Token {
 
     /**
      * Transfer
-     * @param {symbol} _d.token
+     * @param {symbol|address} _d.token
      * @param {number|string} _d.amount
      * @param {address} _d.to
      * @param {address} _d.from (optional)
@@ -25,13 +25,11 @@ module.exports = class Token {
     async transfer(_d) {
         let _addr = await this.internal.getAddress();
         let web3 = this.web3;
-        if (!_d.token || Object.keys(this.tokens.info).indexOf(_d.token.toLowerCase()) == -1) throw new Error("'token' symbol not found.")
+        if (!_d.token) throw new Error("'token' is not defined.")
         if (!_d.to) throw new Error("'to' address is not defined")
         if (!_d.amount) throw new Error("'amount' is not defined")
-        var token = this.tokens.info[_d.token.toLowerCase()];
         if (!_d.from) _d.from = _addr;
-        _d.amount = this.helpers.bigNumInString((_d.amount * 10 ** token.decimals).toFixed(0));
-        if (_d.token.toLowerCase() == "eth") {
+        if (_d.token.toLowerCase() == "eth" || _d.token.toLowerCase() == this.tokens.info.eth.address) {
             return new Promise((resolve, reject) => {
                 return web3.eth.sendTransaction({
                         from: _d.from,
@@ -46,7 +44,7 @@ module.exports = class Token {
                     });
             });
         } else {
-            var _c = await new web3.eth.Contract(this.ABI.basic.erc20, token.address);
+            var _c = await new web3.eth.Contract(this.ABI.basic.erc20, this.helpers.getAddress(_d.token));
             return new Promise((resolve, reject) => {
                 return _c.methods
                     .transfer(_d.to, _d.amount)
@@ -63,7 +61,7 @@ module.exports = class Token {
 
     /**
      * Approve Token
-     * @param {symbol} _d.token
+     * @param {symbol|address} _d.token
      * @param {number|string} _d.amount
      * @param {address} _d.to
      * @param {address} _d.from (optional)
@@ -73,19 +71,17 @@ module.exports = class Token {
     async approve(_d) {
         let _addr = await this.internal.getAddress();
         let web3 = this.web3;
-        if (!_d.token || Object.keys(this.tokens.info).indexOf(_d.token.toLowerCase()) == -1) throw new Error("'token' symbol not found.")
+        if (!_d.token) throw new Error("'token' is not defined.")
         if (!_d.to) throw new Error("'to' address is not defined")
         if (!_d.amount) throw new Error("'amount' is not defined")
-        var token = this.tokens.info[_d.token.toLowerCase()];
         if (!_d.from) _d.from = _addr;
-        _d.amount = this.helpers.bigNumInString((_d.amount * 10 ** token.decimals).toFixed(0));
 
-        if (_d.token.toLowerCase() == "eth") {
+        if (_d.token.toLowerCase() == "eth" || _d.token.toLowerCase() == this.tokens.info.eth.address) {
             return new Promise((resolve, reject) => {
                 resolve("ETH does not require approve.")
             })
         } else {
-            var _c = await new web3.eth.Contract(this.ABI.basic.erc20, token.address);
+            var _c = await new web3.eth.Contract(this.ABI.basic.erc20, this.helpers.getAddress(_d.token));
             return new Promise((resolve, reject) => {
                 return _c.methods
                     .approve(_d.to, _d.amount)
@@ -103,25 +99,25 @@ module.exports = class Token {
 
     /**
      * Get Allowance
-     * @param {symbol} _d.token
+     * @param {symbol|address} _d.token
      * @param {address} _d.to
      * @param {address} _d.from (optional)
      */
     async getAllowance(_d) {
         let _addr = await this.internal.getAddress();
         let web3 = this.web3;
-        if (!_d.token || Object.keys(this.tokens.info).indexOf(_d.token.toLowerCase()) == -1) throw new Error("'token' symbol not found.")
+        if (!_d.token) throw new Error("'token' is not defined.")
         if (!_d.to) throw new Error("'to' address is not defined")
         if (!_d.from) _d.from = _addr;
 
-        if (_d.token.toLowerCase() == "eth") {
+        if (_d.token.toLowerCase() == "eth" || _d.token.toLowerCase() == this.tokens.info.eth.address) {
             return new Promise((resolve, reject) => {
                 resolve("ETH does not have allowance.")
             })
         } else {
             var _c = await new web3.eth.Contract(
                 this.ABI.basic.erc20,
-                this.tokens.info[_d.token.toLowerCase()].address
+                this.helpers.getAddress(_d.token)
             );
             return new Promise(function (resolve, reject) {
                 return _c.methods.allowance(_d.from, _d.to)

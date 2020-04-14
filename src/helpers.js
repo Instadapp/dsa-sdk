@@ -1,4 +1,10 @@
 module.exports = class Helpers {
+
+  constructor (_dsa) {
+    this.tokens = _dsa.tokens;
+    this.web3 = _dsa.web3;
+  }
+
   cleanAddress(address) {
     return address.slice(0, 4) + "..." + address.slice(-4);
   }
@@ -18,6 +24,22 @@ module.exports = class Helpers {
   divWithDec(num, power) {
     power = power ? power : 0;
     return Number(num) / 10 ** power;
+  }
+
+  toDecimals(tokenName, num) {
+    if (Object.keys(this.tokens.info).indexOf(tokenName.toLowerCase()) == -1) throw new Error("'token' symbol not found.")
+    var token = this.tokens.info[tokenName.toLowerCase()];
+    return this.bigNumInString((num * 10 ** token.decimals).toFixed(0));
+  }
+
+  getAddress(token) {
+    var isAddress = this.web3.utils.isAddress(token.toLowerCase())
+    if (isAddress) {
+      return this.web3.utils.toChecksumAddress(token.toLowerCase())
+    } else {
+      if (Object.keys(this.tokens.info).indexOf(token.toLowerCase()) == -1) throw new Error("'token' symbol not found.")
+      return this.web3.utils.toChecksumAddress(this.tokens.info[token.toLowerCase()].address);
+    }
   }
 
   cleanNumber(num) {

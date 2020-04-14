@@ -25,7 +25,7 @@ module.exports = class DSA {
       origin: address.genesis,
     };
     this.web3 = config.web3 ? config.web3 : config;
-    this.helpers = new Helpers();
+    this.helpers = new Helpers(this);
     this.internal = new Internal(this);
     this.balances = new Balances(this);
     this.compound = new Compound(this);
