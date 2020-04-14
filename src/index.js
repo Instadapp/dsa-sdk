@@ -15,6 +15,8 @@ module.exports = class DSA {
    * @param config.web3
    */
   constructor(config) {
+    if (!config) config = {};
+    this.web3 = config.web3 ? config.web3 : config;
     this.address = address;
     this.ABI = ABI;
     this.tokens = tokens;
@@ -24,7 +26,6 @@ module.exports = class DSA {
       version: 1,
       origin: address.genesis,
     };
-    this.web3 = config.web3 ? config.web3 : config;
     this.helpers = new Helpers(this);
     this.internal = new Internal(this);
     this.erc20 = new ERC20(this);
