@@ -22,6 +22,9 @@ module.exports = class Token {
     async transfer(_d) {
         let _addr = await this.internal.getAddress();
         let web3 = this.web3;
+        if(!_d.token || Object.keys(this.tokens.info).indexOf(_d.token.toLowerCase()) == -1) throw new Error("Token symbol not found.")
+        if(!_d.to) throw new Error("'To' address is not defined")
+        if(!_d.amount) throw new Error("'Amount' is not defined")
         var token = this.tokens.info[_d.token.toLowerCase()];
         if (!_d.from) _d.from = _addr;
         _d.amount = this.helpers.bigNumInString((_d.amount*10**token.decimals).toFixed(0));
@@ -63,6 +66,9 @@ module.exports = class Token {
     async approve(_d) {
         let _addr = await this.internal.getAddress();
         let web3 = this.web3;
+        if(!_d.token || Object.keys(this.tokens.info).indexOf(_d.token.toLowerCase()) == -1) throw new Error("Token symbol not found.")
+        if(!_d.to) throw new Error("'To' address is not defined")
+        if(!_d.amount) throw new Error("'Amount' is not defined")
         var token = this.tokens.info[_d.token.toLowerCase()];
         if (!_d.from) _d.from = _addr;
         _d.amount = this.helpers.bigNumInString((_d.amount*10**token.decimals).toFixed(0));
@@ -95,6 +101,8 @@ module.exports = class Token {
     async getAllowance(_d) {
         let _addr = await this.internal.getAddress();
         let web3 = this.web3;
+        if(!_d.token || Object.keys(this.tokens.info).indexOf(_d.token.toLowerCase()) == -1) throw new Error("`token` symbol not found.")
+        if(!_d.to) throw new Error("'To' address is not defined")
         if (!_d.from) _d.from = _addr;
 
         if (_d.token.toLowerCase() == "eth") {
