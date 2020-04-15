@@ -116,7 +116,7 @@ dsa.build()
 
 ### Parameters
 1. `Object` (ALL optional)
-   * `owner`: The authorised address which will be authorised on DSA (defaulted to selected address).
+   * `authority`: The DSA authority address (defaulted to selected address).
    * `origin` - `String`: The address to track the transaction origination (affiliates).
    * `from` - `String`: The address transactions should be made from (defaulted to selected address).
    * `gasPrice` - `String`: The gas price in wei to use for transactions.
