@@ -233,7 +233,6 @@ module.exports = class DSA {
       _internal
         .estimateGas(_obj)
         .then((gas) => {
-          console.log(gas);
           resolve(gas);
         })
         .catch((err) => {
