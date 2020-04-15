@@ -46,7 +46,7 @@ module.exports = class DSA {
 
   /**
    * build new DSA
-   * @param {address} _d.owner (optional)
+   * @param {address} _d.authority (optional)
    * @param {address} _d.origin (optional)
    * @param {address} _d.from (optional)
    * @param {number|string} _d.gasPrice (optional)
@@ -55,7 +55,7 @@ module.exports = class DSA {
   async build(_d) {
     let _addr = await this.internal.getAddress();
     if (!_d) _d = {};
-    if (!_d.owner) _d.owner = _addr;
+    if (!_d.authority) _d.authority = _addr;
     if (!_d.version) _d.version = 1;
     if (!_d.origin) _d.origin = this.instance.origin;
     if (!_d.from) _d.from = _addr;
@@ -65,7 +65,7 @@ module.exports = class DSA {
     );
     return new Promise(function (resolve, reject) {
       return _c.methods
-        .build(_d.owner, _d.version, _d.origin)
+        .build(_d.authority, _d.version, _d.origin)
         .send(_d)
         .on("transactionHash", (txHash) => {
           resolve(txHash);
