@@ -11,14 +11,15 @@ module.exports = class Token {
     this.helpers = _dsa.helpers;
     this.internal = _dsa.internal;
     this.web3 = _dsa.web3;
+    this.dsa = _dsa;
   }
 
   /**
    * Transfer
    * @param {symbol|address} _d.token
    * @param {number|string} _d.amount
-   * @param {address} _d.to
-   * @param {address} _d.from (optional)
+   * @param {address} _d.to (optional) - default is DSA Address
+   * @param {address} _d.from (optional) - default is User's Address
    * @param {number|string} _d.gasPrice (optional)
    * @param {number|string} _d.gas (optional)
    */
@@ -26,7 +27,7 @@ module.exports = class Token {
     let _addr = await this.internal.getAddress();
     let web3 = this.web3;
     if (!_d.token) throw new Error("'token' is not defined.");
-    if (!_d.to) throw new Error("'to' address is not defined");
+    if (!_d.to) _d.to = this.dsa.instance.address;
     if (!_d.amount) throw new Error("'amount' is not defined");
     if (!_d.from) _d.from = _addr;
     if (
