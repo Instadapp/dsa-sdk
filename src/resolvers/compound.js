@@ -16,10 +16,10 @@ module.exports = class Compound {
    * @param {String} cTokenSymbol the ctoken symbol
    */
   ctokenMap(cTokenSymbol) {
-    cTokenSymbol = cTokenSymbol.toLowerCase();
-    for (const key in this.tokens.getList({})) {
-      if (key == cTokenSymbol) {
-        return tokens[key].root;
+    const cTokens = this.tokens.getList({type: 'ctoken'});
+    for (const key in cTokens) {
+      if (cTokens[key].symbol === cTokenSymbol) {
+        return cTokens[key].root;
       }
     }
   }

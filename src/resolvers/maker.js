@@ -31,7 +31,7 @@ var colInfo = {
   },
 };
 
-module.exports = class Compound {
+module.exports = class Maker {
   /**
    * @param {Object} _dsa the dsa instance to access data stores
    */
