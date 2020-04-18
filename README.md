@@ -21,7 +21,7 @@ npm install dsa-sdk
  via jsDelivr CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/dsa-sdk@1.2.3/build/dsa.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dsa-sdk@latest/build/dsa.js"></script>
 ```
 
 For production, we recommend linking to a specific version number ([jsdeliver](https://www.jsdelivr.com/package/npm/dsa-sdk)).
