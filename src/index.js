@@ -209,6 +209,20 @@ module.exports = class DSA {
   }
 
   /**
+   * returns cast encoded data
+   * @param _d.connector the from address
+   * @param _d.method the to address
+   */
+  castEncoded(_d) {
+    var _internal = this.internal;
+    var _args = _internal.encodeSpells(_d);
+    return {
+      targets: _args[0],
+      spells: _args[1]
+    }
+  }
+
+  /**
    * returns the estimate gas cost
    * @param _d.connector the from address
    * @param _d.method the to address
