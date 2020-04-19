@@ -3,6 +3,7 @@ const Internal = require("./internal.js");
 const Balances = require("./resolvers/balances.js");
 const Compound = require("./resolvers/compound.js");
 const Maker = require("./resolvers/maker.js");
+const Pool = require("./resolvers/pool.js");
 const ERC20 = require("./erc20.js");
 const address = require("./constant/addresses.js");
 const ABI = require("./constant/abis.js");
@@ -32,6 +33,7 @@ module.exports = class DSA {
     this.balances = new Balances(this);
     this.compound = new Compound(this);
     this.maker = new Maker(this);
+    this.pool = new Pool(this);
   }
 
   /**
@@ -218,8 +220,8 @@ module.exports = class DSA {
     var _args = _internal.encodeSpells(_d);
     return {
       targets: _args[0],
-      spells: _args[1]
-    }
+      spells: _args[1],
+    };
   }
 
   /**
