@@ -6,14 +6,14 @@ module.exports = {
     account: "0x939Daad09fC4A9B8f8A9352A485DAb2df4F4B3F8",
     connector: "0xD6A602C01a023B98Ecfb29Df02FBA380d3B21E0c",
     events: "0x2af7ea6Cb911035f3eb1ED895Cb6692C39ecbA97",
-    pool: "0x1879BEE186BFfBA9A8b1cAD8181bBFb218A5Aa61",
+    instapool: "0x1879BEE186BFfBA9A8b1cAD8181bBFb218A5Aa61",
   },
   connectors: {
     basic: "0x9370236a085A99Aa359f4bD2f0424b8c3bf25C99",
     auth: "0x627cd0DbD5eE33F8456Aa8143aCd68a13d641588",
     compound: "0x547f1508A2a1AB0cB84DCe4b3e09beB560Bb44Cb",
     maker: "0x0a7493f31a23Ff79Eda30B12e6BA49f011B06e36",
-    pool: "0x55897de6B738c212FD38cF82f07f2c76675c7e61",
+    instapool: "0x55897de6B738c212FD38cF82f07f2c76675c7e61",
     oasis: "0x57118572267072fcaEe72b15aE18B07A8b0d6144",
   },
   resolvers: {

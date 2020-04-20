@@ -3,7 +3,7 @@ const Internal = require("./internal.js");
 const Balances = require("./resolvers/balances.js");
 const Compound = require("./resolvers/compound.js");
 const Maker = require("./resolvers/maker.js");
-const Pool = require("./resolvers/pool.js");
+const InstaPool = require("./resolvers/instapool.js");
 const ERC20 = require("./erc20.js");
 const address = require("./constant/addresses.js");
 const ABI = require("./constant/abis.js");
@@ -33,7 +33,7 @@ module.exports = class DSA {
     this.balances = new Balances(this);
     this.compound = new Compound(this);
     this.maker = new Maker(this);
-    this.pool = new Pool(this);
+    this.instapool = new InstaPool(this);
   }
 
   /**

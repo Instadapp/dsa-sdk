@@ -12,7 +12,7 @@ module.exports = class Compound {
   async getLiquidity() {
     return new Promise(async (resolve, reject) => {
       await this.compound
-        .getPosition(this.address.pool, "token")
+        .getPosition(this.address.instapool, "token")
         .then((_position) => {
           var _maxBorrowLimitInEth = _position.maxBorrowLimitInEth * 0.745;
           var _liquidityAvailable = {

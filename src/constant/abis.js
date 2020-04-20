@@ -17,7 +17,7 @@ module.exports = {
     auth: require("../abi/connectors/auth.json"),
     compound: require("../abi/connectors/compound.json"),
     maker: require("../abi/connectors/maker.json"),
-    pool: require("../abi/connectors/pool.json"),
+    instapool: require("../abi/connectors/instapool.json"),
     oasis: require("../abi/connectors/oasis.json"),
   },
   read: {
