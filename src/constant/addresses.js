@@ -12,8 +12,8 @@ module.exports = {
     basic: "0x9370236a085A99Aa359f4bD2f0424b8c3bf25C99",
     auth: "0x627cd0DbD5eE33F8456Aa8143aCd68a13d641588",
     compound: "0x547f1508A2a1AB0cB84DCe4b3e09beB560Bb44Cb",
-    maker: "0x0a7493f31a23Ff79Eda30B12e6BA49f011B06e36",
-    instapool: "0x0660d16ceef9d5a42910c336a5c2fbc419743bf0",
+    maker: "0x58Bbb677296B6d1B596288B31Abb928492400fBF",
+    instapool: "0x6d11A71575C34eB7b5E22949fAfCd49A2FA2A8F9",
     oasis: "0x57118572267072fcaEe72b15aE18B07A8b0d6144",
   },
   resolvers: {
