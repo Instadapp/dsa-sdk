@@ -1,2 +1,2 @@
-1) `dsa.compound.getPosition()` => change the key from addresses to symbols
-2) add `dsa.version`
+1) @samyak `dsa.compound.getPosition()` => change the key from addresses to symbols
+2) build token decimal thing `dsa.tokens.baseAmount()`
