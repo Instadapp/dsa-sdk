@@ -1,6 +1,6 @@
 # DSA SDK documentation
 
-DSA SDK simplify building DeFi apps and interact with defi smart account without handling all the complexities.
+Before you start reading the readme below, be sure to learn about it from [Instadapp Developer Platform](https://doc.instadapp.io)
 
 - [Get Started](#get-started)
 - [Test in browser](#test-in-browser)
