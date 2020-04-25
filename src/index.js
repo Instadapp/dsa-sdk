@@ -34,6 +34,9 @@ module.exports = class DSA {
     this.compound = new Compound(this);
     this.maker = new Maker(this);
     this.instapool = new InstaPool(this);
+
+    // defining methods where we need web3 access
+    this.transfer = this.erc20.transfer;
   }
 
   /**

@@ -27,7 +27,11 @@ module.exports = class Token {
     let _addr = await this.internal.getAddress();
     let web3 = this.web3;
     if (!_d.token) throw new Error("'token' is not defined.");
-    if (!_d.to) _d.to = this.dsa.instance.address;
+    if (!_d.to) {
+      let _dsa = !this.dsa ? this : this.dsa
+      _d.to = _dsa.instance.address;
+      if(_d.to == _dsa.address.genesis) throw new Error("'to' is not defined and instance is not set.");
+    }
     if (!_d.amount) throw new Error("'amount' is not defined");
     if (!_d.from) _d.from = _addr;
     if (
@@ -55,7 +59,7 @@ module.exports = class Token {
       );
       return new Promise((resolve, reject) => {
         return _c.methods
-          .transfer(_d.to, _d.amount)
+          .transfer(_d.to, this.helpers.bigNumInString(_d.amount)) 
           .send(_d)
           .on("transactionHash", (txHash) => {
             resolve(txHash);
