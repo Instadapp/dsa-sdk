@@ -36,7 +36,7 @@ module.exports = class DSA {
     this.instapool = new InstaPool(this);
 
     // defining methods where we need web3 access
-    this.tokens.transfer = this.erc20.transfer;
+    this.transfer = this.erc20.transfer;
   }
 
   /**
