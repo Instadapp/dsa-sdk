@@ -1,10 +1,10 @@
 /**
  * Returns token amount in wei.
+ * @param {Number | String} amount - Amount to convert.
  * @param {String} tokenName - Token Symbol.
- * @param {Amount | String} amount - Amount to convert.
  * @returns {String} Amount in bigNumInString format.
  */
-exports.fromDecimals = (tokenName, amount) => {
+exports.fromDecimals = (amount, tokenName) => {
   if (Object.keys(this.tokens.info).indexOf(tokenName.toLowerCase()) == -1) throw new Error("'token' symbol not found.");
   var token = this.tokens.info[tokenName.toLowerCase()];
   return this.bigNumInString((Number(amount) * 10 ** token.decimals).toFixed(0));
