@@ -73,9 +73,9 @@ module.exports = class Compound {
               ? (_key = _ctoken)
               : key == "caddress"
               ? (_key = _ctokens[_ctoken].address)
-              : key == "token"
-              ? (_key = _root)
-              : (_key = this.tokens.info[_root].address);
+              : key == "address"
+              ? (_key = this.tokens.info[_root].address)
+              : (_key = _root);
             var _res = res[i];
             var _decimals = this.tokens.info[_ctokens[_ctoken].root].decimals;
             _position[_key] = {};
