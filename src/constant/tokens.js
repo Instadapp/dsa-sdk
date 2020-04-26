@@ -4,7 +4,7 @@
  * @param {String} tokenName - Token Symbol.
  * @returns {String} Amount in bigNumInString format.
  */
-exports.fromDecimals = (amount, tokenName) => {
+exports.fromDecimal = (amount, tokenName) => {
   if (Object.keys(this.tokens.info).indexOf(tokenName.toLowerCase()) == -1) throw new Error("'token' symbol not found.");
   var token = this.tokens.info[tokenName.toLowerCase()];
   return this.bigNumInString((Number(amount) * 10 ** token.decimals).toFixed(0));
