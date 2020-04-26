@@ -25,13 +25,6 @@ module.exports = class Helpers {
     return Number(num) / 10 ** power;
   }
 
-  toDecimals(tokenName, num) {
-    if (Object.keys(this.tokens.info).indexOf(tokenName.toLowerCase()) == -1)
-      throw new Error("'token' symbol not found.");
-    var token = this.tokens.info[tokenName.toLowerCase()];
-    return this.bigNumInString((num * 10 ** token.decimals).toFixed(0));
-  }
-
   getAddress(token) {
     var isAddress = this.web3.utils.isAddress(token.toLowerCase());
     if (isAddress) {
