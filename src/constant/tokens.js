@@ -1,4 +1,16 @@
 /**
+ * Returns token amount in wei.
+ * @param {String} tokenName - Token Symbol.
+ * @param {Amount | String} amount - Amount to convert.
+ * @returns {String} Amount in bigNumInString format.
+ */
+exports.fromDecimals = (tokenName, amount) => {
+  if (Object.keys(this.tokens.info).indexOf(tokenName.toLowerCase()) == -1) throw new Error("'token' symbol not found.");
+  var token = this.tokens.info[tokenName.toLowerCase()];
+  return this.bigNumInString((Number(amount) * 10 ** token.decimals).toFixed(0));
+}
+
+/**
  * Returns all tokens of similar type.
  * if type == "all" then returns whole tokens list.
  */
