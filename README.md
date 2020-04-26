@@ -108,7 +108,7 @@ Transfer tokens.
 ```js
 dsa.transfer({
 	token: "ETH", // name of the token to transfer.
-	amount: dsa.toDecimals("ETH", 1) // amount to transfer in wei.
+	amount: "1000000000000000000" // amount to transfer in wei.
 }).then(data  => {
 	return  data  // transaction hash
 }).catch(error  => {
