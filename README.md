@@ -100,6 +100,35 @@ dsa.setInstance({
    * `address` - `String`: The address of DSA.
    * `origin` - `String`: The address to track the transaction origination (affiliates).
 
+
+## .transfer()
+
+Transfer tokens. 
+
+```js
+dsa.transfer({
+	token: "ETH", // name of the token to transfer.
+	amount: dsa.toDecimals("ETH", 1) // amount to transfer in wei.
+}).then(data  => {
+	return  data  // transaction hash
+}).catch(error  => {
+	return  error
+});
+```
+
+### Parameters
+
+1.  `Object` 
+  *  `token` - `String`: Name of the token to transfer. Eg: `ETH`,  `DAI` , `USDC`.
+  *  `amount` - `String | Number`: Amount of the token to transfer in wei. Can convert to wei using a in-build function `dsa.toDecimals(token_name, token_amount)`
+  *  `from` - `Address` (optional): The address for the sending account. Uses the web3.eth.getAccounts(), if not specified.
+  *  `to` - `Address` (optional): The destination address of the transaction. Uses the current DSA instance address declared via `.setInstance()`, if not specified.
+  *  `gasPrice` - `String` (optional): The price of gas for this transaction in wei, defaults to web3.eth.gasPrice.
+  *  `gas` - `Number` (optional): The amount of gas to use for the transaction (unused gas is refunded). 
+
+### Returns
+`String`: Transaction hash `0x.....`.
+
 ## .build()
 
 Build a new DSA.
