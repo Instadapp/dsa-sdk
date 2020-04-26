@@ -120,7 +120,7 @@ dsa.transfer({
 
 1.  `Object` 
   *  `token` - `String`: Name of the token to transfer. Eg: `ETH`,  `DAI` , `USDC`.
-  *  `amount` - `String | Number`: Amount of the token to transfer in wei. Can convert to wei using a in-build function `dsa.toDecimals(token_name, token_amount)`
+  *  `amount` - `String | Number`: Amount of the token to transfer in wei. Can convert to wei using a in-build function `dsa.helpers.toDecimals(token_name, token_amount)`
   *  `from` - `Address` (optional): The address for the sending account. Uses the web3.eth.getAccounts(), if not specified.
   *  `to` - `Address` (optional): The destination address of the transaction. Uses the current DSA instance address declared via `.setInstance()`, if not specified.
   *  `gasPrice` - `String` (optional): The price of gas for this transaction in wei, defaults to web3.eth.gasPrice.
