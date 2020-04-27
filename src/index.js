@@ -7,7 +7,7 @@ const InstaPool = require("./resolvers/instapool.js");
 const ERC20 = require("./erc20.js");
 const address = require("./constant/addresses.js");
 const ABI = require("./constant/abis.js");
-const tokens = require("./constant/tokens.js");
+const tokens = require("./resolvers/tokens.js");
 
 module.exports = class DSA {
   /**

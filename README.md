@@ -98,7 +98,7 @@ dsa.setInstance({
 1. `Object`
    * `id` - `Number`: The number of DSA.
    * `address` - `String`: The address of DSA.
-   * `origin` - `String`: The address to track the transaction origination (affiliates).
+   * `origin` - `String`: The address to track the transaction origination (analytics).
 
 
 ## .transfer()
@@ -146,8 +146,8 @@ dsa.build()
 ### Parameters
 1. `Object` (ALL optional)
    * `authority`: The DSA authority address (defaulted to selected address).
-   * `origin` - `String`: The address to track the transaction origination (affiliates).
-   * `from` - `String`: The address transactions should be made from (defaulted to selected address).
+   * `origin` - `Address`: The address to track the transaction origination (analytics).
+   * `from` - `Address`: The address transactions should be made from (defaulted to selected address).
    * `gasPrice` - `String`: The gas price in wei to use for transactions.
    * `gas` - `Number`: The maximum gas provided for a transaction (gas limit).
 
@@ -239,7 +239,8 @@ dsa.cast(spells) // or dsa.cast({spells:spells})
 OR
 
 1. `Object`
-   * `data` - The spell instance.
+   * `spells` - The spell instance.
+   * `origin` - `Address`: The address to track the transaction origination (analytics).
    * `from` - `Address` (optional):  The address for the sending account. Uses the web3.eth.getAccounts(), if not specified.
    * `to` - `Address` (optional): The destination address of the transaction. Uses the current DSA instance address declared via `.setInstance()`, if not specified.
    * `value` - `Number|String` (optional): The ETH value transferred for the transaction in wei. 

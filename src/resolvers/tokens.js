@@ -78,4 +78,4 @@ exports.getDataList = ({ type = null, field = null }) => {
  * @param factor (optional) collateral factor, used in ctokens
  * @param root (optional) underlying token, used in ctokens
  */
-exports.info = require("./tokensInfo.json");
+exports.info = require("../constant/tokensInfo.json");
