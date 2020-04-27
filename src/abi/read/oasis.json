@@ -1,0 +1,64 @@
+[
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "internalType": "contract ERC20",
+                "name": "pay_gem",
+                "type": "address"
+            },
+            {
+                "internalType": "contract ERC20",
+                "name": "buy_gem",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "buy_amt",
+                "type": "uint256"
+            }
+        ],
+        "name": "getPayAmount",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "fill_amt",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "internalType": "contract ERC20",
+                "name": "buy_gem",
+                "type": "address"
+            },
+            {
+                "internalType": "contract ERC20",
+                "name": "pay_gem",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "pay_amt",
+                "type": "uint256"
+            }
+        ],
+        "name": "getBuyAmount",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "fill_amt",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }
+]
