@@ -4,6 +4,7 @@ const Balances = require("./resolvers/balances.js");
 const Compound = require("./resolvers/compound.js");
 const Maker = require("./resolvers/maker.js");
 const InstaPool = require("./resolvers/instapool.js");
+const Oasis = require("./resolvers/oasis.js");
 const ERC20 = require("./erc20.js");
 const address = require("./constant/addresses.js");
 const ABI = require("./constant/abis.js");
@@ -34,6 +35,7 @@ module.exports = class DSA {
     this.compound = new Compound(this);
     this.maker = new Maker(this);
     this.instapool = new InstaPool(this);
+    this.oasis = new Oasis(this);
 
     // defining methods where we need web3 access
     this.transfer = this.erc20.transfer;

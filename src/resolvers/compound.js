@@ -16,7 +16,7 @@ module.exports = class Compound {
    * @param {String} cTokenSymbol the ctoken symbol
    */
   ctokenMap(cTokenSymbol) {
-    const cTokens = this.tokens.getList({type: 'ctoken'});
+    const cTokens = this.tokens.getList({ type: "ctoken" });
     for (const key in cTokens) {
       if (cTokens[key].symbol === cTokenSymbol) {
         return cTokens[key].root;

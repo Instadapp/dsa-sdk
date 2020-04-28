@@ -21,6 +21,7 @@ module.exports = {
     balances: "0x6B9aE204B9779fbd15Fdbd027c9F0d266A32f0b7",
     compound: "0x9E6Dcb5C5A3F17F7400CD63ae6bEC0c74e65687c",
     maker: "0x3dF605ca85E8d677C8f6E2665EbcdDbd801Ee9f9",
+    oasis: "0x95E031D9A16eb7cb440c56076CBE07144C2233EA",
   },
   read: {
     core: "0x37D60F60fcDeA9f4Dcf3fC1799fE4df8e096aa3c",
