@@ -11,6 +11,18 @@ exports.fromDecimal = (amount, tokenName) => {
 }
 
 /**
+ * Returns token amount in decimal.
+ * @param {Number | String} amount - Amount to convert.
+ * @param {String} tokenName - Token Symbol.
+ * @returns {Number} Amount in decimal.
+ */
+exports.toDecimal = (amount, tokenName) => {
+  if (Object.keys(this.tokens.info).indexOf(tokenName.toLowerCase()) == -1) throw new Error("'token' symbol not found.");
+  var token = this.tokens.info[tokenName.toLowerCase()];
+  return Number(amount) / 10 ** token.decimals;
+}
+
+/**
  * Returns all tokens of similar type.
  * if type == "all" then returns whole tokens list.
  */
