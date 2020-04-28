@@ -10,7 +10,7 @@ module.exports = {
   },
   connectors: {
     basic: "0x9370236a085A99Aa359f4bD2f0424b8c3bf25C99",
-    auth: "0x627cd0DbD5eE33F8456Aa8143aCd68a13d641588",
+    auth: "0xB3242e09C8E5cE6E14296b3d3AbC4C6965F49b98",
     compound: "0x547f1508A2a1AB0cB84DCe4b3e09beB560Bb44Cb",
     maker: "0x58Bbb677296B6d1B596288B31Abb928492400fBF",
     instapool: "0x6d11A71575C34eB7b5E22949fAfCd49A2FA2A8F9",
