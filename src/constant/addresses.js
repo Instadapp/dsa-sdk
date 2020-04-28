@@ -14,7 +14,7 @@ module.exports = {
     compound: "0x547f1508A2a1AB0cB84DCe4b3e09beB560Bb44Cb",
     maker: "0x58Bbb677296B6d1B596288B31Abb928492400fBF",
     instapool: "0x6d11A71575C34eB7b5E22949fAfCd49A2FA2A8F9",
-    oasis: "0x57118572267072fcaEe72b15aE18B07A8b0d6144",
+    oasis: "0x76C7287D321FE80CFa115Dc2A17E335FDBc5A758",
   },
   resolvers: {
     core: "0x37D60F60fcDeA9f4Dcf3fC1799fE4df8e096aa3c",
