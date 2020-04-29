@@ -5,10 +5,10 @@
  * @returns {String} Amount in bigNumInString format.
  */
 exports.fromDecimal = (amount, tokenName) => {
-  if (Object.keys(this.tokens.info).indexOf(tokenName.toLowerCase()) == -1)
+  if (Object.keys(this.info).indexOf(tokenName.toLowerCase()) == -1)
     throw new Error("'token' symbol not found.");
-  var token = this.tokens.info[tokenName.toLowerCase()];
-  return this.bigNumInString(
+  var token = this.info[tokenName.toLowerCase()];
+  return dsa.helpers.bigNumInString(
     (Number(amount) * 10 ** token.decimals).toFixed(0)
   );
 };
@@ -20,9 +20,9 @@ exports.fromDecimal = (amount, tokenName) => {
  * @returns {Number} Amount in decimal.
  */
 exports.toDecimal = (amount, tokenName) => {
-  if (Object.keys(this.tokens.info).indexOf(tokenName.toLowerCase()) == -1)
+  if (Object.keys(this.info).indexOf(tokenName.toLowerCase()) == -1)
     throw new Error("'token' symbol not found.");
-  var token = this.tokens.info[tokenName.toLowerCase()];
+  var token = this.info[tokenName.toLowerCase()];
   return Number(amount) / 10 ** token.decimals;
 };
 
