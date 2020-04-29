@@ -20,7 +20,7 @@ module.exports = class Balances {
    * @param slippage slippage of trade
    */
   async getBuyAmount(buyToken, sellToken, sellAmt, slippage) {
-    !slippage ? (_slippage = 10 ** 16) : (_slippage = slippage * 10 ** 18);
+    let _slippage = !slippage ?  10 ** 16 :  slippage * 10 ** 18;
 
     var _obj = {
       protocol: "oasis",
@@ -58,7 +58,7 @@ module.exports = class Balances {
    * @param slippage slippage of trade
    */
   async getSellAmount(buyToken, sellToken, buyAmt, slippage) {
-    !slippage ? (_slippage = 10 ** 16) : (_slippage = slippage * 10 ** 18);
+    let _slippage = !slippage ?  10 ** 16 :  slippage * 10 ** 18;
 
     var _obj = {
       protocol: "oasis",
