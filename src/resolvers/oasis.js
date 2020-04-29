@@ -20,16 +20,17 @@ module.exports = class Balances {
    * @param slippage slippage of trade
    */
   async getBuyAmount(buyToken, sellToken, sellAmt, slippage) {
-    let _slippage = !slippage ?  10 ** 16 :  slippage * 10 ** 18;
+    let _slippage = !slippage ?  10 ** 16 :  slippage * 10 ** 16;
+    _slippage = String(this.helpers.bigNumInString(_slippage))
 
     var _obj = {
       protocol: "oasis",
       method: "getBuyAmount",
       args: [
-        this.tokens.info[buyToken].address,
-        this.tokens.info[sellToken].address,
+        this.tokens.info[buyToken.toLowerCase()].address,
+        this.tokens.info[sellToken.toLowerCase()].address,
         this.tokens.fromDecimal(sellAmt, sellToken),
-        this.helpers.bigNumInString(slippage),
+        this.helpers.bigNumInString(_slippage),
       ],
     };
 
@@ -58,16 +59,17 @@ module.exports = class Balances {
    * @param slippage slippage of trade
    */
   async getSellAmount(buyToken, sellToken, buyAmt, slippage) {
-    let _slippage = !slippage ?  10 ** 16 :  slippage * 10 ** 18;
+    let _slippage = !slippage ?  10 ** 16 :  slippage * 10 ** 16;
+    _slippage = String(this.helpers.bigNumInString(_slippage))
 
     var _obj = {
       protocol: "oasis",
       method: "getSellAmount",
       args: [
-        this.tokens.info[buyToken].address,
-        this.tokens.info[sellToken].address,
+        this.tokens.info[buyToken.toLowerCase()].address,
+        this.tokens.info[sellToken.toLowerCase()].address,
         this.tokens.fromDecimal(buyAmt, buyToken),
-        this.helpers.bigNumInString(slippage),
+        this.helpers.bigNumInString(_slippage),
       ],
     };
 
