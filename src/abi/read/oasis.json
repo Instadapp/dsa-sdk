@@ -1,85 +1,112 @@
-[{
-    "inputs": [{
+[
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "buyAddr",
         "type": "address"
-    }, {
+      },
+      {
         "internalType": "address",
         "name": "sellAddr",
         "type": "address"
-    }, {
+      },
+      {
         "internalType": "uint256",
         "name": "sellAmt",
         "type": "uint256"
-    }, {
+      },
+      {
         "internalType": "uint256",
         "name": "slippage",
         "type": "uint256"
-    }],
+      }
+    ],
     "name": "getBuyAmount",
-    "outputs": [{
+    "outputs": [
+      {
         "internalType": "uint256",
         "name": "buyAmt",
         "type": "uint256"
-    }, {
+      },
+      {
         "internalType": "uint256",
         "name": "unitAmt",
         "type": "uint256"
-    }],
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
-}, {
-    "inputs": [{
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "sellAddr",
         "type": "address"
-    }],
+      }
+    ],
     "name": "getMinSellAmount",
-    "outputs": [{
+    "outputs": [
+      {
         "internalType": "uint256",
         "name": "minAmt",
         "type": "uint256"
-    }],
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
-}, {
-    "inputs": [{
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "buyAddr",
         "type": "address"
-    }, {
+      },
+      {
         "internalType": "address",
         "name": "sellAddr",
         "type": "address"
-    }, {
+      },
+      {
         "internalType": "uint256",
         "name": "buyAmt",
         "type": "uint256"
-    }, {
+      },
+      {
         "internalType": "uint256",
         "name": "slippage",
         "type": "uint256"
-    }],
+      }
+    ],
     "name": "getSellAmount",
-    "outputs": [{
+    "outputs": [
+      {
         "internalType": "uint256",
         "name": "sellAmt",
         "type": "uint256"
-    }, {
+      },
+      {
         "internalType": "uint256",
         "name": "unitAmt",
         "type": "uint256"
-    }],
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
-}, {
+  },
+  {
     "inputs": [],
     "name": "name",
-    "outputs": [{
+    "outputs": [
+      {
         "internalType": "string",
         "name": "",
         "type": "string"
-    }],
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
-}]
+  }
+]
