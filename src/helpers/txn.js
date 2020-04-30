@@ -2,7 +2,6 @@
  * txn helpers
  */
 module.exports = class TxnHelper {
-  
   /**
    * @param {Object} dsa the dsa instance to access data stores
    */
@@ -11,7 +10,7 @@ module.exports = class TxnHelper {
     this.internal = dsa.internal;
     this.web3 = dsa.web3;
     this.mode = dsa.mode;
-    this.privateKey = dsa.privateKey
+    this.privateKey = dsa.privateKey;
   }
 
   /**
@@ -25,12 +24,12 @@ module.exports = class TxnHelper {
           .then((rawTx) => {
             this.web3.eth
               .sendSignedTransaction(rawTx.rawTransaction)
-                .on("transactionHash", (txHash) => {
-                  resolve(txHash);
-                })
-                .on("error", function (error) {
-                  reject(error);
-                });
+              .on("transactionHash", (txHash) => {
+                resolve(txHash);
+              })
+              .on("error", function (error) {
+                reject(error);
+              });
           });
       } else {
         this.web3.eth
@@ -44,5 +43,4 @@ module.exports = class TxnHelper {
       }
     });
   }
-
-}
+};

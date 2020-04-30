@@ -24,15 +24,16 @@ module.exports = class DSA {
    * @param config.publicAddress (optional) public ethereum address associated with private keys, in case of "node"
    */
   constructor(config) {
-    
     if (!config) config = {};
     this.web3 = config.web3 ? config.web3 : config;
     this.mode = config.mode ? config.mode.toLowerCase() : "browser";
     if (this.mode == "node") {
-      if (!config.privateKey) return console.error("Private key is not defined.")
-      if (!config.publicAddress) return console.error("Public address is not defined.")
-      this.privateKey = config.privateKey
-      this.publicAddress = config.publicAddress
+      if (!config.privateKey)
+        return console.error("Private key is not defined.");
+      if (!config.publicAddress)
+        return console.error("Public address is not defined.");
+      this.privateKey = config.privateKey;
+      this.publicAddress = config.publicAddress;
     }
 
     this.address = address;
@@ -51,7 +52,7 @@ module.exports = class DSA {
     this.castHelper = new CastHelper(this);
     this.txnHelper = new TxnHelper(this);
 
-    this.sendTxn = this.txnHelper.send // send transaction // node || browser
+    this.sendTxn = this.txnHelper.send; // send transaction // node || browser
 
     this.erc20 = new ERC20(this);
     this.balances = new Balances(this);
@@ -61,15 +62,14 @@ module.exports = class DSA {
     this.oasis = new Oasis(this);
 
     // defining methods to simplify the calls for frontend develoeprs
-    this.transfer = this.erc20.transfer
-    this.castEncoded = this.castHelper.encoded
-    this.estimateCastGas = this.castHelper.estimateGas
-    this.encodeCastABI = this.castHelper.encodeABI
-    this.count = this.account.count
-    this.getAccounts = this.account.getAccounts
-    this.getAuthById = this.account.getAuthById
-    this.getAuthByAddress = this.account.getAuthByAddress
-
+    this.transfer = this.erc20.transfer;
+    this.castEncoded = this.castHelper.encoded;
+    this.estimateCastGas = this.castHelper.estimateGas;
+    this.encodeCastABI = this.castHelper.encodeABI;
+    this.count = this.account.count;
+    this.getAccounts = this.account.getAccounts;
+    this.getAuthById = this.account.getAuthById;
+    this.getAuthByAddress = this.account.getAuthByAddress;
   }
 
   /**
@@ -110,13 +110,15 @@ module.exports = class DSA {
       this.address.core.index
     );
 
-    _d.callData = _c.methods.build(_d.authority, _d.version, _d.origin).encodeABI();
+    _d.callData = _c.methods
+      .build(_d.authority, _d.version, _d.origin)
+      .encodeABI();
     let txObj = await this.internal.getTxObj(_d);
-    
+
     return new Promise((resolve, reject) => {
       return this.sendTxn(txObj)
         .then((tx) => resolve(tx))
-        .catch((err) => reject(err))
+        .catch((err) => reject(err));
     });
   }
 
@@ -139,14 +141,13 @@ module.exports = class DSA {
     if (!_d.to) _d.to = this.instance.address;
     if (!_d.from) _d.from = _addr;
     if (!_d.origin) _d.origin = this.instance.origin;
-    
+
     let _c = new this.web3.eth.Contract(
       this.ABI.core.account,
       this.instance.address
     );
 
     _d.callData = _c.methods.cast(..._espell, _d.origin).encodeABI();
-    console.log(_d.callData);
     let txObj = await this.internal.getTxObj(_d);
 
     return new Promise((resolve, reject) => {
@@ -204,5 +205,4 @@ module.exports = class DSA {
         });
     });
   }
-
 };

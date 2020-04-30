@@ -31,11 +31,11 @@ module.exports = class Token {
       _dsa = !this.dsa ? this : this.dsa;
       _d.to = _dsa.instance.address;
       if (_d.to == _dsa.address.genesis)
-      throw new Error("'to' is not defined and instance is not set.");
+        throw new Error("'to' is not defined and instance is not set.");
     }
     if (!_d.amount) throw new Error("'amount' is not defined");
     if (!_d.from) _d.from = _addr;
-    
+
     let txObj;
     if (
       _d.token.toLowerCase() == "eth" ||
@@ -79,7 +79,7 @@ module.exports = class Token {
     if (!_d.to) throw new Error("'to' address is not defined");
     if (!_d.amount) throw new Error("'amount' is not defined");
     if (!_d.from) _d.from = _addr;
-    
+
     let txObj;
     if (
       _d.token.toLowerCase() == "eth" ||
@@ -99,7 +99,8 @@ module.exports = class Token {
       txObj = await this.internal.getTxObj(_d, callData);
     }
     return new Promise((resolve, reject) => {
-      return _dsa.sendTxn(txObj)
+      return _dsa
+        .sendTxn(txObj)
         .then((tx) => resolve(tx))
         .catch((err) => reject(err));
     });

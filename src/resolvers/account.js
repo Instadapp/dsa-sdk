@@ -2,7 +2,6 @@
  * account resolver
  */
 module.exports = class Account {
-  
   /**
    * @param {Object} _dsa the dsa instance to access data stores
    */
@@ -109,5 +108,4 @@ module.exports = class Account {
         });
     });
   }
-
-}
+};

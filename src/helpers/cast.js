@@ -2,7 +2,6 @@
  * cast helpers
  */
 module.exports = class CastHelper {
-  
   /**
    * @param {Object} _dsa the dsa instance to access data stores
    */
@@ -74,5 +73,4 @@ module.exports = class CastHelper {
     let _contract = new this.web3.eth.Contract(this.ABI.core.account, _d.to);
     return _contract.methods.cast(..._enodedSpell, _d.origin).encodeABI();
   }
-
-}
+};

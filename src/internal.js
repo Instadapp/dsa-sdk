@@ -1,5 +1,4 @@
 module.exports = class Internal {
-  
   /**
    * @param {Object} _dsa the dsa instance to access data stores
    */
@@ -19,7 +18,7 @@ module.exports = class Internal {
     if (_t) return _t;
     else return console.error(`${_co} is invalid connector.`);
   }
-  
+
   /**
    * returns txObj for any calls
    * * @param _d.from
@@ -31,25 +30,28 @@ module.exports = class Internal {
    * * @param _d.nonce (optional) mostly for "node" mode
    */
   async getTxObj(_d) {
-
     if (!_d.from) throw new Error("'from' is not defined.");
     if (!_d.callData) throw new Error("'calldata' is not defined.");
     if (!_d.to) throw new Error("'to' is not defined.");
 
-    let txObj = {}
-    txObj.from = _d.from
-    txObj.to = _d.to
-    txObj.data =_d.callData != "0x" ? _d.callData : "0x"
-    txObj.value = _d.value ? _d.value : 0
+    let txObj = {};
+    txObj.from = _d.from;
+    txObj.to = _d.to;
+    txObj.data = _d.callData != "0x" ? _d.callData : "0x";
+    txObj.value = _d.value ? _d.value : 0;
 
     if (this.mode == "node") {
       // need above 4 params to estimate the gas
-      txObj.gas = _d.gas ? _d.gas : (await this.web3.eth.estimateGas(txObj) * 1.3).toFixed(0) // increasing gas cost by 30% for margin
-      txObj.gasPrice = _d.gasPrice ? _d.gasPrice : 1 // defaulted to 1 gwei
-      txObj.nonce = _d.nonce ? _d.nonce : await this.web3.eth.getTransactionCount(txObj.from) // defaulted to 1 gwei
+      txObj.gas = _d.gas
+        ? _d.gas
+        : ((await this.web3.eth.estimateGas(txObj)) * 1.3).toFixed(0); // increasing gas cost by 30% for margin
+      txObj.gasPrice = _d.gasPrice ? _d.gasPrice : 1; // defaulted to 1 gwei
+      txObj.nonce = _d.nonce
+        ? _d.nonce
+        : await this.web3.eth.getTransactionCount(txObj.from); // defaulted to 1 gwei
     }
 
-    return txObj
+    return txObj;
   }
 
   /**
@@ -112,8 +114,8 @@ module.exports = class Internal {
    * returns the input interface required for cast()
    */
   async getAddress() {
-    if (this.mode == "node") return this.publicAddress
-    
+    if (this.mode == "node") return this.publicAddress;
+
     // otherwise, browser
     let address = await this.web3.eth.getAccounts();
     if (address.length == 0)
