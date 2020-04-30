@@ -48,7 +48,7 @@ module.exports = class Internal {
       txObj.gasPrice = _d.gasPrice ? _d.gasPrice : 1 // defaulted to 1 gwei
       txObj.nonce = _d.nonce ? _d.nonce : await this.web3.eth.getTransactionCount(txObj.from) // defaulted to 1 gwei
     }
-    
+
     return txObj
   }
 

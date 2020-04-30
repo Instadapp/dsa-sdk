@@ -146,6 +146,7 @@ module.exports = class DSA {
     );
 
     _d.callData = _c.methods.cast(..._espell, _d.origin).encodeABI();
+    console.log(_d.callData);
     let txObj = await this.internal.getTxObj(_d);
 
     return new Promise((resolve, reject) => {

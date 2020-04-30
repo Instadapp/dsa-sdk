@@ -25,12 +25,12 @@ module.exports = class TxnHelper {
           .then((rawTx) => {
             this.web3.eth
               .sendSignedTransaction(rawTx.rawTransaction)
-              .on("transactionHash", (txHash) => {
-                resolve(txHash);
-              })
-              .on("error", function (error) {
-                reject(error);
-              });
+                .on("transactionHash", (txHash) => {
+                  resolve(txHash);
+                })
+                .on("error", function (error) {
+                  reject(error);
+                });
           });
       } else {
         this.web3.eth
