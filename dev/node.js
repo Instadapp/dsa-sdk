@@ -4,8 +4,9 @@ const web3 = new Web3(new Web3.providers.HttpProvider(process.env.ETH_NODE_URL))
 
 const DSA = require("../src/index");
 const dsa = new DSA(web3);
-const walletAddress = '0x981C549A74Dc36Bd82fEd9097Bc19404E8db14f3';
+// dsa.instapool.getLiquidity().then(console.log)
 
+// const walletAddress = '0x981C549A74Dc36Bd82fEd9097Bc19404E8db14f3';
 
 // dsa.count().then(console.log)
 // console.log(dsa.tokens.info);

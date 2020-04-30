@@ -1,4 +1,4 @@
-module.exports = class Balances {
+module.exports = class Oasis {
   /**
    * @param {Object} _dsa the dsa instance to access data stores
    */

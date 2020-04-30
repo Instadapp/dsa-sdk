@@ -160,7 +160,7 @@ module.exports = class Maker {
       await this.dsa
         .read(_obj)
         .then((res) => {
-          resolve({rate: this.calRate(res)});
+          resolve({ rate: this.calRate(res) });
         })
         .catch((err) => {
           reject(err);
