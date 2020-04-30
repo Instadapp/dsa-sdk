@@ -25,10 +25,9 @@ module.exports = class Token {
    */
   async transfer(_d) {
     let _addr = await this.internal.getAddress();
-    let _dsa;
+    let _dsa = !this.dsa ? this : this.dsa;
     if (!_d.token) throw new Error("'token' is not defined.");
     if (!_d.to) {
-      _dsa = !this.dsa ? this : this.dsa;
       _d.to = _dsa.instance.address;
       if (_d.to == _dsa.address.genesis)
         throw new Error("'to' is not defined and instance is not set.");
