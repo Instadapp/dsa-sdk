@@ -3,14 +3,14 @@
  */
 module.exports = class TxnHelper {
   /**
-   * @param {Object} dsa the dsa instance to access data stores
+   * @param {Object} _dsa the dsa instance to access data stores
    */
-  constructor(dsa) {
-    this.ABI = dsa.ABI;
-    this.internal = dsa.internal;
-    this.web3 = dsa.web3;
-    this.mode = dsa.mode;
-    this.privateKey = dsa.privateKey;
+  constructor(_dsa) {
+    this.ABI = _dsa.ABI;
+    this.internal = _dsa.internal;
+    this.web3 = _dsa.web3;
+    this.mode = _dsa.mode;
+    this.privateKey = _dsa.privateKey;
   }
 
   /**
