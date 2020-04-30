@@ -6,8 +6,9 @@ module.exports = class Internal {
     this.ABI = _dsa.ABI;
     this.address = _dsa.address;
     this.web3 = _dsa.web3;
-    this._dsa = _dsa;
-    this.nonce = 0; // for backend nonce.
+    this.mode = _dsa.mode;
+    this.privateKey = _dsa.privateKey;
+    this.publicAddress = _dsa.publicAddress;
   }
 
   /**
@@ -23,40 +24,36 @@ module.exports = class Internal {
    * returns the input interface required for cast()
    */
   async getTxObj(_d, data) {
+    
     let txObj = {};
     if (!_d.from) throw new Error("'from' is not defined.");
     if (!data) throw new Error("'data' is not defined.");
     if (!_d.to) throw new Error("'to' is not defined.");
+    if (data != "0x") txObj.data = data
+    txObj.from = _d.from
+    txObj.to = _d.to
+    txObj.value = _d.value ? _d.value : 0
 
-    if (data != "0x") txObj.data = data;
-    txObj.from = _d.from;
-    txObj.to = _d.to;
-    txObj.value = _d.value ? _d.value : 0;
     let _gas = await this.web3.eth
       .estimateGas(txObj)
       .then((data) => {
-        return data;
+        return data
       })
       .catch((err) => {
-        throw err;
-      });
-    txObj.gas = _d.gas ? _d.gas : _gas;
-    
-    if (this._dsa.mode == "node") {
-      let nonce = await this.web3.eth.getTransactionCount(txObj.from).then((data) => {
-        return data;
+        throw err
       })
-      .catch((err) => {
-        throw err;
-      });
-      txObj.nonce = nonce + this.nonce;
-    } else {
-      txObj.nonce = 0
+    txObj.gas = _d.gas ? _d.gas : _gas
+
+    if (this.mode == "node") {
+      try {
+        txObj.nonce = await this.web3.eth.getTransactionCount(txObj.from)
+      } catch (err) {
+        return console.error(err)
+      }
     }
-    
+    if (_d.gasPrice) txObj.gasPrice = _d.gasPrice
     console.log(txObj)
-    if (_d.gasPrice) txObj.gasPrice = _d.gasPrice;
-    return txObj;
+    return txObj
   }
 
   /**
@@ -119,16 +116,13 @@ module.exports = class Internal {
    * returns the input interface required for cast()
    */
   async getAddress() {
-    if (this._dsa.mode == "browser") {
-      let address = await this.web3.eth.getAccounts();
-      if (address.length == 0)
-        return console.error("No ethereum address detected!!!");
-      return address[0];
-    } else {
-      if (!this._dsa.privateKey) return console.error("Invaild private key!!!");
-      return this.web3.eth.accounts.privateKeyToAccount(this._dsa.privateKey)
-        .address;
-    }
+    if (this.mode == "node") return this.publicAddress
+    
+    // otherwise, browser
+    let address = await this.web3.eth.getAccounts();
+    if (address.length == 0)
+      return console.log("No ethereum address detected.");
+    return address[0];
   }
 
   /**

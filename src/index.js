@@ -1,3 +1,5 @@
+const address = require("./constant/addresses.js");
+const ABI = require("./constant/abis.js");
 const Helpers = require("./helpers.js");
 const Internal = require("./internal.js");
 const Balances = require("./resolvers/balances.js");
@@ -6,9 +8,10 @@ const Maker = require("./resolvers/maker.js");
 const InstaPool = require("./resolvers/instapool.js");
 const Oasis = require("./resolvers/oasis.js");
 const ERC20 = require("./erc20.js");
-const address = require("./constant/addresses.js");
-const ABI = require("./constant/abis.js");
 const Tokens = require("./resolvers/tokens.js");
+
+const CastHelper = require("./helpers/cast.js");
+const TxnHelper = require("./helpers/txn.js");
 
 module.exports = class DSA {
   /**
@@ -17,10 +20,17 @@ module.exports = class DSA {
    * @param config.web3
    */
   constructor(config) {
+    
     if (!config) config = {};
     this.web3 = config.web3 ? config.web3 : config;
     this.mode = config.mode ? config.mode.toLowerCase() : "browser";
-    this.privateKey = this.mode == "node" ? config.privateKey : false;
+    if (this.mode == "node") {
+      if (!config.privateKey) return console.error("Private key is not defined.")
+      if (!config.publicAddress) return console.error("Public address is not defined.")
+      this.privateKey = config.privateKey
+      this.publicAddress = config.publicAddress
+    }
+
     this.address = address;
     this.ABI = ABI;
     this.instance = {
@@ -32,21 +42,36 @@ module.exports = class DSA {
     this.helpers = new Helpers(this);
     this.tokens = new Tokens(this);
     this.internal = new Internal(this);
+    
+    this.castHelper = new CastHelper(this);
+
+    this.txnHelper = new TxnHelper(this);
+    this.sendTxn = this.txnHelper.send
+
     this.erc20 = new ERC20(this);
     this.balances = new Balances(this);
     this.compound = new Compound(this);
     this.maker = new Maker(this);
     this.instapool = new InstaPool(this);
     this.oasis = new Oasis(this);
-    // defining methods where we need web3 access
-    this.transfer = this.erc20.transfer;
+
+    // defining methods to simplify the calls for develoeprs
+    this.transfer = this.erc20.transfer
+    this.castEncoded = this.castHelper.encoded
+    this.estimateCastGas = this.castHelper.estimateGas
+    this.encodeCastABI = this.castHelper.encodeABI
+
   }
 
   /**
    * sets the current DSA ID
+   * @param {address} _o.id DSA ID
+   * @param {address} _o.origin DSA address
+   * @param {address} _o.version DSA version
+   * @param {address} _o.origin origin source
    */
   setInstance(_o) {
-    if (_o.id) this.instance.id = _o.id; // DSA ID
+    if (_o.id) this.instance.id = _o.id;
     if (_o.address) this.instance.address = _o.address;
     if (_o.version) this.instance.version = _o.version;
     if (_o.origin) this.instance.origin = _o.origin;
@@ -67,20 +92,23 @@ module.exports = class DSA {
     if (!_d.version) _d.version = 1;
     if (!_d.origin) _d.origin = this.instance.origin;
     if (!_d.from) _d.from = _addr;
+    _d.to = this.address.core.index;
+
     var _c = await new this.web3.eth.Contract(
       this.ABI.core.index,
       this.address.core.index
     );
+
     var callData = _c.methods
       .build(_d.authority, _d.version, _d.origin)
       .encodeABI();
+    
     let txObj = await this.internal.getTxObj(_d, callData);
-    let _dsa = this;
-    return new Promise(function (resolve, reject) {
-      return _dsa
-        .sendTransaction(txObj)
+    
+    return new Promise((resolve, reject) => {
+      return this.sendTxn(txObj)
         .then((tx) => resolve(tx))
-        .catch((err) => reject(err));
+        .catch((err) => reject(err))
     });
   }
 
@@ -199,85 +227,19 @@ module.exports = class DSA {
     if (!_d.to) _d.to = this.instance.address;
     if (!_d.from) _d.from = _addr;
     if (!_d.origin) _d.origin = this.instance.origin;
-    var _c = new this.web3.eth.Contract(
+    let _c = new this.web3.eth.Contract(
       this.ABI.core.account,
       this.instance.address
     );
-
     var callData = _c.methods.cast(..._espell, _d.origin).encodeABI();
     let txObj = await this.internal.getTxObj(_d, callData);
-    let _dsa = this;
     return new Promise((resolve, reject) => {
-      return _dsa
-        .sendTransaction(txObj)
+      return this.sendTxn(txObj)
         .then((tx) => {
           resolve(tx);
         })
         .catch((err) => reject(err));
     });
-  }
-
-  /**
-   * returns cast encoded data
-   * @param _d.connector the from address
-   * @param _d.method the to address
-   */
-  castEncoded(_d) {
-    var _internal = this.internal;
-    var _args = _internal.encodeSpells(_d);
-    return {
-      targets: _args[0],
-      spells: _args[1],
-    };
-  }
-
-  /**
-   * returns the estimate gas cost
-   * @param _d.connector the from address
-   * @param _d.method the to address
-   * @param _d.args the ABI interface
-   */
-  async estimateCastGas(_d) {
-    var _internal = this.internal;
-    var _args = _internal.encodeSpells(_d);
-    _args.push(this.instance.origin);
-    if (!_d.to) _d.to = this.instance.address;
-    if (!_d.from) _d.from = await _internal.getAddress();
-    if (!_d.value) _d.value = "0";
-    var _abi = _internal.getInterface("core", "account", "cast");
-    var _obj = {
-      abi: _abi,
-      args: _args,
-      from: _d.from,
-      to: _d.to,
-      value: _d.value,
-    };
-    return new Promise(function (resolve, reject) {
-      _internal
-        .estimateGas(_obj)
-        .then((gas) => {
-          resolve(gas);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
-  }
-
-  /**
-   * returns the encoded cast ABI byte code to send via a transaction or call.
-   * @param _d the spells instance
-   * OR
-   * @param _d.spells the spells instance
-   * @param _d.to (optional) the address of the smart contract to call
-   * @param _d.origin (optional) the transaction origin source
-   */
-  encodeCastABI(_d) {
-    let _enodedSpell = this.internal.encodeSpells(_d);
-    if (!_d.to) _d.to = this.instance.address;
-    if (!_d.origin) _d.origin = this.instance.origin;
-    let _contract = new this.web3.eth.Contract(this.ABI.core.account, _d.to);
-    return _contract.methods.cast(..._enodedSpell, _d.origin).encodeABI();
   }
 
   /**
@@ -327,42 +289,4 @@ module.exports = class DSA {
     });
   }
 
-  /**
-   * to Send Transaction functions and get raw data return
-   */
-  async sendTransaction(_h) {
-    let _dsa = this;
-    return new Promise(function (resolve, reject) {
-      _dsa.web3.eth.getTransactionCount(_h.from).then((txCount) => {
-        _h.nonce = txCount + _dsa.internal.nonce;
-        // _h.to = _h.from // For testing
-        // delete _h.data; // For testing
-        if (_dsa.mode == "node") {
-          _dsa.web3.eth.accounts
-            .signTransaction(_h, _dsa.privateKey)
-            .then((rawTx) => {
-              _dsa.web3.eth
-                .sendSignedTransaction(rawTx.rawTransaction)
-                .on("transactionHash", (txHash) => {
-                  _dsa.internal.nonce++;
-                  resolve(txHash);
-                })
-                .on("error", function (error) {
-                  reject(error);
-                });
-            });
-        } else {
-          _dsa.web3.eth
-            .sendTransaction(_h)
-            .on("transactionHash", (txHash) => {
-              _dsa.internal.nonce++;
-              resolve(txHash);
-            })
-            .on("error", function (error) {
-              reject(error);
-            });
-        }
-      });
-    });
-  }
 };

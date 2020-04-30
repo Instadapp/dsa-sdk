@@ -57,7 +57,7 @@ module.exports = class Token {
     }
     return new Promise((resolve, reject) => {
       return _dsa
-        .sendTransaction(txObj)
+        .sendTxn(txObj)
         .then((tx) => resolve(tx))
         .catch((err) => reject(err));
     });
@@ -99,7 +99,7 @@ module.exports = class Token {
       txObj = await this.internal.getTxObj(_d, callData);
     }
     return new Promise((resolve, reject) => {
-      return _dsa.sendTransaction(txObj)
+      return _dsa.sendTxn(txObj)
         .then((tx) => resolve(tx))
         .catch((err) => reject(err));
     });
