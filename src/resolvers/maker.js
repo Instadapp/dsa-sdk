@@ -83,8 +83,7 @@ module.exports = class Maker {
               _userVaults[i][6],
               18
             );
-            userVaults[_id].rate =
-              this.calRate(_userVaults[i][7]) * 100;
+            userVaults[_id].rate = this.calRate(_userVaults[i][7]) * 100;
             var _price = this.helpers.divWithDec(_userVaults[i][8], 27);
             userVaults[_id].price = _price;
             userVaults[_id].status = _debt / (_col * _price);
@@ -131,7 +130,7 @@ module.exports = class Maker {
     var _obj = {
       protocol: "maker",
       method: "getDaiPosition",
-      args: [address]
+      args: [address],
     };
 
     return new Promise(async (resolve, reject) => {
@@ -140,7 +139,7 @@ module.exports = class Maker {
         .then((res) => {
           var _dsrInfo = {
             balance: res[0] / 1e18,
-            rate: calRate(res[1])
+            rate: this.calRate(res[1]),
           };
           resolve(_dsrInfo);
         })
@@ -154,19 +153,18 @@ module.exports = class Maker {
     var _obj = {
       protocol: "maker",
       method: "getDsrRate",
-      args: []
+      args: [],
     };
 
     return new Promise(async (resolve, reject) => {
       await this.dsa
         .read(_obj)
         .then((res) => {
-          resolve({rate: calRate(res[0])});
+          resolve({rate: this.calRate(res)});
         })
         .catch((err) => {
           reject(err);
         });
     });
   }
-
 };
