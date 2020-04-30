@@ -7,7 +7,6 @@ module.exports = class Internal {
     this.address = _dsa.address;
     this.web3 = _dsa.web3;
     this.mode = _dsa.mode;
-    this.privateKey = _dsa.privateKey;
     this.publicAddress = _dsa.publicAddress;
   }
 
@@ -19,9 +18,15 @@ module.exports = class Internal {
     if (_t) return _t;
     else return console.error(`${_co} is invalid connector.`);
   }
-
+  
   /**
-   * returns the input interface required for cast()
+   * returns txObj for any calls
+   * * @param _d.from
+   * * @param _d.to
+   * * @param _d.value (optional)
+   * * @param _d.gas (optional)
+   * * @param _d.nonce (optional)
+   * * @param data calldata
    */
   async getTxObj(_d, data) {
     
@@ -42,17 +47,13 @@ module.exports = class Internal {
       .catch((err) => {
         throw err
       })
-    txObj.gas = _d.gas ? _d.gas : _gas
-
-    if (this.mode == "node") {
-      try {
-        txObj.nonce = await this.web3.eth.getTransactionCount(txObj.from)
-      } catch (err) {
-        return console.error(err)
-      }
-    }
+    txObj.gas = _d.gas ? _d.gas : (_gas * 1.3).toFixed(0) // increasing gas cost by 30% for margin
     if (_d.gasPrice) txObj.gasPrice = _d.gasPrice
-    console.log(txObj)
+    if (_d.nonce) txObj.nonce = _d.nonce
+
+    if (this.mode == "node" && !txObj.nonce) {
+      txObj.nonce = await this.web3.eth.getTransactionCount(txObj.from)
+    }
     return txObj
   }
 
@@ -129,9 +130,9 @@ module.exports = class Internal {
    * returns the estimate gas cost
    * @param _d.from the from address
    * @param _d.to the to address
-   * @param _d.abi the ABI interface
-   * @param _d.args the method arguments
-   * @param _d.value the call value
+   * @param {Object} _d.abi the ABI method single interface
+   * @param {Array} _d.args the method arguments
+   * @param _d.value the call ETH value
    */
   async estimateGas(_d) {
     let encodeHash = this.web3.eth.abi.encodeFunctionCall(_d.abi, _d.args);

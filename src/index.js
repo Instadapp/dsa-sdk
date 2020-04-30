@@ -2,6 +2,7 @@ const address = require("./constant/addresses.js");
 const ABI = require("./constant/abis.js");
 const Helpers = require("./helpers.js");
 const Internal = require("./internal.js");
+// const Account = require("./resolvers/account.js");
 const Balances = require("./resolvers/balances.js");
 const Compound = require("./resolvers/compound.js");
 const Maker = require("./resolvers/maker.js");
@@ -42,11 +43,11 @@ module.exports = class DSA {
     this.helpers = new Helpers(this);
     this.tokens = new Tokens(this);
     this.internal = new Internal(this);
-    
-    this.castHelper = new CastHelper(this);
 
+    this.castHelper = new CastHelper(this);
     this.txnHelper = new TxnHelper(this);
-    this.sendTxn = this.txnHelper.send
+
+    this.sendTxn = this.txnHelper.send // send transaction // node || browser
 
     this.erc20 = new ERC20(this);
     this.balances = new Balances(this);
@@ -55,7 +56,7 @@ module.exports = class DSA {
     this.instapool = new InstaPool(this);
     this.oasis = new Oasis(this);
 
-    // defining methods to simplify the calls for develoeprs
+    // defining methods to simplify the calls for frontend develoeprs
     this.transfer = this.erc20.transfer
     this.castEncoded = this.castHelper.encoded
     this.estimateCastGas = this.castHelper.estimateGas
@@ -84,6 +85,7 @@ module.exports = class DSA {
    * @param {address} _d.from (optional)
    * @param {number|string} _d.gasPrice (optional)
    * @param {number|string} _d.gas (optional)
+   * @param {number|string} _d.nonce (optional) txn nonce (mostly for node implementation)
    */
   async build(_d) {
     let _addr = await this.internal.getAddress();
@@ -99,10 +101,7 @@ module.exports = class DSA {
       this.address.core.index
     );
 
-    var callData = _c.methods
-      .build(_d.authority, _d.version, _d.origin)
-      .encodeABI();
-    
+    let callData = _c.methods.build(_d.authority, _d.version, _d.origin).encodeABI();
     let txObj = await this.internal.getTxObj(_d, callData);
     
     return new Promise((resolve, reject) => {
