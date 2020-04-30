@@ -43,9 +43,11 @@ module.exports = class Internal {
     txObj.gas = _d.gas
       ? _d.gas
       : ((await this.web3.eth.estimateGas(txObj)) * 1.3).toFixed(0); // increasing gas cost by 30% for margin
-    
+
     if (this.mode == "node") {
-      txObj.gasPrice = _d.gasPrice ? _d.gasPrice : String(this.web3.utils.toWei("1", "gwei")); // defaulted to 1 gwei.
+      txObj.gasPrice = _d.gasPrice
+        ? _d.gasPrice
+        : String(this.web3.utils.toWei("1", "gwei")); // defaulted to 1 gwei.
       txObj.nonce = _d.nonce
         ? _d.nonce
         : await this.web3.eth.getTransactionCount(txObj.from);
@@ -114,7 +116,9 @@ module.exports = class Internal {
    * returns the input interface required for cast()
    */
   async getAddress() {
-    if (this.mode == "node") return this.web3.eth.accounts.privateKeyToAccount(this.privateKey).address;
+    if (this.mode == "node")
+      return this.web3.eth.accounts.privateKeyToAccount(this.privateKey)
+        .address;
 
     // otherwise, browser
     let address = await this.web3.eth.getAccounts();

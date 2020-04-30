@@ -29,7 +29,10 @@ module.exports = class DSA {
     if (this.mode == "node") {
       if (!config.privateKey)
         return console.error("Private key is not defined.");
-      this.privateKey = config.privateKey.slice(0,2) != "0x" ? "0x" + config.privateKey : config.privateKey;
+      this.privateKey =
+        config.privateKey.slice(0, 2) != "0x"
+          ? "0x" + config.privateKey
+          : config.privateKey;
     }
 
     this.address = address;
