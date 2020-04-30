@@ -45,7 +45,7 @@ module.exports = class Maker {
     this.colInfo = colInfo;
   }
 
-  calStabilityRate(ilkRate) {
+  calRate(ilkRate) {
     ilkRate = Number(ilkRate) / 10 ** 27;
     return ilkRate ** 31545000 - 1;
   }
@@ -84,7 +84,7 @@ module.exports = class Maker {
               18
             );
             userVaults[_id].rate =
-              this.calStabilityRate(_userVaults[i][7]) * 100;
+              this.calRate(_userVaults[i][7]) * 100;
             var _price = this.helpers.divWithDec(_userVaults[i][8], 27);
             userVaults[_id].price = _price;
             userVaults[_id].status = _debt / (_col * _price);
@@ -115,7 +115,7 @@ module.exports = class Maker {
           Object.keys(this.colInfo).forEach((_col, i) => {
             _colInfo[_col] = {};
             _colInfo[_col].token = this.colInfo[_col].token;
-            _colInfo[_col].rate = this.calStabilityRate(res[i][0]) * 100; // in percent
+            _colInfo[_col].rate = this.calRate(res[i][0]) * 100; // in percent
             _colInfo[_col].price = res[i][1] / 1e27;
             _colInfo[_col].ratio = 1 / (res[i][2] / 1e27);
           });
@@ -126,4 +126,47 @@ module.exports = class Maker {
         });
     });
   }
+
+  async getDaiPosition(address) {
+    var _obj = {
+      protocol: "maker",
+      method: "getDaiPosition",
+      args: [address]
+    };
+
+    return new Promise(async (resolve, reject) => {
+      await this.dsa
+        .read(_obj)
+        .then((res) => {
+          var _dsrInfo = {
+            balance: res[0] / 1e18,
+            rate: calRate(res[1])
+          };
+          resolve(_dsrInfo);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  }
+
+  async getDaiRate() {
+    var _obj = {
+      protocol: "maker",
+      method: "getDsrRate",
+      args: []
+    };
+
+    return new Promise(async (resolve, reject) => {
+      await this.dsa
+        .read(_obj)
+        .then((res) => {
+          resolve({rate: calRate(res[0])});
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  }
+
 };
