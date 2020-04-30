@@ -2,7 +2,7 @@ const address = require("./constant/addresses.js");
 const ABI = require("./constant/abis.js");
 const Helpers = require("./helpers.js");
 const Internal = require("./internal.js");
-// const Account = require("./resolvers/account.js");
+const Account = require("./resolvers/account.js");
 const Balances = require("./resolvers/balances.js");
 const Compound = require("./resolvers/compound.js");
 const Maker = require("./resolvers/maker.js");
@@ -43,6 +43,7 @@ module.exports = class DSA {
     this.helpers = new Helpers(this);
     this.tokens = new Tokens(this);
     this.internal = new Internal(this);
+    this.account = new Account(this);
 
     this.castHelper = new CastHelper(this);
     this.txnHelper = new TxnHelper(this);
@@ -61,6 +62,10 @@ module.exports = class DSA {
     this.castEncoded = this.castHelper.encoded
     this.estimateCastGas = this.castHelper.estimateGas
     this.encodeCastABI = this.castHelper.encodeABI
+    this.count = this.account.count
+    this.getAccounts = this.account.getAccounts
+    this.getAuthById = this.account.getAuthById
+    this.getAuthByAddress = this.account.getAuthByAddress
 
   }
 
@@ -96,7 +101,7 @@ module.exports = class DSA {
     if (!_d.from) _d.from = _addr;
     _d.to = this.address.core.index;
 
-    var _c = await new this.web3.eth.Contract(
+    let _c = await new this.web3.eth.Contract(
       this.ABI.core.index,
       this.address.core.index
     );
@@ -112,103 +117,6 @@ module.exports = class DSA {
   }
 
   /**
-   * global number of DSAs
-   */
-  async count() {
-    var _c = new this.web3.eth.Contract(
-      this.ABI.core.list,
-      this.address.core.list
-    );
-    return new Promise((resolve, reject) => {
-      return _c.methods
-        .accounts()
-        .call({ from: this.address.genesis })
-        .then((count) => {
-          resolve(count);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
-  }
-
-  /**
-   * returns accounts in a simple array of objects for addresses owned by the address
-   * @param _authority the ethereum address
-   */
-  async getAccounts(_authority) {
-    if (!_authority) _authority = await this.internal.getAddress();
-    var _c = new this.web3.eth.Contract(
-      this.ABI.resolvers.core,
-      this.address.resolvers.core
-    );
-    return new Promise((resolve, reject) => {
-      return _c.methods
-        .getAuthorityDetails(_authority)
-        .call({ from: this.address.genesis })
-        .then((_d) => {
-          var _l = _d.IDs.length;
-          var accounts = [];
-          for (var i = 0; i < _l; i++) {
-            accounts.push({
-              id: _d.IDs[i],
-              address: _d.accounts[i],
-              version: _d.versions[i],
-            });
-          }
-          resolve(accounts);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
-  }
-
-  /**
-   * returns accounts in a simple array of objects
-   * @param _id the DSA number
-   */
-  async getAuthById(_id) {
-    var _c = new this.web3.eth.Contract(
-      this.ABI.resolvers.core,
-      this.address.resolvers.core
-    );
-    return new Promise((resolve, reject) => {
-      return _c.methods
-        .getIDAuthorities(_id)
-        .call({ from: this.address.genesis })
-        .then((data) => {
-          resolve(data);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
-  }
-
-  /**
-   * returns accounts in a simple array of objects
-   * @param _id the DSA address
-   */
-  async getAuthByAddress(_addr) {
-    var _c = new this.web3.eth.Contract(
-      this.ABI.resolvers.core,
-      this.address.resolvers.core
-    );
-    return new Promise((resolve, reject) => {
-      return _c.methods
-        .getAccountAuthorities(_addr)
-        .call({ from: this.address.genesis })
-        .then((data) => {
-          resolve(data);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
-  }
-
-  /**
    * execute all the spells
    * @param _d the spells instance
    * OR
@@ -219,6 +127,7 @@ module.exports = class DSA {
    * @param _d.value (optional)
    * @param _d.gasPrice (optional)
    * @param _d.gas (optional)
+   * @param {number|string} _d.nonce (optional) txn nonce (mostly for node implementation)
    */
   async cast(_d) {
     let _addr = await this.internal.getAddress();
@@ -226,12 +135,15 @@ module.exports = class DSA {
     if (!_d.to) _d.to = this.instance.address;
     if (!_d.from) _d.from = _addr;
     if (!_d.origin) _d.origin = this.instance.origin;
+    
     let _c = new this.web3.eth.Contract(
       this.ABI.core.account,
       this.instance.address
     );
-    var callData = _c.methods.cast(..._espell, _d.origin).encodeABI();
-    let txObj = await this.internal.getTxObj(_d, callData);
+
+    _d.callData = _c.methods.cast(..._espell, _d.origin).encodeABI();
+    let txObj = await this.internal.getTxObj(_d);
+
     return new Promise((resolve, reject) => {
       return this.sendTxn(txObj)
         .then((tx) => {
@@ -269,12 +181,12 @@ module.exports = class DSA {
   }
 
   /**
-   * to call read functions and get raw data return
+   * to call read functions and get raw data return (kind of a helper)
    */
   async read(_s) {
-    var _c = new this.web3.eth.Contract(
-      this.ABI.read[_s.protocol],
-      this.address.read[_s.protocol]
+    var _c = new this.dsa.web3.eth.Contract(
+      this.dsa.ABI.read[_s.protocol],
+      this.dsa.address.read[_s.protocol]
     );
     return new Promise(function (resolve, reject) {
       return _c.methods[_s.method](..._s.args)

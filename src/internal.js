@@ -28,32 +28,23 @@ module.exports = class Internal {
    * * @param _d.nonce (optional)
    * * @param data calldata
    */
-  async getTxObj(_d, data) {
-    
-    let txObj = {};
+  getTxObj(_d, data) {
+
     if (!_d.from) throw new Error("'from' is not defined.");
-    if (!data) throw new Error("'data' is not defined.");
+    if (!_d.callData) throw new Error("'calldata' is not defined.");
     if (!_d.to) throw new Error("'to' is not defined.");
-    if (data != "0x") txObj.data = data
+
+    let txObj = {}
     txObj.from = _d.from
     txObj.to = _d.to
+    txObj.data =_d.callData != "0x" ? _d.callData : "0x"
     txObj.value = _d.value ? _d.value : 0
 
-    let _gas = await this.web3.eth
-      .estimateGas(txObj)
-      .then((data) => {
-        return data
-      })
-      .catch((err) => {
-        throw err
-      })
-    txObj.gas = _d.gas ? _d.gas : (_gas * 1.3).toFixed(0) // increasing gas cost by 30% for margin
-    if (_d.gasPrice) txObj.gasPrice = _d.gasPrice
-    if (_d.nonce) txObj.nonce = _d.nonce
-
-    if (this.mode == "node" && !txObj.nonce) {
-      txObj.nonce = await this.web3.eth.getTransactionCount(txObj.from)
-    }
+    // need above 4 params to estimate the gas
+    txObj.gas = _d.gas ? _d.gas : (this.web3.eth.estimateGas(txObj) * 1.3).toFixed(0) // increasing gas cost by 30% for margin
+    txObj.gasPrice = _d.gasPrice ? _d.gasPrice : 1 // defaulted to 1 gwei
+    txObj.nonce = _d.nonce ? _d.nonce : await this.web3.eth.getTransactionCount(txObj.from) // defaulted to 1 gwei
+    
     return txObj
   }
 
