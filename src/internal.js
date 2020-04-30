@@ -6,6 +6,8 @@ module.exports = class Internal {
     this.ABI = _dsa.ABI;
     this.address = _dsa.address;
     this.web3 = _dsa.web3;
+    this._dsa = _dsa;
+    this.nonce = 0; // for backend nonce.
   }
 
   /**
@@ -15,6 +17,46 @@ module.exports = class Internal {
     const _t = this.address.connectors[_co];
     if (_t) return _t;
     else return console.error(`${_co} is invalid connector.`);
+  }
+
+  /**
+   * returns the input interface required for cast()
+   */
+  async getTxObj(_d, data) {
+    let txObj = {};
+    if (!_d.from) throw new Error("'from' is not defined.");
+    if (!data) throw new Error("'data' is not defined.");
+    if (!_d.to) throw new Error("'to' is not defined.");
+
+    if (data != "0x") txObj.data = data;
+    txObj.from = _d.from;
+    txObj.to = _d.to;
+    txObj.value = _d.value ? _d.value : 0;
+    let _gas = await this.web3.eth
+      .estimateGas(txObj)
+      .then((data) => {
+        return data;
+      })
+      .catch((err) => {
+        throw err;
+      });
+    txObj.gas = _d.gas ? _d.gas : _gas;
+    
+    if (this._dsa.mode == "node") {
+      let nonce = await this.web3.eth.getTransactionCount(txObj.from).then((data) => {
+        return data;
+      })
+      .catch((err) => {
+        throw err;
+      });
+      txObj.nonce = nonce + this.nonce;
+    } else {
+      txObj.nonce = 0
+    }
+    
+    console.log(txObj)
+    if (_d.gasPrice) txObj.gasPrice = _d.gasPrice;
+    return txObj;
   }
 
   /**
@@ -77,10 +119,16 @@ module.exports = class Internal {
    * returns the input interface required for cast()
    */
   async getAddress() {
-    let address = await this.web3.eth.getAccounts();
-    if (address.length == 0)
-      return console.error("No ethereum address detected!!!");
-    return address[0];
+    if (this._dsa.mode == "browser") {
+      let address = await this.web3.eth.getAccounts();
+      if (address.length == 0)
+        return console.error("No ethereum address detected!!!");
+      return address[0];
+    } else {
+      if (!this._dsa.privateKey) return console.error("Invaild private key!!!");
+      return this.web3.eth.accounts.privateKeyToAccount(this._dsa.privateKey)
+        .address;
+    }
   }
 
   /**

@@ -8,7 +8,7 @@ const Oasis = require("./resolvers/oasis.js");
 const ERC20 = require("./erc20.js");
 const address = require("./constant/addresses.js");
 const ABI = require("./constant/abis.js");
-const tokens = require("./resolvers/tokens.js");
+const Tokens = require("./resolvers/tokens.js");
 
 module.exports = class DSA {
   /**
@@ -19,9 +19,10 @@ module.exports = class DSA {
   constructor(config) {
     if (!config) config = {};
     this.web3 = config.web3 ? config.web3 : config;
+    this.mode = config.mode ? config.mode.toLowerCase() : "browser";
+    this.privateKey = this.mode == "node" ? config.privateKey : false;
     this.address = address;
     this.ABI = ABI;
-    this.tokens = tokens;
     this.instance = {
       id: 0,
       address: address.genesis,
@@ -29,6 +30,7 @@ module.exports = class DSA {
       origin: address.genesis,
     };
     this.helpers = new Helpers(this);
+    this.tokens = new Tokens(this);
     this.internal = new Internal(this);
     this.erc20 = new ERC20(this);
     this.balances = new Balances(this);
@@ -36,7 +38,6 @@ module.exports = class DSA {
     this.maker = new Maker(this);
     this.instapool = new InstaPool(this);
     this.oasis = new Oasis(this);
-
     // defining methods where we need web3 access
     this.transfer = this.erc20.transfer;
   }
@@ -70,16 +71,16 @@ module.exports = class DSA {
       this.ABI.core.index,
       this.address.core.index
     );
+    var callData = _c.methods
+      .build(_d.authority, _d.version, _d.origin)
+      .encodeABI();
+    let txObj = await this.internal.getTxObj(_d, callData);
+    let _dsa = this;
     return new Promise(function (resolve, reject) {
-      return _c.methods
-        .build(_d.authority, _d.version, _d.origin)
-        .send(_d)
-        .on("transactionHash", (txHash) => {
-          resolve(txHash);
-        })
-        .on("error", (err) => {
-          reject(err);
-        });
+      return _dsa
+        .sendTransaction(txObj)
+        .then((tx) => resolve(tx))
+        .catch((err) => reject(err));
     });
   }
 
@@ -202,16 +203,17 @@ module.exports = class DSA {
       this.ABI.core.account,
       this.instance.address
     );
-    return new Promise(function (resolve, reject) {
-      return _c.methods
-        .cast(..._espell, _d.origin)
-        .send(_d)
-        .on("transactionHash", (txHash) => {
-          resolve(txHash);
+
+    var callData = _c.methods.cast(..._espell, _d.origin).encodeABI();
+    let txObj = await this.internal.getTxObj(_d, callData);
+    let _dsa = this;
+    return new Promise((resolve, reject) => {
+      return _dsa
+        .sendTransaction(txObj)
+        .then((tx) => {
+          resolve(tx);
         })
-        .on("error", (err) => {
-          reject(err);
-        });
+        .catch((err) => reject(err));
     });
   }
 
@@ -322,6 +324,45 @@ module.exports = class DSA {
         .catch((err) => {
           reject(err);
         });
+    });
+  }
+
+  /**
+   * to Send Transaction functions and get raw data return
+   */
+  async sendTransaction(_h) {
+    let _dsa = this;
+    return new Promise(function (resolve, reject) {
+      _dsa.web3.eth.getTransactionCount(_h.from).then((txCount) => {
+        _h.nonce = txCount + _dsa.internal.nonce;
+        // _h.to = _h.from // For testing
+        // delete _h.data; // For testing
+        if (_dsa.mode == "node") {
+          _dsa.web3.eth.accounts
+            .signTransaction(_h, _dsa.privateKey)
+            .then((rawTx) => {
+              _dsa.web3.eth
+                .sendSignedTransaction(rawTx.rawTransaction)
+                .on("transactionHash", (txHash) => {
+                  _dsa.internal.nonce++;
+                  resolve(txHash);
+                })
+                .on("error", function (error) {
+                  reject(error);
+                });
+            });
+        } else {
+          _dsa.web3.eth
+            .sendTransaction(_h)
+            .on("transactionHash", (txHash) => {
+              _dsa.internal.nonce++;
+              resolve(txHash);
+            })
+            .on("error", function (error) {
+              reject(error);
+            });
+        }
+      });
     });
   }
 };
