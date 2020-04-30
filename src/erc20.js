@@ -42,7 +42,8 @@ module.exports = class Token {
       _d.token.toLowerCase() == this.tokens.info.eth.address
     ) {
       _d.value = _d.amount;
-      txObj = await this.internal.getTxObj(_d, "0x");
+      _d.callData = "0x";
+      txObj = await this.internal.getTxObj(_d);
     } else {
       _d.toAddr = _d.to;
       _d.to = this.helpers.getAddress(_d.token);
@@ -50,10 +51,10 @@ module.exports = class Token {
         this.ABI.basic.erc20,
         this.helpers.getAddress(_d.token)
       );
-      var callData = _c.methods
+      _d.callData = _c.methods
         .transfer(_d.toAddr, this.helpers.bigNumInString(_d.amount))
         .encodeABI();
-      txObj = await this.internal.getTxObj(_d, callData);
+      txObj = await this.internal.getTxObj(_d);
     }
     return new Promise((resolve, reject) => {
       return _dsa
@@ -95,8 +96,8 @@ module.exports = class Token {
         this.ABI.basic.erc20,
         this.helpers.getAddress(_d.token)
       );
-      var callData = _c.methods.approve(_d.toAddr, _d.amount).encodeABI();
-      txObj = await this.internal.getTxObj(_d, callData);
+      _d.callData = _c.methods.approve(_d.toAddr, _d.amount).encodeABI();
+      txObj = await this.internal.getTxObj(_d);
     }
     return new Promise((resolve, reject) => {
       return _dsa

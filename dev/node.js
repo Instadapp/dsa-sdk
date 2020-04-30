@@ -8,12 +8,12 @@ const dsa = new DSA({
     web3: web3,
     mode: "node",
     privateKey: process.env.PRIVATE_KEY,
-    publicAddress: process.env.PUBLIC_ADDRESS
 });
 
+console.log(dsa.privateKey)
+dsa.internal.getAddress().then(console.log)
 
-// const walletAddress = '0x981C549A74Dc36Bd82fEd9097Bc19404E8db14f3';
-// dsa.internal.getAddress().then(console.log)
+// const walletAddress = '0x73df02AABd68E6b7A6d7f314b1eb5A5424d2BFDF';
 
 // Test 0
 // dsa.build().then(console.log).catch(console.log)

@@ -21,7 +21,6 @@ module.exports = class DSA {
    * @param config.web3
    * @param config.mode (optional) in case of "node"
    * @param config.privateKey (optional) private keys, in case of "node"
-   * @param config.publicAddress (optional) public ethereum address associated with private keys, in case of "node"
    */
   constructor(config) {
     if (!config) config = {};
@@ -30,10 +29,7 @@ module.exports = class DSA {
     if (this.mode == "node") {
       if (!config.privateKey)
         return console.error("Private key is not defined.");
-      if (!config.publicAddress)
-        return console.error("Public address is not defined.");
-      this.privateKey = config.privateKey;
-      this.publicAddress = config.publicAddress;
+      this.privateKey = config.privateKey.slice(0,2) != "0x" ? "0x" + config.privateKey : config.privateKey;
     }
 
     this.address = address;
