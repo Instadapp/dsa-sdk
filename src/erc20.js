@@ -25,51 +25,42 @@ module.exports = class Token {
    */
   async transfer(_d) {
     let _addr = await this.internal.getAddress();
-    let web3 = this.web3;
+    let _dsa;
     if (!_d.token) throw new Error("'token' is not defined.");
     if (!_d.to) {
-      let _dsa = !this.dsa ? this : this.dsa;
+      _dsa = !this.dsa ? this : this.dsa;
       _d.to = _dsa.instance.address;
       if (_d.to == _dsa.address.genesis)
         throw new Error("'to' is not defined and instance is not set.");
     }
     if (!_d.amount) throw new Error("'amount' is not defined");
     if (!_d.from) _d.from = _addr;
+
+    let txObj;
     if (
       _d.token.toLowerCase() == "eth" ||
       _d.token.toLowerCase() == this.tokens.info.eth.address
     ) {
-      return new Promise((resolve, reject) => {
-        return web3.eth
-          .sendTransaction({
-            from: _d.from,
-            to: _d.to,
-            value: _d.amount,
-          })
-          .on("transactionHash", (txHash) => {
-            resolve(txHash);
-          })
-          .on("error", (err) => {
-            reject(err);
-          });
-      });
+      _d.value = _d.amount;
+      txObj = await this.internal.getTxObj(_d, "0x");
     } else {
-      var _c = await new web3.eth.Contract(
+      _d.toAddr = _d.to;
+      _d.to = this.helpers.getAddress(_d.token);
+      var _c = await new this.web3.eth.Contract(
         this.ABI.basic.erc20,
         this.helpers.getAddress(_d.token)
       );
-      return new Promise((resolve, reject) => {
-        return _c.methods
-          .transfer(_d.to, this.helpers.bigNumInString(_d.amount))
-          .send(_d)
-          .on("transactionHash", (txHash) => {
-            resolve(txHash);
-          })
-          .on("error", (err) => {
-            reject(err);
-          });
-      });
+      var callData = _c.methods
+        .transfer(_d.toAddr, this.helpers.bigNumInString(_d.amount))
+        .encodeABI();
+      txObj = await this.internal.getTxObj(_d, callData);
     }
+    return new Promise((resolve, reject) => {
+      return _dsa
+        .sendTxn(txObj)
+        .then((tx) => resolve(tx))
+        .catch((err) => reject(err));
+    });
   }
 
   /**
@@ -83,36 +74,36 @@ module.exports = class Token {
    */
   async approve(_d) {
     let _addr = await this.internal.getAddress();
-    let web3 = this.web3;
+    let _dsa = this.dsa;
     if (!_d.token) throw new Error("'token' is not defined.");
     if (!_d.to) throw new Error("'to' address is not defined");
     if (!_d.amount) throw new Error("'amount' is not defined");
     if (!_d.from) _d.from = _addr;
 
+    let txObj;
     if (
       _d.token.toLowerCase() == "eth" ||
       _d.token.toLowerCase() == this.tokens.info.eth.address
     ) {
       return new Promise((resolve, reject) => {
-        resolve("ETH does not require approve.");
+        reject("ETH does not require approve.");
       });
     } else {
-      var _c = await new web3.eth.Contract(
+      _d.toAddr = _d.to;
+      _d.to = this.helpers.getAddress(_d.token);
+      var _c = await new this.web3.eth.Contract(
         this.ABI.basic.erc20,
         this.helpers.getAddress(_d.token)
       );
-      return new Promise((resolve, reject) => {
-        return _c.methods
-          .approve(_d.to, _d.amount)
-          .send(_d)
-          .on("transactionHash", (txHash) => {
-            resolve(txHash);
-          })
-          .on("error", (err) => {
-            reject(err);
-          });
-      });
+      var callData = _c.methods.approve(_d.toAddr, _d.amount).encodeABI();
+      txObj = await this.internal.getTxObj(_d, callData);
     }
+    return new Promise((resolve, reject) => {
+      return _dsa
+        .sendTxn(txObj)
+        .then((tx) => resolve(tx))
+        .catch((err) => reject(err));
+    });
   }
 
   /**

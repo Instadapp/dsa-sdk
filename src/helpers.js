@@ -1,6 +1,5 @@
 module.exports = class Helpers {
   constructor(_dsa) {
-    this.tokens = _dsa.tokens;
     this.web3 = _dsa.web3;
   }
 
@@ -30,10 +29,11 @@ module.exports = class Helpers {
     if (isAddress) {
       return this.web3.utils.toChecksumAddress(token.toLowerCase());
     } else {
-      if (Object.keys(this.tokens.info).indexOf(token.toLowerCase()) == -1)
+      let tokenInfo = require("./constant/tokensInfo.json");
+      if (Object.keys(tokenInfo).indexOf(token.toLowerCase()) == -1)
         throw new Error("'token' symbol not found.");
       return this.web3.utils.toChecksumAddress(
-        this.tokens.info[token.toLowerCase()].address
+        tokenInfo[token.toLowerCase()].address
       );
     }
   }

@@ -1,11 +1,13 @@
 module.exports = class Internal {
   /**
-   * @param config.web3
+   * @param {Object} _dsa the dsa instance to access data stores
    */
   constructor(_dsa) {
     this.ABI = _dsa.ABI;
     this.address = _dsa.address;
     this.web3 = _dsa.web3;
+    this.mode = _dsa.mode;
+    this.publicAddress = _dsa.publicAddress;
   }
 
   /**
@@ -15,6 +17,41 @@ module.exports = class Internal {
     const _t = this.address.connectors[_co];
     if (_t) return _t;
     else return console.error(`${_co} is invalid connector.`);
+  }
+
+  /**
+   * returns txObj for any calls
+   * * @param _d.from
+   * * @param _d.to
+   * * @param _d.callData
+   * * @param _d.value (optional)
+   * * @param _d.gas (optional)
+   * * @param _d.gasPrice (optional)
+   * * @param _d.nonce (optional) mostly for "node" mode
+   */
+  async getTxObj(_d) {
+    if (!_d.from) throw new Error("'from' is not defined.");
+    if (!_d.callData) throw new Error("'calldata' is not defined.");
+    if (!_d.to) throw new Error("'to' is not defined.");
+
+    let txObj = {};
+    txObj.from = _d.from;
+    txObj.to = _d.to;
+    txObj.data = _d.callData != "0x" ? _d.callData : "0x";
+    txObj.value = _d.value ? _d.value : 0;
+
+    if (this.mode == "node") {
+      // need above 4 params to estimate the gas
+      txObj.gas = _d.gas
+        ? _d.gas
+        : ((await this.web3.eth.estimateGas(txObj)) * 1.3).toFixed(0); // increasing gas cost by 30% for margin
+      txObj.gasPrice = _d.gasPrice ? _d.gasPrice : 1; // defaulted to 1 gwei
+      txObj.nonce = _d.nonce
+        ? _d.nonce
+        : await this.web3.eth.getTransactionCount(txObj.from); // defaulted to 1 gwei
+    }
+
+    return txObj;
   }
 
   /**
@@ -77,9 +114,12 @@ module.exports = class Internal {
    * returns the input interface required for cast()
    */
   async getAddress() {
+    if (this.mode == "node") return this.publicAddress;
+
+    // otherwise, browser
     let address = await this.web3.eth.getAccounts();
     if (address.length == 0)
-      return console.error("No ethereum address detected!!!");
+      return console.log("No ethereum address detected.");
     return address[0];
   }
 
@@ -87,9 +127,9 @@ module.exports = class Internal {
    * returns the estimate gas cost
    * @param _d.from the from address
    * @param _d.to the to address
-   * @param _d.abi the ABI interface
-   * @param _d.args the method arguments
-   * @param _d.value the call value
+   * @param {Object} _d.abi the ABI method single interface
+   * @param {Array} _d.args the method arguments
+   * @param _d.value the call ETH value
    */
   async estimateGas(_d) {
     let encodeHash = this.web3.eth.abi.encodeFunctionCall(_d.abi, _d.args);

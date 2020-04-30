@@ -1,27 +1,43 @@
+const address = require("./constant/addresses.js");
+const ABI = require("./constant/abis.js");
 const Helpers = require("./helpers.js");
 const Internal = require("./internal.js");
+const Account = require("./resolvers/account.js");
 const Balances = require("./resolvers/balances.js");
 const Compound = require("./resolvers/compound.js");
 const Maker = require("./resolvers/maker.js");
 const InstaPool = require("./resolvers/instapool.js");
 const Oasis = require("./resolvers/oasis.js");
 const ERC20 = require("./erc20.js");
-const address = require("./constant/addresses.js");
-const ABI = require("./constant/abis.js");
-const tokens = require("./resolvers/tokens.js");
+const Tokens = require("./resolvers/tokens.js");
+
+const CastHelper = require("./helpers/cast.js");
+const TxnHelper = require("./helpers/txn.js");
 
 module.exports = class DSA {
   /**
    * @param config // === web3
    * OR
    * @param config.web3
+   * @param config.mode (optional) in case of "node"
+   * @param config.privateKey (optional) private keys, in case of "node"
+   * @param config.publicAddress (optional) public ethereum address associated with private keys, in case of "node"
    */
   constructor(config) {
     if (!config) config = {};
     this.web3 = config.web3 ? config.web3 : config;
+    this.mode = config.mode ? config.mode.toLowerCase() : "browser";
+    if (this.mode == "node") {
+      if (!config.privateKey)
+        return console.error("Private key is not defined.");
+      if (!config.publicAddress)
+        return console.error("Public address is not defined.");
+      this.privateKey = config.privateKey;
+      this.publicAddress = config.publicAddress;
+    }
+
     this.address = address;
     this.ABI = ABI;
-    this.tokens = tokens;
     this.instance = {
       id: 0,
       address: address.genesis,
@@ -29,7 +45,15 @@ module.exports = class DSA {
       origin: address.genesis,
     };
     this.helpers = new Helpers(this);
+    this.tokens = new Tokens(this);
     this.internal = new Internal(this);
+    this.account = new Account(this);
+
+    this.castHelper = new CastHelper(this);
+    this.txnHelper = new TxnHelper(this);
+
+    this.sendTxn = this.txnHelper.send; // send transaction // node || browser
+
     this.erc20 = new ERC20(this);
     this.balances = new Balances(this);
     this.compound = new Compound(this);
@@ -37,18 +61,30 @@ module.exports = class DSA {
     this.instapool = new InstaPool(this);
     this.oasis = new Oasis(this);
 
-    // defining methods where we need web3 access
+    // defining methods to simplify the calls for frontend develoeprs
     this.transfer = this.erc20.transfer;
+    this.castEncoded = this.castHelper.encoded;
+    this.estimateCastGas = this.castHelper.estimateGas;
+    this.encodeCastABI = this.castHelper.encodeABI;
+    this.count = this.account.count;
+    this.getAccounts = this.account.getAccounts;
+    this.getAuthById = this.account.getAuthById;
+    this.getAuthByAddress = this.account.getAuthByAddress;
   }
 
   /**
    * sets the current DSA ID
+   * @param {address} _o.id DSA ID
+   * @param {address} _o.origin DSA address
+   * @param {address} _o.version DSA version
+   * @param {address} _o.origin origin source
    */
   setInstance(_o) {
-    if (_o.id) this.instance.id = _o.id; // DSA ID
+    if (_o.id) this.instance.id = _o.id;
     if (_o.address) this.instance.address = _o.address;
     if (_o.version) this.instance.version = _o.version;
     if (_o.origin) this.instance.origin = _o.origin;
+    return true;
   }
 
   /**
@@ -58,6 +94,7 @@ module.exports = class DSA {
    * @param {address} _d.from (optional)
    * @param {number|string} _d.gasPrice (optional)
    * @param {number|string} _d.gas (optional)
+   * @param {number|string} _d.nonce (optional) txn nonce (mostly for node implementation)
    */
   async build(_d) {
     let _addr = await this.internal.getAddress();
@@ -66,117 +103,22 @@ module.exports = class DSA {
     if (!_d.version) _d.version = 1;
     if (!_d.origin) _d.origin = this.instance.origin;
     if (!_d.from) _d.from = _addr;
-    var _c = await new this.web3.eth.Contract(
+    _d.to = this.address.core.index;
+
+    let _c = await new this.web3.eth.Contract(
       this.ABI.core.index,
       this.address.core.index
     );
-    return new Promise(function (resolve, reject) {
-      return _c.methods
-        .build(_d.authority, _d.version, _d.origin)
-        .send(_d)
-        .on("transactionHash", (txHash) => {
-          resolve(txHash);
-        })
-        .on("error", (err) => {
-          reject(err);
-        });
-    });
-  }
 
-  /**
-   * global number of DSAs
-   */
-  async count() {
-    var _c = new this.web3.eth.Contract(
-      this.ABI.core.list,
-      this.address.core.list
-    );
-    return new Promise((resolve, reject) => {
-      return _c.methods
-        .accounts()
-        .call({ from: this.address.genesis })
-        .then((count) => {
-          resolve(count);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
-  }
+    _d.callData = _c.methods
+      .build(_d.authority, _d.version, _d.origin)
+      .encodeABI();
 
-  /**
-   * returns accounts in a simple array of objects for addresses owned by the address
-   * @param _authority the ethereum address
-   */
-  async getAccounts(_authority) {
-    if (!_authority) _authority = await this.internal.getAddress();
-    var _c = new this.web3.eth.Contract(
-      this.ABI.resolvers.core,
-      this.address.resolvers.core
-    );
-    return new Promise((resolve, reject) => {
-      return _c.methods
-        .getAuthorityDetails(_authority)
-        .call({ from: this.address.genesis })
-        .then((_d) => {
-          var _l = _d.IDs.length;
-          var accounts = [];
-          for (var i = 0; i < _l; i++) {
-            accounts.push({
-              id: _d.IDs[i],
-              address: _d.accounts[i],
-              version: _d.versions[i],
-            });
-          }
-          resolve(accounts);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
-  }
-
-  /**
-   * returns accounts in a simple array of objects
-   * @param _id the DSA number
-   */
-  async getAuthById(_id) {
-    var _c = new this.web3.eth.Contract(
-      this.ABI.resolvers.core,
-      this.address.resolvers.core
-    );
-    return new Promise((resolve, reject) => {
-      return _c.methods
-        .getIDAuthorities(_id)
-        .call({ from: this.address.genesis })
-        .then((data) => {
-          resolve(data);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
-  }
-
-  /**
-   * returns accounts in a simple array of objects
-   * @param _id the DSA address
-   */
-  async getAuthByAddress(_addr) {
-    var _c = new this.web3.eth.Contract(
-      this.ABI.resolvers.core,
-      this.address.resolvers.core
-    );
-    return new Promise((resolve, reject) => {
-      return _c.methods
-        .getAccountAuthorities(_addr)
-        .call({ from: this.address.genesis })
-        .then((data) => {
-          resolve(data);
-        })
-        .catch((err) => {
-          reject(err);
-        });
+    return new Promise(async (resolve, reject) => {
+      let txObj = await this.internal.getTxObj(_d);
+      return this.sendTxn(txObj)
+        .then((tx) => resolve(tx))
+        .catch((err) => reject(err));
     });
   }
 
@@ -191,6 +133,7 @@ module.exports = class DSA {
    * @param _d.value (optional)
    * @param _d.gasPrice (optional)
    * @param _d.gas (optional)
+   * @param {number|string} _d.nonce (optional) txn nonce (mostly for node implementation)
    */
   async cast(_d) {
     let _addr = await this.internal.getAddress();
@@ -198,84 +141,22 @@ module.exports = class DSA {
     if (!_d.to) _d.to = this.instance.address;
     if (!_d.from) _d.from = _addr;
     if (!_d.origin) _d.origin = this.instance.origin;
-    var _c = new this.web3.eth.Contract(
+
+    let _c = new this.web3.eth.Contract(
       this.ABI.core.account,
       this.instance.address
     );
-    return new Promise(function (resolve, reject) {
-      return _c.methods
-        .cast(..._espell, _d.origin)
-        .send(_d)
-        .on("transactionHash", (txHash) => {
-          resolve(txHash);
+
+    _d.callData = _c.methods.cast(..._espell, _d.origin).encodeABI();
+
+    return new Promise(async (resolve, reject) => {
+      let txObj = await this.internal.getTxObj(_d);
+      return this.sendTxn(txObj)
+        .then((tx) => {
+          resolve(tx);
         })
-        .on("error", (err) => {
-          reject(err);
-        });
+        .catch((err) => reject(err));
     });
-  }
-
-  /**
-   * returns cast encoded data
-   * @param _d.connector the from address
-   * @param _d.method the to address
-   */
-  castEncoded(_d) {
-    var _internal = this.internal;
-    var _args = _internal.encodeSpells(_d);
-    return {
-      targets: _args[0],
-      spells: _args[1],
-    };
-  }
-
-  /**
-   * returns the estimate gas cost
-   * @param _d.connector the from address
-   * @param _d.method the to address
-   * @param _d.args the ABI interface
-   */
-  async estimateCastGas(_d) {
-    var _internal = this.internal;
-    var _args = _internal.encodeSpells(_d);
-    _args.push(this.instance.origin);
-    if (!_d.to) _d.to = this.instance.address;
-    if (!_d.from) _d.from = await _internal.getAddress();
-    if (!_d.value) _d.value = "0";
-    var _abi = _internal.getInterface("core", "account", "cast");
-    var _obj = {
-      abi: _abi,
-      args: _args,
-      from: _d.from,
-      to: _d.to,
-      value: _d.value,
-    };
-    return new Promise(function (resolve, reject) {
-      _internal
-        .estimateGas(_obj)
-        .then((gas) => {
-          resolve(gas);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
-  }
-
-  /**
-   * returns the encoded cast ABI byte code to send via a transaction or call.
-   * @param _d the spells instance
-   * OR
-   * @param _d.spells the spells instance
-   * @param _d.to (optional) the address of the smart contract to call
-   * @param _d.origin (optional) the transaction origin source
-   */
-  encodeCastABI(_d) {
-    let _enodedSpell = this.internal.encodeSpells(_d);
-    if (!_d.to) _d.to = this.instance.address;
-    if (!_d.origin) _d.origin = this.instance.origin;
-    let _contract = new this.web3.eth.Contract(this.ABI.core.account, _d.to);
-    return _contract.methods.cast(..._enodedSpell, _d.origin).encodeABI();
   }
 
   /**
@@ -306,12 +187,12 @@ module.exports = class DSA {
   }
 
   /**
-   * to call read functions and get raw data return
+   * to call read functions and get raw data return (kind of a helper)
    */
   async read(_s) {
-    var _c = new this.web3.eth.Contract(
-      this.ABI.read[_s.protocol],
-      this.address.read[_s.protocol]
+    var _c = new this.dsa.web3.eth.Contract(
+      this.dsa.ABI.read[_s.protocol],
+      this.dsa.address.read[_s.protocol]
     );
     return new Promise(function (resolve, reject) {
       return _c.methods[_s.method](..._s.args)
