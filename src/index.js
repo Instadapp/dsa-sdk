@@ -190,9 +190,9 @@ module.exports = class DSA {
    * to call read functions and get raw data return (kind of a helper)
    */
   async read(_s) {
-    var _c = new this.dsa.web3.eth.Contract(
-      this.dsa.ABI.read[_s.protocol],
-      this.dsa.address.read[_s.protocol]
+    var _c = new this.web3.eth.Contract(
+      this.ABI.read[_s.protocol],
+      this.address.read[_s.protocol]
     );
     return new Promise((resolve, reject) => {
       return _c.methods[_s.method](..._s.args)
