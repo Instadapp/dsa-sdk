@@ -131,7 +131,7 @@ module.exports = class Token {
         this.ABI.basic.erc20,
         this.helpers.getAddress(_d.token)
       );
-      return new Promise(function (resolve, reject) {
+      return new Promise((resolve, reject) => {
         return _c.methods
           .allowance(_d.from, _d.to)
           .call()

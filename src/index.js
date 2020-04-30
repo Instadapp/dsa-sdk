@@ -194,7 +194,7 @@ module.exports = class DSA {
       this.dsa.ABI.read[_s.protocol],
       this.dsa.address.read[_s.protocol]
     );
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
       return _c.methods[_s.method](..._s.args)
         .call()
         .then((res) => {

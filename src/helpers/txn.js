@@ -27,7 +27,7 @@ module.exports = class TxnHelper {
               .on("transactionHash", (txHash) => {
                 resolve(txHash);
               })
-              .on("error", function (error) {
+              .on("error", (error) => {
                 reject(error);
               });
           });
@@ -37,7 +37,7 @@ module.exports = class TxnHelper {
           .on("transactionHash", (txHash) => {
             resolve(txHash);
           })
-          .on("error", function (error) {
+          .on("error", (error) => {
             reject(error);
           });
       }

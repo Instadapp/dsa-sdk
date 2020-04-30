@@ -46,7 +46,7 @@ module.exports = class CastHelper {
       to: _d.to,
       value: _d.value,
     };
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
       _internal
         .estimateGas(_obj)
         .then((gas) => {

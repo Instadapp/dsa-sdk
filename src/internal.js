@@ -134,7 +134,7 @@ module.exports = class Internal {
   async estimateGas(_d) {
     let encodeHash = this.web3.eth.abi.encodeFunctionCall(_d.abi, _d.args);
     let _web3 = this.web3;
-    return new Promise(async function (resolve, reject) {
+    return new Promise(async (resolve, reject) => {
       await _web3.eth
         .estimateGas({
           from: _d.from,
