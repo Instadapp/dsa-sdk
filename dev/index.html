@@ -23,11 +23,11 @@
           InitWeb3()
       })
  
-    $( window ).on( "load", async function(e) {
+      $(window).on( "load", async function(e) {
         e.preventDefault();
         await InitWeb3()
-        window.dsa = new DSA (window.web3)
-    });
+        window.dsa = new DSA(window.web3)
+      });
     </script>
 
   </body>

@@ -14,7 +14,7 @@ const dsa = new DSA({
 // dsa.internal.getAddress().then(console.log)
 
 // Test 0
-dsa.build().then(console.log).catch(console.log)
+// dsa.build().then(console.log).catch(console.log)
 
 // // Test 1
 // let spells = dsa.Spell();

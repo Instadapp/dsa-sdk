@@ -19,6 +19,9 @@ module.exports = class DSA {
    * @param config // === web3
    * OR
    * @param config.web3
+   * @param config.mode (optional) in case of "node"
+   * @param config.privateKey (optional) private keys, in case of "node"
+   * @param config.publicAddress (optional) public ethereum address associated with private keys, in case of "node"
    */
   constructor(config) {
     
@@ -81,6 +84,7 @@ module.exports = class DSA {
     if (_o.address) this.instance.address = _o.address;
     if (_o.version) this.instance.version = _o.version;
     if (_o.origin) this.instance.origin = _o.origin;
+    return true;
   }
 
   /**
@@ -106,8 +110,8 @@ module.exports = class DSA {
       this.address.core.index
     );
 
-    let callData = _c.methods.build(_d.authority, _d.version, _d.origin).encodeABI();
-    let txObj = await this.internal.getTxObj(_d, callData);
+    _d.callData = _c.methods.build(_d.authority, _d.version, _d.origin).encodeABI();
+    let txObj = await this.internal.getTxObj(_d);
     
     return new Promise((resolve, reject) => {
       return this.sendTxn(txObj)
