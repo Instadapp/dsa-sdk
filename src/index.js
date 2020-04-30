@@ -113,9 +113,9 @@ module.exports = class DSA {
     _d.callData = _c.methods
       .build(_d.authority, _d.version, _d.origin)
       .encodeABI();
-    let txObj = await this.internal.getTxObj(_d);
 
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
+      let txObj = await this.internal.getTxObj(_d);
       return this.sendTxn(txObj)
         .then((tx) => resolve(tx))
         .catch((err) => reject(err));
@@ -148,9 +148,9 @@ module.exports = class DSA {
     );
 
     _d.callData = _c.methods.cast(..._espell, _d.origin).encodeABI();
-    let txObj = await this.internal.getTxObj(_d);
 
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
+      let txObj = await this.internal.getTxObj(_d);
       return this.sendTxn(txObj)
         .then((tx) => {
           resolve(tx);
