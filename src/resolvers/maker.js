@@ -29,6 +29,16 @@ var colInfo = {
     typeBytes:
       "0x555344432d410000000000000000000000000000000000000000000000000000",
   },
+  "WBTC-A": {
+    token: "WBTC",
+    ratio: 2 / 3,
+    joinAddr: "0xBF72Da2Bd84c5170618Fbe5914B0ECA9638d5eb5",
+    addr: "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+    stabiltyRate: 0,
+    price: 0,
+    typeBytes:
+      "0x574254432d410000000000000000000000000000000000000000000000000000",
+  }
 };
 
 module.exports = class Maker {
