@@ -72,18 +72,33 @@ module.exports = class DSA {
   }
 
   /**
-   * sets the current DSA ID
-   * @param {address} _o.id DSA ID
-   * @param {address} _o.origin DSA address
-   * @param {address} _o.version DSA version
-   * @param {address} _o.origin origin source
+   * sets the current DSA ID instance
    */
   setInstance(_o) {
-    if (_o.id) this.instance.id = _o.id;
+    if (web3.utils.isAddress(_o)) {
+      this.instance.address = _o;
+      return true;
+    }
+    if (!_o.address) return console.error("DSA address is not defined."); // address is not optional
+
     if (_o.address) this.instance.address = _o.address;
+    if (_o.id) this.instance.id = _o.id;
     if (_o.version) this.instance.version = _o.version;
     if (_o.origin) this.instance.origin = _o.origin;
     return true;
+  }
+
+  /**
+   * sets the current DSA ID instance
+   * @param {address} _o DSA address
+   * OR
+   * @param {address} _o.id DSA ID
+   * @param {address} _o.address DSA address
+   * @param {address} _o.version DSA version
+   * @param {address} _o.origin (optional) origin source
+   */
+  setAccount(_o) {
+    return setInstance(_o)
   }
 
   /**
