@@ -38,7 +38,7 @@ var colInfo = {
     price: 0,
     typeBytes:
       "0x574254432d410000000000000000000000000000000000000000000000000000",
-  }
+  },
 };
 
 module.exports = class Maker {
