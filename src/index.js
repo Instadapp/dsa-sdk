@@ -77,7 +77,7 @@ module.exports = class DSA {
    * sets the current DSA ID instance
    */
   setInstance(_o) {
-    if (web3.utils.isAddress(_o)) {
+    if (this.web3.utils.isAddress(_o)) {
       this.instance.address = _o;
       return true;
     }
