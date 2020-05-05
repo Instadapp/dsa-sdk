@@ -10,8 +10,8 @@ const dsa = new DSA({
     privateKey: process.env.PRIVATE_KEY,
 });
 
-console.log(dsa.privateKey)
-dsa.internal.getAddress().then(console.log)
+// console.log(dsa.privateKey)
+// dsa.internal.getAddress().then(console.log)
 
 // const walletAddress = '0x73df02AABd68E6b7A6d7f314b1eb5A5424d2BFDF';
 
@@ -62,3 +62,4 @@ dsa.internal.getAddress().then(console.log)
 // dsa.maker.getCollateralInfo().then(console.log)
 // dsa.compound.getPosition(walletAddress, "token").then(console.log)
 // dsa.balances.getBalances(walletAddress).then(console.log)
+// dsa.kyber.getBuyAmount("usdc", "dai", "100", "1").then(console.log)

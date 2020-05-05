@@ -15,6 +15,7 @@ module.exports = {
     maker: "0x58Bbb677296B6d1B596288B31Abb928492400fBF",
     instapool: "0x6d11A71575C34eB7b5E22949fAfCd49A2FA2A8F9",
     oasis: "0xE554c84c030bd5e850cDbd17f6583818b8dE5b1F",
+    kyber: "0x7043FC2E21865c091EEaE37C38E3d82BcCDF5D5C",
   },
   resolvers: {
     core: "0x37D60F60fcDeA9f4Dcf3fC1799fE4df8e096aa3c",
@@ -22,6 +23,7 @@ module.exports = {
     compound: "0x0f5EB292AE3822f13B1479e37ffE3fff795D220a",
     maker: "0x3dF605ca85E8d677C8f6E2665EbcdDbd801Ee9f9",
     oasis: "0x95E031D9A16eb7cb440c56076CBE07144C2233EA",
+    kyber: "0x8240b601d9B565e2BefaA3DA82Cc984E76cB3499",
   },
   read: {
     core: "0x37D60F60fcDeA9f4Dcf3fC1799fE4df8e096aa3c",
@@ -29,5 +31,6 @@ module.exports = {
     compound: "0x0f5EB292AE3822f13B1479e37ffE3fff795D220a",
     maker: "0x3dF605ca85E8d677C8f6E2665EbcdDbd801Ee9f9",
     oasis: "0x95E031D9A16eb7cb440c56076CBE07144C2233EA",
+    kyber: "0x8240b601d9B565e2BefaA3DA82Cc984E76cB3499",
   },
 };
