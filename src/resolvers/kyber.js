@@ -1,17 +1,17 @@
 module.exports = class Kyber {
-    /**
-     * @param {Object} _dsa the dsa instance to access data stores
-     */
-    constructor(_dsa) {
-      this.ABI = _dsa.ABI;
-      this.address = _dsa.address;
-      this.tokens = _dsa.tokens;
-      this.web3 = _dsa.web3;
-      this.instance = _dsa.instance;
-      this.helpers = _dsa.helpers;
-      this.dsa = _dsa;
-    }
-  
+  /**
+   * @param {Object} _dsa the dsa instance to access data stores
+   */
+  constructor(_dsa) {
+    this.ABI = _dsa.ABI;
+    this.address = _dsa.address;
+    this.tokens = _dsa.tokens;
+    this.web3 = _dsa.web3;
+    this.instance = _dsa.instance;
+    this.helpers = _dsa.helpers;
+    this.dsa = _dsa;
+  }
+
   /**
    * returns buy/dest amount and unit Amount
    * @param buyToken buy token symbol
@@ -50,6 +50,4 @@ module.exports = class Kyber {
         });
     });
   }
-
 };
-  

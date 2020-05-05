@@ -19,7 +19,8 @@ module.exports = class TxnHelper {
    */
   async send(_h) {
     return new Promise((resolve, reject) => {
-      if(_h.to == this.address.genesis) return reject(`'to' address is ${this.address.genesis}.`)
+      if (_h.to == this.address.genesis)
+        return reject(`'to' address is ${this.address.genesis}.`);
       if (this.mode == "node") {
         this.web3.eth.accounts
           .signTransaction(_h, this.privateKey)
