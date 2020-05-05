@@ -7,6 +7,7 @@ module.exports = class TxnHelper {
    */
   constructor(_dsa) {
     this.ABI = _dsa.ABI;
+    this.address = _dsa.address;
     this.internal = _dsa.internal;
     this.web3 = _dsa.web3;
     this.mode = _dsa.mode;
@@ -18,6 +19,7 @@ module.exports = class TxnHelper {
    */
   async send(_h) {
     return new Promise((resolve, reject) => {
+      if(_h.to == this.address.genesis) return reject(`'to' address is ${this.address.genesis}.`)
       if (this.mode == "node") {
         this.web3.eth.accounts
           .signTransaction(_h, this.privateKey)
