@@ -6,12 +6,6 @@ module.exports = {
     connector: require("../abi/core/connector.json"),
     events: require("../abi/core/events.json"),
   },
-  resolvers: {
-    core: require("../abi/resolvers/core.json"),
-    compound: require("../abi/read/compound.json"),
-    maker: require("../abi/read/maker.json"),
-    balances: require("../abi/read/balances.json"),
-  },
   connectors: {
     basic: require("../abi/connectors/basic.json"),
     auth: require("../abi/connectors/auth.json"),
@@ -22,7 +16,7 @@ module.exports = {
     kyber: require("../abi/connectors/kyber.json"),
   },
   read: {
-    core: require("../abi/resolvers/core.json"),
+    core: require("../abi/read/core.json"),
     compound: require("../abi/read/compound.json"),
     maker: require("../abi/read/maker.json"),
     balances: require("../abi/read/balances.json"),

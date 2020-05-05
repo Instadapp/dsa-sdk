@@ -40,8 +40,8 @@ module.exports = class Account {
   async getAccounts(_authority) {
     if (!_authority) _authority = await this.internal.getAddress();
     var _c = new this.web3.eth.Contract(
-      this.ABI.resolvers.core,
-      this.address.resolvers.core
+      this.ABI.read.core,
+      this.address.read.core
     );
     return new Promise((resolve, reject) => {
       return _c.methods
@@ -71,8 +71,8 @@ module.exports = class Account {
    */
   async getAuthById(_id) {
     var _c = new this.web3.eth.Contract(
-      this.ABI.resolvers.core,
-      this.address.resolvers.core
+      this.ABI.read.core,
+      this.address.read.core
     );
     return new Promise((resolve, reject) => {
       return _c.methods
@@ -93,8 +93,8 @@ module.exports = class Account {
    */
   async getAuthByAddress(_addr) {
     var _c = new this.web3.eth.Contract(
-      this.ABI.resolvers.core,
-      this.address.resolvers.core
+      this.ABI.read.core,
+      this.address.read.core
     );
     return new Promise((resolve, reject) => {
       return _c.methods
