@@ -39,10 +39,10 @@ module.exports = class Curve {
                 _position.curveBalance = res[0] / 10 ** (_curveDec);
                 _position.totalSupply = res[1] / 10 ** (_curveDec);
                 _position.userShare = res[2] / 10 ** (_curveDec);
-                _position.daiPoolBalance = res[3] / 10 ** (18 + (18 - _daiDec));
-                _position.usdcPoolBalance = res[4] / 10 ** (18 + (18 - _usdcDec));
-                _position.usdtPoolBalance = res[5] / 10 ** (18 + (18 - _usdtDec));
-                _position.susdPoolBalance = res[6] / 10 ** (18 + (18 - _susdDec));
+                _position.daiPoolBalance = res[3] / 10 ** (_daiDec);
+                _position.usdcPoolBalance = res[4] / 10 ** (_usdcDec);
+                _position.usdtPoolBalance = res[5] / 10 ** (_usdtDec);
+                _position.susdPoolBalance = res[6] / 10 ** (_susdDec);
                 resolve(_position);
             })
             .catch((err) => {
