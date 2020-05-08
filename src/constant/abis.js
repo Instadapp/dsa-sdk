@@ -14,6 +14,7 @@ module.exports = {
     instapool: require("../abi/connectors/instapool.json"),
     oasis: require("../abi/connectors/oasis.json"),
     kyber: require("../abi/connectors/kyber.json"),
+    curve: require("../abi/connectors/curve.json"),
   },
   read: {
     core: require("../abi/read/core.json"),
@@ -22,6 +23,7 @@ module.exports = {
     balances: require("../abi/read/balances.json"),
     oasis: require("../abi/read/oasis.json"),
     kyber: require("../abi/read/kyber.json"),
+    curve: require("../abi/read/curve.json"),
   },
   basic: {
     erc20: require("../abi/basics/erc20.json"),
