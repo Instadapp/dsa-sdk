@@ -13,7 +13,7 @@ module.exports = class Curve {
   }
 
   /**
-   * get properly formatted compound position details
+   * get properly formatted Curve position details
    * @param {string} address the owner address
    */
   async getPosition(address) {
@@ -111,7 +111,7 @@ module.exports = class Curve {
         .read(_obj)
         .then((res) => {
           var _res = {
-            curveAmt: this.tokens.toDecimal(res[0], token),
+            curveAmt: this.tokens.toDecimal(res[0], "curvesusd"),
             curveAmtRaw: res[0],
             unitAmt: res[1],
           };
@@ -148,7 +148,7 @@ module.exports = class Curve {
         .read(_obj)
         .then((res) => {
           var _res = {
-            curveAmt: this.tokens.toDecimal(res[0], token),
+            curveAmt: this.tokens.toDecimal(res[0], "curvesusd"),
             curveAmtRaw: res[0],
             unitAmt: res[1],
           };
