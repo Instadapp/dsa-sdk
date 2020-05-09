@@ -9,6 +9,7 @@ const Maker = require("./resolvers/maker.js");
 const InstaPool = require("./resolvers/instapool.js");
 const Oasis = require("./resolvers/oasis.js");
 const Kyber = require("./resolvers/kyber.js");
+const Curve = require("./resolvers/curve.js");
 const ERC20 = require("./erc20.js");
 const Tokens = require("./resolvers/tokens.js");
 
@@ -61,6 +62,7 @@ module.exports = class DSA {
     this.instapool = new InstaPool(this);
     this.oasis = new Oasis(this);
     this.kyber = new Kyber(this);
+    this.curve = new Curve(this);
 
     // defining methods to simplify the calls for frontend develoeprs
     this.transfer = this.erc20.transfer;

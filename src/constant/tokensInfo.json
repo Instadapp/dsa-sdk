@@ -76,6 +76,13 @@
     "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
     "decimals": 8
   },
+  "susd": {
+    "type": "token",
+    "symbol": "SUSD",
+    "name": "Synthetix USD",
+    "address": "0x57ab1ec28d129707052df4df418d58a2d46d5f51",
+    "decimals": 18
+  },
   "ceth": {
     "type": "ctoken",
     "symbol": "CETH",
@@ -147,5 +154,12 @@
     "decimals": 8,
     "factor": 0,
     "root": "wbtc"
+  },
+  "curvesusd": {
+    "type": "curvetoken",
+    "symbol": "CSUSD",
+    "name": "Curve SUSD",
+    "address": "0xC25a3A3b969415c80451098fa907EC722572917F",
+    "decimals": 18
   }
 }
