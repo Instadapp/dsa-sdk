@@ -55,20 +55,6 @@
     "address": "0x8dd5fbCe2F6a956C3022bA3663759011Dd51e73E",
     "decimals": 18
   },
-  "susd": {
-    "type": "token",
-    "symbol": "SUSD",
-    "name": "Synthetix USD",
-    "address": "0x57ab1ec28d129707052df4df418d58a2d46d5f51",
-    "decimals": 18
-  },
-  "curve": {
-    "type": "token",
-    "symbol": "CURVE",
-    "name": "Curve fi",
-    "address": "0xC25a3A3b969415c80451098fa907EC722572917F",
-    "decimals": 18
-  },
   "bat": {
     "type": "token",
     "symbol": "BAT",
@@ -89,6 +75,13 @@
     "name": "Wrapped BTC",
     "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
     "decimals": 8
+  },
+  "susd": {
+    "type": "token",
+    "symbol": "SUSD",
+    "name": "Synthetix USD",
+    "address": "0x57ab1ec28d129707052df4df418d58a2d46d5f51",
+    "decimals": 18
   },
   "ceth": {
     "type": "ctoken",
@@ -161,5 +154,12 @@
     "decimals": 8,
     "factor": 0,
     "root": "wbtc"
+  },
+  "curvesusd": {
+    "type": "curvetoken",
+    "symbol": "CSUSD",
+    "name": "Curve SUSD",
+    "address": "0xC25a3A3b969415c80451098fa907EC722572917F",
+    "decimals": 18
   }
 }
