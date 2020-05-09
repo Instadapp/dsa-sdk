@@ -16,7 +16,7 @@ module.exports = {
     instapool: "0x6d11A71575C34eB7b5E22949fAfCd49A2FA2A8F9",
     oasis: "0xE554c84c030bd5e850cDbd17f6583818b8dE5b1F",
     kyber: "0x7043FC2E21865c091EEaE37C38E3d82BcCDF5D5C",
-    curve: "0x15B3fc06a3931474FEC51479c75B7d9A1C4fBEb5",
+    curve: "0xfB1762449983E3a5F5ad5C04a118A6D6Dba88963",
   },
   read: {
     core: "0x37D60F60fcDeA9f4Dcf3fC1799fE4df8e096aa3c",
