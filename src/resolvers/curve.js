@@ -31,10 +31,9 @@ module.exports = class Curve {
         .read(_obj)
         .then((res) => {
           let _position = {};
-          var _curveDec = this.tokens.toDecimal(res[3], "curvesusd");;
-          _position.curveBalance = res[0] / 10 ** _curveDec;
-          _position.totalSupply = res[1] / 10 ** _curveDec;
-          _position.userShare = res[2] / 10 ** _curveDec;
+          _position.curveBalance = this.tokens.toDecimal(res[0], "curvesusd");
+          _position.totalSupply = this.tokens.toDecimal(res[1], "curvesusd");
+          _position.userShare = this.tokens.toDecimal(res[2], "curvesusd");
           _position.daiPoolBalance = this.tokens.toDecimal(res[3], "DAI");
           _position.usdcPoolBalance = this.tokens.toDecimal(res[4], "USDC");
           _position.usdtPoolBalance = this.tokens.toDecimal(res[5], "USDT");
