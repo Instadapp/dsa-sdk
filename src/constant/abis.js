@@ -9,6 +9,7 @@ module.exports = {
   connectors: {
     basic: require("../abi/connectors/basic.json"),
     auth: require("../abi/connectors/auth.json"),
+    authority: require("../abi/connectors/auth.json"), // same json file as of "auth" to not break things with upgrade
     compound: require("../abi/connectors/compound.json"),
     maker: require("../abi/connectors/maker.json"),
     instapool: require("../abi/connectors/instapool.json"),
