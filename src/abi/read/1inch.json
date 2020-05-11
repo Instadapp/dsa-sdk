@@ -1,56 +1,56 @@
 [
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "buyAddr",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "sellAddr",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "sellAmt",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "slippage",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "distribution",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "disableDexes",
-                "type": "uint256"
-            }
-        ],
-        "name": "getBuyAmount",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "buyAmt",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "unitAmt",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256[]",
-                "name": "distributions",
-                "type": "uint256[]"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    }
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "buyAddr",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "sellAddr",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "sellAmt",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "slippage",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "distribution",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "disableDexes",
+        "type": "uint256"
+      }
+    ],
+    "name": "getBuyAmount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "buyAmt",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "unitAmt",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "distributions",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
 ]

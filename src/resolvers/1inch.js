@@ -19,7 +19,14 @@ module.exports = class OneInch {
    * @param sellAmt sell token amount in decimal
    * @param slippage slippage of trade
    */
-  async getBuyAmount(buyToken, sellToken, sellAmt, slippage, distribution, disableDex) {
+  async getBuyAmount(
+    buyToken,
+    sellToken,
+    sellAmt,
+    slippage,
+    distribution,
+    disableDex
+  ) {
     let _slippage = !slippage ? 10 ** 16 : slippage * 10 ** 16;
     _slippage = String(this.helpers.bigNumInString(_slippage));
     let _distribution = !distribution ? 3 : distribution;
@@ -34,7 +41,7 @@ module.exports = class OneInch {
         this.tokens.fromDecimal(sellAmt, sellToken),
         this.helpers.bigNumInString(_slippage),
         this.helpers.bigNumInString(_distribution),
-        this.helpers.bigNumInString(_disableDex)
+        this.helpers.bigNumInString(_disableDex),
       ],
     };
     return new Promise((resolve, reject) => {
@@ -45,7 +52,7 @@ module.exports = class OneInch {
             buyAmt: this.tokens.toDecimal(res[0], buyToken),
             buyAmtRaw: res[0],
             unitAmt: res[1],
-            distribution: res[2]
+            distribution: res[2],
           };
           resolve(_res);
         })
