@@ -15,6 +15,7 @@ module.exports = {
     oasis: require("../abi/connectors/oasis.json"),
     kyber: require("../abi/connectors/kyber.json"),
     curve: require("../abi/connectors/curve.json"),
+    oneInch: require("../abi/connectors/1inch.json"),
   },
   read: {
     core: require("../abi/read/core.json"),
@@ -24,6 +25,7 @@ module.exports = {
     oasis: require("../abi/read/oasis.json"),
     kyber: require("../abi/read/kyber.json"),
     curve: require("../abi/read/curve.json"),
+    oneInch: require("../abi/read/1inch.json"),
   },
   basic: {
     erc20: require("../abi/basics/erc20.json"),
