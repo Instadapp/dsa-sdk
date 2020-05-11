@@ -17,6 +17,7 @@ module.exports = {
     oasis: "0xE554c84c030bd5e850cDbd17f6583818b8dE5b1F",
     kyber: "0x7043FC2E21865c091EEaE37C38E3d82BcCDF5D5C",
     curve: "0xfB1762449983E3a5F5ad5C04a118A6D6Dba88963",
+    oneInch: "0x1beCC315E044E8ee8898011609E63F8259d3B124",
   },
   read: {
     core: "0x37D60F60fcDeA9f4Dcf3fC1799fE4df8e096aa3c",
@@ -26,5 +27,6 @@ module.exports = {
     oasis: "0x95E031D9A16eb7cb440c56076CBE07144C2233EA",
     kyber: "0x8240b601d9B565e2BefaA3DA82Cc984E76cB3499",
     curve: "0x6326c45c2aa6EA9AdF8D43A43284D736e7a89Ae0",
+    oneInch: "0x16F0a50305c6aCf1A44A3DAa225531e731f39A9F",
   },
 };
