@@ -113,9 +113,9 @@ module.exports = class DSA {
    * @param {address} _d.authority (optional)
    * @param {address} _d.origin (optional)
    * @param {address} _d.from (optional)
-   * @param {number|string} _d.gasPrice (optional)
-   * @param {number|string} _d.gas (optional)
-   * @param {number|string} _d.nonce (optional) txn nonce (mostly for node implementation)
+   * @param {number|string} _d.gasPrice (optional) not optional in "node"
+   * @param {number|string} _d.gas (optional) not optional in "node"
+   * @param {number|string} _d.nonce (optional) not optional in "node"
    */
   async build(_d) {
     let _addr = await this.internal.getAddress();
