@@ -105,7 +105,7 @@ module.exports = class DSA {
    * @param {address} _o.origin (optional) origin source
    */
   setAccount(_o) {
-    return setInstance(_o);
+    return this.setInstance(_o);
   }
 
   /**
