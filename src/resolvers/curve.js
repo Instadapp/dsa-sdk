@@ -33,7 +33,8 @@ module.exports = class Curve {
           let _position = {};
           _position.curveBalance = this.tokens.toDecimal(res[0], "curvesusd");
           _position.totalSupply = this.tokens.toDecimal(res[1], "curvesusd");
-          _position.userShare = this.tokens.toDecimal(res[2], "curvesusd") * 100;
+          _position.userShare =
+            this.tokens.toDecimal(res[2], "curvesusd") * 100;
           _position.daiPoolBalance = this.tokens.toDecimal(res[3], "DAI");
           _position.usdcPoolBalance = this.tokens.toDecimal(res[4], "USDC");
           _position.usdtPoolBalance = this.tokens.toDecimal(res[5], "USDT");
