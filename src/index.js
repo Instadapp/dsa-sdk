@@ -81,12 +81,21 @@ module.exports = class DSA {
   /**
    * sets the current DSA instance
    */
-async setInstance(_o) {
-    if (!isFinite(_o)) throw new Error("Invaild `DSA-ID`.");
+  async setInstance(_o) { 
+    let _id;
+    if (typeof _o == "object") {
+      if (!_o.id) throw new Error("`dsaId` is not defined.");
+      _id = _o.id;
+    } else {
+      _id = _o;
+    }
+    
+    if (!isFinite(_id)) throw new Error("Invaild `dsaId`.");
+  
     let _obj = {
       protocol: "core",
       method: "getAccountDetails",
-      args: [_o]
+      args: [_id]
     }
     return new Promise((resolve, reject) => {
       return this.read(_obj)
@@ -110,7 +119,7 @@ async setInstance(_o) {
    * sets the current DSA ID instance
    * @param {number | string} _o DSA ID
    */
-async setAccount(_o) {
+  async setAccount(_o) {
     return this.setInstance(_o);
   }
 
