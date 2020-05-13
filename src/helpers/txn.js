@@ -20,7 +20,9 @@ module.exports = class TxnHelper {
   async send(_h) {
     return new Promise((resolve, reject) => {
       if (_h.to == this.address.genesis)
-        return reject(`Please configure the DSA instance by calling dsa.setInstance(dsaI). More details: https://docs.instadapp.io/setup`);
+        return reject(
+          `Please configure the DSA instance by calling dsa.setInstance(dsaI). More details: https://docs.instadapp.io/setup`
+        );
       if (this.mode == "node") {
         this.web3.eth.accounts
           .signTransaction(_h, this.privateKey)

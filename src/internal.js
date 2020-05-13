@@ -47,7 +47,7 @@ module.exports = class Internal {
     if (this.mode == "node") {
       if (!_d.gasPrice) throw new Error("`gasPrice` is not defined.");
 
-      txObj.gasPrice = _d.gasPrice
+      txObj.gasPrice = _d.gasPrice;
       txObj.nonce = _d.nonce
         ? _d.nonce
         : await this.web3.eth.getTransactionCount(txObj.from);

@@ -44,7 +44,7 @@ module.exports = class DSA {
     this.instance = {
       id: 0,
       address: address.genesis,
-      version: 1
+      version: 1,
     };
     this.origin = address.genesis;
     this.helpers = new Helpers(this);
@@ -81,7 +81,7 @@ module.exports = class DSA {
   /**
    * sets the current DSA instance
    */
-  async setInstance(_o) { 
+  async setInstance(_o) {
     let _id;
     if (typeof _o == "object") {
       if (!_o.id) throw new Error("`dsaId` is not defined.");
@@ -89,14 +89,14 @@ module.exports = class DSA {
     } else {
       _id = _o;
     }
-    
+
     if (!isFinite(_id)) throw new Error("Invaild `dsaId`.");
-  
+
     let _obj = {
       protocol: "core",
       method: "getAccountDetails",
-      args: [_id]
-    }
+      args: [_id],
+    };
     return new Promise((resolve, reject) => {
       return this.read(_obj)
         .then((res) => {
@@ -108,7 +108,9 @@ module.exports = class DSA {
         .catch(async (err) => {
           let count = await this.account.count();
           if (count < Number(_o)) {
-            return reject("dsaId does not exist. Run `dsa.build()` to create new DSA.")
+            return reject(
+              "dsaId does not exist. Run `dsa.build()` to create new DSA."
+            );
           }
           reject(err);
         });
@@ -175,7 +177,7 @@ module.exports = class DSA {
    * @param _d.to (optional)
    * @param _d.from (optional)
    * @param _d.value (optional)
-   * @param _d.gasPrice (optional only for "browser" mode) 
+   * @param _d.gasPrice (optional only for "browser" mode)
    * @param _d.gas (optional)
    * @param {number|string} _d.nonce (optional) txn nonce (mostly for node implementation)
    */
