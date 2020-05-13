@@ -149,5 +149,46 @@
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
-  }
+  },
+  {
+    "inputs": [
+        {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+        }
+    ],
+    "name": "getAccountDetails",
+    "outputs": [
+        {
+            "components": [
+                {
+                    "internalType": "uint256",
+                    "name": "ID",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "version",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "address[]",
+                    "name": "authorities",
+                    "type": "address[]"
+                }
+            ],
+            "internalType": "struct AccountResolver.AccountData",
+            "name": "",
+            "type": "tuple"
+        }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+}
 ]

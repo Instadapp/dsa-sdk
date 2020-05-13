@@ -26,7 +26,7 @@ module.exports = class Internal {
    * * @param _d.callData
    * * @param _d.value (optional)
    * * @param _d.gas (optional)
-   * * @param _d.gasPrice (optional)
+   * * @param _d.gasPrice (optional only for "browser" mode)
    * * @param _d.nonce (optional) mostly for "node" mode
    */
   async getTxObj(_d) {
@@ -45,9 +45,9 @@ module.exports = class Internal {
       : ((await this.web3.eth.estimateGas(txObj)) * 1.3).toFixed(0); // increasing gas cost by 30% for margin
 
     if (this.mode == "node") {
+      if (!_d.gasPrice) throw new Error("`gasPrice` is not defined.");
+
       txObj.gasPrice = _d.gasPrice
-        ? _d.gasPrice
-        : String(this.web3.utils.toWei("1", "gwei")); // defaulted to 1 gwei.
       txObj.nonce = _d.nonce
         ? _d.nonce
         : await this.web3.eth.getTransactionCount(txObj.from);
