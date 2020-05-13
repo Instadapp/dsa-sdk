@@ -166,7 +166,7 @@ async setAccount(_o) {
    * @param _d.to (optional)
    * @param _d.from (optional)
    * @param _d.value (optional)
-   * @param _d.gasPrice (not optional for "node" mode) 
+   * @param _d.gasPrice (optional only for "browser" mode) 
    * @param _d.gas (optional)
    * @param {number|string} _d.nonce (optional) txn nonce (mostly for node implementation)
    */
