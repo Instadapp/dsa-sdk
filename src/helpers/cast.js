@@ -34,7 +34,7 @@ module.exports = class CastHelper {
   async estimateGas(_d) {
     var _internal = this.internal;
     var _args = _internal.encodeSpells(_d);
-    _args.push(this.instance.origin);
+    _args.push(this.origin);
     if (!_d.to) _d.to = this.instance.address;
     if (!_d.from) _d.from = await _internal.getAddress();
     if (!_d.value) _d.value = "0";
@@ -69,7 +69,7 @@ module.exports = class CastHelper {
   encodeABI(_d) {
     let _enodedSpell = this.internal.encodeSpells(_d);
     if (!_d.to) _d.to = this.instance.address;
-    if (!_d.origin) _d.origin = this.instance.origin;
+    if (!_d.origin) _d.origin = this.origin;
     let _contract = new this.web3.eth.Contract(this.ABI.core.account, _d.to);
     return _contract.methods.cast(..._enodedSpell, _d.origin).encodeABI();
   }

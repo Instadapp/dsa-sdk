@@ -44,9 +44,9 @@ module.exports = class DSA {
     this.instance = {
       id: 0,
       address: address.genesis,
-      version: 1,
-      origin: address.genesis,
+      version: 1
     };
+    this.origin = address.genesis;
     this.helpers = new Helpers(this);
     this.tokens = new Tokens(this);
     this.internal = new Internal(this);
@@ -91,8 +91,7 @@ module.exports = class DSA {
     if (_o.address) this.instance.address = _o.address;
     if (_o.id) this.instance.id = _o.id;
     if (_o.version) this.instance.version = _o.version;
-    if (_o.origin) this.instance.origin = _o.origin;
-    return true;
+    if (_o.origin) this.origin = _o.origin;
   }
 
   /**
@@ -109,6 +108,14 @@ module.exports = class DSA {
   }
 
   /**
+   * sets the origin of interactions
+   * @param {address} address the origin address for affiliation and on-chain analytics
+   */
+  setOrigin(_origin) {
+    this.origin = _origin;
+  }
+
+  /**
    * build new DSA
    * @param {address} _d.authority (optional)
    * @param {address} _d.origin (optional)
@@ -122,7 +129,7 @@ module.exports = class DSA {
     if (!_d) _d = {};
     if (!_d.authority) _d.authority = _addr;
     if (!_d.version) _d.version = 1;
-    if (!_d.origin) _d.origin = this.instance.origin;
+    if (!_d.origin) _d.origin = this.origin;
     if (!_d.from) _d.from = _addr;
     _d.to = this.address.core.index;
 
@@ -161,7 +168,7 @@ module.exports = class DSA {
     let _espell = this.internal.encodeSpells(_d);
     if (!_d.to) _d.to = this.instance.address;
     if (!_d.from) _d.from = _addr;
-    if (!_d.origin) _d.origin = this.instance.origin;
+    if (!_d.origin) _d.origin = this.origin;
 
     let _c = new this.web3.eth.Contract(
       this.ABI.core.account,
