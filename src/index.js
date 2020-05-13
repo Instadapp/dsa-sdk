@@ -81,30 +81,38 @@ module.exports = class DSA {
   /**
    * sets the current DSA ID instance
    */
-  setInstance(_o) {
-    if (this.web3.utils.isAddress(_o)) {
-      this.instance.address = _o;
-      return true;
+async setInstance(_o) {
+    if (!isFinite(_o)) throw new Error("Invaild `DSA-ID`.");
+    let _obj = {
+      protocol: "core",
+      method: "getAccountDetails",
+      args: [_o]
     }
-    if (!_o.address) return console.error("DSA address is not defined."); // address is not optional
-
-    if (_o.address) this.instance.address = _o.address;
-    if (_o.id) this.instance.id = _o.id;
-    if (_o.version) this.instance.version = _o.version;
-    if (_o.origin) this.origin = _o.origin;
+    return new Promise((resolve, reject) => {
+      return this.read(_obj)
+        .then((res) => {
+          this.instance.id = res[0];
+          this.instance.address = res[1];
+          this.instance.version = res[2];
+          resolve(this.instance);
+        })
+        .catch(async (err) => {
+          let count = await this.account.count();
+          if (count < Number(_o)) {
+            return reject("account-not-created-yet. Run `dsa.build()` to create new DSA.")
+          }
+          reject(err);
+        });
+    });
   }
 
   /**
    * sets the current DSA ID instance
-   * @param {address} _o DSA address
-   * OR
-   * @param {address} _o.id DSA ID
-   * @param {address} _o.address DSA address
-   * @param {address} _o.version DSA version
+   * @param {number | string} _o DSA ID
    * @param {address} _o.origin (optional) origin source
    */
-  setAccount(_o) {
-    return setInstance(_o);
+async setAccount(_o) {
+    return this.setInstance(_o);
   }
 
   /**
@@ -159,7 +167,7 @@ module.exports = class DSA {
    * @param _d.to (optional)
    * @param _d.from (optional)
    * @param _d.value (optional)
-   * @param _d.gasPrice (optional)
+   * @param _d.gasPrice (not optional for "node" mode) 
    * @param _d.gas (optional)
    * @param {number|string} _d.nonce (optional) txn nonce (mostly for node implementation)
    */
