@@ -108,7 +108,7 @@ module.exports = class DSA {
         .catch(async (err) => {
           let count = await this.account.count();
           if (count < Number(_o)) {
-            return reject("account-not-created-yet. Run `dsa.build()` to create new DSA.")
+            return reject("dsaId does not exists. Run `dsa.build()` to create new DSA.")
           }
           reject(err);
         });
