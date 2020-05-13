@@ -79,7 +79,7 @@ module.exports = class DSA {
   }
 
   /**
-   * sets the current DSA ID instance
+   * sets the current DSA instance
    */
 async setInstance(_o) {
     if (!isFinite(_o)) throw new Error("Invaild `DSA-ID`.");
@@ -109,7 +109,6 @@ async setInstance(_o) {
   /**
    * sets the current DSA ID instance
    * @param {number | string} _o DSA ID
-   * @param {address} _o.origin (optional) origin source
    */
 async setAccount(_o) {
     return this.setInstance(_o);
