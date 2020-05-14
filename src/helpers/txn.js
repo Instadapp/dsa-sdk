@@ -21,7 +21,7 @@ module.exports = class TxnHelper {
     return new Promise((resolve, reject) => {
       if (_h.to == this.address.genesis)
         return reject(
-          `Please configure the DSA instance by calling dsa.setInstance(dsaI). More details: https://docs.instadapp.io/setup`
+          `Please configure the DSA instance by calling dsa.setInstance(dsaId). More details: https://docs.instadapp.io/setup`
         );
       if (this.mode == "node") {
         this.web3.eth.accounts
