@@ -3,22 +3,6 @@ module.exports = class Helpers {
     this.web3 = _dsa.web3;
   }
 
-  cleanAddress(address) {
-    return address.slice(0, 4) + "..." + address.slice(-4);
-  }
-
-  cleanTxn(txHash) {
-    return txHash.slice(0, 6) + "..." + txHash.slice(-6);
-  }
-
-  cleanDecimal(num, power) {
-    var MUL_DIV = 100;
-    if (power) {
-      MUL_DIV = 10 ** power;
-    }
-    return Math.floor(Number(num) * MUL_DIV) / MUL_DIV;
-  }
-
   divWithDec(num, power) {
     power = power ? power : 0;
     return Number(num) / 10 ** power;
@@ -36,19 +20,6 @@ module.exports = class Helpers {
         tokenInfo[token.toLowerCase()].address
       );
     }
-  }
-
-  cleanNumber(num) {
-    if (num > 1000000) {
-      var _num = cleanDecimal(num / 1000000);
-      return `${_num.toLocaleString()} M`;
-    } else if (num > 10000) {
-      var _num = cleanDecimal(num / 1000);
-      return `${_num.toLocaleString()} K`;
-    } else if (!num) {
-      return "0.00";
-    }
-    return cleanDecimal(num).toLocaleString();
   }
 
   bigNumInString(x) {
