@@ -29,7 +29,7 @@ module.exports = class OneInch {
   ) {
     let _slippage = !slippage ? 10 ** 16 : slippage * 10 ** 16;
     _slippage = String(this.helpers.bigNumInString(_slippage));
-    let _distribution = !distribution ? 20 : distribution;
+    let _distribution = !distribution ? 100 : distribution;
     let _disableDex = !disableDex ? 0 : disableDex;
 
     var _obj = {
