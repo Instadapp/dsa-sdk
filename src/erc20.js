@@ -45,10 +45,10 @@ module.exports = class Token {
       txObj = await this.internal.getTxObj(_d);
     } else {
       _d.toAddr = _d.to;
-      _d.to = this.helpers.getAddress(_d.token);
+      _d.to = this.internal.filterAddress(_d.token);
       var _c = await new this.web3.eth.Contract(
         this.ABI.basic.erc20,
-        this.helpers.getAddress(_d.token)
+        this.internal.filterAddress(_d.token)
       );
       _d.callData = _c.methods
         .transfer(_d.toAddr, this.helpers.bigNumInString(_d.amount))
@@ -90,10 +90,10 @@ module.exports = class Token {
       });
     } else {
       _d.toAddr = _d.to;
-      _d.to = this.helpers.getAddress(_d.token);
+      _d.to = this.internal.filterAddress(_d.token);
       var _c = await new this.web3.eth.Contract(
         this.ABI.basic.erc20,
-        this.helpers.getAddress(_d.token)
+        this.internal.filterAddress(_d.token)
       );
       _d.callData = _c.methods.approve(_d.toAddr, _d.amount).encodeABI();
       txObj = await this.internal.getTxObj(_d);
@@ -129,7 +129,7 @@ module.exports = class Token {
     } else {
       var _c = await new web3.eth.Contract(
         this.ABI.basic.erc20,
-        this.helpers.getAddress(_d.token)
+        this.internal.filterAddress(_d.token)
       );
       return new Promise((resolve, reject) => {
         return _c.methods

@@ -92,7 +92,7 @@ module.exports = class Internal {
 
   /**
    * returns encoded data of spells (used via cast() mostly)
-   * * @param _d the spells instance
+   * @param _d the spells instance
    * OR
    * @param _d.spells the spells instance
    */
@@ -125,6 +125,23 @@ module.exports = class Internal {
     if (address.length == 0)
       return console.log("No ethereum address detected.");
     return address[0];
+  }
+
+  /**
+   * returns the address from token key OR checksum the address if not
+   */
+  filterAddress(token) {
+    var isAddress = this.web3.utils.isAddress(token.toLowerCase());
+    if (isAddress) {
+      return this.web3.utils.toChecksumAddress(token.toLowerCase());
+    } else {
+      let tokenInfo = require("./constant/tokensInfo.json");
+      if (Object.keys(tokenInfo).indexOf(token.toLowerCase()) == -1)
+        throw new Error("'token' symbol not found.");
+      return this.web3.utils.toChecksumAddress(
+        tokenInfo[token.toLowerCase()].address
+      );
+    }
   }
 
   /**

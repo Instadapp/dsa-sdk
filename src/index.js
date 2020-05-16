@@ -12,11 +12,12 @@ const Kyber = require("./resolvers/kyber.js");
 const Curve = require("./resolvers/curve.js");
 const OneInch = require("./resolvers/1Inch.js");
 
-const ERC20 = require("./erc20.js");
 const Tokens = require("./resolvers/tokens.js");
 
-const CastHelper = require("./helpers/cast.js");
-const TxnHelper = require("./helpers/txn.js");
+const Erc20 = require("./utils/erc20.js");
+const Cast = require("./utils/cast.js");
+const Txn = require("./utils/txn.js");
+const Math = require("./utils/math.js");
 
 module.exports = class DSA {
   /**
@@ -52,12 +53,14 @@ module.exports = class DSA {
     this.internal = new Internal(this);
     this.account = new Account(this);
 
-    this.castHelper = new CastHelper(this);
-    this.txnHelper = new TxnHelper(this);
+    // utils
+    this.castUtil = new Cast(this);
+    this.txnUtil = new Txn(this);
+    this.erc20 = new Erc20(this);
+    this.math = new Math(this);
+    
+    this.sendTxn = this.txnUtil.send; // send transaction // node || browser
 
-    this.sendTxn = this.txnHelper.send; // send transaction // node || browser
-
-    this.erc20 = new ERC20(this);
     this.balances = new Balances(this);
     this.compound = new Compound(this);
     this.maker = new Maker(this);
@@ -69,9 +72,9 @@ module.exports = class DSA {
 
     // defining methods to simplify the calls for frontend develoeprs
     this.transfer = this.erc20.transfer;
-    this.castEncoded = this.castHelper.encoded;
-    this.estimateCastGas = this.castHelper.estimateGas;
-    this.encodeCastABI = this.castHelper.encodeABI;
+    this.castEncoded = this.castUtil.encoded;
+    this.estimateCastGas = this.castUtil.estimateGas;
+    this.encodeCastABI = this.castUtil.encodeABI;
     this.count = this.account.count;
     this.getAccounts = this.account.getAccounts;
     this.getAuthById = this.account.getAuthById;
