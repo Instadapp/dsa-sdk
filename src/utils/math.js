@@ -1,4 +1,4 @@
-module.exports = class Helpers {
+module.exports = class Math {
   constructor(_dsa) {
     this.web3 = _dsa.web3;
   }
@@ -26,4 +26,3 @@ module.exports = class Helpers {
     return x;
   }
 };
-  

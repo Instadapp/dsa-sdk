@@ -1,7 +1,7 @@
 /**
  * generic ERC20 token methods
  */
-module.exports = class Token {
+module.exports = class Erc20 {
   /**
    * @param {Object} _dsa the dsa instance to access data stores
    */
