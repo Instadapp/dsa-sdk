@@ -8,7 +8,7 @@ module.exports = class Token {
   constructor(_dsa) {
     this.ABI = _dsa.ABI;
     this.tokens = _dsa.tokens;
-    this.helpers = _dsa.helpers;
+    this.math = _dsa.math;
     this.internal = _dsa.internal;
     this.web3 = _dsa.web3;
     this.dsa = _dsa;
@@ -51,7 +51,7 @@ module.exports = class Token {
         this.internal.filterAddress(_d.token)
       );
       _d.callData = _c.methods
-        .transfer(_d.toAddr, this.helpers.bigNumInString(_d.amount))
+        .transfer(_d.toAddr, this.math.bigNumInString(_d.amount))
         .encodeABI();
       txObj = await this.internal.getTxObj(_d);
     }

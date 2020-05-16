@@ -8,7 +8,7 @@ module.exports = class OneInch {
     this.tokens = _dsa.tokens;
     this.web3 = _dsa.web3;
     this.instance = _dsa.instance;
-    this.helpers = _dsa.helpers;
+    this.math = _dsa.math;
     this.dsa = _dsa;
   }
 
@@ -28,7 +28,7 @@ module.exports = class OneInch {
     disableDex
   ) {
     let _slippage = !slippage ? 10 ** 16 : slippage * 10 ** 16;
-    _slippage = String(this.helpers.bigNumInString(_slippage));
+    _slippage = String(this.math.bigNumInString(_slippage));
     let _distribution = !distribution ? 100 : distribution;
     let _disableDex = !disableDex ? 0 : disableDex;
 
@@ -39,9 +39,9 @@ module.exports = class OneInch {
         this.tokens.info[buyToken.toLowerCase()].address,
         this.tokens.info[sellToken.toLowerCase()].address,
         this.tokens.fromDecimal(sellAmt, sellToken),
-        this.helpers.bigNumInString(_slippage),
-        this.helpers.bigNumInString(_distribution),
-        this.helpers.bigNumInString(_disableDex),
+        this.math.bigNumInString(_slippage),
+        this.math.bigNumInString(_distribution),
+        this.math.bigNumInString(_disableDex),
       ],
     };
     return new Promise((resolve, reject) => {

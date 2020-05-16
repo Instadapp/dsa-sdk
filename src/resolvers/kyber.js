@@ -8,7 +8,7 @@ module.exports = class Kyber {
     this.tokens = _dsa.tokens;
     this.web3 = _dsa.web3;
     this.instance = _dsa.instance;
-    this.helpers = _dsa.helpers;
+    this.math = _dsa.math;
     this.dsa = _dsa;
   }
 
@@ -21,7 +21,7 @@ module.exports = class Kyber {
    */
   async getBuyAmount(buyToken, sellToken, sellAmt, slippage) {
     let _slippage = !slippage ? 10 ** 16 : slippage * 10 ** 16;
-    _slippage = String(this.helpers.bigNumInString(_slippage));
+    _slippage = String(this.math.bigNumInString(_slippage));
 
     var _obj = {
       protocol: "kyber",
@@ -30,7 +30,7 @@ module.exports = class Kyber {
         this.tokens.info[buyToken.toLowerCase()].address,
         this.tokens.info[sellToken.toLowerCase()].address,
         this.tokens.fromDecimal(sellAmt, sellToken),
-        this.helpers.bigNumInString(_slippage),
+        this.math.bigNumInString(_slippage),
       ],
     };
 

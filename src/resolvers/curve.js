@@ -8,7 +8,7 @@ module.exports = class Curve {
     this.tokens = _dsa.tokens;
     this.web3 = _dsa.web3;
     this.instance = _dsa.instance;
-    this.helpers = _dsa.helpers;
+    this.math = _dsa.math;
     this.dsa = _dsa;
   }
 
@@ -56,7 +56,7 @@ module.exports = class Curve {
    */
   async getBuyAmount(buyToken, sellToken, sellAmt, slippage) {
     let _slippage = !slippage ? 10 ** 16 : slippage * 10 ** 16;
-    _slippage = String(this.helpers.bigNumInString(_slippage));
+    _slippage = String(this.math.bigNumInString(_slippage));
 
     var _obj = {
       protocol: "curve",
@@ -65,7 +65,7 @@ module.exports = class Curve {
         this.tokens.info[buyToken.toLowerCase()].address,
         this.tokens.info[sellToken.toLowerCase()].address,
         this.tokens.fromDecimal(sellAmt, sellToken),
-        this.helpers.bigNumInString(_slippage),
+        this.math.bigNumInString(_slippage),
       ],
     };
 
@@ -94,7 +94,7 @@ module.exports = class Curve {
    */
   async getDepositAmount(token, amt, slippage) {
     let _slippage = !slippage ? 10 ** 16 : slippage * 10 ** 16;
-    _slippage = String(this.helpers.bigNumInString(_slippage));
+    _slippage = String(this.math.bigNumInString(_slippage));
 
     var _obj = {
       protocol: "curve",
@@ -102,7 +102,7 @@ module.exports = class Curve {
       args: [
         this.tokens.info[token.toLowerCase()].address,
         this.tokens.fromDecimal(amt, token),
-        this.helpers.bigNumInString(_slippage),
+        this.math.bigNumInString(_slippage),
       ],
     };
 
@@ -131,7 +131,7 @@ module.exports = class Curve {
    */
   async getWithdrawAmount(token, amt, slippage) {
     let _slippage = !slippage ? 10 ** 16 : slippage * 10 ** 16;
-    _slippage = String(this.helpers.bigNumInString(_slippage));
+    _slippage = String(this.math.bigNumInString(_slippage));
 
     var _obj = {
       protocol: "curve",
@@ -139,7 +139,7 @@ module.exports = class Curve {
       args: [
         this.tokens.info[token.toLowerCase()].address,
         this.tokens.fromDecimal(amt, token),
-        this.helpers.bigNumInString(_slippage),
+        this.math.bigNumInString(_slippage),
       ],
     };
 
