@@ -1,4 +1,4 @@
-module.exports = class Math {
+module.exports = class MathHelpers {
   constructor(_dsa) {
     this.web3 = _dsa.web3;
   }
