@@ -1,4 +1,4 @@
-module.exports = class Helpers {
+module.exports = class Math {
   constructor(_dsa) {
     this.web3 = _dsa.web3;
   }
@@ -6,20 +6,6 @@ module.exports = class Helpers {
   divWithDec(num, power) {
     power = power ? power : 0;
     return Number(num) / 10 ** power;
-  }
-
-  getAddress(token) {
-    var isAddress = this.web3.utils.isAddress(token.toLowerCase());
-    if (isAddress) {
-      return this.web3.utils.toChecksumAddress(token.toLowerCase());
-    } else {
-      let tokenInfo = require("./constant/tokensInfo.json");
-      if (Object.keys(tokenInfo).indexOf(token.toLowerCase()) == -1)
-        throw new Error("'token' symbol not found.");
-      return this.web3.utils.toChecksumAddress(
-        tokenInfo[token.toLowerCase()].address
-      );
-    }
   }
 
   bigNumInString(x) {

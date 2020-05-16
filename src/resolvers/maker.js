@@ -50,7 +50,7 @@ module.exports = class Maker {
     this.address = _dsa.address;
     this.tokens = _dsa.tokens;
     this.web3 = _dsa.web3;
-    this.helpers = _dsa.helpers;
+    this.math = _dsa.math;
     this.dsa = _dsa;
     this.colInfo = colInfo;
   }
@@ -85,20 +85,20 @@ module.exports = class Maker {
             userVaults[_id].owner = _userVaults[i][1];
             userVaults[_id].colName = _userVaults[i][2];
             userVaults[_id].token = this.colInfo[_userVaults[i][2]].token;
-            var _col = this.helpers.divWithDec(_userVaults[i][3], 18);
+            var _col = this.math.divWithDec(_userVaults[i][3], 18);
             userVaults[_id].col = _col;
-            var _debt = this.helpers.divWithDec(_userVaults[i][5], 18);
+            var _debt = this.math.divWithDec(_userVaults[i][5], 18);
             userVaults[_id].debt = _debt;
-            userVaults[_id].liquidatedCol = this.helpers.divWithDec(
+            userVaults[_id].liquidatedCol = this.math.divWithDec(
               _userVaults[i][6],
               18
             );
             userVaults[_id].rate = this.calRate(_userVaults[i][7]) * 100;
-            var _price = this.helpers.divWithDec(_userVaults[i][8], 27);
+            var _price = this.math.divWithDec(_userVaults[i][8], 27);
             userVaults[_id].price = _price;
             userVaults[_id].status = _debt / (_col * _price);
             userVaults[_id].liquidation =
-              1 / this.helpers.divWithDec(_userVaults[i][9], 27);
+              1 / this.math.divWithDec(_userVaults[i][9], 27);
             userVaults[_id].urn = _userVaults[i][10];
           }
           resolve(userVaults);

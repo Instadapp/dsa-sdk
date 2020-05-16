@@ -1,14 +1,14 @@
 /**
  * generic ERC20 token methods
  */
-module.exports = class Token {
+module.exports = class Erc20 {
   /**
    * @param {Object} _dsa the dsa instance to access data stores
    */
   constructor(_dsa) {
     this.ABI = _dsa.ABI;
     this.tokens = _dsa.tokens;
-    this.helpers = _dsa.helpers;
+    this.math = _dsa.math;
     this.internal = _dsa.internal;
     this.web3 = _dsa.web3;
     this.dsa = _dsa;
@@ -45,13 +45,13 @@ module.exports = class Token {
       txObj = await this.internal.getTxObj(_d);
     } else {
       _d.toAddr = _d.to;
-      _d.to = this.helpers.getAddress(_d.token);
+      _d.to = this.internal.filterAddress(_d.token);
       var _c = await new this.web3.eth.Contract(
         this.ABI.basic.erc20,
-        this.helpers.getAddress(_d.token)
+        this.internal.filterAddress(_d.token)
       );
       _d.callData = _c.methods
-        .transfer(_d.toAddr, this.helpers.bigNumInString(_d.amount))
+        .transfer(_d.toAddr, this.math.bigNumInString(_d.amount))
         .encodeABI();
       txObj = await this.internal.getTxObj(_d);
     }
@@ -90,10 +90,10 @@ module.exports = class Token {
       });
     } else {
       _d.toAddr = _d.to;
-      _d.to = this.helpers.getAddress(_d.token);
+      _d.to = this.internal.filterAddress(_d.token);
       var _c = await new this.web3.eth.Contract(
         this.ABI.basic.erc20,
-        this.helpers.getAddress(_d.token)
+        this.internal.filterAddress(_d.token)
       );
       _d.callData = _c.methods.approve(_d.toAddr, _d.amount).encodeABI();
       txObj = await this.internal.getTxObj(_d);
@@ -129,7 +129,7 @@ module.exports = class Token {
     } else {
       var _c = await new web3.eth.Contract(
         this.ABI.basic.erc20,
-        this.helpers.getAddress(_d.token)
+        this.internal.filterAddress(_d.token)
       );
       return new Promise((resolve, reject) => {
         return _c.methods

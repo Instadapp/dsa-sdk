@@ -13,7 +13,7 @@ module.exports = class Tokens {
      * @param root (optional) underlying token, used in ctokens
      */
     this.info = require("../constant/tokensInfo.json");
-    this.helpers = _dsa.helpers;
+    this.math = _dsa.math;
   }
 
   /**
@@ -26,7 +26,7 @@ module.exports = class Tokens {
     if (Object.keys(this.info).indexOf(tokenName.toLowerCase()) == -1)
       throw new Error("'token' symbol not found.");
     var token = this.info[tokenName.toLowerCase()];
-    return this.helpers.bigNumInString(
+    return this.math.bigNumInString(
       (Number(amount) * 10 ** token.decimals).toFixed(0)
     );
   }

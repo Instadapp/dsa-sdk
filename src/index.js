@@ -1,7 +1,17 @@
+// constant
 const address = require("./constant/addresses.js");
 const ABI = require("./constant/abis.js");
-const Helpers = require("./helpers.js");
+
+// internal
 const Internal = require("./internal.js");
+
+// utils
+const Erc20 = require("./utils/erc20.js");
+const Cast = require("./utils/cast.js");
+const Txn = require("./utils/txn.js");
+const Math = require("./utils/math.js");
+
+// resolvers
 const Account = require("./resolvers/account.js");
 const Balances = require("./resolvers/balances.js");
 const Compound = require("./resolvers/compound.js");
@@ -11,12 +21,7 @@ const Oasis = require("./resolvers/oasis.js");
 const Kyber = require("./resolvers/kyber.js");
 const Curve = require("./resolvers/curve.js");
 const OneInch = require("./resolvers/1Inch.js");
-
-const ERC20 = require("./erc20.js");
 const Tokens = require("./resolvers/tokens.js");
-
-const CastHelper = require("./helpers/cast.js");
-const TxnHelper = require("./helpers/txn.js");
 
 module.exports = class DSA {
   /**
@@ -47,17 +52,16 @@ module.exports = class DSA {
       version: 1,
     };
     this.origin = address.genesis;
-    this.helpers = new Helpers(this);
-    this.tokens = new Tokens(this);
+
     this.internal = new Internal(this);
+    this.math = new Math(this);
+    this.tokens = new Tokens(this);
+
+    this.castUtil = new Cast(this);
+    this.txnUtil = new Txn(this);
+    this.erc20 = new Erc20(this);
+
     this.account = new Account(this);
-
-    this.castHelper = new CastHelper(this);
-    this.txnHelper = new TxnHelper(this);
-
-    this.sendTxn = this.txnHelper.send; // send transaction // node || browser
-
-    this.erc20 = new ERC20(this);
     this.balances = new Balances(this);
     this.compound = new Compound(this);
     this.maker = new Maker(this);
@@ -67,11 +71,12 @@ module.exports = class DSA {
     this.curve = new Curve(this);
     this.oneInch = new OneInch(this);
 
-    // defining methods to simplify the calls for frontend develoeprs
+    // defining methods to simplify the calls for frontend developers
+    this.sendTxn = this.txnUtil.send; // send transaction // node || browser
     this.transfer = this.erc20.transfer;
-    this.castEncoded = this.castHelper.encoded;
-    this.estimateCastGas = this.castHelper.estimateGas;
-    this.encodeCastABI = this.castHelper.encodeABI;
+    this.castEncoded = this.castUtil.encoded;
+    this.estimateCastGas = this.castUtil.estimateGas;
+    this.encodeCastABI = this.castUtil.encodeABI;
     this.count = this.account.count;
     this.getAccounts = this.account.getAccounts;
     this.getAuthById = this.account.getAuthById;
