@@ -9,7 +9,7 @@ module.exports = {
     instapool: "0x1879BEE186BFfBA9A8b1cAD8181bBFb218A5Aa61",
   },
   connectors: {
-    basic: "0x9370236a085A99Aa359f4bD2f0424b8c3bf25C99",
+    basic: "0x6a31c5982C5Bc5533432913cf06a66b6D3333a95",
     auth: "0xB3242e09C8E5cE6E14296b3d3AbC4C6965F49b98",
     authority: "0xB3242e09C8E5cE6E14296b3d3AbC4C6965F49b98", // same address as of "auth" to not break things with upgrade
     compound: "0xaeCfA2c0f4bAD0Ecee46dcd1250cd0334fE28BC0",
