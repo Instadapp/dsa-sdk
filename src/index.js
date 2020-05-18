@@ -21,6 +21,7 @@ const Oasis = require("./resolvers/oasis.js");
 const Kyber = require("./resolvers/kyber.js");
 const Curve = require("./resolvers/curve.js");
 const OneInch = require("./resolvers/1Inch.js");
+const Dydx = require("./resolvers/dydx.js");
 const Tokens = require("./resolvers/tokens.js");
 
 module.exports = class DSA {
@@ -70,6 +71,7 @@ module.exports = class DSA {
     this.kyber = new Kyber(this);
     this.curve = new Curve(this);
     this.oneInch = new OneInch(this);
+    this.dydx = new Dydx(this);
 
     // defining methods to simplify the calls for frontend developers
     this.sendTxn = this.txnUtil.send; // send transaction // node || browser
