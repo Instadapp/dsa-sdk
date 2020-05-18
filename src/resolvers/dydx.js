@@ -74,10 +74,14 @@ module.exports = class Dydx {
                     _totalBorrowInEth += _borrow * _priceInEth;
 
                     var tokenUtil = _res[3] / 10 ** 18;
-                    var borrowYeild = (0.1 * tokenUtil) + (0.1 * tokenUtil ** 32) + (0.3 * tokenUtil ** 64)
-                    var suppyYeild = 0.95 * borrowYeild * tokenUtil;
+                    var borrowRate = (0.1 * tokenUtil) + (0.1 * tokenUtil ** 32) + (0.3 * tokenUtil ** 64)
+                    var suppyRate = 0.95 * borrowRate * tokenUtil;
+                    var borrowYeild = (1 + borrowRate / 365) ** 365 - 1;
+                    var supplyYield = (1 + suppyRate / 365) ** 365 - 1;
+                    _position[_key].borrowRate = borrowRate * 100;
                     _position[_key].borrowYield = borrowYeild * 100;
-                    _position[_key].SupplyYield = suppyYeild * 100;
+                    _position[_key].SupplyRate = suppyRate * 100;
+                    _position[_key].supplyYield = supplyYield * 100;
                 })
                 _position.totalSupplyInEth = _totalSupplyInEth;
                 _position.totalBorrowInEth = _totalBorrowInEth;
