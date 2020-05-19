@@ -9,6 +9,8 @@ module.exports = class Kyber {
     this.web3 = _dsa.web3;
     this.instance = _dsa.instance;
     this.math = _dsa.math;
+    this.internal = _dsa.internal;
+    this.erc20 = _dsa.erc20;
     this.dsa = _dsa;
   }
 
@@ -22,14 +24,19 @@ module.exports = class Kyber {
   async getBuyAmount(buyToken, sellToken, sellAmt, slippage) {
     let _slippage = !slippage ? 10 ** 16 : slippage * 10 ** 16;
     _slippage = String(this.math.bigNumInString(_slippage));
+    
+    let _sellToken = this.tokens.isToken(sellToken)
+    let _sellAmount = !_sellToken ? 
+      await this.erc20.fromDecimal(sellAmt, sellToken) : 
+      this.tokens.fromDecimal(sellAmt, _sellToken);
 
     var _obj = {
       protocol: "kyber",
       method: "getBuyAmount",
       args: [
-        this.tokens.info[buyToken.toLowerCase()].address,
-        this.tokens.info[sellToken.toLowerCase()].address,
-        this.tokens.fromDecimal(sellAmt, sellToken),
+        this.internal.filterAddress(buyToken),
+        this.internal.filterAddress(sellToken),
+        _sellAmount,
         this.math.bigNumInString(_slippage),
       ],
     };
@@ -37,9 +44,14 @@ module.exports = class Kyber {
     return new Promise((resolve, reject) => {
       return this.dsa
         .read(_obj)
-        .then((res) => {
+        .then(async (res) => {
+          let _buyToken = this.tokens.isToken(buyToken)
+          let _buyAmt = !_buyToken ? 
+            await this.erc20.toDecimal(res[0], buyToken) : 
+            this.tokens.toDecimal(res[0], _buyToken);
+
           var _res = {
-            buyAmt: this.tokens.toDecimal(res[0], buyToken),
+            buyAmt: _buyAmt,
             buyAmtRaw: res[0],
             unitAmt: res[1],
           };

@@ -144,4 +144,60 @@ module.exports = class Erc20 {
       });
     }
   }
+
+  /**
+   * Decimals
+   * @param {number} amount
+   * @param {address} token
+   */
+  async fromDecimal(amount, token) {
+    let web3 = this.web3;
+    var isAddress = this.web3.utils.isAddress(token.toLowerCase());
+    if (!isAddress) throw new Error("'token' address not vaild.");
+
+      var _c = await new web3.eth.Contract(
+        this.ABI.basic.erc20,
+        token
+      );
+      return new Promise((resolve, reject) => {
+        return _c.methods
+          .decimals()
+          .call()
+          .then((res) => {
+            var _res = this.math.bigNumInString(amount * 10 ** res);
+            resolve(_res);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+  }
+
+  /**
+   * Decimals
+   * @param {number} amount
+   * @param {address} token
+   */
+  async toDecimal(amount, token) {
+    let web3 = this.web3;
+    var isAddress = this.web3.utils.isAddress(token.toLowerCase());
+    if (!isAddress) throw new Error("'token' address not vaild.");
+
+      var _c = await new web3.eth.Contract(
+        this.ABI.basic.erc20,
+        token
+      );
+      return new Promise((resolve, reject) => {
+        return _c.methods
+          .decimals()
+          .call()
+          .then((res) => {
+            var _res = this.math.bigNumInString(amount / 10 ** res);
+            resolve(_res);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+  }
 };

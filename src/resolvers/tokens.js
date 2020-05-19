@@ -13,6 +13,7 @@ module.exports = class Tokens {
      * @param root (optional) underlying token, used in ctokens
      */
     this.info = require("../constant/tokensInfo.json");
+    this.web3 = _dsa.web3;
     this.math = _dsa.math;
   }
 
@@ -42,6 +43,22 @@ module.exports = class Tokens {
       throw new Error("'token' symbol not found.");
     var token = this.info[tokenName.toLowerCase()];
     return Number(amount) / 10 ** token.decimals;
+  }
+
+  /**
+   * Returns token amount in wei.
+   * @param {String | address} token - Token.
+   * @returns {Bool}
+   */
+  isToken(token) {
+    var isAddress = this.web3.utils.isAddress(token.toLowerCase());
+    let tokenInfo = this.info;
+    if (isAddress) {
+      return Object.keys(tokenInfo).filter((_token) => tokenInfo[_token].address.toLowerCase() == token.toLowerCase())[0]; 
+    } else {
+      if (Object.keys(tokenInfo).indexOf(token.toLowerCase()) == -1) return false;
+      return token.toLowerCase();
+    }
   }
 
   /**
