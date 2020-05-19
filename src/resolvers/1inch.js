@@ -34,11 +34,11 @@ module.exports = class OneInch {
     let _distribution = !distribution ? 100 : distribution;
     let _disableDex = !disableDex ? 0 : disableDex;
 
-    let _sellToken = this.tokens.isToken(sellToken)
-    let _sellAmount = !_sellToken ? 
-      await this.erc20.fromDecimalInternal(sellAmt, sellToken) : 
-      this.tokens.fromDecimal(sellAmt, _sellToken);
-    
+    let _sellToken = this.tokens.isToken(sellToken);
+    let _sellAmount = !_sellToken
+      ? await this.erc20.fromDecimalInternal(sellAmt, sellToken)
+      : this.tokens.fromDecimal(sellAmt, _sellToken);
+
     var _obj = {
       protocol: "oneInch",
       method: "getBuyAmount",
@@ -55,10 +55,10 @@ module.exports = class OneInch {
       return this.dsa
         .read(_obj)
         .then(async (res) => {
-          let _buyToken = this.tokens.isToken(buyToken)
-          let _buyAmt = !_buyToken ? 
-            await this.erc20.toDecimalInternal(res[0], buyToken) : 
-            this.tokens.toDecimal(res[0], _buyToken);
+          let _buyToken = this.tokens.isToken(buyToken);
+          let _buyAmt = !_buyToken
+            ? await this.erc20.toDecimalInternal(res[0], buyToken)
+            : this.tokens.toDecimal(res[0], _buyToken);
           var _res = {
             buyAmt: _buyAmt,
             buyAmtRaw: res[0],

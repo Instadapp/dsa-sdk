@@ -54,9 +54,13 @@ module.exports = class Tokens {
     var isAddress = this.web3.utils.isAddress(token.toLowerCase());
     let tokenInfo = this.info;
     if (isAddress) {
-      return Object.keys(tokenInfo).filter((_token) => tokenInfo[_token].address.toLowerCase() == token.toLowerCase())[0]; 
+      return Object.keys(tokenInfo).filter(
+        (_token) =>
+          tokenInfo[_token].address.toLowerCase() == token.toLowerCase()
+      )[0];
     } else {
-      if (Object.keys(tokenInfo).indexOf(token.toLowerCase()) == -1) return false;
+      if (Object.keys(tokenInfo).indexOf(token.toLowerCase()) == -1)
+        return false;
       return token.toLowerCase();
     }
   }
