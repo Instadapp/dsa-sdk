@@ -27,7 +27,7 @@ module.exports = class Kyber {
     
     let _sellToken = this.tokens.isToken(sellToken)
     let _sellAmount = !_sellToken ? 
-      await this.erc20.fromDecimal(sellAmt, sellToken) : 
+      await this.erc20.fromDecimalInternal(sellAmt, sellToken) : 
       this.tokens.fromDecimal(sellAmt, _sellToken);
 
     var _obj = {
@@ -47,7 +47,7 @@ module.exports = class Kyber {
         .then(async (res) => {
           let _buyToken = this.tokens.isToken(buyToken)
           let _buyAmt = !_buyToken ? 
-            await this.erc20.toDecimal(res[0], buyToken) : 
+            await this.erc20.toDecimalInternal(res[0], buyToken) : 
             this.tokens.toDecimal(res[0], _buyToken);
 
           var _res = {
