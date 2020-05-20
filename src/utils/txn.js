@@ -52,25 +52,56 @@ module.exports = class TxnHelper {
 
   /**
    * Cancel transaction.
-   * @param {number} nonce - transaction nonce to cancel.
+   * @param {number} _h.nonce - transaction hash.
+   * @param {number} _h.gasPrice - transaction hash.
    * @returns {String} transaction hash.
   */
   async cancel(nonce) {
+    if (!_h.nonce) reject("'nonce` not defined.");
+     if (!_h.gasPrice) reject("'gasPrice` not defined.");
     return new Promise(async (resolve, reject) => {
       let _userAddr = await this.internal.getAddress();
-      let _gasPrice = await this.web3.eth.getGasPrice();
       let _txObj = {
         from: _userAddr,
         to: _userAddr,
         value: 0,
         data: "0x",
-        gasPrice: (_gasPrice * 1.2).toFixed(0),
+        gasPrice: _h.gasPrice,
         gas: "27500",
-        nonce: nonce,
+        nonce: _h.nonce,
       }
       await this.send(_txObj).then(data => resolve(data)).catch(err => reject(err))
     });
   }
+
+  /**
+   * Speed up transaction.
+   * @param {String} _h.txHash - transaction hash.
+   * @param {number} _h.gasPrice - transaction hash.
+   * @returns {String} transaction hash.
+  */
+ async speedUp(_h) {
+   return new Promise(async (resolve, reject) => {
+     let _userAddr = await this.internal.getAddress();
+     if (!_h.txHash) reject("'txHash` not defined.");
+     if (!_h.gasPrice) reject("'gasPrice` not defined.");
+    this.web3.eth.getTransaction(_h.txHash).then(async (txData) => {
+      if (txData.from.toLowerCase() != _userAddr.toLowerCase()) reject("'from' address doesnt match.");
+      let _txObj = {
+        from: txData.from,
+        to: txData.to,
+        value: txData.value,
+        data: txData.input,
+        gasPrice: _h.gasPrice.toFixed(0),
+        gas: (txData.gas),
+        nonce: txData.nonce,
+      }
+      await this.send(_txObj).then(data => resolve(data)).catch(err => reject(err))
+    })
+    .catch(err => reject(err))
+   
+  });
+}
 
   /**
    * Get transaction Nonce.
@@ -78,7 +109,7 @@ module.exports = class TxnHelper {
    */
   async getTxNonce(tx) {
     return new Promise(async (resolve, reject) => {
-      web3.eth.getTransaction(tx).then(tx => resolve(tx.nonce)).catch(err => reject(err))
+      this.web3.eth.getTransaction(tx).then(tx => resolve(tx)).catch(err => reject(err))
     });
   }
 
@@ -88,7 +119,7 @@ module.exports = class TxnHelper {
    */
   async getTxCount(address) {
     return new Promise(async (resolve, reject) => {
-      web3.eth.getTransactionCount(address).then(nonce => resolve(nonce)).catch(err => reject(err))
+      this.web3.eth.getTransactionCount(address).then(nonce => resolve(nonce)).catch(err => reject(err))
     });
   }
 };
