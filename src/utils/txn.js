@@ -12,6 +12,7 @@ module.exports = class TxnHelper {
     this.web3 = _dsa.web3;
     this.mode = _dsa.mode;
     this.privateKey = _dsa.privateKey;
+    this.dsa = _dsa;
   }
 
   /**
@@ -46,6 +47,48 @@ module.exports = class TxnHelper {
             reject(error);
           });
       }
+    });
+  }
+
+  /**
+   * Cancel transaction.
+   * @param {number} nonce - transaction nonce to cancel.
+   * @returns {String} transaction hash.
+  */
+  async cancel(nonce) {
+    return new Promise(async (resolve, reject) => {
+      let _userAddr = await this.internal.getAddress();
+      let _gasPrice = await this.web3.eth.getGasPrice();
+      let _txObj = {
+        from: _userAddr,
+        to: _userAddr,
+        value: 0,
+        data: "0x",
+        gasPrice: (_gasPrice * 1.2).toFixed(0),
+        gas: "27500",
+        nonce: nonce,
+      }
+      await this.send(_txObj).then(data => resolve(data)).catch(err => reject(err))
+    });
+  }
+
+  /**
+   * Get transaction Nonce.
+   * @param {string} tx - transaction hash to get nonce.
+   */
+  async getTxNonce(tx) {
+    return new Promise(async (resolve, reject) => {
+      web3.eth.getTransaction(tx).then(tx => resolve(tx.nonce)).catch(err => reject(err))
+    });
+  }
+
+  /**
+   * Get transaction count.
+   * @param {address} address - transaction count of address.
+   */
+  async getTxCount(address) {
+    return new Promise(async (resolve, reject) => {
+      web3.eth.getTransactionCount(address).then(nonce => resolve(nonce)).catch(err => reject(err))
     });
   }
 };
