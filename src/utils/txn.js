@@ -56,7 +56,7 @@ module.exports = class TxnHelper {
    * @param {number} _h.gasPrice - transaction hash.
    * @returns {String} transaction hash.
   */
-  async cancel(nonce) {
+  async cancel(_h) {
     if (!_h.nonce) reject("'nonce` not defined.");
      if (!_h.gasPrice) reject("'gasPrice` not defined.");
     return new Promise(async (resolve, reject) => {
