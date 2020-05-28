@@ -13,15 +13,15 @@ For production, we recommend linking to a specific version number ([jsdeliver](h
 
 ## Usage
 
-To enable web3 calls via SDK, instantiate [web3 library](https://github.com/ethereum/web3.js/#installation).
+To enable web3 calls via SDK, instigate [web3 library](https://github.com/ethereum/web3.js/#installation).
 ```javascript
 // in browser
 if (window.ethereum) {
-	window.web3 = new  Web3(window.ethereum)
+  window.web3 = new  Web3(window.ethereum)
 } else  if (window.web3) {
-	window.web3 = new  Web3(window.web3.currentProvider)
+  window.web3 = new  Web3(window.web3.currentProvider)
 } else {
-	window.web3 = new  Web3(customProvider)
+  window.web3 = new  Web3(customProvider)
 }
 
 // in nodejs
@@ -31,7 +31,7 @@ const  web3 = new  Web3(new  Web3.providers.HttpProvider(ETH_NODE_URL))
 ```
 
  
-Now instantiate DSA with web3 instance.
+Now instigate DSA with web3 instance.
 
 ```javascript
 
@@ -40,16 +40,16 @@ const  dsa = new  DSA(web3);
 
 // in nodejs
 const  dsa = new  DSA({
-	web3:  web3,
-	mode:  "node",
-	privateKey:  PRIVATE_KEY
+  web3:  web3,
+  mode:  "node",
+  privateKey:  PRIVATE_KEY
 });
 ```
 
 
 # Setup Account
 
-Every user needs to create Smart Account to interact with DeFi Protocols seamlessly; this allows developers to build extensible use-cases with maximum security and composability. You can also create multiple account for a single address.
+Every user needs to create Smart Account to interact with DeFi Protocols seamlessly; this allows developers to build extensible use-cases with maximum security and composability. You can also create multiple accounts for a single address.
 
 - Create Smart Account - `build()`
 - Fetch Smart Accounts - `getAccounts()`
@@ -73,11 +73,11 @@ dsa.getAccounts(address).then(console.log);
 
 ```javascript
 [
-	{
-		id:  52, // DSA Number
-		address:  "0x...", // DSA Address
-		version:  1  // DSA version
-	},
+  {
+  	id:  52, // DSA Number
+  	address:  "0x...", // DSA Address
+  	version:  1  // DSA version
+  },
 	...
 ]
 
@@ -96,21 +96,21 @@ The build method also accepts an optional `Object` parameter as shown below:
 
 ```javascript
 dsa.build({
-	gasPrice:  gasPrice  // estimate gas price: https://gist.github.com/thrilok209/8b19dbd8d46b2805ab8bb8973611aea2
-	origin: origin,
-	authority:  authority,
+  gasPrice:  gasPrice  // estimate gas price: https://gist.github.com/thrilok209/8b19dbd8d46b2805ab8bb8973611aea2
+  origin: origin,
+  authority:  authority,
 })
 ```
 
-The build method also accepts an **optional**  `Object` parameter as shown below. You can also checkout [our gist](https://gist.github.com/Sowmayjain/64690959985a1b47715c79f49ac79a34) for the implementation of this method.
+The build method also accepts **optional**  `Object` parameter as shown below. You can also checkout [our gist](https://gist.github.com/Sowmayjain/64690959985a1b47715c79f49ac79a34) for the implementation of this method.
 
 ```javascript
 dsa.build({
-	gasPrice: web3.utils.toWei(gasPrice, 'gwei'), // estimate gas price*
-	origin: origin,
-	authority: authority,
-	from: from,
-	nonce: nonce
+  gasPrice: web3.utils.toWei(gasPrice, 'gwei'), // estimate gas price*
+  origin: origin,
+  authority: authority,
+  from: from,
+  nonce: nonce
 })
 ```
 * View our [Gist](https://gist.github.com/thrilok209/8b19dbd8d46b2805ab8bb8973611aea2) for estimation of gas price.
@@ -137,7 +137,6 @@ Now that you have an account setup, transfer assets to your DSA address, which c
 
 # UseCase(Short DAI)
 
-
 The DSA will cast the spells across the [MakerDAO](https://docs.instadapp.io/connectors/makerdao/), [OasisDEX](https://docs.instadapp.io/connectors/oasis/) and [Instapool](https://docs.instadapp.io/connectors/instapool/) connectors in the following sequence.
 
 ##### Benefits
@@ -155,7 +154,7 @@ The DSA will cast the spells across the [MakerDAO](https://docs.instadapp.io/con
 
 ##### Requirements
 * User should have base amount of USDC to perform the leverage. Liquidation on Compound is 83.33% which means for 1 DAI borrowed, user needs to have the balance of 0.25 USDC for collateral to perform this spell.
-* Maker vault minimum debt requirement is 20 DAI.
+* Minimum debt required to open a vault is 20 DAI.
 
 ```javascript
 let  borrowAmount = 20; // 20 DAI
@@ -170,39 +169,39 @@ let  buyAmount = await  dsa.oasis.getBuyAmount("USDC", "DAI", borrowAmount, slip
 let  spells = dsa.Spell();
 
 spells.add({
-	connector:  "instapool",
-	method:  "flashBorrow",
-	args: [dai_address, borrowAmtInWei, 0, 0]
+  connector:  "instapool",
+  method:  "flashBorrow",
+  args: [dai_address, borrowAmtInWei, 0, 0]
 });
 
 spells.add({
-	connector:  "oasis",
-	method:  "sell",
-	args: [usdc_address, dai_address, borrowAmtInWei, buyAmount.unitAmt, 0, 0]
+  connector:  "oasis",
+  method:  "sell",
+  args: [usdc_address, dai_address, borrowAmtInWei, buyAmount.unitAmt, 0, 0]
 });
 
 spells.add({
-	connector:  "maker",
-	method:  "open",
-	args: ["USDC-A"]
+  connector:  "maker",
+  method:  "open",
+  args: ["USDC-A"]
 });
 
 spells.add({
-	connector:  "maker",
-	method:  "deposit",
-	args: [0, -1, 0, 0] // deposit all USDC
+  connector:  "maker",
+  method:  "deposit",
+  args: [0, -1, 0, 0] // deposit all USDC
 });
 
 spells.add({
-	connector:  "maker",
-	method:  "borrow",
-	args: [0, borrowAmtInWei, 0, 0]
+  connector:  "maker",
+  method:  "borrow",
+  args: [0, borrowAmtInWei, 0, 0]
 });
 
 spells.add({
-	connector:  "instapool",
-	method:  "flashPayback",
-	args: [dai_address, 0, 0]
+  connector:  "instapool",
+  method:  "flashPayback",
+  args: [dai_address, 0, 0]
 });
 
 dsa.cast(spells).then(console.log)
