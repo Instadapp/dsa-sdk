@@ -83,6 +83,41 @@
     "address": "0x57ab1ec28d129707052df4df418d58a2d46d5f51",
     "decimals": 18
   },
+  "busd": {
+    "type": "token",
+    "symbol": "BUSD",
+    "name": "Binance USD",
+    "address": "0x4Fabb145d64652a948d72533023f6E7A623C7C53",
+    "decimals": 18
+  },
+  "lend": {
+    "type": "token",
+    "symbol": "LEND",
+    "name": "ETH LEND",
+    "address": "0x80fB784B7eD66730e8b1DBd9820aFD29931aab03",
+    "decimals": 18
+  },
+  "link": {
+    "type": "token",
+    "symbol": "LINK",
+    "name": "ChainLink Token",
+    "address": "0x514910771AF9Ca656af840dff83E8264EcF986CA",
+    "decimals": 18
+  },
+  "mana": {
+    "type": "token",
+    "symbol": "MANA",
+    "name": "Decentraland",
+    "address": "0x0F5D2fB29fb7d3CFeE444a200298f468908cC942",
+    "decimals": 18
+  },
+  "snx": {
+    "type": "token",
+    "symbol": "SNX",
+    "name": "Synthetix Network Token",
+    "address": "0xC011a73ee8576Fb46F5E1c5751cA3B9Fe0af2a6F",
+    "decimals": 18
+  },
   "ceth": {
     "type": "ctoken",
     "symbol": "CETH",
@@ -167,7 +202,7 @@
     "symbol": "AETH",
     "name": "Aave ETH",
     "address": "0x3a3A65aAb0dd2A17E3F1947bA16138cd37d08c04",
-    "decimals": 8,
+    "decimals": 18,
     "factor": 0.75,
     "root": "eth"
   },
@@ -176,7 +211,7 @@
     "symbol": "ADAI",
     "name": "Aave DAI",
     "address": "0xfC1E690f61EFd961294b3e1Ce3313fBD8aa4f85d",
-    "decimals": 8,
+    "decimals": 18,
     "factor": 0.75,
     "root": "dai"
   },
@@ -185,7 +220,7 @@
     "symbol": "AUSDC",
     "name": "Aave USDC",
     "address": "0x9bA00D6856a4eDF4665BcA2C2309936572473B7E",
-    "decimals": 8,
+    "decimals": 18,
     "factor": 0.75,
     "root": "usdc"
   },
@@ -194,17 +229,116 @@
     "symbol": "AUSDT",
     "name": "Aave USDT",
     "address": "0x71fc860F7D3A592A4a98740e39dB31d25db65ae8",
-    "decimals": 8,
-    "factor": 0,
+    "decimals": 18,
+    "factor": 0.75,
     "root": "usdt"
+  },
+  "asusd": {
+    "type": "atoken",
+    "symbol": "ASUSD",
+    "name": "Aave SUSD",
+    "address": "0x625aE63000f46200499120B906716420bd059240",
+    "decimals": 18,
+    "factor": 0.75,
+    "root": "susd"
+  },
+  "atusd": {
+    "type": "atoken",
+    "symbol": "ATUSD",
+    "name": "Aave TUSD",
+    "address": "0x4DA9b813057D04BAef4e5800E36083717b4a0341",
+    "decimals": 18,
+    "factor": 0.75,
+    "root": "tusd"
+  },
+  "abusd": {
+    "type": "atoken",
+    "symbol": "ABUSD",
+    "name": "Aave BUSD",
+    "address": "0x6Ee0f7BB50a54AB5253dA0667B0Dc2ee526C30a8",
+    "decimals": 18,
+    "factor": 0.75,
+    "root": "busd"
+  },
+  "abat": {
+    "type": "atoken",
+    "symbol": "ABAT",
+    "name": "Aave BAT",
+    "address": "0xE1BA0FB44CCb0D11b80F92f4f8Ed94CA3fF51D00",
+    "decimals": 18,
+    "factor": 0.75,
+    "root": "bat"
+  },
+  "aknc": {
+    "type": "atoken",
+    "symbol": "AKNC",
+    "name": "Aave KNC",
+    "address": "0x9D91BE44C06d373a8a226E1f3b146956083803eB",
+    "decimals": 18,
+    "factor": 0.75,
+    "root": "knc"
+  },
+  "alend": {
+    "type": "atoken",
+    "symbol": "ALEND",
+    "name": "Aave LEND",
+    "address": "0x7D2D3688Df45Ce7C552E19c27e007673da9204B8",
+    "decimals": 18,
+    "factor": 0.75,
+    "root": "lend"
+  },
+  "alink": {
+    "type": "atoken",
+    "symbol": "ALINK",
+    "name": "Aave LINK",
+    "address": "0xA64BD6C70Cb9051F6A9ba1F163Fdc07E0DfB5F84",
+    "decimals": 18,
+    "factor": 0.75,
+    "root": "link"
+  },
+  "amana": {
+    "type": "atoken",
+    "symbol": "AMANA",
+    "name": "Aave MANA",
+    "address": "0x6FCE4A401B6B80ACe52baAefE4421Bd188e76F6f",
+    "decimals": 18,
+    "factor": 0.75,
+    "root": "mana"
+  },
+  "amkr": {
+    "type": "atoken",
+    "symbol": "AMKR",
+    "name": "Aave MKR",
+    "address": "0x7deB5e830be29F91E298ba5FF1356BB7f8146998",
+    "decimals": 18,
+    "factor": 0.75,
+    "root": "mkr"
+  },
+  "asnx": {
+    "type": "atoken",
+    "symbol": "ASNX",
+    "name": "Aave SNX",
+    "address": "0x328C4c80BC7aCa0834Db37e6600A6c49E12Da4DE",
+    "decimals": 18,
+    "factor": 0.75,
+    "root": "snx"
+  },
+  "awbtc": {
+    "type": "atoken",
+    "symbol": "AWBTC",
+    "name": "Aave WBTC",
+    "address": "0xFC4B8ED459e00e5400be803A9BB3954234FD50e3",
+    "decimals": 18,
+    "factor": 0.75,
+    "root": "wbtc"
   },
   "azrx": {
     "type": "atoken",
     "symbol": "AZRX",
     "name": "Aave ZRX",
     "address": "0x6Fb0855c404E09c47C3fBCA25f08d4E41f9F062f",
-    "decimals": 8,
-    "factor": 0.6,
+    "decimals": 18,
+    "factor": 0.75,
     "root": "zrx"
   },
   "arep": {
@@ -212,8 +346,8 @@
     "symbol": "AREP",
     "name": "Aave REP",
     "address": "0x71010A9D003445aC60C4e6A7017c1E89A477B438",
-    "decimals": 8,
-    "factor": 0.4,
+    "decimals": 18,
+    "factor": 0.75,
     "root": "rep"
   }
 }
