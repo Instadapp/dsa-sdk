@@ -20,7 +20,7 @@ module.exports = class Aave {
         return _atokens;
     }
 
-    getCtokensAddresses(_atokens) {
+    getAtokensAddresses(_atokens) {
         if (!_atokens) _atokens = getAtokens();
         var _addresses = [];
         Object.keys(_atokens).forEach((_key) => {
