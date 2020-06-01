@@ -1,0 +1,15 @@
+version: 2
+updates:
+  # Keep package.json (& lockfiles) up to date as soon as
+  # new versions are published to the npm registry
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      
+    # Apply default reviewer and label to created
+    # pull requests
+    reviewers:
+      - "ishanjain28"
+    labels:
+      - "dependency-security-update"
