@@ -161,5 +161,59 @@
     "name": "Curve SUSD",
     "address": "0xC25a3A3b969415c80451098fa907EC722572917F",
     "decimals": 18
+  },
+  "aeth": {
+    "type": "atoken",
+    "symbol": "AETH",
+    "name": "Aave ETH",
+    "address": "0x3a3A65aAb0dd2A17E3F1947bA16138cd37d08c04",
+    "decimals": 8,
+    "factor": 0.75,
+    "root": "eth"
+  },
+  "adai": {
+    "type": "atoken",
+    "symbol": "ADAI",
+    "name": "Aave DAI",
+    "address": "0xfC1E690f61EFd961294b3e1Ce3313fBD8aa4f85d",
+    "decimals": 8,
+    "factor": 0.75,
+    "root": "dai"
+  },
+  "ausdc": {
+    "type": "atoken",
+    "symbol": "AUSDC",
+    "name": "Aave USDC",
+    "address": "0x9bA00D6856a4eDF4665BcA2C2309936572473B7E",
+    "decimals": 8,
+    "factor": 0.75,
+    "root": "usdc"
+  },
+  "ausdt": {
+    "type": "atoken",
+    "symbol": "AUSDT",
+    "name": "Aave USDT",
+    "address": "0x71fc860F7D3A592A4a98740e39dB31d25db65ae8",
+    "decimals": 8,
+    "factor": 0,
+    "root": "usdt"
+  },
+  "azrx": {
+    "type": "atoken",
+    "symbol": "AZRX",
+    "name": "Aave ZRX",
+    "address": "0x6Fb0855c404E09c47C3fBCA25f08d4E41f9F062f",
+    "decimals": 8,
+    "factor": 0.6,
+    "root": "zrx"
+  },
+  "arep": {
+    "type": "atoken",
+    "symbol": "AREP",
+    "name": "Aave REP",
+    "address": "0x71010A9D003445aC60C4e6A7017c1E89A477B438",
+    "decimals": 8,
+    "factor": 0.4,
+    "root": "rep"
   }
 }

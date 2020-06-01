@@ -18,6 +18,7 @@ module.exports = {
     curve: require("../abi/connectors/curve.json"),
     oneInch: require("../abi/connectors/1inch.json"),
     dydx: require("../abi/connectors/dydx.json"),
+    aave: require("../abi/read/aave.json"),
   },
   read: {
     core: require("../abi/read/core.json"),
@@ -29,6 +30,7 @@ module.exports = {
     curve: require("../abi/read/curve.json"),
     oneInch: require("../abi/read/1inch.json"),
     dydx: require("../abi/read/dydx.json"),
+    aave: require("../abi/read/aave.json"),
   },
   basic: {
     erc20: require("../abi/basics/erc20.json"),
