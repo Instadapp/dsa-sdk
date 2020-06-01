@@ -35,9 +35,11 @@ module.exports = class Account {
 
   /**
    * returns accounts in a simple array of objects for addresses owned by the address
-   * @param _authority the ethereum address
+   * @param _authority the ethereum address or .eth name
    */
   async getAccounts(_authority) {
+    if (_authority.includes(".eth"))
+      _authority = await this.internal.web3.eth.ens.getAddress(_authority);
     if (!_authority) _authority = await this.internal.getAddress();
     var _c = new this.web3.eth.Contract(
       this.ABI.read.core,
