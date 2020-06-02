@@ -85,6 +85,11 @@
                     },
                     {
                         "internalType": "uint256",
+                        "name": "ltv",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
                         "name": "healthFactor",
                         "type": "uint256"
                     }
@@ -92,6 +97,19 @@
                 "internalType": "struct AaveHelpers.AaveUserData",
                 "name": "",
                 "type": "tuple"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "name",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
             }
         ],
         "stateMutability": "view",
