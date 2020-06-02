@@ -1,0 +1,100 @@
+[
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            },
+            {
+                "internalType": "address[]",
+                "name": "tokens",
+                "type": "address[]"
+            }
+        ],
+        "name": "getPosition",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "tokenPrice",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "supplyBalance",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "borrowBalance",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "borrowFee",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "supplyRate",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "borrowRate",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct AaveHelpers.AaveTokenData[]",
+                "name": "",
+                "type": "tuple[]"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "totalSupplyETH",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "totalCollateralETH",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "totalBorrowsETH",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "totalFeesETH",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "availableBorrowsETH",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "currentLiquidationThreshold",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "healthFactor",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct AaveHelpers.AaveUserData",
+                "name": "",
+                "type": "tuple"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    }
+]
