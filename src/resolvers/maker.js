@@ -41,7 +41,7 @@ var colInfo = {
   },
   "USDC-B": {
     token: "USDC",
-    ratio: 2 / 3,
+    ratio: 5 / 6,
     joinAddr: "0x2600004fd1585f7270756DDc88aD9cfA10dD0428",
     addr: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
     stabiltyRate: 0,
@@ -51,7 +51,7 @@ var colInfo = {
   },
   "TUSD-A": {
     token: "TUSD",
-    ratio: 2 / 3,
+    ratio: 5 / 6,
     joinAddr: "0x4454aF7C8bb9463203b66C816220D41ED7837f44",
     addr: "0x0000000000085d4780B73119b644AE5ecd22b376",
     stabiltyRate: 0,
