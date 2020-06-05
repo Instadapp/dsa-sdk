@@ -49,16 +49,16 @@ var colInfo = {
     typeBytes:
       "0x555344432d420000000000000000000000000000000000000000000000000000",
   },
-  "TUSD-A": {
-    token: "TUSD",
-    ratio: 5 / 6,
-    joinAddr: "0x4454aF7C8bb9463203b66C816220D41ED7837f44",
-    addr: "0x0000000000085d4780B73119b644AE5ecd22b376",
-    stabiltyRate: 0,
-    price: 0,
-    typeBytes:
-      "0x545553442d410000000000000000000000000000000000000000000000000000",
-  },
+  // "TUSD-A": { // Unavailable due to a token upgrade.
+  //   token: "TUSD",
+  //   ratio: 5 / 6,
+  //   joinAddr: "0x4454aF7C8bb9463203b66C816220D41ED7837f44",
+  //   addr: "0x0000000000085d4780B73119b644AE5ecd22b376",
+  //   stabiltyRate: 0,
+  //   price: 0,
+  //   typeBytes:
+  //     "0x545553442d410000000000000000000000000000000000000000000000000000",
+  // },
 };
 
 module.exports = class Maker {
