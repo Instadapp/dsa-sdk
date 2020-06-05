@@ -21,7 +21,7 @@ var colInfo = {
   },
   "USDC-A": {
     token: "USDC",
-    ratio: 4 / 5,
+    ratio: 5 / 6,
     joinAddr: "0xa191e578a6736167326d05c119ce0c90849e84b7",
     addr: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
     stabiltyRate: 0,
@@ -39,6 +39,26 @@ var colInfo = {
     typeBytes:
       "0x574254432d410000000000000000000000000000000000000000000000000000",
   },
+  "USDC-B": {
+    token: "USDC",
+    ratio: 5 / 6,
+    joinAddr: "0x2600004fd1585f7270756DDc88aD9cfA10dD0428",
+    addr: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+    stabiltyRate: 0,
+    price: 0,
+    typeBytes:
+      "0x555344432d420000000000000000000000000000000000000000000000000000",
+  },
+  // "TUSD-A": { // Unavailable due to a token upgrade.
+  //   token: "TUSD",
+  //   ratio: 5 / 6,
+  //   joinAddr: "0x4454aF7C8bb9463203b66C816220D41ED7837f44",
+  //   addr: "0x0000000000085d4780B73119b644AE5ecd22b376",
+  //   stabiltyRate: 0,
+  //   price: 0,
+  //   typeBytes:
+  //     "0x545553442d410000000000000000000000000000000000000000000000000000",
+  // },
 };
 
 module.exports = class Maker {
