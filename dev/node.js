@@ -10,6 +10,8 @@ const dsa = new DSA({
     privateKey: process.env.PRIVATE_KEY,
 });
 
+// dsa.aave.getPosition("0xa7615CD307F323172331865181DC8b80a2834324", "token").then(console.log)
+
 // console.log(dsa.privateKey)
 // dsa.internal.getAddress().then(console.log)
 
