@@ -7,8 +7,11 @@ module.exports = class CastHelper {
    */
   constructor(_dsa) {
     this.ABI = _dsa.ABI;
+    this.address = _dsa.address;
     this.internal = _dsa.internal;
     this.web3 = _dsa.web3;
+    this.instance = _dsa.instance;
+    this.dsa = _dsa;
   }
 
   /**
@@ -69,7 +72,10 @@ module.exports = class CastHelper {
   encodeABI(_d) {
     let _enodedSpell = this.internal.encodeSpells(_d);
     if (!_d.to) _d.to = this.instance.address;
-    if (!_d.origin) _d.origin = this.origin;
+    if(_d.to == this.address.genesis) throw new Error(
+      `Please configure the DSA instance by calling dsa.setInstance(dsaId). More details: https://docs.instadapp.io/setup`
+    );
+    if (!_d.origin) _d.origin = this.dsa.origin;
     let _contract = new this.web3.eth.Contract(this.ABI.core.account, _d.to);
     return _contract.methods.cast(..._enodedSpell, _d.origin).encodeABI();
   }
