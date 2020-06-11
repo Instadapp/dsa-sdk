@@ -19,6 +19,7 @@ module.exports = {
     oneInch: require("../abi/connectors/1inch.json"),
     dydx: require("../abi/connectors/dydx.json"),
     aave: require("../abi/connectors/aave.json"),
+    migrate: require("../abi/connectors/migrate.json"),
   },
   read: {
     core: require("../abi/read/core.json"),
