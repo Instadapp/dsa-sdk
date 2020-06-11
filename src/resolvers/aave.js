@@ -83,8 +83,8 @@ module.exports = class Aave {
             _position[_key].borrow = _borrow;
             var _fee = _res[3] / 10 ** _decimals;
             _position[_key].borrowFee = _fee;
-            _position[_key].borrowYield = (_res[4] / 1e27) * 100; // Multiply with 100 to make it in percent
-            _position[_key].supplyYield = (_res[5] / 1e27) * 100; // Multiply with 100 to make it in percent
+            _position[_key].borrowYield = (_res[5] / 1e27) * 100; // Multiply with 100 to make it in percent
+            _position[_key].supplyYield = (_res[4] / 1e27) * 100; // Multiply with 100 to make it in percent
           });
           _position.totalSupplyInEth = _totalSupplyInEth;
           _position.totalBorrowInEth = Number(res[1][2]) / 1e18;
