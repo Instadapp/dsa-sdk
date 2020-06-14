@@ -21,6 +21,7 @@ module.exports = {
     oneInch: "0x1beCC315E044E8ee8898011609E63F8259d3B124",
     dydx: "0x6AF6C791c869DfA65f8A2fa042fA47D1535Bef25",
     aave: "0x3fd79E82CCAc22A1c1b504e8a04bec133CB3f282",
+    migrate: "0xcb5cbc3f397e0024fac67cf6dd465e02ca91c215",
   },
   read: {
     core: "0xCCf112e4348Fb273381D37F20dF49135DA973Be5",
