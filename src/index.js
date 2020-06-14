@@ -87,7 +87,8 @@ module.exports = class DSA {
     this.getAuthByAddress = this.account.getAuthByAddress;
 
     // value of uint(-1).
-    this.maxValue = "115792089237316195423570985008687907853269984665640564039457584007913129639935";
+    this.maxValue =
+      "115792089237316195423570985008687907853269984665640564039457584007913129639935";
   }
 
   /**
