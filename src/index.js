@@ -85,6 +85,9 @@ module.exports = class DSA {
     this.getAccounts = this.account.getAccounts;
     this.getAuthById = this.account.getAuthById;
     this.getAuthByAddress = this.account.getAuthByAddress;
+
+    // value of uint(-1).
+    this.maxValue = "115792089237316195423570985008687907853269984665640564039457584007913129639935";
   }
 
   /**
