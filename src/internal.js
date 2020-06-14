@@ -44,14 +44,14 @@ module.exports = class Internal {
       ? _d.gas
       : ((await this.web3.eth.estimateGas(txObj)) * 1.3).toFixed(0); // increasing gas cost by 30% for margin
 
-      if (this.mode == "node") {
-        if (!_d.gasPrice) throw new Error("`gasPrice` is not defined.");
-        
-        txObj.nonce = _d.nonce
+    if (this.mode == "node") {
+      if (!_d.gasPrice) throw new Error("`gasPrice` is not defined.");
+
+      txObj.nonce = _d.nonce
         ? _d.nonce
         : await this.web3.eth.getTransactionCount(txObj.from);
-      }
-      if(_d.gasPrice) txObj.gasPrice = _d.gasPrice;
+    }
+    if (_d.gasPrice) txObj.gasPrice = _d.gasPrice;
 
     return txObj;
   }
