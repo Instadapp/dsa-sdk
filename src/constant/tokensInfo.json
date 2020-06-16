@@ -34,6 +34,13 @@
     "address": "0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2",
     "decimals": 18
   },
+  "comp": {
+    "type": "token",
+    "symbol": "COMP",
+    "name": "Compound",
+    "address": "0xc00e94Cb662C3520282E6f5717214004A7f26888",
+    "decimals": 18
+  },
   "zrx": {
     "type": "token",
     "symbol": "ZRX",
