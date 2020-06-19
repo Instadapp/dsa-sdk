@@ -109,7 +109,7 @@ module.exports = class Compound {
           _position.liquidation = _liquidation;
           _position.CompBalance = res[1].balance / 10 ** (18)
           _position.CompAccrued = res[1].allocated / 10 ** (18)
-          _position.CompVotedelegate = res[1].delegate
+          _position.CompDelegate = res[1].delegate
           _position.CompVotes = res[1].votes
           resolve(_position);
         })
