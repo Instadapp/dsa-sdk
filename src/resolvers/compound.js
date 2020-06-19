@@ -76,7 +76,7 @@ module.exports = class Compound {
               : key == "address"
               ? (_key = this.tokens.info[_root].address)
               : (_key = _root);
-            var _res = res[i];
+            var _res = res[0][i];
             var _decimals = this.tokens.info[_ctokens[_ctoken].root].decimals;
             _position[_key] = {};
             var _priceInEth = _res[0] / 10 ** (18 + (18 - _decimals));
@@ -107,6 +107,10 @@ module.exports = class Compound {
           _position.status = _status;
           var _liquidation = _maxBorrowLimitInEth / _totalSupplyInEth;
           _position.liquidation = _liquidation;
+          _position.CompBalance = res[1].balance / 10 ** (18)
+          _position.CompAccrued = res[1].allocated / 10 ** (18)
+          _position.CompVotedelegate = res[1].delegate
+          _position.CompVotes = res[1].votes
           resolve(_position);
         })
         .catch((err) => {
