@@ -107,10 +107,10 @@ module.exports = class Compound {
           _position.status = _status;
           var _liquidation = _maxBorrowLimitInEth / _totalSupplyInEth;
           _position.liquidation = _liquidation;
-          _position.CompBalance = res[1].balance / 10 ** 18;
-          _position.CompAccrued = res[1].allocated / 10 ** 18;
-          _position.CompDelegate = res[1].delegate;
-          _position.CompVotes = res[1].votes;
+          _position.compBalance = res[1].balance / 10 ** 18;
+          _position.compAccrued = res[1].allocated / 10 ** 18;
+          _position.compDelegate = res[1].delegate;
+          _position.compVotes = res[1].votes;
           resolve(_position);
         })
         .catch((err) => {
