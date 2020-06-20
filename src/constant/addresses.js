@@ -12,7 +12,7 @@ module.exports = {
     basic: "0x6a31c5982C5Bc5533432913cf06a66b6D3333a95",
     auth: "0xB3242e09C8E5cE6E14296b3d3AbC4C6965F49b98",
     authority: "0xB3242e09C8E5cE6E14296b3d3AbC4C6965F49b98", // same address as of "auth" to not break things with upgrade
-    compound: "0xaeCfA2c0f4bAD0Ecee46dcd1250cd0334fE28BC0",
+    compound: "0x07F81230d73a78f63F0c2A3403AD281b067d28F8",
     maker: "0x58Bbb677296B6d1B596288B31Abb928492400fBF",
     instapool: "0x6d11A71575C34eB7b5E22949fAfCd49A2FA2A8F9",
     oasis: "0xE554c84c030bd5e850cDbd17f6583818b8dE5b1F",

@@ -428,5 +428,18 @@
     "outputs": [],
     "stateMutability": "payable",
     "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "setId",
+        "type": "uint256"
+      }
+    ],
+    "name": "ClaimComp",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
   }
 ]
