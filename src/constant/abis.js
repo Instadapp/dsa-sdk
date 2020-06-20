@@ -20,6 +20,7 @@ module.exports = {
     dydx: require("../abi/connectors/dydx.json"),
     aave: require("../abi/connectors/aave.json"),
     migrate: require("../abi/connectors/migrate.json"),
+    compoundImport: require("../abi/connectors/compoundImport.json"),
   },
   read: {
     core: require("../abi/read/core.json"),

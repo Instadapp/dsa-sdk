@@ -1,141 +1,141 @@
 [
   {
-      "inputs": [
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "internalType": "address[]",
+        "name": "cAddress",
+        "type": "address[]"
+      }
+    ],
+    "name": "getCompoundData",
+    "outputs": [
+      {
+        "components": [
           {
-              "internalType": "address",
-              "name": "owner",
-              "type": "address"
+            "internalType": "uint256",
+            "name": "tokenPrice",
+            "type": "uint256"
           },
           {
-              "internalType": "address[]",
-              "name": "cAddress",
-              "type": "address[]"
-          }
-      ],
-      "name": "getCompoundData",
-      "outputs": [
+            "internalType": "uint256",
+            "name": "exchangeRateStored",
+            "type": "uint256"
+          },
           {
-              "components": [
-                  {
-                      "internalType": "uint256",
-                      "name": "tokenPrice",
-                      "type": "uint256"
-                  },
-                  {
-                      "internalType": "uint256",
-                      "name": "exchangeRateStored",
-                      "type": "uint256"
-                  },
-                  {
-                      "internalType": "uint256",
-                      "name": "balanceOfUser",
-                      "type": "uint256"
-                  },
-                  {
-                      "internalType": "uint256",
-                      "name": "borrowBalanceStoredUser",
-                      "type": "uint256"
-                  },
-                  {
-                      "internalType": "uint256",
-                      "name": "supplyRatePerBlock",
-                      "type": "uint256"
-                  },
-                  {
-                      "internalType": "uint256",
-                      "name": "borrowRatePerBlock",
-                      "type": "uint256"
-                  }
-              ],
-              "internalType": "struct Helpers.CompData[]",
-              "name": "",
-              "type": "tuple[]"
+            "internalType": "uint256",
+            "name": "balanceOfUser",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "borrowBalanceStoredUser",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "supplyRatePerBlock",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "borrowRatePerBlock",
+            "type": "uint256"
           }
-      ],
-      "stateMutability": "view",
-      "type": "function"
+        ],
+        "internalType": "struct Helpers.CompData[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-      "inputs": [
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "internalType": "address[]",
+        "name": "cAddress",
+        "type": "address[]"
+      }
+    ],
+    "name": "getPosition",
+    "outputs": [
+      {
+        "components": [
           {
-              "internalType": "address",
-              "name": "owner",
-              "type": "address"
+            "internalType": "uint256",
+            "name": "tokenPrice",
+            "type": "uint256"
           },
           {
-              "internalType": "address[]",
-              "name": "cAddress",
-              "type": "address[]"
-          }
-      ],
-      "name": "getPosition",
-      "outputs": [
-          {
-              "components": [
-                  {
-                      "internalType": "uint256",
-                      "name": "tokenPrice",
-                      "type": "uint256"
-                  },
-                  {
-                      "internalType": "uint256",
-                      "name": "exchangeRateStored",
-                      "type": "uint256"
-                  },
-                  {
-                      "internalType": "uint256",
-                      "name": "balanceOfUser",
-                      "type": "uint256"
-                  },
-                  {
-                      "internalType": "uint256",
-                      "name": "borrowBalanceStoredUser",
-                      "type": "uint256"
-                  },
-                  {
-                      "internalType": "uint256",
-                      "name": "supplyRatePerBlock",
-                      "type": "uint256"
-                  },
-                  {
-                      "internalType": "uint256",
-                      "name": "borrowRatePerBlock",
-                      "type": "uint256"
-                  }
-              ],
-              "internalType": "struct Helpers.CompData[]",
-              "name": "",
-              "type": "tuple[]"
+            "internalType": "uint256",
+            "name": "exchangeRateStored",
+            "type": "uint256"
           },
           {
-              "components": [
-                  {
-                      "internalType": "uint256",
-                      "name": "balance",
-                      "type": "uint256"
-                  },
-                  {
-                      "internalType": "uint256",
-                      "name": "votes",
-                      "type": "uint256"
-                  },
-                  {
-                      "internalType": "address",
-                      "name": "delegate",
-                      "type": "address"
-                  },
-                  {
-                      "internalType": "uint256",
-                      "name": "allocated",
-                      "type": "uint256"
-                  }
-              ],
-              "internalType": "struct CompReadInterface.CompBalanceMetadataExt",
-              "name": "",
-              "type": "tuple"
+            "internalType": "uint256",
+            "name": "balanceOfUser",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "borrowBalanceStoredUser",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "supplyRatePerBlock",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "borrowRatePerBlock",
+            "type": "uint256"
           }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
+        ],
+        "internalType": "struct Helpers.CompData[]",
+        "name": "",
+        "type": "tuple[]"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "balance",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "votes",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "delegate",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "allocated",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct CompReadInterface.CompBalanceMetadataExt",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
   }
 ]
