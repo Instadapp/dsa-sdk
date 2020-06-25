@@ -1,11 +1,14 @@
+const Erc20Resolver = require("../resolvers/erc20.js");
+
 /**
  * generic ERC20 token methods
  */
-module.exports = class Erc20 {
+module.exports = class Erc20 extends Erc20Resolver {
   /**
    * @param {Object} _dsa the dsa instance to access data stores
    */
   constructor(_dsa) {
+    super(_dsa);
     this.ABI = _dsa.ABI;
     this.tokens = _dsa.tokens;
     this.math = _dsa.math;

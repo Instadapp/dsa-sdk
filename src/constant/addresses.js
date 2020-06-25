@@ -26,7 +26,7 @@ module.exports = {
   },
   read: {
     core: "0xCCf112e4348Fb273381D37F20dF49135DA973Be5",
-    balances: "0x6B9aE204B9779fbd15Fdbd027c9F0d266A32f0b7",
+    erc20: "0x6d9c624844e61280c19fd7ef588d79a6de893d64",
     compound: "0x540b719fe7788Fbd4eE98033d9Fb980D753f0ED2",
     maker: "0x3dF605ca85E8d677C8f6E2665EbcdDbd801Ee9f9",
     oasis: "0xa3d13105397F3b13Dd47cd1f90a50F95A60cdd56",
