@@ -1,4 +1,4 @@
-module.exports = class Balances {
+module.exports = class ERC20 {
   /**
    * @param {Object} _dsa the dsa instance to access data stores
    */
@@ -12,8 +12,7 @@ module.exports = class Balances {
   }
 
   /**
-   * returns token balance in a mapped object with balance and raw balances
-   * @param _addr the ethereum address to get balances for
+   * returns token balances.
    */
   async getBalances(address, type) {
     var _address;
@@ -27,7 +26,7 @@ module.exports = class Balances {
     var _tokensAddr = this.tokens.getTokensField("address", _tokens);
 
     var _obj = {
-      protocol: "balances",
+      protocol: "erc20",
       method: "getBalances",
       args: [_address, Object.values(_tokensAddr)],
     };
@@ -41,6 +40,40 @@ module.exports = class Balances {
             _balances[key] = res[i] / 10 ** _tokens[key].decimals;
           });
           resolve(_balances);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  }
+
+  /**
+   * returns token allowances.
+   */
+  async getAllowances(address, spender, type) {
+    var _address = !address ? this.instance.address : address;
+    if(!spender) throw new Error('`spender` not defined.')
+
+    var _type = type ?  type :  "token";
+    const _tokens = this.tokens.getTokenByType(_type);
+
+    var _tokensAddr = this.tokens.getTokensField("address", _tokens);
+
+    var _obj = {
+      protocol: "erc20",
+      method: "getAllowances",
+      args: [_address, spender, Object.values(_tokensAddr)],
+    };
+
+    return new Promise((resolve, reject) => {
+      return this.dsa
+        .read(_obj)
+        .then((res) => {
+          var _allowance = {};
+          Object.keys(_tokens).forEach((key, i) => {
+            _allowance[key] = res[i] / 10 ** _tokens[key].decimals;
+          });
+          resolve(_allowance);
         })
         .catch((err) => {
           reject(err);

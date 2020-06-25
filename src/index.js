@@ -12,8 +12,9 @@ const Txn = require("./utils/txn.js");
 const Math = require("./utils/math.js");
 
 // resolvers
+const Erc20Resolver = require("./resolvers/erc20.js");
+
 const Account = require("./resolvers/account.js");
-const Balances = require("./resolvers/balances.js");
 const Compound = require("./resolvers/compound.js");
 const Maker = require("./resolvers/maker.js");
 const InstaPool = require("./resolvers/instapool.js");
@@ -64,7 +65,7 @@ module.exports = class DSA {
     this.erc20 = new Erc20(this);
 
     this.account = new Account(this);
-    this.balances = new Balances(this);
+    this.balances = new Erc20Resolver(this);
     this.compound = new Compound(this);
     this.maker = new Maker(this);
     this.instapool = new InstaPool(this);

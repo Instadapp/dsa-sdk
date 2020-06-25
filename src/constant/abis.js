@@ -26,7 +26,7 @@ module.exports = {
     core: require("../abi/read/core.json"),
     compound: require("../abi/read/compound.json"),
     maker: require("../abi/read/maker.json"),
-    balances: require("../abi/read/balances.json"),
+    erc20: require("../abi/read/erc20.json"),
     oasis: require("../abi/read/oasis.json"),
     kyber: require("../abi/read/kyber.json"),
     curve: require("../abi/read/curve.json"),
