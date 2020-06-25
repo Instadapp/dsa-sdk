@@ -52,9 +52,9 @@ module.exports = class ERC20 {
    */
   async getAllowances(address, spender, type) {
     var _address = !address ? this.instance.address : address;
-    if(!spender) throw new Error('`spender` not defined.')
+    if (!spender) throw new Error("`spender` not defined.");
 
-    var _type = type ?  type :  "token";
+    var _type = type ? type : "token";
     const _tokens = this.tokens.getTokenByType(_type);
 
     var _tokensAddr = this.tokens.getTokensField("address", _tokens);
