@@ -49,6 +49,26 @@ var colInfo = {
     typeBytes:
       "0x555344432d420000000000000000000000000000000000000000000000000000",
   },
+  "ZRX-A": {
+    token: "ZRX",
+    ratio: 4 / 7,
+    joinAddr: "0xc7e8Cd72BDEe38865b4F5615956eF47ce1a7e5D0",
+    addr: "0xE41d2489571d322189246DaFA5ebDe1F4699F498",
+    stabiltyRate: 0,
+    price: 0,
+    typeBytes:
+      "0x5a52582d41000000000000000000000000000000000000000000000000000000",
+  },
+  "KNC-A": {
+    token: "KNC",
+    ratio: 4 / 7,
+    joinAddr: "0x475F1a89C1ED844A08E8f6C50A00228b5E59E4A9",
+    addr: "0xdd974D5C2e2928deA5F71b9825b8b646686BD200",
+    stabiltyRate: 0,
+    price: 0,
+    typeBytes:
+      "0x4b4e432d41000000000000000000000000000000000000000000000000000000",
+  },
   // "TUSD-A": { // Unavailable due to a token upgrade.
   //   token: "TUSD",
   //   ratio: 5 / 6,
