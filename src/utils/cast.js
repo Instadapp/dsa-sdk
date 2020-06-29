@@ -40,6 +40,10 @@ module.exports = class CastHelper {
     var _args = _internal.encodeSpells(_d);
     _args.push(this.origin);
     if (!_d.to) _d.to = this.instance.address;
+    if (_d.to == this.address.genesis)
+      throw new Error(
+        `Please configure the DSA instance by calling dsa.setInstance(dsaId). More details: https://docs.instadapp.io/setup`
+      );
     if (!_d.from) _d.from = await _internal.getAddress();
     if (!_d.value) _d.value = "0";
     var _abi = _internal.getInterface("core", "account", "cast");
