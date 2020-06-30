@@ -22,7 +22,7 @@ module.exports = {
     dydx: "0x6AF6C791c869DfA65f8A2fa042fA47D1535Bef25",
     aave: "0x3fd79E82CCAc22A1c1b504e8a04bec133CB3f282",
     migrate: "0xcb5cbc3f397e0024fac67cf6dd465e02ca91c215",
-    compoundImport: "0xCEE7310AcA3d80b09448D4809Cb41B1Af31B0b0e",
+    compoundImport: "0xc2954213923DdF0A6E5F5eCFD2375AC25440960b",
   },
   read: {
     core: "0xCCf112e4348Fb273381D37F20dF49135DA973Be5",
