@@ -17,8 +17,7 @@ module.exports = class Curve {
    * @param {string} address the owner address
    */
   async getPosition(address) {
-    var _address;
-    !address ? (_address = this.instance.address) : (_address = address);
+    var _address = !address ? this.instance.address : address;
 
     var _obj = {
       protocol: "curve",
@@ -33,12 +32,13 @@ module.exports = class Curve {
           let _position = {};
           _position.curveBalance = this.tokens.toDecimal(res[0], "curvesusd");
           _position.totalSupply = this.tokens.toDecimal(res[1], "curvesusd");
+          _position.virtualPrice = res[2] / 10 ** 18;
           _position.userShare =
-            this.tokens.toDecimal(res[2], "curvesusd") * 100;
-          _position.daiPoolBalance = this.tokens.toDecimal(res[3], "DAI");
-          _position.usdcPoolBalance = this.tokens.toDecimal(res[4], "USDC");
-          _position.usdtPoolBalance = this.tokens.toDecimal(res[5], "USDT");
-          _position.susdPoolBalance = this.tokens.toDecimal(res[6], "SUSD");
+            this.tokens.toDecimal(res[3], "curvesusd") * 100;
+          _position.daiPoolBalance = this.tokens.toDecimal(res[4], "DAI");
+          _position.usdcPoolBalance = this.tokens.toDecimal(res[5], "USDC");
+          _position.usdtPoolBalance = this.tokens.toDecimal(res[6], "USDT");
+          _position.susdPoolBalance = this.tokens.toDecimal(res[7], "SUSD");
           resolve(_position);
         })
         .catch((err) => {
@@ -76,6 +76,7 @@ module.exports = class Curve {
           var _res = {
             buyAmt: this.tokens.toDecimal(res[0], buyToken),
             buyAmtRaw: res[0],
+            virtualPrice: res[2] / 10 ** 18,
             unitAmt: res[1],
           };
           resolve(_res);
@@ -114,6 +115,7 @@ module.exports = class Curve {
             curveAmt: this.tokens.toDecimal(res[0], "curvesusd"),
             curveAmtRaw: res[0],
             unitAmt: res[1],
+            virtualPrice: res[2] / 10 ** 18,
           };
           resolve(_res);
         })
@@ -151,6 +153,7 @@ module.exports = class Curve {
             curveAmt: this.tokens.toDecimal(res[0], "curvesusd"),
             curveAmtRaw: res[0],
             unitAmt: res[1],
+            virtualPrice: res[2] / 10 ** 18,
           };
           resolve(_res);
         })
