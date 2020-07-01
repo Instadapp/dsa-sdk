@@ -1,0 +1,173 @@
+[
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "buyAddr",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "sellAddr",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "sellAmt",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "slippage",
+                "type": "uint256"
+            }
+        ],
+        "name": "getBuyAmount",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "buyAmt",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "unitAmt",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "virtualPrice",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "token",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "depositAmt",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "slippage",
+                "type": "uint256"
+            }
+        ],
+        "name": "getDepositAmount",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "curveAmt",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "unitAmt",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "virtualPrice",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            }
+        ],
+        "name": "getPosition",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "userBal",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "totalSupply",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "virtualPrice",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "userShare",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "poolRenBtcBal",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "poolWbtcBal",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "poolSbtcBal",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "token",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "withdrawAmt",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "slippage",
+                "type": "uint256"
+            }
+        ],
+        "name": "getWithdrawAmount",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "curveAmt",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "unitAmt",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "virtualPrice",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    }
+]
