@@ -20,7 +20,7 @@ module.exports = class Curve {
     var _address = !address ? this.instance.address : address;
 
     var _obj = {
-      protocol: "curve",
+      protocol: "curve_susd",
       method: "getPosition",
       args: [_address],
     };
@@ -59,7 +59,7 @@ module.exports = class Curve {
     _slippage = String(this.math.bigNumInString(_slippage));
 
     var _obj = {
-      protocol: "curve",
+      protocol: "curve_susd",
       method: "getBuyAmount",
       args: [
         this.tokens.info[buyToken.toLowerCase()].address,
@@ -98,7 +98,7 @@ module.exports = class Curve {
     _slippage = String(this.math.bigNumInString(_slippage));
 
     var _obj = {
-      protocol: "curve",
+      protocol: "curve_susd",
       method: "getDepositAmount",
       args: [
         this.tokens.info[token.toLowerCase()].address,
@@ -136,7 +136,7 @@ module.exports = class Curve {
     _slippage = String(this.math.bigNumInString(_slippage));
 
     var _obj = {
-      protocol: "curve",
+      protocol: "curve_susd",
       method: "getWithdrawAmount",
       args: [
         this.tokens.info[token.toLowerCase()].address,

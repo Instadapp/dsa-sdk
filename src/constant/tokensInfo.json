@@ -90,6 +90,20 @@
     "address": "0x57ab1ec28d129707052df4df418d58a2d46d5f51",
     "decimals": 18
   },
+  "sbtc": {
+    "type": "token",
+    "symbol": "SBTC",
+    "name": "Synthetix BTC",
+    "address": "0xfE18be6b3Bd88A2D2A7f928d00292E7a9963CfC6",
+    "decimals": 18
+  },
+  "renbtc": {
+    "type": "token",
+    "symbol": "renBTC",
+    "name": "Ren USD",
+    "address": "0xEB4C2781e4ebA804CE9a9803C67d0893436bB27D",
+    "decimals": 8
+  },
   "busd": {
     "type": "token",
     "symbol": "BUSD",
@@ -202,6 +216,13 @@
     "symbol": "CSUSD",
     "name": "Curve SUSD",
     "address": "0xC25a3A3b969415c80451098fa907EC722572917F",
+    "decimals": 18
+  },
+  "curvesbtc": {
+    "type": "curvetoken",
+    "symbol": "CSBTC",
+    "name": "Curve SBTC",
+    "address": "0x075b1bb99792c9E1041bA13afEf80C91a1e70fB3",
     "decimals": 18
   },
   "aeth": {
