@@ -36,8 +36,8 @@ module.exports = class Curve {
             _position.userShare =
               this.tokens.toDecimal(res[3], "curvesbtc") * 100;
             _position.renBtcPoolBalance = this.tokens.toDecimal(res[4], "renBTC");
-            _position.wbtcPoolBalance = this.tokens.toDecimal(res[5], "WBTC");
-            _position.sBtctPoolBalance = this.tokens.toDecimal(res[6], "sBTC");
+            _position.wBtcPoolBalance = this.tokens.toDecimal(res[5], "WBTC");
+            _position.sBtcPoolBalance = this.tokens.toDecimal(res[6], "sBTC");
             resolve(_position);
           })
           .catch((err) => {
@@ -67,13 +67,11 @@ module.exports = class Curve {
           this.math.bigNumInString(_slippage),
         ],
       };
-      console.log(_obj)
   
       return new Promise((resolve, reject) => {
         return this.dsa
           .read(_obj)
           .then((res) => {
-              console.log(res)
             var _res = {
               buyAmt: this.tokens.toDecimal(res[0], buyToken),
               buyAmtRaw: res[0],
