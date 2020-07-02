@@ -14,7 +14,7 @@ module.exports = {
     authority: "0xB3242e09C8E5cE6E14296b3d3AbC4C6965F49b98", // same address as of "auth" to not break things with upgrade
     compound: "0x07F81230d73a78f63F0c2A3403AD281b067d28F8",
     maker: "0xac02030d8a8F49eD04b2f52C394D3F901A10F8A9",
-    instapool: "0x6d11A71575C34eB7b5E22949fAfCd49A2FA2A8F9",
+    instapool: "0x94662C2Af52570618bD46079AE2Aad4497E678E8",
     oasis: "0xE554c84c030bd5e850cDbd17f6583818b8dE5b1F",
     kyber: "0x7043FC2E21865c091EEaE37C38E3d82BcCDF5D5C",
     curve: "0xC74902Ad45C8223da10EfdCfF2DeD12184e9D9b5",
