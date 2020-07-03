@@ -43,6 +43,7 @@ module.exports = class Erc20 extends Erc20Resolver {
       _d.token.toLowerCase() == "eth" ||
       _d.token.toLowerCase() == this.tokens.info.eth.address
     ) {
+      if(_d.amount == "-1" || _d.amount ==_dsa.maxValue) throw new Error("ETH amount value cannot be passed as '-1'.")
       _d.value = _d.amount;
       _d.callData = "0x";
       txObj = await this.internal.getTxObj(_d);
@@ -52,7 +53,12 @@ module.exports = class Erc20 extends Erc20Resolver {
       var _c = await new this.web3.eth.Contract(
         this.ABI.basic.erc20,
         this.internal.filterAddress(_d.token)
-      );
+        );
+      if(_d.amount == "-1" || _d.amount ==_dsa.maxValue) {
+        await _c.methods.balanceOf(_d.from).call()
+        .then(bal => _d.amount = bal)
+        .catch(err => {throw new Error (`Error while getting token balance: ${err}`)});
+      }
       _d.callData = _c.methods
         .transfer(_d.toAddr, this.math.bigNumInString(_d.amount))
         .encodeABI();
