@@ -6,7 +6,7 @@ module.exports = {
     account: "0x939Daad09fC4A9B8f8A9352A485DAb2df4F4B3F8",
     connector: "0xD6A602C01a023B98Ecfb29Df02FBA380d3B21E0c",
     events: "0x2af7ea6Cb911035f3eb1ED895Cb6692C39ecbA97",
-    instapool: "0x94662C2Af52570618bD46079AE2Aad4497E678E8",
+    instapool: "0x06cb7c24990cbe6b9f99982f975f9147c000fec6",
   },
   connectors: {
     basic: "0x6a31c5982C5Bc5533432913cf06a66b6D3333a95",
