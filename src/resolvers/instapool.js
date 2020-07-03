@@ -19,6 +19,11 @@ module.exports = class InstaPool {
             eth: _maxBorrowLimitInEth,
             dai: _maxBorrowLimitInEth / _position.dai.priceInEth,
             usdc: _maxBorrowLimitInEth / _position.usdc.priceInEth,
+            usdt: _maxBorrowLimitInEth / _position.usdt.priceInEth,
+            bat: _maxBorrowLimitInEth / _position.bat.priceInEth,
+            zrx: _maxBorrowLimitInEth / _position.zrx.priceInEth,
+            wbtc: _maxBorrowLimitInEth / _position.wbtc.priceInEth,
+            rep: _maxBorrowLimitInEth / _position.rep.priceInEth,
           };
           resolve(_liquidityAvailable);
         })
