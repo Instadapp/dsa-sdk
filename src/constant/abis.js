@@ -16,6 +16,8 @@ module.exports = {
     oasis: require("../abi/connectors/oasis.json"),
     kyber: require("../abi/connectors/kyber.json"),
     curve: require("../abi/connectors/curve.json"),
+    curve_susd: require("../abi/connectors/curve.json"),
+    curve_sbtc: require("../abi/connectors/curve.json"),
     oneInch: require("../abi/connectors/1inch.json"),
     dydx: require("../abi/connectors/dydx.json"),
     aave: require("../abi/connectors/aave.json"),
