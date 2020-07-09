@@ -25,6 +25,7 @@ const CurveSBTC = require("./resolvers/curve_sbtc.js");
 const OneInch = require("./resolvers/1inch.js");
 const Dydx = require("./resolvers/dydx.js");
 const Aave = require("./resolvers/aave.js");
+const Uniswap = require("./resolvers/uniswap.js");
 const Tokens = require("./resolvers/tokens.js");
 
 module.exports = class DSA {
@@ -78,6 +79,7 @@ module.exports = class DSA {
     this.oneInch = new OneInch(this);
     this.dydx = new Dydx(this);
     this.aave = new Aave(this);
+    this.uniswap = new Uniswap(this);
 
     // defining methods to simplify the calls for frontend developers
     this.sendTxn = this.txnUtil.send; // send transaction // node || browser

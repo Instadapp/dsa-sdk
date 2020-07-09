@@ -25,6 +25,7 @@ module.exports = {
     aave: "0x3fd79E82CCAc22A1c1b504e8a04bec133CB3f282",
     migrate: "0xcb5cbc3f397e0024fac67cf6dd465e02ca91c215",
     compoundImport: "0xc2954213923DdF0A6E5F5eCFD2375AC25440960b",
+    uniswap: "0x62EbfF47B2Ba3e47796efaE7C51676762dC961c0",
   },
   read: {
     core: "0xCCf112e4348Fb273381D37F20dF49135DA973Be5",
@@ -39,5 +40,6 @@ module.exports = {
     oneInch: "0x33498ee6Db368A8344a4a8d2899c631E99adBEAE",
     dydx: "0xcb704D9505Fbbf61478F06741C75F34eA84Ec85C",
     aave: "0x5616a3d7e5c65d9d4af05e9cda6541db18d64790",
+    uniswap: "0x492e5f3f01d20513fc0d53ca0215b6499faec8a0",
   },
 };
