@@ -24,7 +24,10 @@ module.exports = class Uniswap {
     var _tokenPairs = tokenPair.map(a => {
       if(!a.tokenA) throw new Error ("tokenA not found")
       if(!a.tokenB) throw new Error ("tokenB not found")
-      return [a.tokenA, a.tokenB]
+      return [
+        this.internal.filterAddress(a.tokenA),
+        this.internal.filterAddress(a.tokenB)
+      ]
     })
     var _obj = {
       protocol: "uniswap",
