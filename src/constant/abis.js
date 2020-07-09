@@ -23,6 +23,7 @@ module.exports = {
     aave: require("../abi/connectors/aave.json"),
     migrate: require("../abi/connectors/migrate.json"),
     compoundImport: require("../abi/connectors/compoundImport.json"),
+    uniswap: require("../abi/connectors/uniswap.json"),
   },
   read: {
     core: require("../abi/read/core.json"),
@@ -37,6 +38,7 @@ module.exports = {
     oneInch: require("../abi/read/1inch.json"),
     dydx: require("../abi/read/dydx.json"),
     aave: require("../abi/read/aave.json"),
+    uniswap: require("../abi/read/uniswap.json"),
   },
   basic: {
     erc20: require("../abi/basics/erc20.json"),
