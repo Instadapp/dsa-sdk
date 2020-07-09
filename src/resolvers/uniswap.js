@@ -20,15 +20,15 @@ module.exports = class Uniswap {
    */
   async getPosition(address, tokenPair) {
     var _address = !address ? this.instance.address : address;
-    
-    var _tokenPairs = tokenPair.map(a => {
-      if(!a.tokenA) throw new Error ("tokenA not found")
-      if(!a.tokenB) throw new Error ("tokenB not found")
+
+    var _tokenPairs = tokenPair.map((a) => {
+      if (!a.tokenA) throw new Error("tokenA not found");
+      if (!a.tokenB) throw new Error("tokenB not found");
       return [
         this.internal.filterAddress(a.tokenA),
-        this.internal.filterAddress(a.tokenB)
-      ]
-    })
+        this.internal.filterAddress(a.tokenB),
+      ];
+    });
     var _obj = {
       protocol: "uniswap",
       method: "getPosition",
@@ -41,25 +41,25 @@ module.exports = class Uniswap {
         .then(async (res) => {
           let _position = [];
           for (let i = 0; i < res.length; i++) {
-            let tokenA = _tokenPairs[i][0]
-            let tokenB = _tokenPairs[i][1]
-            let _res = res[i]
+            let tokenA = _tokenPairs[i][0];
+            let tokenB = _tokenPairs[i][1];
+            let _res = res[i];
 
             let _tokenA = this.tokens.isToken(tokenA);
             let _amtA = !_tokenA
-            ? await this.erc20.toDecimalInternal(_res[0], tokenA)
-            : this.tokens.toDecimal(_res[0], _tokenA);
+              ? await this.erc20.toDecimalInternal(_res[0], tokenA)
+              : this.tokens.toDecimal(_res[0], _tokenA);
 
             let _tokenB = this.tokens.isToken(tokenB);
             let _amtB = !_tokenB
-            ? await this.erc20.toDecimalInternal(_res[1], tokenB)
-            : this.tokens.toDecimal(_res[1], _tokenB);
+              ? await this.erc20.toDecimalInternal(_res[1], tokenB)
+              : this.tokens.toDecimal(_res[1], _tokenB);
 
             _position[i] = {
               amountA: _amtA,
               amountB: _amtB,
-              uniTokenAmount: (_res[2] / 10 ** 18)
-            }
+              uniTokenAmount: _res[2] / 10 ** 18,
+            };
           }
           resolve(_position);
         })
@@ -184,7 +184,7 @@ module.exports = class Uniswap {
       args: [
         this.internal.filterAddress(tokenA),
         this.internal.filterAddress(tokenB),
-        this.math.bigNumInString(_amtA)
+        this.math.bigNumInString(_amtA),
       ],
     };
 
@@ -252,7 +252,7 @@ module.exports = class Uniswap {
             amountA_Raw: res[0],
             amountB_Raw: res[1],
             unitAmtA: res[2],
-            unitAmtB: res[3]
+            unitAmtB: res[3],
           };
           resolve(_res);
         })
