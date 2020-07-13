@@ -24,6 +24,7 @@ module.exports = {
     migrate: require("../abi/connectors/migrate.json"),
     compoundImport: require("../abi/connectors/compoundImport.json"),
     uniswap: require("../abi/connectors/uniswap.json"),
+    comp: require("../abi/connectors/comp.json"),
   },
   read: {
     core: require("../abi/read/core.json"),

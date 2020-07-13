@@ -1,0 +1,69 @@
+[
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "setId",
+                "type": "uint256"
+            }
+        ],
+        "name": "ClaimComp",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address[]",
+                "name": "supplyTokens",
+                "type": "address[]"
+            },
+            {
+                "internalType": "address[]",
+                "name": "borrowTokens",
+                "type": "address[]"
+            },
+            {
+                "internalType": "uint256",
+                "name": "setId",
+                "type": "uint256"
+            }
+        ],
+        "name": "ClaimCompThree",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address[]",
+                "name": "tokens",
+                "type": "address[]"
+            },
+            {
+                "internalType": "uint256",
+                "name": "setId",
+                "type": "uint256"
+            }
+        ],
+        "name": "ClaimCompTwo",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "delegatee",
+                "type": "address"
+            }
+        ],
+        "name": "delegate",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    }
+]
