@@ -39,6 +39,9 @@ module.exports = class Curve {
           _position.usdcPoolBalance = this.tokens.toDecimal(res[5], "USDC");
           _position.usdtPoolBalance = this.tokens.toDecimal(res[6], "USDT");
           _position.susdPoolBalance = this.tokens.toDecimal(res[7], "SUSD");
+          _position.stakedCurveBalance = this.tokens.toDecimal(res[8], "curvesusd");
+          _position.rewardsEarned = this.tokens.toDecimal(res[9], "snx");
+          _position.snxTokenBalance = this.tokens.toDecimal(res[10], "snx");
           resolve(_position);
         })
         .catch((err) => {
@@ -137,7 +140,7 @@ module.exports = class Curve {
 
     var _obj = {
       protocol: "curve_susd",
-      method: "getWithdrawAmount",
+      method: "getWithdrawCurveAmount",
       args: [
         this.tokens.info[token.toLowerCase()].address,
         this.tokens.fromDecimal(amt, token),
@@ -152,6 +155,44 @@ module.exports = class Curve {
           var _res = {
             curveAmt: this.tokens.toDecimal(res[0], "curvesusd"),
             curveAmtRaw: res[0],
+            unitAmt: res[1],
+            virtualPrice: res[2] / 10 ** 18,
+          };
+          resolve(_res);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  }
+
+  /**
+   * returns token amount and unit Amount
+   * @param token withdraw token symbol
+   * @param amt curve token amount
+   * @param slippage slippage to withdraw
+   */
+  async getWithdrawTokenAmount(token, amt, slippage) {
+    let _slippage = !slippage ? 10 ** 16 : slippage * 10 ** 16;
+    _slippage = String(this.math.bigNumInString(_slippage));
+
+    var _obj = {
+      protocol: "curve_susd",
+      method: "getWithdrawTokenAmount",
+      args: [
+        this.tokens.info[token.toLowerCase()].address,
+        this.tokens.fromDecimal(amt, "curvesusd"),
+        this.math.bigNumInString(_slippage),
+      ],
+    };
+
+    return new Promise((resolve, reject) => {
+      return this.dsa
+        .read(_obj)
+        .then((res) => {
+          var _res = {
+            [`${token.toLowerCase()}Amt`]: this.tokens.toDecimal(res[0], token),
+            [`${token.toLowerCase()}AmtRaw`]: res[0],
             unitAmt: res[1],
             virtualPrice: res[2] / 10 ** 18,
           };
