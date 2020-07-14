@@ -26,7 +26,7 @@ module.exports = {
     migrate: "0xcb5cbc3f397e0024fac67cf6dd465e02ca91c215",
     compoundImport: "0xc2954213923DdF0A6E5F5eCFD2375AC25440960b",
     uniswap: "0x62EbfF47B2Ba3e47796efaE7C51676762dC961c0",
-    comp: "0xB4a04F1C194bEed64FCE27843B5b3079339cdaD4"
+    comp: "0xB4a04F1C194bEed64FCE27843B5b3079339cdaD4",
   },
   read: {
     core: "0xCCf112e4348Fb273381D37F20dF49135DA973Be5",

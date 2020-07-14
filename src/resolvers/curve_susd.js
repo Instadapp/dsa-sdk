@@ -39,7 +39,10 @@ module.exports = class Curve {
           _position.usdcPoolBalance = this.tokens.toDecimal(res[5], "USDC");
           _position.usdtPoolBalance = this.tokens.toDecimal(res[6], "USDT");
           _position.susdPoolBalance = this.tokens.toDecimal(res[7], "SUSD");
-          _position.stakedCurveBalance = this.tokens.toDecimal(res[8], "curvesusd");
+          _position.stakedCurveBalance = this.tokens.toDecimal(
+            res[8],
+            "curvesusd"
+          );
           _position.rewardsEarned = this.tokens.toDecimal(res[9], "snx");
           _position.snxTokenBalance = this.tokens.toDecimal(res[10], "snx");
           resolve(_position);
