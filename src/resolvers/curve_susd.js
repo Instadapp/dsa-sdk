@@ -194,8 +194,8 @@ module.exports = class Curve {
         .read(_obj)
         .then((res) => {
           var _res = {
-            [`${token.toLowerCase()}Amt`]: this.tokens.toDecimal(res[0], token),
-            [`${token.toLowerCase()}AmtRaw`]: res[0],
+            amt: this.tokens.toDecimal(res[0], token),
+            amtRaw: res[0],
             unitAmt: res[1],
             virtualPrice: res[2] / 10 ** 18,
           };
