@@ -43,7 +43,7 @@ module.exports = class CurveY {
             "curvey"
           );
           _position.rewardsEarned = this.tokens.toDecimal(res[9], "yfi");
-          _position.yfiTokenBalance = this.tokens.toDecimal(res[10], "yfi");
+          _position.rewardTokenBalance = this.tokens.toDecimal(res[10], "yfi");
           resolve(_position);
         })
         .catch((err) => {
