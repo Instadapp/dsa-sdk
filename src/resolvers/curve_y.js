@@ -30,11 +30,11 @@ module.exports = class CurveY {
         .read(_obj)
         .then((res) => {
           let _position = {};
-          _position.curveBalance = this.tokens.toDecimal(res[0], "curvesbtc");
-          _position.totalSupply = this.tokens.toDecimal(res[1], "curvesbtc");
+          _position.curveBalance = this.tokens.toDecimal(res[0], "curvey");
+          _position.totalSupply = this.tokens.toDecimal(res[1], "curvey");
           _position.virtualPrice = res[2] / 10 ** 18;
           _position.userShare =
-            this.tokens.toDecimal(res[3], "curvesbtc") * 100;
+            this.tokens.toDecimal(res[3], "curvey") * 100;
             _position.daiPoolBalance = this.tokens.toDecimal(res[4], "DAI");
             _position.usdcPoolBalance = this.tokens.toDecimal(res[5], "USDC");
             _position.usdtPoolBalance = this.tokens.toDecimal(res[6], "USDT");
@@ -178,7 +178,7 @@ module.exports = class CurveY {
       method: "getWithdrawTokenAmount",
       args: [
         this.tokens.info[token.toLowerCase()].address,
-        this.tokens.fromDecimal(amt, "curvesusd"),
+        this.tokens.fromDecimal(amt, "curvey"),
         this.math.bigNumInString(_slippage),
       ],
     };

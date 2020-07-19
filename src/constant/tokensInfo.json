@@ -225,6 +225,13 @@
     "address": "0x075b1bb99792c9E1041bA13afEf80C91a1e70fB3",
     "decimals": 18
   },
+  "curvey": {
+    "type": "curvetoken",
+    "symbol": "CY",
+    "name": "Curve Y",
+    "address": "0xdF5e0e81Dff6FAF3A7e52BA697820c5e32D806A8",
+    "decimals": 18
+  },
   "aeth": {
     "type": "atoken",
     "symbol": "AETH",
