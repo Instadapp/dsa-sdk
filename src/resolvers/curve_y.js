@@ -34,17 +34,31 @@ module.exports = class CurveY {
           _position.totalSupply = this.tokens.toDecimal(res[1], "curvey");
           _position.virtualPrice = res[2] / 10 ** 18;
           _position.userShare = this.tokens.toDecimal(res[3], "curvey") * 100;
-          _position.daiPoolBalance = this.tokens.toDecimal(res[4].tokenPoolbal, "DAI");
-          _position.usdcPoolBalance = this.tokens.toDecimal(res[5].tokenPoolbal, "USDC");
-          _position.usdtPoolBalance = this.tokens.toDecimal(res[6].tokenPoolbal, "USDT");
-          _position.tusdPoolBalance = this.tokens.toDecimal(res[7].tokenPoolbal, "TUSD");
+          _position.daiPoolBalance = this.tokens.toDecimal(
+            res[4].tokenPoolbal,
+            "DAI"
+          );
+          _position.usdcPoolBalance = this.tokens.toDecimal(
+            res[5].tokenPoolbal,
+            "USDC"
+          );
+          _position.usdtPoolBalance = this.tokens.toDecimal(
+            res[6].tokenPoolbal,
+            "USDT"
+          );
+          _position.tusdPoolBalance = this.tokens.toDecimal(
+            res[7].tokenPoolbal,
+            "TUSD"
+          );
           _position.stakedCurveBalance = this.tokens.toDecimal(
             res[8],
             "curvey"
           );
           _position.rewardsEarned = this.tokens.toDecimal(res[9], "yfi");
           _position.rewardTokenBalance = this.tokens.toDecimal(res[10], "yfi");
-          _position.totalCurveBalance = Number(_position.curveBalance) + Number(_position.stakedCurveBalance);
+          _position.totalCurveBalance =
+            Number(_position.curveBalance) +
+            Number(_position.stakedCurveBalance);
           resolve(_position);
         })
         .catch((err) => {
