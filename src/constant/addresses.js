@@ -28,7 +28,7 @@ module.exports = {
     compoundImport: "0xc2954213923DdF0A6E5F5eCFD2375AC25440960b",
     uniswap: "0x62EbfF47B2Ba3e47796efaE7C51676762dC961c0",
     comp: "0xB4a04F1C194bEed64FCE27843B5b3079339cdaD4",
-    snx_staking: "0x8f9cC348881a87917A1655dE1B762f202284fab1"
+    snx_staking: "0x8f9cC348881a87917A1655dE1B762f202284fab1",
   },
   read: {
     core: "0xCCf112e4348Fb273381D37F20dF49135DA973Be5",

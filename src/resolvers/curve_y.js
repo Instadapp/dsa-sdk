@@ -33,12 +33,11 @@ module.exports = class CurveY {
           _position.curveBalance = this.tokens.toDecimal(res[0], "curvey");
           _position.totalSupply = this.tokens.toDecimal(res[1], "curvey");
           _position.virtualPrice = res[2] / 10 ** 18;
-          _position.userShare =
-            this.tokens.toDecimal(res[3], "curvey") * 100;
-            _position.daiPoolBalance = this.tokens.toDecimal(res[4], "DAI");
-            _position.usdcPoolBalance = this.tokens.toDecimal(res[5], "USDC");
-            _position.usdtPoolBalance = this.tokens.toDecimal(res[6], "USDT");
-            _position.tusdPoolBalance = this.tokens.toDecimal(res[7], "TUSD");
+          _position.userShare = this.tokens.toDecimal(res[3], "curvey") * 100;
+          _position.daiPoolBalance = this.tokens.toDecimal(res[4], "DAI");
+          _position.usdcPoolBalance = this.tokens.toDecimal(res[5], "USDC");
+          _position.usdtPoolBalance = this.tokens.toDecimal(res[6], "USDT");
+          _position.tusdPoolBalance = this.tokens.toDecimal(res[7], "TUSD");
           resolve(_position);
         })
         .catch((err) => {
@@ -163,7 +162,7 @@ module.exports = class CurveY {
     });
   }
 
-   /**
+  /**
    * returns token amount and unit Amount
    * @param token withdraw token symbol
    * @param amt curve token amount
