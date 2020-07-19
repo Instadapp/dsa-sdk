@@ -18,6 +18,7 @@ module.exports = {
     curve: require("../abi/connectors/curve.json"),
     curve_susd: require("../abi/connectors/curve.json"),
     curve_sbtc: require("../abi/connectors/curve.json"),
+    curve_y: require("../abi/connectors/curve.json"),
     oneInch: require("../abi/connectors/1inch.json"),
     dydx: require("../abi/connectors/dydx.json"),
     aave: require("../abi/connectors/aave.json"),
@@ -25,6 +26,7 @@ module.exports = {
     compoundImport: require("../abi/connectors/compoundImport.json"),
     uniswap: require("../abi/connectors/uniswap.json"),
     comp: require("../abi/connectors/comp.json"),
+    snx_staking: require("../abi/connectors/snx_staking.json"),
   },
   read: {
     core: require("../abi/read/core.json"),
@@ -36,6 +38,7 @@ module.exports = {
     curve: require("../abi/read/curve_susd.json"),
     curve_susd: require("../abi/read/curve_susd.json"),
     curve_sbtc: require("../abi/read/curve_sbtc.json"),
+    curve_y: require("../abi/read/curve_y.json"),
     oneInch: require("../abi/read/1inch.json"),
     dydx: require("../abi/read/dydx.json"),
     aave: require("../abi/read/aave.json"),
