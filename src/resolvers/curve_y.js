@@ -44,6 +44,7 @@ module.exports = class CurveY {
           );
           _position.rewardsEarned = this.tokens.toDecimal(res[9], "yfi");
           _position.rewardTokenBalance = this.tokens.toDecimal(res[10], "yfi");
+          _position.totalCurveBalance = Number(_position.curveBalance) + Number(_position.stakedCurveBalance);
           resolve(_position);
         })
         .catch((err) => {
