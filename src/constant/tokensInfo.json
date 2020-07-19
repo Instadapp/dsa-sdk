@@ -139,6 +139,13 @@
     "address": "0xC011a73ee8576Fb46F5E1c5751cA3B9Fe0af2a6F",
     "decimals": 18
   },
+  "yfi": {
+    "type": "token",
+    "symbol": "FYI",
+    "name": "YEARN",
+    "address": "0x0bc529c00C6401aEF6D220BE8C6Ea1667F6Ad93e",
+    "decimals": 18
+  },
   "ceth": {
     "type": "ctoken",
     "symbol": "CETH",

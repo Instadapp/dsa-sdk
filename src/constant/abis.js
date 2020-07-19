@@ -26,7 +26,7 @@ module.exports = {
     compoundImport: require("../abi/connectors/compoundImport.json"),
     uniswap: require("../abi/connectors/uniswap.json"),
     comp: require("../abi/connectors/comp.json"),
-    snx_staking: require("../abi/connectors/snx_staking.json"),
+    staking: require("../abi/connectors/staking.json"),
   },
   read: {
     core: require("../abi/read/core.json"),

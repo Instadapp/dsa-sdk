@@ -44,7 +44,8 @@ module.exports = class Curve {
             "curvesusd"
           );
           _position.rewardsEarned = this.tokens.toDecimal(res[9], "snx");
-          _position.snxTokenBalance = this.tokens.toDecimal(res[10], "snx");
+          _position.rewardTokenBalance = this.tokens.toDecimal(res[10], "snx");
+          _position.totalCurveBalance = Number(_position.curveBalance) + Number(_position.stakedCurveBalance);
           resolve(_position);
         })
         .catch((err) => {

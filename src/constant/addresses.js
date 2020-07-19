@@ -28,7 +28,7 @@ module.exports = {
     compoundImport: "0xc2954213923DdF0A6E5F5eCFD2375AC25440960b",
     uniswap: "0x62EbfF47B2Ba3e47796efaE7C51676762dC961c0",
     comp: "0xB4a04F1C194bEed64FCE27843B5b3079339cdaD4",
-    snx_staking: "0x8f9cC348881a87917A1655dE1B762f202284fab1",
+    staking: "0xe5b66b785bd6b6708BB814482180C136Ddbcd687",
   },
   read: {
     core: "0xCCf112e4348Fb273381D37F20dF49135DA973Be5",
@@ -40,7 +40,7 @@ module.exports = {
     curve: "0x734c90119A0012eF744e3a0ee74691b4f05A2D7e",
     curve_susd: "0x734c90119A0012eF744e3a0ee74691b4f05A2D7e",
     curve_sbtc: "0x55d71Dd2d3A8A5932dF7fd6c94347FA6507535BA",
-    curve_y: "0xca6d82d20f8c1da30086dfd2cbe7281f30862805",
+    curve_y: "0xaf122FB1C70b913AF467a9D924890f92c109bfc3",
     oneInch: "0x33498ee6Db368A8344a4a8d2899c631E99adBEAE",
     dydx: "0xcb704D9505Fbbf61478F06741C75F34eA84Ec85C",
     aave: "0x5616a3d7e5c65d9d4af05e9cda6541db18d64790",
