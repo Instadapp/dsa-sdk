@@ -232,6 +232,13 @@
     "address": "0xdF5e0e81Dff6FAF3A7e52BA697820c5e32D806A8",
     "decimals": 18
   },
+  "yfi": {
+    "type": "yearntoken",
+    "symbol": "FYI",
+    "name": "YEARN",
+    "address": "0x0bc529c00C6401aEF6D220BE8C6Ea1667F6Ad93e",
+    "decimals": 18
+  },
   "aeth": {
     "type": "atoken",
     "symbol": "AETH",
