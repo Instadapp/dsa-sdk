@@ -141,7 +141,7 @@
   },
   "yfi": {
     "type": "token",
-    "symbol": "FYI",
+    "symbol": "YFI",
     "name": "YEARN",
     "address": "0x0bc529c00C6401aEF6D220BE8C6Ea1667F6Ad93e",
     "decimals": 18
