@@ -169,5 +169,44 @@
     ],
     "stateMutability": "view",
     "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "curveAmt",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "slippage",
+        "type": "uint256"
+      }
+    ],
+    "name": "getWithdrawTokenAmount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "tokenAmt",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "unitAmt",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "virtualPrice",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   }
 ]

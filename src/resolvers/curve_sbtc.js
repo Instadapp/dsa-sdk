@@ -162,4 +162,42 @@ module.exports = class Curve {
         });
     });
   }
+
+  /**
+   * returns token amount and unit Amount
+   * @param token withdraw token symbol
+   * @param amt curve token amount
+   * @param slippage slippage to withdraw
+   */
+  async getWithdrawTokenAmount(token, amt, slippage) {
+    let _slippage = !slippage ? 10 ** 16 : slippage * 10 ** 16;
+    _slippage = String(this.math.bigNumInString(_slippage));
+
+    var _obj = {
+      protocol: "curve_sbtc",
+      method: "getWithdrawTokenAmount",
+      args: [
+        this.tokens.info[token.toLowerCase()].address,
+        this.tokens.fromDecimal(amt, "curvesbtc"),
+        this.math.bigNumInString(_slippage),
+      ],
+    };
+
+    return new Promise((resolve, reject) => {
+      return this.dsa
+        .read(_obj)
+        .then((res) => {
+          var _res = {
+            amt: this.tokens.toDecimal(res[0], token),
+            amtRaw: res[0],
+            unitAmt: res[1],
+            virtualPrice: res[2] / 10 ** 18,
+          };
+          resolve(_res);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  }
 };
