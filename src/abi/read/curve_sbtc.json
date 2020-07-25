@@ -126,6 +126,50 @@
         "internalType": "uint256",
         "name": "poolSbtcBal",
         "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "stakedBal",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "rewardsEarned",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "rewardBal",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "getStakingPosition",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "stakedBal",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "rewardsEarned",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "rewardBal",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -204,6 +248,19 @@
         "internalType": "uint256",
         "name": "virtualPrice",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "name",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
       }
     ],
     "stateMutability": "view",

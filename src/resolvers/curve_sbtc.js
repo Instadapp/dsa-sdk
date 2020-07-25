@@ -38,7 +38,18 @@ module.exports = class Curve {
           _position.renBtcPoolBalance = this.tokens.toDecimal(res[4], "renBTC");
           _position.wBtcPoolBalance = this.tokens.toDecimal(res[5], "WBTC");
           _position.sBtcPoolBalance = this.tokens.toDecimal(res[6], "sBTC");
-          _position.totalCurveBalance = Number(_position.curveBalance);
+          _position.stakedCurveBalance = this.tokens.toDecimal(
+            res[7],
+            "curvesbtc"
+          );
+          _position.rewardsEarned = this.tokens.toDecimal(res[8], "snx_ren");
+          _position.rewardTokenBalance = this.tokens.toDecimal(
+            res[9],
+            "snx_ren"
+          );
+          _position.totalCurveBalance =
+            Number(_position.curveBalance) +
+            Number(_position.stakedCurveBalance);
           resolve(_position);
         })
         .catch((err) => {
