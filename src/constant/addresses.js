@@ -39,7 +39,7 @@ module.exports = {
     kyber: "0x8240b601d9B565e2BefaA3DA82Cc984E76cB3499",
     curve: "0x734c90119A0012eF744e3a0ee74691b4f05A2D7e",
     curve_susd: "0x734c90119A0012eF744e3a0ee74691b4f05A2D7e",
-    curve_sbtc: "0xaF6F2dFcE27cfd925358fa72b513e066eD8380aC",
+    curve_sbtc: "0xc8ff9e290e65972a1b3fc67e1ab7451088a74752",
     curve_y: "0xaf122FB1C70b913AF467a9D924890f92c109bfc3",
     oneInch: "0x33498ee6Db368A8344a4a8d2899c631E99adBEAE",
     dydx: "0xcb704D9505Fbbf61478F06741C75F34eA84Ec85C",
