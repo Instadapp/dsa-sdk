@@ -42,8 +42,8 @@ module.exports = class Curve {
             res[7],
             "curvesbtc"
           );
-          _position.rewardsEarned = this.tokens.toDecimal(res[8], "snx");
-          _position.rewardTokenBalance = this.tokens.toDecimal(res[9], "snx");
+          _position.rewardsEarned = this.tokens.toDecimal(res[8], "snx_ren");
+          _position.rewardTokenBalance = this.tokens.toDecimal(res[9], "snx_ren");
           _position.totalCurveBalance =
             Number(_position.curveBalance) +
             Number(_position.stakedCurveBalance);
