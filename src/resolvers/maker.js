@@ -21,7 +21,7 @@ var colInfo = {
   },
   "USDC-A": {
     token: "USDC",
-    ratio: 5 / 6,
+    ratio: 10 / 11,
     joinAddr: "0xa191e578a6736167326d05c119ce0c90849e84b7",
     addr: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
     stabiltyRate: 0,
