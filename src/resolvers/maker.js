@@ -69,6 +69,16 @@ var colInfo = {
     typeBytes:
       "0x4b4e432d41000000000000000000000000000000000000000000000000000000",
   },
+  "MANA-A": {
+    token: "MANA",
+    ratio: 4 / 7,
+    joinAddr: "0xA6EA3b9C04b8a38Ff5e224E7c3D6937ca44C0ef9",
+    addr: "0x0F5D2fB29fb7d3CFeE444a200298f468908cC942",
+    stabiltyRate: 0,
+    price: 0,
+    typeBytes:
+      "0x4d414e412d410000000000000000000000000000000000000000000000000000",
+  },
   // "TUSD-A": { // Unavailable due to a token upgrade.
   //   token: "TUSD",
   //   ratio: 5 / 6,
