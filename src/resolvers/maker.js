@@ -177,6 +177,8 @@ module.exports = class Maker {
             _colInfo[_col].rate = this.calRate(res[i][0]) * 100; // in percent
             _colInfo[_col].price = res[i][1] / 1e27;
             _colInfo[_col].ratio = 1 / (res[i][2] / 1e27);
+            _colInfo[_col].debtCeiling = Number(res[i][3]);
+            _colInfo[_col].totalDebt = res[i][4] / 1e18;
           });
           resolve(_colInfo);
         })
