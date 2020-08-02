@@ -21,7 +21,7 @@ export const createTransaction = async ({
     account: from,
     hardwareWallet,
     smartContractWallet,
-  } = getProviderInfo();
+  } = await getProviderInfo();
   const safeInstance = await getGnosisSafeInstanceAt(safeAddress);
   const lastTx = await getLastTx(safeAddress);
   const nonce = Number(await getNewTxNonce(txNonce, lastTx, safeInstance));
@@ -79,13 +79,6 @@ export const createTransaction = async ({
     // if not set owner management tests will fail on ganache
     if (process.env.NODE_ENV === 'test') {
       sendParams.gas = '7000000'
-    }
-
-    const txToMock = {
-      ...txArgs,
-      confirmations: [], // this is used to determine if a tx is pending or not. See `calculateTransactionStatus` helper
-      value: txArgs.valueInWei,
-      safeTxHash: generateSafeTxHash(safeAddress, txArgs),
     }
 
     await tx

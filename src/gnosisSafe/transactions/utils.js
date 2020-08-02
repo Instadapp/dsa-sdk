@@ -26,10 +26,10 @@ export const getNewTxNonce = async (txNonce, lastTx, safeInstance) => {
 };
 
 export const shouldExecuteTransaction = async (safeInstance, nonce, lastTx) => {
-  const threshold = await safeInstance.getThreshold();
+  const threshold = await safeInstance.methods.getThreshold().call();
 
   // Tx will automatically be executed if and only if the threshold is 1
-  if (threshold.toNumber() === 1) {
+  if (Number(threshold) === 1) {
     const isFirstTransaction = Number.parseInt(nonce) === 0;
     // if the previous tx is not executed, it's delayed using the approval mechanisms,
     // once the previous tx is executed, the current tx will be available to be executed
