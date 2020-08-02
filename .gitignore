@@ -23,6 +23,7 @@ dev/test.js
 coverage
 public/css/main.css
 .nyc_output/*
+build/*
 
 #Libraries from npm packages
 public/js/lib/bootstrap.min*

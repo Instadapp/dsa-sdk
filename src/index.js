@@ -29,6 +29,9 @@ const Aave = require("./resolvers/aave.js");
 const Uniswap = require("./resolvers/uniswap.js");
 const Tokens = require("./resolvers/tokens.js");
 
+// Gnosis Safe
+const GnosisSafe = require("./gnosisSafe/index.js");
+
 module.exports = class DSA {
   /**
    * @param config // === web3
@@ -66,6 +69,7 @@ module.exports = class DSA {
     this.castUtil = new Cast(this);
     this.txnUtil = new Txn(this);
     this.erc20 = new Erc20(this);
+    this.gnosisSafe = new GnosisSafe(this);
 
     this.account = new Account(this);
     this.balances = new Erc20Resolver(this);

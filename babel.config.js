@@ -8,6 +8,10 @@ module.exports = {
       }
     ],
     ["minify", {
+      // https://github.com/babel/minify/issues/904
+      builtIns: false,
+      evaluate: false,
+      mangle: false,
       "keepFnName": true
     }]
   ],
