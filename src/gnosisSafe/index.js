@@ -1,3 +1,4 @@
+const axios = require("axios");
 const { createTransaction } = require("./transactions/createTransaction");
 const {
   MULTI_SEND_ADDRESS,
@@ -8,6 +9,7 @@ const {
   TX_NOTIFICATION_TYPES,
 } = require("./transactions/notifiedTransactions");
 const { setWeb3 } = require("./getWeb3");
+const {getTxServiceHost, getOwnersUriFrom} = require("./config")
 
 module.exports = class GnosisSafe {
   constructor(_dsa) {
@@ -24,7 +26,7 @@ module.exports = class GnosisSafe {
   /**
    * sets the current GnosisSafe instance
    */
-  async setInstance(_o) {
+  setInstance(_o) {
     let _safeAddress;
     if (typeof _o == "object") {
       if (!_o.safeAddress) throw new Error("`safeAddress` is not defined.");
@@ -34,6 +36,22 @@ module.exports = class GnosisSafe {
     }
 
     this.safeAddress = _safeAddress;
+  }
+
+  async getSafeAddresses(){
+    const host = getTxServiceHost();
+    const accounts = await this.web3.eth.requestAccounts()
+    const base = getOwnersUriFrom(accounts[0])
+    const url = `${host}${base}`;
+    const response = await axios.get(url);
+    const SUCCESS_STATUS = 200;
+    if (response.status !== SUCCESS_STATUS) {
+      return Promise.reject(new Error("Error getting safe addresses"));
+    }else{
+      const safeAddresses = response.data.safes;
+      this.setInstance(safeAddresses[0]);
+      return safeAddresses;
+    }
   }
 
   sendTransactions(safeAddress, txs, origin) {

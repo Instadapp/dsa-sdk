@@ -39,6 +39,9 @@ export const getTxServiceHost = () => {
 export const getTxServiceUriFrom = (safeAddress) =>
   `safes/${safeAddress}/transactions/`;
 
+export const getOwnersUriFrom = (ownerAddress) =>
+  `owners/${ownerAddress}/`;
+
 export const getIncomingTxServiceUriTo = (safeAddress) =>
   `safes/${safeAddress}/incoming-transfers/`;
 
