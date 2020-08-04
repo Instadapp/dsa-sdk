@@ -1,9 +1,9 @@
 const axios = require("axios");
 const { createTransaction } = require("./transactions/createTransaction");
-const {
-  MULTI_SEND_ADDRESS,
-  getEncodedMultiSendCallData,
-} = require("./contracts/safeContracts");
+// const {
+//   MULTI_SEND_ADDRESS,
+//   getEncodedMultiSendCallData,
+// } = require("./contracts/safeContracts");
 const { DELEGATE_CALL } = require("./transactions/send");
 const {
   TX_NOTIFICATION_TYPES,
@@ -62,19 +62,20 @@ module.exports = class GnosisSafe {
     }
   }
 
-  sendTransactions(safeAddress, txs, origin) {
-    const encodeMultiSendCallData = getEncodedMultiSendCallData(txs);
+  // send transaction with MultiSend
+  // sendTransactions(safeAddress, txs, origin) {
+  //   const encodeMultiSendCallData = getEncodedMultiSendCallData(txs);
 
-    return createTransaction({
-      safeAddress,
-      to: MULTI_SEND_ADDRESS,
-      valueInWei: "0",
-      txData: encodeMultiSendCallData,
-      notifiedTransaction: TX_NOTIFICATION_TYPES.STANDARD_TX,
-      operation: DELEGATE_CALL,
-      origin,
-    });
-  }
+  //   return createTransaction({
+  //     safeAddress,
+  //     to: MULTI_SEND_ADDRESS,
+  //     valueInWei: "0",
+  //     txData: encodeMultiSendCallData,
+  //     notifiedTransaction: TX_NOTIFICATION_TYPES.STANDARD_TX,
+  //     operation: DELEGATE_CALL,
+  //     origin,
+  //   });
+  // }
 
   submitTx = async (tx) => {
     const web3 = this.web3;

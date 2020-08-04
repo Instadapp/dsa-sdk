@@ -9,6 +9,7 @@ export const SAFE_MASTER_COPY_ADDRESS_V10 =
 import GnosisSafeSol from "@gnosis.pm/safe-contracts/build/contracts/GnosisSafe.json";
 import { getWeb3 } from "../getWeb3";
 
+/*
 export const getEncodedMultiSendCallData = (txs, web3) => {
   const multiSendAbi = [
     {
@@ -42,6 +43,7 @@ export const getEncodedMultiSendCallData = (txs, web3) => {
 
   return encodeMultiSendCallData;
 };
+*/
 
 export const getGnosisSafeInstanceAt = async (safeAddress) => {
   const web3 = getWeb3();
