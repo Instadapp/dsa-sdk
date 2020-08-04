@@ -5,7 +5,6 @@ import { buildTxServiceUrl } from "./txHistory";
 export const getLastTx = async (safeAddress) => {
   try {
     const url = await buildTxServiceUrl(safeAddress);
-    console.log("url: ", url)
     const response = await axios.get(url, { params: { limit: 1 } });
 
     return response.data.results[0] || null;

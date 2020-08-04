@@ -19,13 +19,23 @@ module.exports = class GnosisSafe {
     this.internal = _dsa.internal;
     this.web3 = _dsa.web3;
     this.dsa = _dsa;
-    this.safeAddress = _dsa.address.genesis;
+
+    // web3 not init yet
+    if(typeof(this.web3.version) === "object"){
+      return
+    }
+
+    this.getSafeAddresses().then((safeAddresses) =>{
+      this.safeAddresses = safeAddresses;
+      if(safeAddresses.length > 0)
+        this.safeAddress = safeAddresses[0];
+      else
+        this.safeAddress = _dsa.address.genesis;
+    });
+
     setWeb3(this.web3.currentProvider);
   }
 
-  /**
-   * sets the current GnosisSafe instance
-   */
   setInstance(_o) {
     let _safeAddress;
     if (typeof _o == "object") {
@@ -48,9 +58,7 @@ module.exports = class GnosisSafe {
     if (response.status !== SUCCESS_STATUS) {
       return Promise.reject(new Error("Error getting safe addresses"));
     }else{
-      const safeAddresses = response.data.safes;
-      this.setInstance(safeAddresses[0]);
-      return safeAddresses;
+      return response.data.safes;
     }
   }
 
@@ -72,7 +80,7 @@ module.exports = class GnosisSafe {
     const web3 = this.web3;
     const safeAddress = this.safeAddress;
     const txRecipient = tx.contractAddress;
-    const txData = tx.data ? tx.data.trim() : "";
+    const txData = tx.data ? tx.data.trim() : "0x";
     const txValue = tx.value ? web3.utils.toWei(tx.value, "ether") : "0";
 
     createTransaction({

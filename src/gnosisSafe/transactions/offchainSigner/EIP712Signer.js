@@ -2,8 +2,6 @@ import { getWeb3 } from '../../getWeb3'
 
 const EIP712_NOT_SUPPORTED_ERROR_MSG = "EIP712 is not supported by user's wallet"
 
-const web3 = getWeb3()
-
 const generateTypedDataFrom = async ({
   baseGas,
   data,
@@ -78,6 +76,8 @@ export const getEIP712Signer = (version) => async (txArgs) => {
     from: txArgs.sender,
     id: new Date().getTime(),
   }
+
+  const web3 = getWeb3()
 
   return new Promise((resolve, reject) => {
     web3.currentProvider.sendAsync(signedTypedData, (err, signature) => {

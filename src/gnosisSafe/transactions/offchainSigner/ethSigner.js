@@ -2,8 +2,6 @@ import { getWeb3 } from '../../getWeb3'
 
 const ETH_SIGN_NOT_SUPPORTED_ERROR_MSG = 'ETH_SIGN_NOT_SUPPORTED'
 
-const web3 = getWeb3()
-
 export const ethSigner = async ({
   baseGas,
   data,
@@ -33,6 +31,8 @@ export const ethSigner = async ({
       from: sender,
     },
   ).call()
+
+  const web3 = getWeb3()
 
   return new Promise(function (resolve, reject) {
     web3.currentProvider.sendAsync(

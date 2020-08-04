@@ -1,9 +1,7 @@
 import axios from "axios";
+import { getWeb3 } from '../getWeb3'
 
 import { getTxServiceHost, getTxServiceUriFrom } from "../config/index";
-import { getWeb3 } from "../getWeb3";
-
-const web3 = getWeb3();
 
 const calculateBodyFrom = async (
   safeInstance,
@@ -37,6 +35,7 @@ const calculateBodyFrom = async (
     )
     .call();
 
+  const web3 = getWeb3();
   return {
     to: web3.utils.toChecksumAddress(to),
     value: valueInWei,
@@ -57,6 +56,7 @@ const calculateBodyFrom = async (
 };
 
 export const buildTxServiceUrl = async (safeAddress) => {
+  const web3 = getWeb3()
   const host = getTxServiceHost();
   const address = web3.utils.toChecksumAddress(safeAddress);
   const base = getTxServiceUriFrom(address);
@@ -80,7 +80,7 @@ export const saveTxToHistory = async ({
   txHash,
   valueInWei,
 }) => {
-  const url = buildTxServiceUrl(safeInstance.address);
+  const url = await buildTxServiceUrl(safeInstance._address);
   const body = await calculateBodyFrom(
     safeInstance,
     to,

@@ -1,10 +1,10 @@
 import {getWeb3} from '../getWeb3'
+import GnosisSafeSol from "@gnosis.pm/safe-contracts/build/contracts/GnosisSafe.json";
+
 export const CALL = 0;
 export const DELEGATE_CALL = 1;
 export const TX_TYPE_EXECUTION = "execution";
 export const TX_TYPE_CONFIRMATION = "confirmation";
-
-const web3 = getWeb3();
 
 export const getApprovalTransaction = async ({
   baseGas,
@@ -48,9 +48,10 @@ export const getExecutionTransaction = async ({
   valueInWei,
 }) => {
   try {
+    const web3 = getWeb3();
     const contract = new web3.eth.Contract(
       GnosisSafeSol.abi,
-      safeInstance.address
+      safeInstance._address
     );
 
     return contract.methods.execTransaction(

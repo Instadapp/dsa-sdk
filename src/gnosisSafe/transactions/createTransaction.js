@@ -6,6 +6,8 @@ import semverSatisfies from 'semver/functions/satisfies'
 import {tryOffchainSigning} from './offchainSigner'
 import {saveTxToHistory} from './txHistory'
 import {generateSafeTxHash, getErrorMessage} from './transactionHelpers'
+import { estimateSafeTxGas } from './gasNew'
+import address from "../../constant/addresses"
 
 export const createTransaction = async ({
   safeAddress,
@@ -31,6 +33,7 @@ export const createTransaction = async ({
     lastTx
   );
   const safeVersion = await safeInstance.methods.VERSION().call();
+  const safeTxGas = await estimateSafeTxGas(safeInstance, safeAddress, txData, to, valueInWei, operation)
 
   // https://docs.gnosis.io/safe/docs/docs5/#pre-validated-signatures
   const sigs = `0x000000000000000000000000${from.replace(
@@ -51,8 +54,8 @@ export const createTransaction = async ({
     safeTxGas,
     baseGas: 0,
     gasPrice: 0,
-    gasToken: ZERO_ADDRESS,
-    refundReceiver: ZERO_ADDRESS,
+    gasToken: address.genesis,
+    refundReceiver: address.genesis,
     sender: from,
     sigs,
   };
@@ -110,7 +113,7 @@ export const createTransaction = async ({
     console.error(`Error creating the TX: `, err)
 
     const executeDataUsedSignatures = safeInstance.methods
-      .execTransaction(to, valueInWei, txData, operation, 0, 0, 0, ZERO_ADDRESS, ZERO_ADDRESS, sigs)
+      .execTransaction(to, valueInWei, txData, operation, 0, 0, 0, address.genesis, address.genesis, sigs)
       .encodeABI()
     const errMsg = await getErrorMessage(safeInstance.options.address, 0, executeDataUsedSignatures, from)
     console.error(`Error creating the TX - an attempt to get the error message: ${errMsg}`)
