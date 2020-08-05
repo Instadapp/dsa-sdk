@@ -3,7 +3,7 @@ import { getGnosisSafeInstanceAt } from "../contracts/safeContracts";
 import { getProviderInfo } from "../getWeb3";
 import { getLastTx, getNewTxNonce, shouldExecuteTransaction } from "./utils";
 import semverSatisfies from 'semver/functions/satisfies'
-import {tryOffchainSigning} from './offchainSigner'
+import {tryOffchainSigning, SAFE_VERSION_FOR_OFFCHAIN_SIGNATURES} from './offchainSigner'
 import {saveTxToHistory} from './txHistory'
 import {generateSafeTxHash, getErrorMessage} from './transactionHelpers'
 import { estimateSafeTxGas } from './gasNew'
