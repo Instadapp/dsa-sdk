@@ -20,11 +20,6 @@ module.exports = class GnosisSafe {
     this.web3 = _dsa.web3;
     this.dsa = _dsa;
 
-    // web3 not init yet
-    if(typeof(this.web3.version) === "object"){
-      return
-    }
-
     this.getSafeAddresses().then((safeAddresses) =>{
       this.safeAddresses = safeAddresses;
       if(safeAddresses.length > 0)
@@ -50,8 +45,8 @@ module.exports = class GnosisSafe {
 
   async getSafeAddresses(){
     const host = getTxServiceHost();
-    const accounts = await this.web3.eth.requestAccounts()
-    const base = getOwnersUriFrom(accounts[0])
+    const _addr = await this.internal.getAddress();
+    const base = getOwnersUriFrom(_addr)
     const url = `${host}${base}`;
     const response = await axios.get(url);
     const SUCCESS_STATUS = 200;
