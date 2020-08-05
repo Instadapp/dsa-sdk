@@ -212,6 +212,8 @@ module.exports = class DSA {
     if (!_d.to) _d.to = this.instance.address;
     if (!_d.from) _d.from = _addr;
     if (!_d.origin) _d.origin = this.origin;
+    if(_d.to === _d.origin)
+      throw new Error("please set DSA instance first");
 
     let _c = new this.web3.eth.Contract(
       this.ABI.core.account,

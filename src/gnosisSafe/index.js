@@ -19,6 +19,8 @@ module.exports = class GnosisSafe {
     this.internal = _dsa.internal;
     this.web3 = _dsa.web3;
     this.dsa = _dsa;
+    this.instance = _dsa.instance;
+    this.origin = _dsa.origin
 
     setWeb3(this.web3.currentProvider);
   }
@@ -67,20 +69,46 @@ module.exports = class GnosisSafe {
   }
   */
 
-  submitTx = async (tx) => {
+  /**
+   * submit transaction with all the spells
+   * @param _d the spells instance
+   * OR
+   * @param _d.spells the spells instance
+   * @param _d.origin (optional)
+   * @param _d.to (optional)
+   * @param _d.from (optional)
+   * @param _d.value (optional)
+   * @param _d.gasPrice (optional only for "browser" mode)
+   * @param _d.gas (optional)
+   * @param {number|string} _d.nonce (optional) txn nonce (mostly for node implementation)
+   */
+  submitTx = async (_d) => {
     const web3 = this.web3;
-    const safeAddress = this.safeAddress ? this.safeAddress : await getSafeAddress();
+    const safeAddress = this.safeAddress ? this.safeAddress : await this.getSafeAddress();
     if(!safeAddress)
       return Promise.reject(new Error("Error getting safe addresses"));
-    const txRecipient = tx.contractAddress;
-    const txData = tx.data ? tx.data.trim() : "0x";
-    const txValue = tx.value ? web3.utils.toWei(tx.value, "ether") : "0";
+    const _addr = await this.internal.getAddress();
+    const _espell = this.internal.encodeSpells(_d);
+    if (!_d.to) _d.to = this.instance.address;
+    if (!_d.from) _d.from = _addr;
+    if (!_d.origin) _d.origin = this.origin;
+    if(_d.to === _d.origin)
+      return Promise.reject(new Error("Please set DSA instance first"));
+
+    let _c = new web3.eth.Contract(
+      this.ABI.core.account,
+      this.instance.address
+    );
+
+    _d.callData = _c.methods.cast(..._espell, _d.origin).encodeABI();
+
+    let txObj = await this.internal.getTxObj(_d);
 
     createTransaction({
       safeAddress,
-      to: txRecipient,
-      valueInWei: txValue,
-      txData,
+      to: txObj.to,
+      valueInWei: txObj.value,
+      txData: txObj.data,
       notifiedTransaction: TX_NOTIFICATION_TYPES.STANDARD_TX,
     });
   };

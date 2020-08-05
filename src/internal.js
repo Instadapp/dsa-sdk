@@ -40,9 +40,10 @@ module.exports = class Internal {
     txObj.data = _d.callData != "0x" ? _d.callData : "0x";
     txObj.value = _d.value ? _d.value : 0;
     // need above 4 params to estimate the gas
+    let txObjClone = {...txObj}
     txObj.gas = _d.gas
       ? _d.gas
-      : ((await this.web3.eth.estimateGas(txObj)) * 1.3).toFixed(0); // increasing gas cost by 30% for margin
+      : ((await this.web3.eth.estimateGas(txObjClone)) * 1.3).toFixed(0); // increasing gas cost by 30% for margin
 
     if (this.mode == "node") {
       if (!_d.gasPrice) throw new Error("`gasPrice` is not defined.");
