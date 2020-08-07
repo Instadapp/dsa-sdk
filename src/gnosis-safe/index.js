@@ -41,6 +41,11 @@ module.exports = class GnosisSafe {
   async getSafeAddresses(address) {
     return await this.apiHelpers.getSafeAddresses(address);
   }
+
+  async getSafeOwners(safeAddress) {
+    let _safeAddress = safeAddress ? safeAddress : this.safeAddress;
+    return await this.apiHelpers.getSafeOwners(_safeAddress);
+  }
   
   /**
    * submit transaction with all the spells
