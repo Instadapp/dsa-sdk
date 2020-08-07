@@ -204,16 +204,16 @@ module.exports = class DSA {
    * @param _d.value (optional)
    * @param _d.gasPrice (optional only for "browser" mode)
    * @param _d.gas (optional)
-   * @param _d.type (optional)
+   * @param type (optional) 0 => normal, 1 => gnosis-safe
    * @param {number|string} _d.nonce (optional) txn nonce (mostly for node implementation)
    */
-  async cast(_d) {
+  async cast(_d, type) {
     let _addr = await this.internal.getAddress();
     let _espell = this.internal.encodeSpells(_d);
     if (!_d.to) _d.to = this.instance.address;
     if (!_d.from) _d.from = _addr;
     if (!_d.origin) _d.origin = this.origin;
-    if (!_d.type) _d.type = 1;
+    _d.type = type ? type : 0;
     
     let _c = new this.web3.eth.Contract(
       this.ABI.core.account,
