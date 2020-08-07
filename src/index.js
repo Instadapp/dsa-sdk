@@ -214,7 +214,6 @@ module.exports = class DSA {
     if (!_d.from) _d.from = _addr;
     if (!_d.origin) _d.origin = this.origin;
     if (!_d.type) _d.type = 1;
-    console.log(_d)
     
     let _c = new this.web3.eth.Contract(
       this.ABI.core.account,
@@ -234,7 +233,7 @@ module.exports = class DSA {
       } else if (_d.type == 1) {
         let safeAddr = this.gnosisSafe.safeAddress;
         if(!safeAddr) throw new Error("`safeAddress` is not defined.")
-        this.gnosisSafe.createTransaction.createTransaction({
+        this.gnosisSafe.createTransaction({
           safeAddress: safeAddr,
           from: txObj.from,
           to: txObj.to,

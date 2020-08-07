@@ -1,4 +1,3 @@
-// import axios from "axios";
 const axios =  require("axios");
 
 
@@ -127,11 +126,9 @@ module.exports = class APIHelpers {
       };
 
       async buildTxServiceUrl(safeAddress) {
-        const web3 = this.web3;
         const host = this.getTxServiceHost();
         const address = this.web3.utils.toChecksumAddress(safeAddress);
         const base = this.getTxServiceUriFrom(address);
-        console.log(`${host}${base}?has_confirmations=True`)
         return `${host}${base}?has_confirmations=True`;
       };
       

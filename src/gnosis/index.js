@@ -1,23 +1,92 @@
+const APIHelpers = require("./utils/apiHelpers.js");
 const semverSatisfies = require('semver/functions/satisfies')
-const TransactionsHelpers = require("./transactionHelpers.js");
-const GasEstimate = require("./estimateGas.js");
-const OffchainSigner = require("./offchainSigner/index.js");
-const Web3Helper = require("./web3Helper.js");
+const TransactionsHelpers = require("./utils/transactionHelpers.js");
+const GasEstimate = require("./utils/estimateGas.js");
+const OffchainSigner = require("./utils/offchainSigner/index.js");
+const Web3Helper = require("./utils/web3Helper.js");
 
-module.exports = class GnosisSafeCreateTransactions {
-    constructor(_dsa) {
-        this.internal = _dsa.internal;
-        this.ABI = _dsa.ABI;
-        this.web3 = _dsa.web3;
-        this.address = _dsa.address;
-        this.internal = _dsa.internal;
-        this.sendTxn = _dsa.sendTxn;
-        this.web3Helper = new Web3Helper(this);
-        this.apiHelpers = _dsa.apiHelpers;
-        this.transactionsHelpers = new TransactionsHelpers(this);
-        this.gasEstimate = new GasEstimate(this);
-        this.offchainSigner = new OffchainSigner(this);
+module.exports = class GnosisSafe {
+  constructor(_dsa) {
+    this.ABI = _dsa.ABI;
+    this.tokens = _dsa.tokens;
+    this.address = _dsa.address;
+    this.math = _dsa.math;
+    this.internal = _dsa.internal;
+    this.web3 = _dsa.web3;
+    this.dsa = _dsa;
+    this.instance = _dsa.instance;
+    this.origin = _dsa.origin;
+    this.sendTxn = _dsa.sendTxn;
+    this.internal = _dsa.internal;
+
+    this.apiHelpers = new APIHelpers(this);
+    this.web3Helper = new Web3Helper(this);
+    this.transactionsHelpers = new TransactionsHelpers(this);
+    this.gasEstimate = new GasEstimate(this);
+    this.offchainSigner = new OffchainSigner(this);
+  }
+
+  setInstance(_o) {
+    let _safeAddress;
+    if (typeof _o == "object") {
+      if (!_o.safeAddress) throw new Error("`safeAddress` is not defined.");
+      _safeAddress = _o.safeAddress;
+    } else {
+      _safeAddress = _o;
     }
+
+    this.safeAddress = _safeAddress;
+  }
+
+  async getSafeAddresses(address) {
+    return await this.apiHelpers.getSafeAddresses(address);
+  }
+  
+  /**
+   * submit transaction with all the spells
+   * @param _d the spells instance
+   * OR
+   * @param _d.spells the spells instance
+   * @param _d.origin (optional)
+   * @param _d.to (optional)
+   * @param _d.from (optional)
+   * @param _d.value (optional)
+   * @param _d.gasPrice (optional only for "browser" mode)
+   * @param _d.gas (optional)
+   * @param {number|string} _d.nonce (optional) txn nonce (mostly for node implementation)
+   */
+    submitTx = async (_d) => {
+        const web3 = this.web3;
+        if(!this.safeAddress) throw new Error("`safeAddress` is not defined.")
+        const safeAddress = this.safeAddress;
+        const _addr = await this.internal.getAddress();
+        const _espell = this.internal.encodeSpells(_d);
+        if (!_d.to) _d.to = this.instance.address;
+        if (!_d.from) _d.from = _addr;
+        if (!_d.origin) _d.origin = this.origin;
+        _d.type = 1;
+
+        let _c = new web3.eth.Contract(
+        this.ABI.core.account,
+        this.instance.address
+        );
+        _d.callData = _c.methods.cast(..._espell, _d.origin).encodeABI();
+
+        let txObj = await this.internal.getTxObj(_d);
+        return new Promise(async (resolve, reject) => {
+            await this.createTransaction({
+            safeAddress,
+            from: txObj.from,
+            to: txObj.to,
+            valueInWei: txObj.value,
+            txData: txObj.data,
+            }).then(hash => {
+                resolve(hash)
+            }).catch(err => {
+                reject(err)
+            });
+        });
+    };
 
     async createTransaction({
         safeAddress,
@@ -142,6 +211,4 @@ module.exports = class GnosisSafeCreateTransactions {
             }
         })
     }
-
-    
-}
+};
