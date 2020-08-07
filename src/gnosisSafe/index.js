@@ -1,13 +1,6 @@
 const axios = require("axios");
 const { createTransaction } = require("./transactions/createTransaction");
-// const {
-//   MULTI_SEND_ADDRESS,
-//   getEncodedMultiSendCallData,
-// } = require("./contracts/safeContracts");
 const { DELEGATE_CALL } = require("./transactions/send");
-const {
-  TX_NOTIFICATION_TYPES,
-} = require("./transactions/notifiedTransactions");
 const { setWeb3 } = require("./getWeb3");
 const {getTxServiceHost, getOwnersUriFrom} = require("./config")
 
@@ -52,23 +45,6 @@ module.exports = class GnosisSafe {
     }
   }
 
-  // send transaction with MultiSend
-  /*
-  sendTransactions(safeAddress, txs, origin) {
-    const encodeMultiSendCallData = getEncodedMultiSendCallData(txs);
-
-    return createTransaction({
-      safeAddress,
-      to: MULTI_SEND_ADDRESS,
-      valueInWei: "0",
-      txData: encodeMultiSendCallData,
-      notifiedTransaction: TX_NOTIFICATION_TYPES.STANDARD_TX,
-      operation: DELEGATE_CALL,
-      origin,
-    });
-  }
-  */
-
   /**
    * submit transaction with all the spells
    * @param _d the spells instance
@@ -92,8 +68,6 @@ module.exports = class GnosisSafe {
     if (!_d.to) _d.to = this.instance.address;
     if (!_d.from) _d.from = _addr;
     if (!_d.origin) _d.origin = this.origin;
-    if(_d.to === _d.origin)
-      return Promise.reject(new Error("Please set DSA instance first"));
 
     let _c = new web3.eth.Contract(
       this.ABI.core.account,
@@ -109,7 +83,6 @@ module.exports = class GnosisSafe {
       to: txObj.to,
       valueInWei: txObj.value,
       txData: txObj.data,
-      notifiedTransaction: TX_NOTIFICATION_TYPES.STANDARD_TX,
     });
   };
 };

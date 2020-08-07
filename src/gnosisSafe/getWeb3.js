@@ -12,16 +12,6 @@ export const sameAddress = (firstAddress, secondAddress) => {
   return firstAddress.toLowerCase() === secondAddress.toLowerCase();
 };
 
-export const ETHEREUM_NETWORK = {
-  MAINNET: "MAINNET",
-  MORDEN: "MORDEN",
-  ROPSTEN: "ROPSTEN",
-  RINKEBY: "RINKEBY",
-  GOERLI: "GOERLI",
-  KOVAN: "KOVAN",
-  UNKNOWN: "UNKNOWN",
-};
-
 export const WALLET_PROVIDER = {
   SAFE: "SAFE",
   METAMASK: "METAMASK",
@@ -38,15 +28,6 @@ export const WALLET_PROVIDER = {
   AUTHEREUM: "AUTHEREUM",
   LEDGER: "LEDGER",
   TREZOR: "TREZOR",
-};
-
-export const ETHEREUM_NETWORK_IDS = {
-  1: ETHEREUM_NETWORK.MAINNET,
-  2: ETHEREUM_NETWORK.MORDEN,
-  3: ETHEREUM_NETWORK.ROPSTEN,
-  4: ETHEREUM_NETWORK.RINKEBY,
-  5: ETHEREUM_NETWORK.GOERLI,
-  42: ETHEREUM_NETWORK.KOVAN,
 };
 
 // With some wallets from web3connect you have to use their provider instance only for signing

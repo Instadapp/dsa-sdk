@@ -14,7 +14,6 @@ export const createTransaction = async ({
   to,
   valueInWei,
   txData = "0x",
-  notifiedTransaction,
   txNonce,
   operation = 0,
   origin = null,
