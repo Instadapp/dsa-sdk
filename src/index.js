@@ -30,7 +30,7 @@ const Uniswap = require("./resolvers/uniswap.js");
 const Tokens = require("./resolvers/tokens.js");
 
 // Gnosis Safe
-const GnosisSafe = require("./gnosis/index.js");
+const GnosisSafe = require("./gnosis-safe/index.js");
 
 module.exports = class DSA {
   /**

@@ -40,7 +40,6 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "@gnosis.pm/safe-contracts": "^1.1.1-dev.2",
     "axios": "^0.19.2",
     "semver": "^7.3.2"
   }
