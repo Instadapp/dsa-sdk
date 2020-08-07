@@ -42,7 +42,6 @@
   "dependencies": {
     "@gnosis.pm/safe-contracts": "^1.1.1-dev.2",
     "axios": "^0.19.2",
-    "ethereumjs-abi": "^0.6.8",
     "semver": "^7.3.2"
   }
 }
