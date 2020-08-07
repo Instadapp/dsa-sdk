@@ -31,7 +31,7 @@ module.exports = {
     staking: "0xe5b66b785bd6b6708BB814482180C136Ddbcd687",
   },
   read: {
-    core: "0xCCf112e4348Fb273381D37F20dF49135DA973Be5",
+    core: "0x6187d8d8a866ceEfe6E9889EDc91797e6a15C012",
     erc20: "0x6d9c624844e61280c19fd7ef588d79a6de893d64",
     compound: "0x540b719fe7788Fbd4eE98033d9Fb980D753f0ED2",
     maker: "0x3dF605ca85E8d677C8f6E2665EbcdDbd801Ee9f9",
