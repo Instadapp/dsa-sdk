@@ -1,9 +1,9 @@
-const APIHelpers = require("./utils/apiHelpers.js");
 const semverSatisfies = require('semver/functions/satisfies')
-const TransactionsHelpers = require("./utils/transactionHelpers.js");
-const GasEstimate = require("./utils/estimateGas.js");
+const APIHelpers = require("./utils/safe-api.js");
+const TransactionsHelpers = require("./utils/safe-tnx.js");
+const GasEstimate = require("./utils/safe-estimateGas.js");
 const OffchainSigner = require("./utils/offchainSigner/index.js");
-const Web3Helper = require("./utils/web3Helper.js");
+const Web3Helper = require("./utils/safe-provider.js");
 
 module.exports = class GnosisSafe {
   constructor(_dsa) {
