@@ -30,7 +30,7 @@ const Uniswap = require("./resolvers/uniswap.js");
 const Tokens = require("./resolvers/tokens.js");
 
 // Gnosis Safe
-const GnosisSafe = require("./gnosisSafe/index.js");
+const GnosisSafe = require("./gnosis/index.js");
 
 module.exports = class DSA {
   /**
@@ -204,6 +204,7 @@ module.exports = class DSA {
    * @param _d.value (optional)
    * @param _d.gasPrice (optional only for "browser" mode)
    * @param _d.gas (optional)
+   * @param _d.type (optional)
    * @param {number|string} _d.nonce (optional) txn nonce (mostly for node implementation)
    */
   async cast(_d) {
@@ -212,23 +213,37 @@ module.exports = class DSA {
     if (!_d.to) _d.to = this.instance.address;
     if (!_d.from) _d.from = _addr;
     if (!_d.origin) _d.origin = this.origin;
-    if(_d.to === _d.origin)
-      throw new Error("please set DSA instance first");
-
+    if (!_d.type) _d.type = 1;
+    console.log(_d)
+    
     let _c = new this.web3.eth.Contract(
       this.ABI.core.account,
       this.instance.address
     );
 
     _d.callData = _c.methods.cast(..._espell, _d.origin).encodeABI();
-
+    
     return new Promise(async (resolve, reject) => {
       let txObj = await this.internal.getTxObj(_d);
-      return this.sendTxn(txObj)
-        .then((tx) => {
-          resolve(tx);
-        })
-        .catch((err) => reject(err));
+      if (_d.type == 0) {
+        return this.sendTxn(txObj)
+          .then((tx) => {
+            resolve(tx);
+          })
+          .catch((err) => reject(err));
+      } else if (_d.type == 1) {
+        let safeAddr = this.gnosisSafe.safeAddress;
+        if(!safeAddr) throw new Error("`safeAddress` is not defined.")
+        this.gnosisSafe.createTransaction.createTransaction({
+          safeAddress: safeAddr,
+          from: txObj.from,
+          to: txObj.to,
+          valueInWei: txObj.value,
+          txData: txObj.data,
+        }).then((tx) => resolve(tx)).catch((err) => reject(err));
+      } else {
+        throw new Error("`type` is not vaild")
+      }
     });
   }
 
