@@ -26,18 +26,6 @@ module.exports = class GnosisSafe {
     this.offchainSigner = new OffchainSigner(this);
   }
 
-  setInstance(_o) {
-    let _safeAddress;
-    if (typeof _o == "object") {
-      if (!_o.safeAddress) throw new Error("`safeAddress` is not defined.");
-      _safeAddress = _o.safeAddress;
-    } else {
-      _safeAddress = _o;
-    }
-
-    this.safeAddress = _safeAddress;
-  }
-
   async getSafeAddresses(address) {
     return await this.apiHelpers.getSafeAddresses(address);
   }
@@ -62,8 +50,9 @@ module.exports = class GnosisSafe {
    */
     submitTx = async (_d) => {
         const web3 = this.web3;
-        if(!this.safeAddress) throw new Error("`safeAddress` is not defined.")
-        const safeAddress = this.safeAddress;
+        const safeAddress = this.instance.config.gnosisSafe;
+        if(!safeAddress)
+            throw new Error("`safeAddress` is not defined. Run `await dsa.setInstance(dsaId, { gnosisSafe: safeAddr })`")
         const _addr = await this.internal.getAddress();
         const _espell = this.internal.encodeSpells(_d);
         if (!_d.to) _d.to = this.instance.address;
@@ -190,29 +179,7 @@ module.exports = class GnosisSafe {
                     console.error("Tx error: ", error);
                 })
             } catch (err) {
-                console.error(`Error creating the TX: `, err);
-
-                const executeDataUsedSignatures = safeInstance.methods
-                    .execTransaction(
-                        to,
-                        valueInWei,
-                        txData,
-                        operation,
-                        0,
-                        0,
-                        0,
-                        address.genesis,
-                        address.genesis,
-                        sigs
-                    ).encodeABI();
-                const errMsg = await getErrorMessage(
-                    safeInstance.options.address,
-                    0,
-                    executeDataUsedSignatures,
-                    from
-                );
-                let msg = `Error creating the TX - an attempt to get the error message: ${errMsg}`;
-                reject(msg)
+                reject(`Error creating the Tx.`)
             }
         })
     }
