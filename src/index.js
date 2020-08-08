@@ -60,8 +60,8 @@ module.exports = class DSA {
       address: address.genesis,
       version: 1,
       config: {
-        type: 0
-      }
+        type: 0,
+      },
     };
     this.origin = address.genesis;
 
@@ -111,17 +111,17 @@ module.exports = class DSA {
    */
   async setInstance(_o, _c) {
     if (_c && _c.gnosisSafe) {
-      let _gnosisSafe = this.web3.utils.checkAddressChecksum(_c.gnosisSafe)
-      if(!_gnosisSafe) throw new Error("`gnosisSafe` is not vaild")
-      _gnosisSafe = this.web3.utils.toChecksumAddress(_c.gnosisSafe)
+      let _gnosisSafe = this.web3.utils.checkAddressChecksum(_c.gnosisSafe);
+      if (!_gnosisSafe) throw new Error("`gnosisSafe` is not vaild");
+      _gnosisSafe = this.web3.utils.toChecksumAddress(_c.gnosisSafe);
       this.instance.config = {
         type: 1,
-        gnosisSafe: _gnosisSafe
-      }
+        gnosisSafe: _gnosisSafe,
+      };
     } else {
       this.instance.config = {
-        type: 0
-      }
+        type: 0,
+      };
     }
 
     let _id;
@@ -231,38 +231,44 @@ module.exports = class DSA {
     if (!_d.from) _d.from = _addr;
     if (!_d.origin) _d.origin = this.origin;
     _d.type = this.instance.config.type;
-    
+
     let _c = new this.web3.eth.Contract(
       this.ABI.core.account,
       this.instance.address
     );
 
     _d.callData = _c.methods.cast(..._espell, _d.origin).encodeABI();
-    
+
     return new Promise(async (resolve, reject) => {
       let txObj = await this.internal.getTxObj(_d);
       if (_d.type == 0) {
-        console.log("Casting spells to DSA.")
+        console.log("Casting spells to DSA.");
         return this.sendTxn(txObj)
           .then((tx) => {
             resolve(tx);
           })
           .catch((err) => reject(err));
       } else if (_d.type == 1) {
-        if (this.node == "node") reject("Gnosis-Safe integration is not available on `node` mode")
-        console.log("Casting spells to Gnosis Safe.")
+        if (this.node == "node")
+          reject("Gnosis-Safe integration is not available on `node` mode");
+        console.log("Casting spells to Gnosis Safe.");
         let safeAddr = this.instance.config.gnosisSafe;
-        if(!safeAddr)
-          throw new Error("`safeAddress` is not defined. Run `await dsa.setInstance(dsaId, { gnosisSafe: safeAddr })`")
-        this.gnosisSafe.createTransaction({
-          safeAddress: safeAddr,
-          from: txObj.from,
-          to: txObj.to,
-          valueInWei: txObj.value,
-          txData: txObj.data,
-        }).then((tx) => resolve(tx)).catch((err) => reject(err));
+        if (!safeAddr)
+          throw new Error(
+            "`safeAddress` is not defined. Run `await dsa.setInstance(dsaId, { gnosisSafe: safeAddr })`"
+          );
+        this.gnosisSafe
+          .createTransaction({
+            safeAddress: safeAddr,
+            from: txObj.from,
+            to: txObj.to,
+            valueInWei: txObj.value,
+            txData: txObj.data,
+          })
+          .then((tx) => resolve(tx))
+          .catch((err) => reject(err));
       } else {
-        throw new Error("`type` is not vaild")
+        throw new Error("`type` is not vaild");
       }
     });
   }
