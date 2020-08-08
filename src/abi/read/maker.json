@@ -25,6 +25,16 @@
             "internalType": "uint256",
             "name": "liquidationRatio",
             "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "debtCeiling",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "totalDebt",
+            "type": "uint256"
           }
         ],
         "internalType": "struct Helpers.ColInfo[]",

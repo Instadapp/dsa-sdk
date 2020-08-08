@@ -21,7 +21,7 @@ var colInfo = {
   },
   "USDC-A": {
     token: "USDC",
-    ratio: 5 / 6,
+    ratio: 10 / 11,
     joinAddr: "0xa191e578a6736167326d05c119ce0c90849e84b7",
     addr: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
     stabiltyRate: 0,
@@ -68,6 +68,16 @@ var colInfo = {
     price: 0,
     typeBytes:
       "0x4b4e432d41000000000000000000000000000000000000000000000000000000",
+  },
+  "MANA-A": {
+    token: "MANA",
+    ratio: 4 / 7,
+    joinAddr: "0xA6EA3b9C04b8a38Ff5e224E7c3D6937ca44C0ef9",
+    addr: "0x0F5D2fB29fb7d3CFeE444a200298f468908cC942",
+    stabiltyRate: 0,
+    price: 0,
+    typeBytes:
+      "0x4d414e412d410000000000000000000000000000000000000000000000000000",
   },
   // "TUSD-A": { // Unavailable due to a token upgrade.
   //   token: "TUSD",
@@ -167,6 +177,8 @@ module.exports = class Maker {
             _colInfo[_col].rate = this.calRate(res[i][0]) * 100; // in percent
             _colInfo[_col].price = res[i][1] / 1e27;
             _colInfo[_col].ratio = 1 / (res[i][2] / 1e27);
+            _colInfo[_col].debtCeiling = Number(res[i][3]);
+            _colInfo[_col].totalDebt = res[i][4] / 1e18;
           });
           resolve(_colInfo);
         })

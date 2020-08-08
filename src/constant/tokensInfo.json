@@ -100,7 +100,7 @@
   "renbtc": {
     "type": "token",
     "symbol": "renBTC",
-    "name": "Ren USD",
+    "name": "Ren BTC",
     "address": "0xEB4C2781e4ebA804CE9a9803C67d0893436bB27D",
     "decimals": 8
   },
@@ -391,5 +391,12 @@
     "decimals": 18,
     "factor": 0.35,
     "root": "rep"
+  },
+  "snx_ren": {
+    "type": "bptoken",
+    "symbol": "SNX_REN",
+    "name": "Balancer SNX_REN",
+    "address": "0x330416c863f2acce7af9c9314b422d24c672534a",
+    "decimals": 18
   }
 }
