@@ -88,7 +88,7 @@ module.exports = class Aave {
           });
           _position.totalSupplyInEth = _totalSupplyInEth;
           _position.totalBorrowInEth = Number(res[1][2]) / 1e18;
-          _position.totalFreeInETH = Number(res[1][3]) / 1e18;
+          _position.totalFeeInETH = Number(res[1][3]) / 1e18;
           _position.maxBorrowLimitInEth = _maxBorrowLimitInEth;
           var _status = _totalBorrowInEth / _totalSupplyInEth;
           _position.status = _status;
