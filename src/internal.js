@@ -24,6 +24,7 @@ module.exports = class Internal {
    * * @param _d.from
    * * @param _d.to
    * * @param _d.callData
+   * * @param _d.type
    * * @param _d.value (optional)
    * * @param _d.gas (optional)
    * * @param _d.gasPrice (optional only for "browser" mode)
@@ -33,6 +34,7 @@ module.exports = class Internal {
     if (!_d.from) throw new Error("'from' is not defined.");
     if (!_d.callData) throw new Error("'calldata' is not defined.");
     if (!_d.to) throw new Error("'to' is not defined.");
+    if (_d.type != 0 && !_d.type) throw new Error("'type' is not defined.");
 
     let txObj = {};
     txObj.from = _d.from;
@@ -40,18 +42,21 @@ module.exports = class Internal {
     txObj.data = _d.callData != "0x" ? _d.callData : "0x";
     txObj.value = _d.value ? _d.value : 0;
     // need above 4 params to estimate the gas
-    txObj.gas = _d.gas
-      ? _d.gas
-      : ((await this.web3.eth.estimateGas(txObj)) * 1.3).toFixed(0); // increasing gas cost by 30% for margin
+    if (_d.type == 0) {
+      let txObjClone = { ...txObj };
+      txObj.gas = _d.gas
+        ? _d.gas
+        : ((await this.web3.eth.estimateGas(txObjClone)) * 1.3).toFixed(0); // increasing gas cost by 30% for margin
 
-    if (this.mode == "node") {
-      if (!_d.gasPrice) throw new Error("`gasPrice` is not defined.");
+      if (this.mode == "node") {
+        if (!_d.gasPrice) throw new Error("`gasPrice` is not defined.");
 
-      txObj.nonce = _d.nonce
-        ? _d.nonce
-        : await this.web3.eth.getTransactionCount(txObj.from);
+        txObj.nonce = _d.nonce
+          ? _d.nonce
+          : await this.web3.eth.getTransactionCount(txObj.from);
+      }
+      if (_d.gasPrice) txObj.gasPrice = _d.gasPrice;
     }
-    if (_d.gasPrice) txObj.gasPrice = _d.gasPrice;
 
     return txObj;
   }

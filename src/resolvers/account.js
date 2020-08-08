@@ -91,7 +91,7 @@ module.exports = class Account {
 
   /**
    * returns accounts in a simple array of objects
-   * @param _id the DSA address
+   * @param _addr the DSA address
    */
   async getAuthByAddress(_addr) {
     var _c = new this.web3.eth.Contract(
@@ -101,6 +101,28 @@ module.exports = class Account {
     return new Promise((resolve, reject) => {
       return _c.methods
         .getAccountAuthorities(_addr)
+        .call({ from: this.address.genesis })
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  }
+
+  /**
+   * returns authorities with its type in a simple array of objects.
+   * @param dsaAddr the DSA address
+   */
+  async getAuthoritiesTypes(dsaAddr) {
+    var _c = new this.web3.eth.Contract(
+      this.ABI.read.core,
+      this.address.read.core
+    );
+    return new Promise((resolve, reject) => {
+      return _c.methods
+        .getAccountAuthoritiesTypes(dsaAddr)
         .call({ from: this.address.genesis })
         .then((data) => {
           resolve(data);

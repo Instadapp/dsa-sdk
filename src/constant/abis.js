@@ -47,4 +47,5 @@ module.exports = {
   basic: {
     erc20: require("../abi/basics/erc20.json"),
   },
+  gnosisSafe: require("../abi/gnosis/gnosisSafe.json"),
 };

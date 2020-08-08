@@ -29,6 +29,9 @@ const Aave = require("./resolvers/aave.js");
 const Uniswap = require("./resolvers/uniswap.js");
 const Tokens = require("./resolvers/tokens.js");
 
+// Gnosis Safe
+const GnosisSafe = require("./gnosis-safe/index.js");
+
 module.exports = class DSA {
   /**
    * @param config // === web3
@@ -56,6 +59,9 @@ module.exports = class DSA {
       id: 0,
       address: address.genesis,
       version: 1,
+      config: {
+        type: 0,
+      },
     };
     this.origin = address.genesis;
 
@@ -66,6 +72,7 @@ module.exports = class DSA {
     this.castUtil = new Cast(this);
     this.txnUtil = new Txn(this);
     this.erc20 = new Erc20(this);
+    this.gnosisSafe = new GnosisSafe(this);
 
     this.account = new Account(this);
     this.balances = new Erc20Resolver(this);
@@ -102,7 +109,21 @@ module.exports = class DSA {
   /**
    * sets the current DSA instance
    */
-  async setInstance(_o) {
+  async setInstance(_o, _c) {
+    if (_c && _c.gnosisSafe) {
+      let _gnosisSafe = this.web3.utils.checkAddressChecksum(_c.gnosisSafe);
+      if (!_gnosisSafe) throw new Error("`gnosisSafe` is not vaild");
+      _gnosisSafe = this.web3.utils.toChecksumAddress(_c.gnosisSafe);
+      this.instance.config = {
+        type: 1,
+        gnosisSafe: _gnosisSafe,
+      };
+    } else {
+      this.instance.config = {
+        type: 0,
+      };
+    }
+
     let _id;
     if (typeof _o == "object") {
       if (!_o.id) throw new Error("`dsaId` is not defined.");
@@ -111,11 +132,11 @@ module.exports = class DSA {
       _id = _o;
     }
 
-    if (!isFinite(_id)) throw new Error("Invaild `dsaId`.");
+    if (!isFinite(String(_id))) throw new Error("Invaild `dsaId`.");
 
     let _obj = {
       protocol: "core",
-      method: "getAccountDetails",
+      method: "getAccountIdDetails",
       args: [_id],
     };
     return new Promise((resolve, reject) => {
@@ -128,7 +149,7 @@ module.exports = class DSA {
         })
         .catch(async (err) => {
           let count = await this.account.count();
-          if (count < Number(_o)) {
+          if (count < Number(_id)) {
             return reject(
               "dsaId does not exist. Run `dsa.build()` to create new DSA."
             );
@@ -141,9 +162,10 @@ module.exports = class DSA {
   /**
    * sets the current DSA ID instance
    * @param {number | string} _o DSA ID
+   * @param {object} _c config
    */
-  async setAccount(_o) {
-    return this.setInstance(_o);
+  async setAccount(_o, _c) {
+    return this.setInstance(_o, _c);
   }
 
   /**
@@ -208,6 +230,7 @@ module.exports = class DSA {
     if (!_d.to) _d.to = this.instance.address;
     if (!_d.from) _d.from = _addr;
     if (!_d.origin) _d.origin = this.origin;
+    _d.type = this.instance.config.type;
 
     let _c = new this.web3.eth.Contract(
       this.ABI.core.account,
@@ -218,11 +241,35 @@ module.exports = class DSA {
 
     return new Promise(async (resolve, reject) => {
       let txObj = await this.internal.getTxObj(_d);
-      return this.sendTxn(txObj)
-        .then((tx) => {
-          resolve(tx);
-        })
-        .catch((err) => reject(err));
+      if (_d.type == 0) {
+        console.log("Casting spells to DSA.");
+        return this.sendTxn(txObj)
+          .then((tx) => {
+            resolve(tx);
+          })
+          .catch((err) => reject(err));
+      } else if (_d.type == 1) {
+        if (this.node == "node")
+          reject("Gnosis-Safe integration is not available on `node` mode");
+        console.log("Casting spells to Gnosis Safe.");
+        let safeAddr = this.instance.config.gnosisSafe;
+        if (!safeAddr)
+          throw new Error(
+            "`safeAddress` is not defined. Run `await dsa.setInstance(dsaId, { gnosisSafe: safeAddr })`"
+          );
+        this.gnosisSafe
+          .createTransaction({
+            safeAddress: safeAddr,
+            from: txObj.from,
+            to: txObj.to,
+            valueInWei: txObj.value,
+            txData: txObj.data,
+          })
+          .then((tx) => resolve(tx))
+          .catch((err) => reject(err));
+      } else {
+        throw new Error("`type` is not vaild");
+      }
     });
   }
 
