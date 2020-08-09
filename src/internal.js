@@ -34,7 +34,7 @@ module.exports = class Internal {
     if (!_d.from) throw new Error("'from' is not defined.");
     if (!_d.callData) throw new Error("'calldata' is not defined.");
     if (!_d.to) throw new Error("'to' is not defined.");
-    if (_d.type != 0 && !_d.type) throw new Error("'type' is not defined.");
+    if (_d.type != 0 && !_d.type) _d.type = 0;
 
     let txObj = {};
     txObj.from = _d.from;
