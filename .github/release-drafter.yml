@@ -1,3 +1,13 @@
+categories:
+  - title: '🚀 Features'
+    label:
+      - 'feature'
+      - 'implement'
+  - title: '🐛 Bug Fixes'
+    labels:
+      - 'fix'
+      - 'bugfix'
+      - 'bug'
 version-resolver:
   major:
     labels:
