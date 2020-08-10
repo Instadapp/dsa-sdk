@@ -43,7 +43,7 @@ module.exports = {
     curve_y: "0xaf122FB1C70b913AF467a9D924890f92c109bfc3",
     oneInch: "0x33498ee6Db368A8344a4a8d2899c631E99adBEAE",
     dydx: "0xcb704D9505Fbbf61478F06741C75F34eA84Ec85C",
-    aave: "0x5616a3d7e5c65d9d4af05e9cda6541db18d64790",
+    aave: "0x0Cb46B9595678b2C4331274d8904803E48A9430f",
     uniswap: "0x492e5f3f01d20513fc0d53ca0215b6499faec8a0",
   },
 };
