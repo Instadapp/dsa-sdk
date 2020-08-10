@@ -1,1 +1,125 @@
-[{"inputs":[{"internalType":"address","name":"user","type":"address"},{"internalType":"address[]","name":"tokens","type":"address[]"}],"name":"getPosition","outputs":[{"components":[{"internalType":"uint256","name":"tokenPrice","type":"uint256"},{"internalType":"uint256","name":"supplyBalance","type":"uint256"},{"internalType":"uint256","name":"borrowBalance","type":"uint256"},{"internalType":"uint256","name":"borrowFee","type":"uint256"},{"internalType":"uint256","name":"supplyRate","type":"uint256"},{"internalType":"uint256","name":"borrowRate","type":"uint256"},{"components":[{"internalType":"uint256","name":"ltv","type":"uint256"},{"internalType":"uint256","name":"threshold","type":"uint256"},{"internalType":"bool","name":"usageAsCollEnabled","type":"bool"},{"internalType":"bool","name":"borrowEnabled","type":"bool"},{"internalType":"bool","name":"stableBorrowEnabled","type":"bool"},{"internalType":"bool","name":"isActive","type":"bool"}],"internalType":"struct AaveHelpers.AaveTokenData","name":"aaveTokenData","type":"tuple"}],"internalType":"struct AaveHelpers.AaveUserTokenData[]","name":"","type":"tuple[]"},{"components":[{"internalType":"uint256","name":"totalSupplyETH","type":"uint256"},{"internalType":"uint256","name":"totalCollateralETH","type":"uint256"},{"internalType":"uint256","name":"totalBorrowsETH","type":"uint256"},{"internalType":"uint256","name":"totalFeesETH","type":"uint256"},{"internalType":"uint256","name":"availableBorrowsETH","type":"uint256"},{"internalType":"uint256","name":"currentLiquidationThreshold","type":"uint256"},{"internalType":"uint256","name":"ltv","type":"uint256"},{"internalType":"uint256","name":"healthFactor","type":"uint256"}],"internalType":"struct AaveHelpers.AaveUserData","name":"","type":"tuple"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"}]
+[
+  {
+    "inputs": [
+      { "internalType": "address", "name": "user", "type": "address" },
+      { "internalType": "address[]", "name": "tokens", "type": "address[]" }
+    ],
+    "name": "getPosition",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "tokenPrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "supplyBalance",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "borrowBalance",
+            "type": "uint256"
+          },
+          { "internalType": "uint256", "name": "borrowFee", "type": "uint256" },
+          {
+            "internalType": "uint256",
+            "name": "supplyRate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "borrowRate",
+            "type": "uint256"
+          },
+          {
+            "components": [
+              { "internalType": "uint256", "name": "ltv", "type": "uint256" },
+              {
+                "internalType": "uint256",
+                "name": "threshold",
+                "type": "uint256"
+              },
+              {
+                "internalType": "bool",
+                "name": "usageAsCollEnabled",
+                "type": "bool"
+              },
+              {
+                "internalType": "bool",
+                "name": "borrowEnabled",
+                "type": "bool"
+              },
+              {
+                "internalType": "bool",
+                "name": "stableBorrowEnabled",
+                "type": "bool"
+              },
+              { "internalType": "bool", "name": "isActive", "type": "bool" }
+            ],
+            "internalType": "struct AaveHelpers.AaveTokenData",
+            "name": "aaveTokenData",
+            "type": "tuple"
+          }
+        ],
+        "internalType": "struct AaveHelpers.AaveUserTokenData[]",
+        "name": "",
+        "type": "tuple[]"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "totalSupplyETH",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "totalCollateralETH",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "totalBorrowsETH",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "totalFeesETH",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "availableBorrowsETH",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "currentLiquidationThreshold",
+            "type": "uint256"
+          },
+          { "internalType": "uint256", "name": "ltv", "type": "uint256" },
+          {
+            "internalType": "uint256",
+            "name": "healthFactor",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct AaveHelpers.AaveUserData",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "name",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
