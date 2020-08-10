@@ -10,8 +10,8 @@ module.exports = {
   },
   connectors: {
     basic: "0x6a31c5982C5Bc5533432913cf06a66b6D3333a95",
-    auth: "0xB3242e09C8E5cE6E14296b3d3AbC4C6965F49b98",
-    authority: "0xB3242e09C8E5cE6E14296b3d3AbC4C6965F49b98", // same address as of "auth" to not break things with upgrade
+    auth: "0xd1aff9f2acf800c876c409100d6f39aea93fc3d9",
+    authority: "0xd1aff9f2acf800c876c409100d6f39aea93fc3d9", // same address as of "auth" to not break things with upgrade
     compound: "0x07F81230d73a78f63F0c2A3403AD281b067d28F8",
     maker: "0xac02030d8a8F49eD04b2f52C394D3F901A10F8A9",
     instapool: "0xCeF5f3c402d4fef76A038e89a4357176963e1464",
@@ -29,6 +29,7 @@ module.exports = {
     uniswap: "0x62EbfF47B2Ba3e47796efaE7C51676762dC961c0",
     comp: "0xB4a04F1C194bEed64FCE27843B5b3079339cdaD4",
     staking: "0xe5b66b785bd6b6708BB814482180C136Ddbcd687",
+    chi: "0xb86437e80709015d05354c35e54b7c8b11a58687",
   },
   read: {
     core: "0x6187d8d8a866ceEfe6E9889EDc91797e6a15C012",

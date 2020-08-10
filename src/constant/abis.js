@@ -27,6 +27,7 @@ module.exports = {
     uniswap: require("../abi/connectors/uniswap.json"),
     comp: require("../abi/connectors/comp.json"),
     staking: require("../abi/connectors/staking.json"),
+    chi: require("../abi/connectors/chi.json"),
   },
   read: {
     core: require("../abi/read/core.json"),
