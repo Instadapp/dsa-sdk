@@ -35,6 +35,11 @@
             "type": "uint256"
           },
           {
+            "internalType": "uint256",
+            "name": "borrowModal",
+            "type": "uint256"
+          },
+          {
             "components": [
               { "internalType": "uint256", "name": "ltv", "type": "uint256" },
               {
