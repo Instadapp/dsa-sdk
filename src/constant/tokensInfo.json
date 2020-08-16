@@ -239,6 +239,13 @@
     "address": "0xdF5e0e81Dff6FAF3A7e52BA697820c5e32D806A8",
     "decimals": 18
   },
+  "crv": {
+    "type": "curvetoken",
+    "symbol": "CRV",
+    "name": "Curve token",
+    "address": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+    "decimals": 18
+  },
   "aeth": {
     "type": "atoken",
     "symbol": "AETH",

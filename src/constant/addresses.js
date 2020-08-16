@@ -30,6 +30,7 @@ module.exports = {
     comp: "0xB4a04F1C194bEed64FCE27843B5b3079339cdaD4",
     staking: "0xe5b66b785bd6b6708BB814482180C136Ddbcd687",
     chi: "0xb86437e80709015d05354c35e54b7c8b11a58687",
+    curve_claim: "0xF5e14d35706971B6AaD7A67B1A8E9a1EF7870Be9",
   },
   read: {
     core: "0x6187d8d8a866ceEfe6E9889EDc91797e6a15C012",
@@ -46,5 +47,6 @@ module.exports = {
     dydx: "0xcb704D9505Fbbf61478F06741C75F34eA84Ec85C",
     aave: "0xe04Cd009fF68628BC663058dDAA7E5Bf7979BEaF",
     uniswap: "0x492e5f3f01d20513fc0d53ca0215b6499faec8a0",
+    curve_claim: "0xc501F3c50DabB377c4afe5C0cD44BF7173b0F833",
   },
 };
