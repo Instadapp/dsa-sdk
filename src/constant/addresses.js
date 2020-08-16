@@ -48,5 +48,6 @@ module.exports = {
     aave: "0xe04Cd009fF68628BC663058dDAA7E5Bf7979BEaF",
     uniswap: "0x492e5f3f01d20513fc0d53ca0215b6499faec8a0",
     curve_claim: "0xc501F3c50DabB377c4afe5C0cD44BF7173b0F833",
+    chainlink: "0xF72Ee0Cc52C119F00B19c35a4d4ee2f445573D3e",
   },
 };

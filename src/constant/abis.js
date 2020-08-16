@@ -46,6 +46,7 @@ module.exports = {
     aave: require("../abi/read/aave.json"),
     uniswap: require("../abi/read/uniswap.json"),
     curve_claim: require("../abi/read/curveClaim.json"),
+    chainlink: require("../abi/read/chainlink.json"),
   },
   basic: {
     erc20: require("../abi/basics/erc20.json"),

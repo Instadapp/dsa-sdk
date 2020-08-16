@@ -29,6 +29,7 @@ const Dydx = require("./resolvers/dydx.js");
 const Aave = require("./resolvers/aave.js");
 const Uniswap = require("./resolvers/uniswap.js");
 const Tokens = require("./resolvers/tokens.js");
+const ChainLinkPrices = require("./resolvers/ChainLink.js");
 
 // Gnosis Safe
 const GnosisSafe = require("./gnosis-safe/index.js");
@@ -90,6 +91,8 @@ module.exports = class DSA {
     this.dydx = new Dydx(this);
     this.aave = new Aave(this);
     this.uniswap = new Uniswap(this);
+
+    this.chainlink = new ChainLinkPrices(this);
 
     // defining methods to simplify the calls for frontend developers
     this.sendTxn = this.txnUtil.send; // send transaction // node || browser
