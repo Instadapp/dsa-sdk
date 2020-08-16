@@ -146,6 +146,13 @@
     "address": "0x0bc529c00C6401aEF6D220BE8C6Ea1667F6Ad93e",
     "decimals": 18
   },
+  "chi": {
+    "type": "token",
+    "symbol": "CHI",
+    "name": "CHI Gas Token",
+    "address": "0x0000000000004946c0e9F43F4Dee607b0eF1fA1c",
+    "decimals": 0
+  },
   "ceth": {
     "type": "ctoken",
     "symbol": "CETH",
