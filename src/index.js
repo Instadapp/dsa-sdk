@@ -82,7 +82,6 @@ module.exports = class DSA {
     this.instapool = new InstaPool(this);
     this.oasis = new Oasis(this);
     this.kyber = new Kyber(this);
-    this.curve = new CurveSUSD(this);
     this.curve_susd = new CurveSUSD(this);
     this.curve_sbtc = new CurveSBTC(this);
     this.curve_y = new CurveY(this);
