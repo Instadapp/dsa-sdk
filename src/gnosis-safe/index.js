@@ -36,6 +36,92 @@ module.exports = class GnosisSafe {
   }
 
   /**
+   * returns the estimate gas cost
+   * @param _d.from the from address
+   * @param _d.gnosisSafe the from address
+   * @param _d.to the to address
+   * @param _d.spells spells
+   * @param _d.value the call ETH value
+   *
+   */
+  async estimateGnosisSafeGas(_d) {
+    if (!_d.to) _d.to = this.instance.address;
+    if (_d.to == this.address.genesis)
+      throw new Error(
+        `Please configure the DSA instance by calling dsa.setInstance(dsaId, {gnosisSafe: Addr}). More details: https://docs.instadapp.io/setup`
+      );
+    if (!_d.from) _d.from = await this.internal.getAddress();
+    if (!_d.value) _d.value = "0";
+    let encodedSpellData = this.dsa.encodeCastABI(_d.spells);
+    const _owners = await this.apiHelpers.getSafeOwners(
+      this.web3.utils.toChecksumAddress(_d.gnosisSafe)
+    );
+
+    if (_owners.indexOf(this.web3.utils.toChecksumAddress(_d.from)) == "-1")
+      throw new Error("'from' address is not owner of safe address");
+    const safeInstance = await this.transactionsHelpers.getGnosisSafeInstanceAt(
+      _d.gnosisSafe
+    );
+    return new Promise(async (resolve, reject) => {
+      await this.gasEstimate
+        .estimateSafeTxGas(
+          safeInstance,
+          _d.gnosisSafe,
+          encodedSpellData,
+          _d.to,
+          _d.value,
+          0
+        )
+        .then((gasLimit) => resolve(gasLimit))
+        .catch((err) => reject(err));
+    });
+  }
+
+  /**
+   * returns the estimate gas cost
+   * @param _d.to the to address
+   * @param _d.from the from address
+   * @param _d.spells spells
+   * @param _d.value the call ETH value
+   *
+   */
+  async encodeGnosisCastABI(_d) {
+    if (!_d.to) _d.to = this.instance.address;
+    if (_d.to == this.address.genesis)
+      throw new Error(
+        `Please configure the DSA instance by calling dsa.setInstance(dsaId, {gnosisSafe: Addr}). More details: https://docs.instadapp.io/setup`
+      );
+
+    if (!_d.from) _d.from = await this.internal.getAddress();
+    if (!_d.value) _d.value = "0";
+    let encodedSpellData = this.dsa.encodeCastABI(_d.spells);
+    let MainSafeAddress = "0x34CfAC646f301356fAa8B21e94227e3583Fe3F5F";
+    const contract = new this.web3.eth.Contract(
+      this.ABI.gnosisSafe.abi,
+      MainSafeAddress
+    );
+
+    const sigs = `0x000000000000000000000000${_d.from.replace(
+      "0x",
+      ""
+    )}000000000000000000000000000000000000000000000000000000000000000001`;
+    return contract.methods
+      .execTransaction(
+        _d.to,
+        _d.value,
+        encodedSpellData,
+        0,
+        9000000,
+        0,
+        0,
+        this.address.genesis,
+        this.address.genesis,
+        sigs
+      )
+      .encodeABI();
+  }
+
+  /**
    * submit transaction with all the spells
    * @param _d the spells instance
    * OR

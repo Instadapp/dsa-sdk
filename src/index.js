@@ -94,7 +94,7 @@ module.exports = class DSA {
     this.sendTxn = this.txnUtil.send; // send transaction // node || browser
     this.transfer = this.erc20.transfer;
     this.castEncoded = this.castUtil.encoded;
-    this.estimateCastGas = this.castUtil.estimateGas;
+    // this.estimateCastGas = this.castUtil.estimateGas;
     this.encodeCastABI = this.castUtil.encodeABI;
     this.count = this.account.count;
     this.getAccounts = this.account.getAccounts;
@@ -104,6 +104,31 @@ module.exports = class DSA {
     // value of uint(-1).
     this.maxValue =
       "115792089237316195423570985008687907853269984665640564039457584007913129639935";
+  }
+
+  /**
+   * returns the estimate gas cost
+   * @param _d.from the from address
+   * @param _d.to the to address
+   * @param _d.value eth value
+   * @param _d.spells cast spells
+   */
+  async estimateCastGas(_d) {
+    let type = this.instance.config.type;
+    return new Promise(async (resolve, reject) => {
+      if (type == 0) {
+        await this.castUtil
+          .estimateGas(_d)
+          .then((gas) => resolve(gas))
+          .catch((err) => reject(err));
+      } else if (type == 1) {
+        _d.gnosisSafe = this.instance.config.gnosisSafe;
+        await this.gnosisSafe
+          .estimateGnosisSafeGas(_d)
+          .then((gas) => resolve(gas))
+          .catch((err) => reject(err));
+      }
+    });
   }
 
   /**

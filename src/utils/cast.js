@@ -31,9 +31,10 @@ module.exports = class CastHelper {
 
   /**
    * returns the estimate gas cost
-   * @param _d.connector the from address
-   * @param _d.method the to address
-   * @param _d.args the ABI interface
+   * @param _d.from the from address
+   * @param _d.to the to address
+   * @param _d.value eth value
+   * @param _d.spells cast spells
    */
   async estimateGas(_d) {
     var _internal = this.internal;
