@@ -79,7 +79,7 @@ module.exports = class OneInch {
    * @param sellToken sell token symbol
    * @param sellAmt sell token amount in decimal
    * @param slippage slippage of trade
-   * @param gasPriceInEth dest Token Eth Price Times Gas Price
+   * @param gasPriceInEth dest Token Eth Price Times Gas Price. Default: 0.
    */
   async getBuyAmountWithGas(
     buyToken,
@@ -128,6 +128,7 @@ module.exports = class OneInch {
             buyAmtRaw: res[0],
             unitAmt: res[1],
             distribution: res[2],
+            gasEstimate: res[3]
           };
           resolve(_res);
         })
@@ -139,10 +140,12 @@ module.exports = class OneInch {
 
   /**
    * returns buy/dest amount and unit Amount
-   * @param tokensArray array of token path
+   * @param tokensArr array of token path
    * @param sellAmt sell token amount in decimal
    * @param slippage slippage of trade
-   * @param gasPriceInEth dest Token Eth Price Times Gas Price
+   * @param distributionArr distributions array.
+   * @param disableDexArr disable flag array.
+   * @param gasPriceInEthArr dest Token Eth Price Times Gas Price. Default: 0.
    */
   async getBuyAmountMultiWithGas(
     tokensArr,
@@ -168,7 +171,7 @@ module.exports = class OneInch {
         Array(swapNum).fill("0") :
         disableDexArr.map(a => this.math.bigNumInString(a));
     let _gasPriceInEth = !gasPriceInEthArr ?
-        Array(swapNum).fill("1") :
+        Array(swapNum).fill("0") :
         gasPriceInEthArr.map(a => this.math.bigNumInString(a));
 
     let _sellToken = this.tokens.isToken(sellToken);
@@ -189,12 +192,10 @@ module.exports = class OneInch {
       ],
     };
 
-    console.log(_obj)
     return new Promise((resolve, reject) => {
       return this.dsa
         .read(_obj)
         .then(async (res) => {
-          console.log(res)
           let _buyToken = this.tokens.isToken(buyToken);
           let _buyAmt = !_buyToken
             ? await this.erc20.toDecimalInternal(res[0], buyToken)
@@ -204,6 +205,7 @@ module.exports = class OneInch {
             buyAmtRaw: res[0],
             unitAmt: res[1],
             distribution: res[2],
+            gasEstimate: res[4]
           };
           resolve(_res);
         })
