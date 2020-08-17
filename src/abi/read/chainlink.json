@@ -1,0 +1,156 @@
+[
+  {
+    "inputs": [
+      { "internalType": "string[]", "name": "tokens", "type": "string[]" },
+      {
+        "internalType": "address[]",
+        "name": "chainlinkFeeds",
+        "type": "address[]"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "tokenSymbol",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "chainlinkFeed",
+        "type": "address"
+      }
+    ],
+    "name": "LogAddChainLinkMapping",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "tokenSymbol",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "chainlinkFeed",
+        "type": "address"
+      }
+    ],
+    "name": "LogRemoveChainLinkMapping",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      { "internalType": "string[]", "name": "tokens", "type": "string[]" },
+      {
+        "internalType": "address[]",
+        "name": "chainlinkFeeds",
+        "type": "address[]"
+      }
+    ],
+    "name": "addChainLinkMapping",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "name": "chainLinkMapping",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "connectors",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getGasPrice",
+    "outputs": [
+      { "internalType": "uint256", "name": "gasPrice", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string[]", "name": "tokens", "type": "string[]" }
+    ],
+    "name": "getPrice",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "uint256", "name": "price", "type": "uint256" },
+          { "internalType": "uint256", "name": "decimals", "type": "uint256" }
+        ],
+        "internalType": "struct Resolver.PriceData",
+        "name": "ethPriceInUsd",
+        "type": "tuple"
+      },
+      {
+        "components": [
+          { "internalType": "uint256", "name": "price", "type": "uint256" },
+          { "internalType": "uint256", "name": "decimals", "type": "uint256" }
+        ],
+        "internalType": "struct Resolver.PriceData",
+        "name": "btcPriceInUsd",
+        "type": "tuple"
+      },
+      {
+        "components": [
+          { "internalType": "uint256", "name": "price", "type": "uint256" },
+          { "internalType": "uint256", "name": "decimals", "type": "uint256" }
+        ],
+        "internalType": "struct Resolver.PriceData[]",
+        "name": "tokensPriceInETH",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "instaIndex",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "name",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string[]", "name": "tokens", "type": "string[]" }
+    ],
+    "name": "removeChainLinkMapping",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "version",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
