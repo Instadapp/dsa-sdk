@@ -60,7 +60,7 @@ module.exports = class Curve {
       return this.dsa
         .read(_obj)
         .then((res) => {
-          resolve(res[0]);
+          resolve(Number(res));
         })
         .catch((err) => {
           reject(err);
