@@ -162,7 +162,7 @@ module.exports = class OneInch {
     let _slippage = !slippage ? 10 ** 16 : slippage * 10 ** 16;
     _slippage = String(this.math.bigNumInString(_slippage));
     let _distribution = !distributionArr ?
-        Array(swapNum).fill("100") :
+        Array(swapNum).fill("5") :
         distributionArr.map(a => this.math.bigNumInString(a));
     let _disableDex = !disableDexArr ?
         Array(swapNum).fill("0") :
