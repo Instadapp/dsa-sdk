@@ -242,6 +242,34 @@ module.exports = class DSA {
   }
 
   /**
+   * build new DSA txObj
+   * @param {address} _d.authority (optional)
+   * @param {address} _d.origin (optional)
+   * @param {number|string} _d.gasPrice (optional) not optional in "node"
+   * @param {number|string} _d.gas (optional) not optional in "node"
+   * @param {number|string} _d.nonce (optional) not optional in "node"
+   */
+  async buildTxObj(_d) {
+    if (!_d) _d = {};
+    if (!_d.authority) _d.authority = _addr;
+    if (!_d.version) _d.version = 1;
+    if (!_d.origin) _d.origin = this.origin;
+    _d.to = this.address.core.index;
+
+    let _c = await new this.web3.eth.Contract(
+      this.ABI.core.index,
+      this.address.core.index
+    );
+
+    _d.callData = _c.methods
+      .build(_d.authority, _d.version, _d.origin)
+      .encodeABI();
+
+    let txObj = await this.internal.getTxObj(_d);
+    return txObj;
+  }
+
+  /**
    * execute all the spells
    * @param _d the spells instance
    * OR
@@ -301,6 +329,35 @@ module.exports = class DSA {
         throw new Error("`type` is not vaild");
       }
     });
+  }
+
+  /**
+   * Return txObj for cast
+   * @param _d the spells instance
+   * OR
+   * @param _d.spells the spells instance
+   * @param _d.origin (optional)
+   * @param _d.to (optional)
+   * @param _d.value (optional)
+   * @param _d.gasPrice (optional only for "browser" mode)
+   * @param _d.gas (optional)
+   * @param {number|string} _d.nonce (optional) txn nonce (mostly for node implementation)
+   */
+  async castTxObj(_d) {
+    let _espell = this.internal.encodeSpells(_d);
+    if (!_d.to) _d.to = this.instance.address;
+    if (!_d.origin) _d.origin = this.origin;
+    _d.type = this.instance.config.type;
+
+    let _c = new this.web3.eth.Contract(
+      this.ABI.core.account,
+      this.instance.address
+    );
+
+    _d.callData = _c.methods.cast(..._espell, _d.origin).encodeABI();
+
+    let txObj = await this.internal.getTxObj(_d);
+    return txObj;
   }
 
   /**
