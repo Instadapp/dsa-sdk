@@ -1,16 +1,8 @@
 [
   {
     "inputs": [
-      {
-        "internalType": "address",
-        "name": "user",
-        "type": "address"
-      },
-      {
-        "internalType": "address[]",
-        "name": "tokens",
-        "type": "address[]"
-      }
+      { "internalType": "address", "name": "user", "type": "address" },
+      { "internalType": "address[]", "name": "tokens", "type": "address[]" }
     ],
     "name": "getPosition",
     "outputs": [
@@ -31,11 +23,7 @@
             "name": "borrowBalance",
             "type": "uint256"
           },
-          {
-            "internalType": "uint256",
-            "name": "borrowFee",
-            "type": "uint256"
-          },
+          { "internalType": "uint256", "name": "borrowFee", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "supplyRate",
@@ -45,9 +33,43 @@
             "internalType": "uint256",
             "name": "borrowRate",
             "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "borrowModal",
+            "type": "uint256"
+          },
+          {
+            "components": [
+              { "internalType": "uint256", "name": "ltv", "type": "uint256" },
+              {
+                "internalType": "uint256",
+                "name": "threshold",
+                "type": "uint256"
+              },
+              {
+                "internalType": "bool",
+                "name": "usageAsCollEnabled",
+                "type": "bool"
+              },
+              {
+                "internalType": "bool",
+                "name": "borrowEnabled",
+                "type": "bool"
+              },
+              {
+                "internalType": "bool",
+                "name": "stableBorrowEnabled",
+                "type": "bool"
+              },
+              { "internalType": "bool", "name": "isActive", "type": "bool" }
+            ],
+            "internalType": "struct AaveHelpers.AaveTokenData",
+            "name": "aaveTokenData",
+            "type": "tuple"
           }
         ],
-        "internalType": "struct AaveHelpers.AaveTokenData[]",
+        "internalType": "struct AaveHelpers.AaveUserTokenData[]",
         "name": "",
         "type": "tuple[]"
       },
@@ -83,11 +105,7 @@
             "name": "currentLiquidationThreshold",
             "type": "uint256"
           },
-          {
-            "internalType": "uint256",
-            "name": "ltv",
-            "type": "uint256"
-          },
+          { "internalType": "uint256", "name": "ltv", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "healthFactor",
@@ -105,13 +123,7 @@
   {
     "inputs": [],
     "name": "name",
-    "outputs": [
-      {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
-      }
-    ],
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
     "stateMutability": "view",
     "type": "function"
   }

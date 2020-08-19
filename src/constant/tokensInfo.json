@@ -146,6 +146,13 @@
     "address": "0x0bc529c00C6401aEF6D220BE8C6Ea1667F6Ad93e",
     "decimals": 18
   },
+  "chi": {
+    "type": "token",
+    "symbol": "CHI",
+    "name": "CHI Gas Token",
+    "address": "0x0000000000004946c0e9F43F4Dee607b0eF1fA1c",
+    "decimals": 0
+  },
   "ceth": {
     "type": "ctoken",
     "symbol": "CETH",
@@ -237,6 +244,13 @@
     "symbol": "CY",
     "name": "Curve Y",
     "address": "0xdF5e0e81Dff6FAF3A7e52BA697820c5e32D806A8",
+    "decimals": 18
+  },
+  "crv": {
+    "type": "curvetoken",
+    "symbol": "CRV",
+    "name": "Curve token",
+    "address": "0xD533a949740bb3306d119CC777fa900bA034cd52",
     "decimals": 18
   },
   "aeth": {

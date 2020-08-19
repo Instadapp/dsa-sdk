@@ -1,0 +1,24 @@
+[
+  {
+    "inputs": [
+      { "internalType": "address", "name": "user", "type": "address" }
+    ],
+    "name": "getPosition",
+    "outputs": [
+      { "internalType": "uint256", "name": "vestedBalance", "type": "uint256" },
+      { "internalType": "uint256", "name": "unclaimedBal", "type": "uint256" },
+      { "internalType": "uint256", "name": "claimedBal", "type": "uint256" },
+      { "internalType": "uint256", "name": "lockedBalance", "type": "uint256" },
+      { "internalType": "uint256", "name": "crvBalance", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "name",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

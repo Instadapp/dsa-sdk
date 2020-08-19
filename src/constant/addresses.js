@@ -10,8 +10,8 @@ module.exports = {
   },
   connectors: {
     basic: "0x6a31c5982C5Bc5533432913cf06a66b6D3333a95",
-    auth: "0xB3242e09C8E5cE6E14296b3d3AbC4C6965F49b98",
-    authority: "0xB3242e09C8E5cE6E14296b3d3AbC4C6965F49b98", // same address as of "auth" to not break things with upgrade
+    auth: "0xd1aff9f2acf800c876c409100d6f39aea93fc3d9",
+    authority: "0xd1aff9f2acf800c876c409100d6f39aea93fc3d9", // same address as of "auth" to not break things with upgrade
     compound: "0x07F81230d73a78f63F0c2A3403AD281b067d28F8",
     maker: "0xac02030d8a8F49eD04b2f52C394D3F901A10F8A9",
     instapool: "0xCeF5f3c402d4fef76A038e89a4357176963e1464",
@@ -29,9 +29,11 @@ module.exports = {
     uniswap: "0x62EbfF47B2Ba3e47796efaE7C51676762dC961c0",
     comp: "0xB4a04F1C194bEed64FCE27843B5b3079339cdaD4",
     staking: "0xe5b66b785bd6b6708BB814482180C136Ddbcd687",
+    chi: "0xb86437e80709015d05354c35e54b7c8b11a58687",
+    curve_claim: "0xF5e14d35706971B6AaD7A67B1A8E9a1EF7870Be9",
   },
   read: {
-    core: "0xCCf112e4348Fb273381D37F20dF49135DA973Be5",
+    core: "0x6187d8d8a866ceEfe6E9889EDc91797e6a15C012",
     erc20: "0x6d9c624844e61280c19fd7ef588d79a6de893d64",
     compound: "0x540b719fe7788Fbd4eE98033d9Fb980D753f0ED2",
     maker: "0x0A7008B38E7015F8C36A49eEbc32513ECA8801E5",
@@ -43,7 +45,9 @@ module.exports = {
     curve_y: "0xaf122FB1C70b913AF467a9D924890f92c109bfc3",
     oneInch: "0x40c71a20938ff932bea18f674e73be670ea47ccf",
     dydx: "0xcb704D9505Fbbf61478F06741C75F34eA84Ec85C",
-    aave: "0x5616a3d7e5c65d9d4af05e9cda6541db18d64790",
+    aave: "0xe04Cd009fF68628BC663058dDAA7E5Bf7979BEaF",
     uniswap: "0x492e5f3f01d20513fc0d53ca0215b6499faec8a0",
+    curve_claim: "0xc501F3c50DabB377c4afe5C0cD44BF7173b0F833",
+    chainlink: "0xF72Ee0Cc52C119F00B19c35a4d4ee2f445573D3e",
   },
 };

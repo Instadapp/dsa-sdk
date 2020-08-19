@@ -27,6 +27,8 @@ module.exports = {
     uniswap: require("../abi/connectors/uniswap.json"),
     comp: require("../abi/connectors/comp.json"),
     staking: require("../abi/connectors/staking.json"),
+    chi: require("../abi/connectors/chi.json"),
+    curve_claim: require("../abi/connectors/curveClaim.json"),
   },
   read: {
     core: require("../abi/read/core.json"),
@@ -43,8 +45,11 @@ module.exports = {
     dydx: require("../abi/read/dydx.json"),
     aave: require("../abi/read/aave.json"),
     uniswap: require("../abi/read/uniswap.json"),
+    curve_claim: require("../abi/read/curveClaim.json"),
+    chainlink: require("../abi/read/chainlink.json"),
   },
   basic: {
     erc20: require("../abi/basics/erc20.json"),
   },
+  gnosisSafe: require("../abi/gnosis/gnosisSafe.json"),
 };

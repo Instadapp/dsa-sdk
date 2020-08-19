@@ -85,10 +85,17 @@ module.exports = class Aave {
             _position[_key].borrowFee = _fee;
             _position[_key].borrowYield = (_res[5] / 1e27) * 100; // Multiply with 100 to make it in percent
             _position[_key].supplyYield = (_res[4] / 1e27) * 100; // Multiply with 100 to make it in percent
+            _position[_key].ltv = _res[7].ltv / 100;
+            _position[_key].maxRatio = _res[7].threshold / 100;
+            _position[_key].isVariableBorrow = Number(_res[6]) == 2;
+            // _position[_key].isStableBorrowAllowed = Boolean(
+            //   _res[7].stableBorrowEnabled
+            // );
           });
           _position.totalSupplyInEth = _totalSupplyInEth;
           _position.totalBorrowInEth = Number(res[1][2]) / 1e18;
           _position.totalFeeInETH = Number(res[1][3]) / 1e18;
+          _position.totalMaxRatio = Number(res[1][5]) / 1e2;
           _position.maxBorrowLimitInEth = _maxBorrowLimitInEth;
           var _status = _totalBorrowInEth / _totalSupplyInEth;
           _position.status = _status;

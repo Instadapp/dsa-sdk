@@ -1,6 +1,6 @@
 {
   "name": "dsa-sdk",
-  "version": "1.4.18",
+  "version": "1.4.23",
   "description": "DSA Starter Kit for building DeFi dapps",
   "main": "build/dsa.min.js",
   "scripts": {
@@ -8,7 +8,9 @@
     "build-dev": "webpack --mode development --config webpack.config.dev.js",
     "dev-server": "webpack-dev-server --mode development --config webpack.config.dev.js",
     "prepare": "npm run build",
-    "trypublish": "npm publish || true"
+    "trypublish": "npm publish || true",
+    "postversion": "git push && git push --tags && npm publish && npm run open-releases",
+    "open-releases": "open \"$(node -e 'console.log(`${require(\"./package.json\").repository}/releases`)')\""
   },
   "repository": {
     "type": "git",
@@ -38,5 +40,9 @@
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "semver": "^7.3.2"
   }
 }
