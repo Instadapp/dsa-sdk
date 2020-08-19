@@ -285,6 +285,17 @@ module.exports = class OneInch {
         });
       }
     }
+    
+    let directPath = [sellToken, buyToken];
+    let directPathAddr = directPath.map(a => this.internal.filterAddress(a))
+    path.push(directPath);
+    pathAddr.push(directPathAddr);
+    multiTokenPath.push({
+      tokens: directPathAddr,
+      destTokenEthPriceTimesGasPrices: directPath.slice(1).map((x) => tokenGasPriceArr[x.toLowerCase()]),
+      distribution: Array(2).fill(_distribution),
+      disableDexes: Array(2).fill(_disableDex)
+    });
 
     let _sellToken = this.tokens.isToken(sellToken);
     let _sellAmount = !_sellToken
