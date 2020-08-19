@@ -214,4 +214,119 @@ module.exports = class OneInch {
         });
     });
   }
+
+
+  /**
+   * returns buy/dest amount and unit Amount
+   * @param tokensArr array of token path
+   * @param sellAmt sell token amount in decimal
+   * @param slippage slippage of trade
+   * @param gasPriceInEthArr dest Token Eth Price Times Gas Price. Default: 0.
+   */
+  async getBuyAmountMultiArr(
+    buyToken,
+    sellToken,
+    tokensArr,
+    sellAmt,
+    slippage,
+    distribution,
+    disableDex,
+    tokenPrices,
+    gasPrice
+  ) {
+    if (tokensArr.length == 0) throw new Error(`"tokensArr" is empty`);
+    let _slippage = !slippage ? 10 ** 16 : slippage * 10 ** 16;
+    _slippage = String(this.math.bigNumInString(_slippage));
+
+    let _distribution = !distribution ? "5" : distribution;
+    let _disableDex = !disableDex ? "0" : disableDex;
+
+    let tokenGasPriceArr = {}
+    let _alldestTokens = [...tokensArr, buyToken];
+    for (let i = 0; i < _alldestTokens.length; i++) {
+      let _token = _alldestTokens[i].toLowerCase();
+      if (!this.tokens.isToken(_token)) throw new Error(`${_token} not found.`);
+
+      let _priceInEth = Object.keys(tokenPrices).filter(a => a.toLowerCase() == _token)[0];
+      if (!_priceInEth) throw new Error(`${_token} price not found.`);
+
+      let priceInWei = this.tokens.fromDecimal(tokenPrices[_priceInEth], _token);
+      tokenGasPriceArr[_token] = this.math.bigNumInString(priceInWei * (gasPrice * (10 ** 9)));
+    }
+
+    let multiTokenPath = []
+    let path = []
+    let pathAddr = []
+    for (let i = 0; i < tokensArr.length; i++) {
+      let tokenA = tokensArr[i]
+      for (let j = 0; j < tokensArr.length; j++) {
+        let _tokenPath = [];
+        let _tokenPathAddr = [];
+        
+        let _gasArr = [];
+        let tokenB = tokensArr[j];
+        if (i == j) {
+          _tokenPath = [sellToken, tokenA, buyToken]
+        } else {
+          _tokenPath = [sellToken, tokenA, tokenB, buyToken];
+        }
+        _tokenPath.slice(1).forEach((x) => {
+          _gasArr.push(tokenGasPriceArr[x.toLowerCase()])
+        })
+        _tokenPathAddr = _tokenPath.map(a => this.internal.filterAddress(a))
+        path.push(_tokenPath)
+        pathAddr.push(_tokenPathAddr)
+        let _len = _tokenPathAddr.length - 1;
+        multiTokenPath.push({
+          tokens: _tokenPathAddr,
+          destTokenEthPriceTimesGasPrices: _gasArr,
+          distribution: Array(_len).fill(_distribution),
+          disableDexes: Array(_len).fill(_disableDex)
+        });
+      }
+    }
+
+    let _sellToken = this.tokens.isToken(sellToken);
+    let _sellAmount = !_sellToken
+      ? await this.erc20.fromDecimalInternal(sellAmt, sellToken)
+      : this.tokens.fromDecimal(sellAmt, _sellToken);
+
+
+    var _obj = {
+      protocol: "oneInch",
+      method: "getBuyAmountsMulti",
+      args: [
+        multiTokenPath,
+        _sellAmount,
+        this.math.bigNumInString(_slippage),
+      ],
+    };
+    return new Promise((resolve, reject) => {
+      return this.dsa
+        .read(_obj)
+        .then(async (res) => {
+          let _res = [];
+          let _buyToken = this.tokens.isToken(buyToken);
+          for (let i = 0; i < res.length; i++) {
+            const data = res[i];
+            let _buyAmt = !_buyToken
+              ? await this.erc20.toDecimalInternal(data[0], buyToken)
+              : this.tokens.toDecimal(data[0], _buyToken);
+              _res.push({
+                path: path[i],
+                pathAddresses: pathAddr[i],
+                buyAmt: _buyAmt,
+                buyAmtRaw: data[0],
+                unitAmt: data[1],
+                distribution: data[2],
+                gasEstimate: data[4]
+              });
+          }
+          resolve(_res);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  }
 };
