@@ -61,6 +61,7 @@ module.exports = class Aave {
           var _totalSupplyInEth = 0;
           var _totalBorrowInEth = 0;
           var _maxBorrowLimitInEth = 0;
+          var _liquidationLimitInEth = 0;
           Object.keys(_aTokens).forEach((_atoken, i) => {
             var _root = _aTokens[_atoken].root;
             var _key;
@@ -77,16 +78,18 @@ module.exports = class Aave {
             var _supply = _res[1] / 10 ** _decimals;
             _position[_key].supply = _supply;
             _totalSupplyInEth += _supply * _priceInEth;
+            _position[_key].ltv = _res[7].ltv / 100;
+            _position[_key].maxRatio = _res[7].threshold / 100;
             _maxBorrowLimitInEth +=
-              _supply * _priceInEth * _aTokens[_atoken].factor;
+              _supply * _priceInEth * _position[_key].ltv;
+            _liquidationLimitInEth +=
+              _supply * _priceInEth * _position[_key].maxRatio;
             var _borrow = _res[2] / 10 ** _decimals;
             _position[_key].borrow = _borrow;
             var _fee = _res[3] / 10 ** _decimals;
             _position[_key].borrowFee = _fee;
             _position[_key].borrowYield = (_res[5] / 1e27) * 100; // Multiply with 100 to make it in percent
             _position[_key].supplyYield = (_res[4] / 1e27) * 100; // Multiply with 100 to make it in percent
-            _position[_key].ltv = _res[7].ltv / 100;
-            _position[_key].maxRatio = _res[7].threshold / 100;
             _position[_key].isVariableBorrow = Number(_res[6]) == 2;
             // _position[_key].isStableBorrowAllowed = Boolean(
             //   _res[7].stableBorrowEnabled
@@ -99,7 +102,7 @@ module.exports = class Aave {
           _position.maxBorrowLimitInEth = _maxBorrowLimitInEth;
           var _status = _totalBorrowInEth / _totalSupplyInEth;
           _position.status = _status;
-          var _liquidation = _maxBorrowLimitInEth / _totalSupplyInEth;
+          var _liquidation = _liquidationLimitInEth / _totalSupplyInEth;
           _position.liquidation = _liquidation;
           resolve(_position);
         })
