@@ -81,25 +81,48 @@ module.exports = class OneInch {
    * @param sellToken sell token symbol
    * @param sellAmt sell token amount in decimal
    * @param slippage (optional) slippage of trade.
-   * @param distribution (optional) distribution of the swap. Default: 5.
-   * @param disableDex (optional) disable dex. Default: 0 (none).
-   * @param gasPriceInEth dest Token Eth Price Times Gas Price. Default: 0.
+   * @param _d (optional) config paramter
+   * OR
+   * @param _d.distribution (optional) distribution of the swap. Default: 20.
+   * @param _d.disableDex (optional) disable dex. Default: 0(none).
+   * @param _d.tokenPrice (optional) object of token prices
+   * @param _d.gasPrice (optional) gas price.
    */
   async getBuyAmountWithGas(
     buyToken,
     sellToken,
     sellAmt,
     slippage,
-    distribution,
-    disableDex,
-    gasPriceInEth
+    _d
   ) {
+    if (!_d) _d = {}
+
     let _slippage = !slippage ? 10 ** 16 : slippage * 10 ** 16;
     _slippage = String(this.math.bigNumInString(_slippage));
-    let _distribution = !distribution ? 100 : distribution;
-    let _disableDex = !disableDex ? 0 : disableDex;
-    let _gasPriceInEth = !gasPriceInEth ? 0 : gasPriceInEth;
+    let _distribution = !_d.distribution ? 20 : _d.distribution;
+    let _disableDex = !_d.disableDex ? 0 : _d.disableDex;
+    
+    let _buyToken = this.tokens.isToken(buyToken);
+    
+    let tokenPrice;
+    let gasPrice;
+    if (!_d.tokenPrice) {
+      let prices = await this.dsa.chainlink.getTokenPrices();
+      let tokenPrices = Object.fromEntries(Object.keys(prices).map(v => [v, (prices[v] ? prices.ETH / prices[v] : 0)]));
+      if (!_buyToken && !tokenPrices[_buyToken.toUpperCase()])
+      throw new Error(`${buyToken} price not found.`)
+      tokenPrice = tokenPrices[_buyToken.toUpperCase()]
+    } else {
+      tokenPrice = _d.tokenPrice;
+    }
+    if (!_d.gasPrice) gasPrice = (await this.dsa.chainlink.getFastGasPrice()) / 1e9;
+    else gasPrice = _d.gasPrice;
 
+    let _gasPriceInEth = !_buyToken
+    ? await this.erc20.fromDecimalInternal(tokenPrice, buyToken)
+    : this.tokens.fromDecimal(tokenPrice, _buyToken);
+    _gasPriceInEth = _gasPriceInEth * (gasPrice * (10 ** 9))
+  
     let _sellToken = this.tokens.isToken(sellToken);
     let _sellAmount = !_sellToken
       ? await this.erc20.fromDecimalInternal(sellAmt, sellToken)
@@ -122,7 +145,6 @@ module.exports = class OneInch {
       return this.dsa
         .read(_obj)
         .then(async (res) => {
-          console.log(res)
           let _buyToken = this.tokens.isToken(buyToken);
           let _buyAmt = !_buyToken
             ? await this.erc20.toDecimalInternal(res[0], buyToken)
@@ -147,18 +169,21 @@ module.exports = class OneInch {
    * @param tokensArr array of token path
    * @param sellAmt sell token amount in decimal
    * @param slippage slippage of trade
-   * @param distributionArr distributions array.
-   * @param disableDexArr disable flag array.
-   * @param gasPriceInEthArr dest Token Eth Price Times Gas Price. Default: 0.
+   * @param _d (optional) config paramter
+   * OR
+   * @param _d.distributionsArr (optional) distribution of the swap. Default: 5.
+   * @param _d.disableDexArr (optional) disable dex. Default: 0(none).
+   * @param _d.tokenPricesArr (optional) object of token prices
+   * @param _d.gasPrice (optional) gas price.
    */
   async getBuyAmountMultiWithGas(
     tokensArr,
     sellAmt,
     slippage,
-    distributionArr,
-    disableDexArr,
-    gasPriceInEthArr
+    _d
   ) {
+    if (!_d) _d = {}
+
     let swapNum = tokensArr.length - 1;
     if(swapNum < 1) throw new Error("tokens length is not vaild")
     let buyToken = tokensArr[swapNum]
@@ -168,16 +193,41 @@ module.exports = class OneInch {
 
     let _slippage = !slippage ? 10 ** 16 : slippage * 10 ** 16;
     _slippage = String(this.math.bigNumInString(_slippage));
-    let _distribution = !distributionArr ?
+    let _distribution = !_d.distributionsArr ?
         Array(swapNum).fill("5") :
-        distributionArr.map(a => this.math.bigNumInString(a));
-    let _disableDex = !disableDexArr ?
+        _d.distributionsArr.map(a => this.math.bigNumInString(a));
+    let _disableDex = !_d.disableDexArr ?
         Array(swapNum).fill("0") :
-        disableDexArr.map(a => this.math.bigNumInString(a));
-    let _gasPriceInEth = !gasPriceInEthArr ?
-        Array(swapNum).fill("0") :
-        gasPriceInEthArr.map(a => this.math.bigNumInString(a));
+        _d.disableDexArr.map(a => this.math.bigNumInString(a));
+    
+    let gasPrice;
+    let tokenPrices;
+    
+    if (!_d.gasPrice) gasPrice = (await this.dsa.chainlink.getFastGasPrice()) / 1e9;
+    else gasPrice = _d.gasPrice;
 
+    if (!_d.tokenPricesArr) {
+        let prices = await this.dsa.chainlink.getTokenPrices();
+        tokenPrices = Object.fromEntries(Object.keys(prices).map(v => [v, (prices[v] ? prices.ETH / prices[v] : 0)]));
+    } else {
+        tokenPrices = _d.tokenPrices;
+    }
+
+    let tokenGasPriceArr = []
+    for (let i = 1; i < tokensArr.length; i++) {
+      let _token = tokensArr[i].toLowerCase();
+      let _tokenSym = this.tokens.isToken(_token);
+      let _qToken = !_tokenSym ? _token : _tokenSym;
+
+      let _priceInEth = Object.keys(tokenPrices).filter(a => a.toLowerCase() == _qToken)[0];
+      if (!_priceInEth) throw new Error(`${_token} price not found.`);
+
+      let priceInWei = !_tokenSym
+      ? await this.erc20.fromDecimalInternal(tokenPrices[_priceInEth], _token)
+      : this.tokens.fromDecimal(tokenPrices[_priceInEth], _tokenSym)
+      tokenGasPriceArr.push(this.math.bigNumInString(priceInWei * (gasPrice * (10 ** 9))));
+    }
+  
     let _sellToken = this.tokens.isToken(sellToken);
     let _sellAmount = !_sellToken
       ? await this.erc20.fromDecimalInternal(sellAmt, sellToken)
@@ -192,7 +242,7 @@ module.exports = class OneInch {
         this.math.bigNumInString(_slippage),
         _distribution,
         _disableDex,
-        _gasPriceInEth,
+        tokenGasPriceArr,
       ],
     };
 
