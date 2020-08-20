@@ -76,6 +76,8 @@ module.exports = class DSA {
     this.erc20 = new Erc20(this);
     this.gnosisSafe = new GnosisSafe(this);
 
+    this.chainlink = new ChainLinkPrices(this);
+
     this.account = new Account(this);
     this.balances = new Erc20Resolver(this);
     this.compound = new Compound(this);
@@ -92,8 +94,6 @@ module.exports = class DSA {
     this.dydx = new Dydx(this);
     this.aave = new Aave(this);
     this.uniswap = new Uniswap(this);
-
-    this.chainlink = new ChainLinkPrices(this);
 
     // defining methods to simplify the calls for frontend developers
     this.sendTxn = this.txnUtil.send; // send transaction // node || browser
