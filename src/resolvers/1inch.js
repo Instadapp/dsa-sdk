@@ -19,7 +19,9 @@ module.exports = class OneInch {
    * @param buyToken buy token symbol
    * @param sellToken sell token symbol
    * @param sellAmt sell token amount in decimal
-   * @param slippage slippage of trade
+   * @param slippage (optional) slippage of trade.
+   * @param distribution (optional) distribution of the swap. Default: 5.
+   * @param disableDex (optional) disable dex. Default: 0 (none).
    */
   async getBuyAmount(
     buyToken,
@@ -78,7 +80,9 @@ module.exports = class OneInch {
    * @param buyToken buy token symbol
    * @param sellToken sell token symbol
    * @param sellAmt sell token amount in decimal
-   * @param slippage slippage of trade
+   * @param slippage (optional) slippage of trade.
+   * @param distribution (optional) distribution of the swap. Default: 5.
+   * @param disableDex (optional) disable dex. Default: 0 (none).
    * @param gasPriceInEth dest Token Eth Price Times Gas Price. Default: 0.
    */
   async getBuyAmountWithGas(
@@ -217,11 +221,18 @@ module.exports = class OneInch {
 
 
   /**
-   * returns buy/dest amount and unit Amount
-   * @param tokensArr array of token path
+   * returns different combinations of buy/dest amount and unit Amount
+   * @param buyToken buy token symbol
+   * @param sellToken sell token symbol
+   * @param tokensArr array of token for different combinations of bath with sellToken and buyToken.
    * @param sellAmt sell token amount in decimal
-   * @param slippage slippage of trade
-   * @param gasPriceInEthArr dest Token Eth Price Times Gas Price. Default: 0.
+   * @param slippage (optional) slippage of trade. Default: 1%.
+   * @param _d (optional) config paramter
+   * Or
+   * @param _d.distribution (optional) distribution of the swap. Default: 5.
+   * @param _d.disableDex (optional) disable dex. Default: 0(none).
+   * @param _d.tokenPrices (optional) object of token prices
+   * @param _d.gasPrice (optional) gas price.
    */
   async getBuyAmountMultiArr(
     buyToken,
@@ -229,17 +240,27 @@ module.exports = class OneInch {
     tokensArr,
     sellAmt,
     slippage,
-    distribution,
-    disableDex,
-    tokenPrices,
-    gasPrice
+    _d
   ) {
+    if (!_d) _d = {}
     if (tokensArr.length == 0) throw new Error(`"tokensArr" is empty`);
+
+    let tokenPrices;
+    let gasPrice;
+    if (!_d.tokenPrices) {
+      let prices = await this.dsa.chainlink.getTokenPrices();
+      tokenPrices = Object.fromEntries(Object.keys(prices).map(v => [v, (prices[v] ? prices.ETH / prices[v] : 0)]));
+    } else {
+      tokenPrices = _d.tokenPrices;
+    }
+    if (!_d.gasPrice) gasPrice = (await this.dsa.chainlink.getFastGasPrice()) / 1e9;
+    else gasPrice = _d.gasPrice
+
     let _slippage = !slippage ? 10 ** 16 : slippage * 10 ** 16;
     _slippage = String(this.math.bigNumInString(_slippage));
 
-    let _distribution = !distribution ? "5" : distribution;
-    let _disableDex = !disableDex ? "0" : disableDex;
+    let _distribution = !_d.distribution ? "5" : _d.distribution;
+    let _disableDex = !_d.disableDex ? "0" : _d.disableDex;
 
     let tokenGasPriceArr = {}
     let _alldestTokens = [...tokensArr, buyToken];
@@ -274,8 +295,10 @@ module.exports = class OneInch {
           _gasArr.push(tokenGasPriceArr[x.toLowerCase()])
         })
         _tokenPathAddr = _tokenPath.map(a => this.internal.filterAddress(a))
+
         path.push(_tokenPath)
         pathAddr.push(_tokenPathAddr)
+
         let _len = _tokenPathAddr.length - 1;
         multiTokenPath.push({
           tokens: _tokenPathAddr,
