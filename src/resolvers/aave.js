@@ -79,7 +79,7 @@ module.exports = class Aave {
             _position[_key].supply = _supply;
             _totalSupplyInEth += _supply * _priceInEth;
             _position[_key].ltv = _res[7].ltv / 100;
-            _position[_key].maxRatio = _res[7].threshold / 100;
+            _position[_key].maxRatio = _res[7].ltv == 0 ? 0 : _res[7].threshold / 100;
             _maxBorrowLimitInEth +=
               _supply * _priceInEth * _position[_key].ltv;
             _liquidationLimitInEth +=
