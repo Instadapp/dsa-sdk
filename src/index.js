@@ -29,7 +29,7 @@ const Dydx = require("./resolvers/dydx.js");
 const Aave = require("./resolvers/aave.js");
 const Uniswap = require("./resolvers/uniswap.js");
 const Tokens = require("./resolvers/tokens.js");
-const ChainLinkPrices = require("./resolvers/ChainLink.js");
+const ChainLinkPrices = require("./resolvers/chainLink.js");
 
 // Gnosis Safe
 const GnosisSafe = require("./gnosis-safe/index.js");
