@@ -1,26 +1,345 @@
 [
   {
+    "anonymous": false,
     "inputs": [
       {
+        "indexed": true,
         "internalType": "uint256",
         "name": "vault",
         "type": "uint256"
       },
       {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "ilk",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
         "internalType": "uint256",
-        "name": "amt",
+        "name": "tokenAmt",
         "type": "uint256"
       },
       {
+        "indexed": false,
         "internalType": "uint256",
         "name": "getId",
         "type": "uint256"
       },
       {
+        "indexed": false,
         "internalType": "uint256",
         "name": "setId",
         "type": "uint256"
       }
+    ],
+    "name": "LogBorrow",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "vault",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "ilk",
+        "type": "bytes32"
+      }
+    ],
+    "name": "LogClose",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "vault",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "ilk",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "tokenAmt",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "getId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "setId",
+        "type": "uint256"
+      }
+    ],
+    "name": "LogDeposit",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "tokenAmt",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "getId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "setId",
+        "type": "uint256"
+      }
+    ],
+    "name": "LogDepositDai",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "vault",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "ilk",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "tokenAmt",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "getId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "setId",
+        "type": "uint256"
+      }
+    ],
+    "name": "LogExitDai",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "vault",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "ilk",
+        "type": "bytes32"
+      }
+    ],
+    "name": "LogOpen",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "vault",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "ilk",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "tokenAmt",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "getId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "setId",
+        "type": "uint256"
+      }
+    ],
+    "name": "LogPayback",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "vault",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "ilk",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "LogTransfer",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "vault",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "ilk",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "tokenAmt",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "getId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "setId",
+        "type": "uint256"
+      }
+    ],
+    "name": "LogWithdraw",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "tokenAmt",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "getId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "setId",
+        "type": "uint256"
+      }
+    ],
+    "name": "LogWithdrawDai",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "vault",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "ilk",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "tokenAmt",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "getId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "setId",
+        "type": "uint256"
+      }
+    ],
+    "name": "LogWithdrawLiquidated",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "vault", "type": "uint256" },
+      { "internalType": "uint256", "name": "amt", "type": "uint256" },
+      { "internalType": "uint256", "name": "getId", "type": "uint256" },
+      { "internalType": "uint256", "name": "setId", "type": "uint256" }
     ],
     "name": "borrow",
     "outputs": [],
@@ -29,11 +348,7 @@
   },
   {
     "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "vault",
-        "type": "uint256"
-      }
+      { "internalType": "uint256", "name": "vault", "type": "uint256" }
     ],
     "name": "close",
     "outputs": [],
@@ -44,42 +359,18 @@
     "inputs": [],
     "name": "connectorID",
     "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "_type",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_id",
-        "type": "uint256"
-      }
+      { "internalType": "uint256", "name": "_type", "type": "uint256" },
+      { "internalType": "uint256", "name": "_id", "type": "uint256" }
     ],
     "stateMutability": "pure",
     "type": "function"
   },
   {
     "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "vault",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amt",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "getId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "setId",
-        "type": "uint256"
-      }
+      { "internalType": "uint256", "name": "vault", "type": "uint256" },
+      { "internalType": "uint256", "name": "amt", "type": "uint256" },
+      { "internalType": "uint256", "name": "getId", "type": "uint256" },
+      { "internalType": "uint256", "name": "setId", "type": "uint256" }
     ],
     "name": "deposit",
     "outputs": [],
@@ -88,21 +379,24 @@
   },
   {
     "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "amt",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "getId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "setId",
-        "type": "uint256"
-      }
+      { "internalType": "uint256", "name": "vault", "type": "uint256" },
+      { "internalType": "uint256", "name": "depositAmt", "type": "uint256" },
+      { "internalType": "uint256", "name": "borrowAmt", "type": "uint256" },
+      { "internalType": "uint256", "name": "getIdDeposit", "type": "uint256" },
+      { "internalType": "uint256", "name": "getIdBorrow", "type": "uint256" },
+      { "internalType": "uint256", "name": "setIdDeposit", "type": "uint256" },
+      { "internalType": "uint256", "name": "setIdBorrow", "type": "uint256" }
+    ],
+    "name": "depositAndBorrow",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "amt", "type": "uint256" },
+      { "internalType": "uint256", "name": "getId", "type": "uint256" },
+      { "internalType": "uint256", "name": "setId", "type": "uint256" }
     ],
     "name": "depositDai",
     "outputs": [],
@@ -111,26 +405,10 @@
   },
   {
     "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "vault",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amt",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "getId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "setId",
-        "type": "uint256"
-      }
+      { "internalType": "uint256", "name": "vault", "type": "uint256" },
+      { "internalType": "uint256", "name": "amt", "type": "uint256" },
+      { "internalType": "uint256", "name": "getId", "type": "uint256" },
+      { "internalType": "uint256", "name": "setId", "type": "uint256" }
     ],
     "name": "exitDai",
     "outputs": [],
@@ -140,57 +418,27 @@
   {
     "inputs": [],
     "name": "name",
-    "outputs": [
-      {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
-      }
-    ],
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      {
-        "internalType": "string",
-        "name": "colType",
-        "type": "string"
-      }
+      { "internalType": "string", "name": "colType", "type": "string" }
     ],
     "name": "open",
     "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "vault",
-        "type": "uint256"
-      }
+      { "internalType": "uint256", "name": "vault", "type": "uint256" }
     ],
     "stateMutability": "payable",
     "type": "function"
   },
   {
     "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "vault",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amt",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "getId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "setId",
-        "type": "uint256"
-      }
+      { "internalType": "uint256", "name": "vault", "type": "uint256" },
+      { "internalType": "uint256", "name": "amt", "type": "uint256" },
+      { "internalType": "uint256", "name": "getId", "type": "uint256" },
+      { "internalType": "uint256", "name": "setId", "type": "uint256" }
     ],
     "name": "payback",
     "outputs": [],
@@ -199,44 +447,10 @@
   },
   {
     "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "vault",
-        "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "nextOwner",
-        "type": "address"
-      }
-    ],
-    "name": "transfer",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "vault",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amt",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "getId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "setId",
-        "type": "uint256"
-      }
+      { "internalType": "uint256", "name": "vault", "type": "uint256" },
+      { "internalType": "uint256", "name": "amt", "type": "uint256" },
+      { "internalType": "uint256", "name": "getId", "type": "uint256" },
+      { "internalType": "uint256", "name": "setId", "type": "uint256" }
     ],
     "name": "withdraw",
     "outputs": [],
@@ -245,21 +459,9 @@
   },
   {
     "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "amt",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "getId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "setId",
-        "type": "uint256"
-      }
+      { "internalType": "uint256", "name": "amt", "type": "uint256" },
+      { "internalType": "uint256", "name": "getId", "type": "uint256" },
+      { "internalType": "uint256", "name": "setId", "type": "uint256" }
     ],
     "name": "withdrawDai",
     "outputs": [],
@@ -268,26 +470,10 @@
   },
   {
     "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "vault",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amt",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "getId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "setId",
-        "type": "uint256"
-      }
+      { "internalType": "uint256", "name": "vault", "type": "uint256" },
+      { "internalType": "uint256", "name": "amt", "type": "uint256" },
+      { "internalType": "uint256", "name": "getId", "type": "uint256" },
+      { "internalType": "uint256", "name": "setId", "type": "uint256" }
     ],
     "name": "withdrawLiquidated",
     "outputs": [],

@@ -13,7 +13,8 @@ module.exports = {
     auth: "0xd1aff9f2acf800c876c409100d6f39aea93fc3d9",
     authority: "0xd1aff9f2acf800c876c409100d6f39aea93fc3d9", // same address as of "auth" to not break things with upgrade
     compound: "0x07F81230d73a78f63F0c2A3403AD281b067d28F8",
-    maker: "0xac02030d8a8F49eD04b2f52C394D3F901A10F8A9",
+    maker: "0x6c4E4D4aB22cAB08b8498a3A232D92609e8b2d62",
+    maker_old: "0xac02030d8a8F49eD04b2f52C394D3F901A10F8A9",
     instapool: "0xCeF5f3c402d4fef76A038e89a4357176963e1464",
     oasis: "0xE554c84c030bd5e850cDbd17f6583818b8dE5b1F",
     kyber: "0x7043FC2E21865c091EEaE37C38E3d82BcCDF5D5C",
