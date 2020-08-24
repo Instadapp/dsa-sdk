@@ -277,9 +277,7 @@ module.exports = class GnosisSafe {
               await Promise.all([
                 this.apiHelpers.saveTxToHistory({ ...txArgs, hash, origin }),
               ]);
-              resolve({
-                txHash: hash,
-              });
+              resolve(hash);
             } catch (e) {}
           })
           .on("error", (error) => {
