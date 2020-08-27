@@ -12,6 +12,7 @@ module.exports = {
     authority: require("../abi/connectors/auth.json"), // same json file as of "auth" to not break things with upgrade
     compound: require("../abi/connectors/compound.json"),
     maker: require("../abi/connectors/maker.json"),
+    maker_old: require("../abi/connectors/maker_old.json"),
     instapool: require("../abi/connectors/instapool.json"),
     oasis: require("../abi/connectors/oasis.json"),
     kyber: require("../abi/connectors/kyber.json"),
