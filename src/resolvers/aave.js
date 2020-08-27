@@ -100,6 +100,7 @@ module.exports = class Aave {
           _position.totalFeeInETH = Number(res[1][3]) / 1e18;
           _position.totalMaxRatio = Number(res[1][5]) / 1e2;
           _position.maxBorrowLimitInEth = _maxBorrowLimitInEth;
+          _position.liquidationLimitInEth = _liquidationLimitInEth;
           var _status = _totalBorrowInEth / _totalSupplyInEth;
           _position.status = _status;
           var _liquidation = _liquidationLimitInEth / _totalSupplyInEth;
