@@ -390,7 +390,7 @@
     "name": "Aave REN",
     "address": "0x69948cc03f478b95283f7dbf1ce764d0fc7ec54c",
     "decimals": 18,
-    "factor": 0.50,
+    "factor": 0.5,
     "root": "ren"
   },
   "asnx": {
@@ -417,7 +417,7 @@
     "name": "Aave YFI",
     "address": "0x12e51E77DAAA58aA0E9247db7510Ea4B46F9bEAd",
     "decimals": 18,
-    "factor": 0.40,
+    "factor": 0.4,
     "root": "yfi"
   },
   "azrx": {
