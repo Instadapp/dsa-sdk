@@ -97,6 +97,13 @@
     "address": "0xfE18be6b3Bd88A2D2A7f928d00292E7a9963CfC6",
     "decimals": 18
   },
+  "ren": {
+    "type": "token",
+    "symbol": "REN",
+    "name": "Republic Token",
+    "address": "0x408e41876cccdc0f92210600ef50372656052a38",
+    "decimals": 18
+  },
   "renbtc": {
     "type": "token",
     "symbol": "renBTC",
@@ -152,6 +159,13 @@
     "name": "CHI Gas Token",
     "address": "0x0000000000004946c0e9F43F4Dee607b0eF1fA1c",
     "decimals": 0
+  },
+  "enj": {
+    "type": "token",
+    "symbol": "ENJ",
+    "name": "Enjin Coin",
+    "address": "0xf629cbd94d3791c9250152bd8dfbdf380e2a3b9c",
+    "decimals": 18
   },
   "ceth": {
     "type": "ctoken",
@@ -370,6 +384,15 @@
     "factor": 0.35,
     "root": "mkr"
   },
+  "aren": {
+    "type": "atoken",
+    "symbol": "AREN",
+    "name": "Aave REN",
+    "address": "0x69948cc03f478b95283f7dbf1ce764d0fc7ec54c",
+    "decimals": 18,
+    "factor": 0.50,
+    "root": "ren"
+  },
   "asnx": {
     "type": "atoken",
     "symbol": "ASNX",
@@ -388,6 +411,15 @@
     "factor": 0.6,
     "root": "wbtc"
   },
+  "ayfi": {
+    "type": "atoken",
+    "symbol": "AYFI",
+    "name": "Aave YFI",
+    "address": "0x12e51E77DAAA58aA0E9247db7510Ea4B46F9bEAd",
+    "decimals": 18,
+    "factor": 0.40,
+    "root": "yfi"
+  },
   "azrx": {
     "type": "atoken",
     "symbol": "AZRX",
@@ -405,6 +437,15 @@
     "decimals": 18,
     "factor": 0.35,
     "root": "rep"
+  },
+  "aenj": {
+    "type": "atoken",
+    "symbol": "AENJ",
+    "name": "Aave ENJ",
+    "address": "0x712db54daa836b53ef1ecbb9c6ba3b9efb073f40",
+    "decimals": 18,
+    "factor": 0.55,
+    "root": "enj"
   },
   "snx_ren": {
     "type": "bptoken",
