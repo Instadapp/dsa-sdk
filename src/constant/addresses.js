@@ -32,6 +32,7 @@ module.exports = {
     staking: "0xe5b66b785bd6b6708BB814482180C136Ddbcd687",
     chi: "0xb86437e80709015d05354c35e54b7c8b11a58687",
     curve_claim: "0xF5e14d35706971B6AaD7A67B1A8E9a1EF7870Be9",
+    curve_gauge: "0xAf615b36Db171fD5A369A0060b9bCB88fFf0190d",
   },
   read: {
     core: "0x621AD080ad3B839e7b19e040C77F05213AB71524",
@@ -50,5 +51,6 @@ module.exports = {
     uniswap: "0x492e5f3f01d20513fc0d53ca0215b6499faec8a0",
     curve_claim: "0xc501F3c50DabB377c4afe5C0cD44BF7173b0F833",
     chainlink: "0xF72Ee0Cc52C119F00B19c35a4d4ee2f445573D3e",
+    curve_gauge: "0x3Dfb98C045d4f4Be168bBE60ba2eb0A3ccf8fBC3",
   },
 };

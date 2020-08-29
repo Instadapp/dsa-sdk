@@ -30,6 +30,7 @@ module.exports = {
     staking: require("../abi/connectors/staking.json"),
     chi: require("../abi/connectors/chi.json"),
     curve_claim: require("../abi/connectors/curveClaim.json"),
+    curve_gauge: require("../abi/connectors/curveGauge.json"),
   },
   read: {
     core: require("../abi/read/core.json"),
@@ -48,6 +49,7 @@ module.exports = {
     uniswap: require("../abi/read/uniswap.json"),
     curve_claim: require("../abi/read/curveClaim.json"),
     chainlink: require("../abi/read/chainlink.json"),
+    curve_gauge: require("../abi/read/curveGauge.json"),
   },
   basic: {
     erc20: require("../abi/basics/erc20.json"),
