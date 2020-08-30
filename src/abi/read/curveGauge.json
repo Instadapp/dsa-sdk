@@ -1,0 +1,85 @@
+[
+  {
+    "inputs": [
+      { "internalType": "string", "name": "gaugeName", "type": "string" },
+      { "internalType": "address", "name": "user", "type": "address" }
+    ],
+    "name": "getPosition",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "uint256", "name": "stakedBal", "type": "uint256" },
+          { "internalType": "uint256", "name": "crvEarned", "type": "uint256" },
+          {
+            "internalType": "uint256",
+            "name": "crvClaimed",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "rewardsEarned",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "rewardsClaimed",
+            "type": "uint256"
+          },
+          { "internalType": "uint256", "name": "crvBal", "type": "uint256" },
+          { "internalType": "uint256", "name": "rewardBal", "type": "uint256" },
+          { "internalType": "bool", "name": "hasReward", "type": "bool" }
+        ],
+        "internalType": "struct Resolver.PositionData",
+        "name": "positionData",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string[]", "name": "gaugesName", "type": "string[]" },
+      { "internalType": "address", "name": "user", "type": "address" }
+    ],
+    "name": "getPositions",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "uint256", "name": "stakedBal", "type": "uint256" },
+          { "internalType": "uint256", "name": "crvEarned", "type": "uint256" },
+          {
+            "internalType": "uint256",
+            "name": "crvClaimed",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "rewardsEarned",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "rewardsClaimed",
+            "type": "uint256"
+          },
+          { "internalType": "uint256", "name": "crvBal", "type": "uint256" },
+          { "internalType": "uint256", "name": "rewardBal", "type": "uint256" },
+          { "internalType": "bool", "name": "hasReward", "type": "bool" }
+        ],
+        "internalType": "struct Resolver.PositionData[]",
+        "name": "positions",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "name",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
