@@ -42,7 +42,8 @@ module.exports = class Curve {
               crvClaimed: this.tokens.toDecimal(_res[2], "crv"),
               crvBalance: this.tokens.toDecimal(_res[5], "crv"),
             };
-            _position[_pool].crvUnclaimed = _position[_pool].crvEarned - _position[_pool].crvClaimed;
+            _position[_pool].crvUnclaimed =
+              _position[_pool].crvEarned - _position[_pool].crvClaimed;
 
             if (_res[7]) {
               _position[_pool].rewardClaimed = this.tokens.toDecimal(
@@ -58,7 +59,8 @@ module.exports = class Curve {
                 _poolReward[_pool]
               );
               _position[_pool].rewardToken = _poolReward[_pool];
-              _position[_pool].rewardsUnclaimed = _position[_pool].rewardEarned - _position[_pool].rewardClaimed;
+              _position[_pool].rewardsUnclaimed =
+                _position[_pool].rewardEarned - _position[_pool].rewardClaimed;
             }
           });
           resolve(_position);
