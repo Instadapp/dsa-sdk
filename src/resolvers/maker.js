@@ -79,6 +79,26 @@ var colInfo = {
     typeBytes:
       "0x4d414e412d410000000000000000000000000000000000000000000000000000",
   },
+  "USDT-A": {
+    token: "USDT",
+    ratio: 2 / 3,
+    joinAddr: "0x0Ac6A1D74E84C2dF9063bDDc31699FF2a2BB22A2",
+    addr: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+    stabiltyRate: 0,
+    price: 0,
+    typeBytes:
+      "0x555344542d410000000000000000000000000000000000000000000000000000",
+  },
+  "PAXUSD-A": {
+    token: "PAXUSD",
+    ratio: 5 / 6,
+    joinAddr: "0x7e62B7E279DFC78DEB656E34D6a435cC08a44666",
+    addr: "0x8E870D67F660D95d5be530380D0eC0bd388289E1",
+    stabiltyRate: 0,
+    price: 0,
+    typeBytes:
+      "0x5041585553442d41000000000000000000000000000000000000000000000000",
+  },
   // "TUSD-A": { // Unavailable due to a token upgrade.
   //   token: "TUSD",
   //   ratio: 5 / 6,
