@@ -31,6 +31,7 @@ module.exports = {
     chi: require("../abi/connectors/chi.json"),
     curve_claim: require("../abi/connectors/curveClaim.json"),
     curve_gauge: require("../abi/connectors/curveGauge.json"),
+    gelato: require("../abi/connectors/gelato.json"),
   },
   read: {
     core: require("../abi/read/core.json"),
