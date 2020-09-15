@@ -27,6 +27,7 @@ const CurveClaim = require("./resolvers/curve_claim.js");
 const CurveGauge = require("./resolvers/curve_gauge.js");
 const OneInch = require("./resolvers/1inch.js");
 const Dydx = require("./resolvers/dydx.js");
+const DydxFlashloan = require("./resolvers/dydxFlashloan.js");
 const Aave = require("./resolvers/aave.js");
 const Uniswap = require("./resolvers/uniswap.js");
 const Tokens = require("./resolvers/tokens.js");
@@ -94,6 +95,7 @@ module.exports = class DSA {
     this.dydx = new Dydx(this);
     this.aave = new Aave(this);
     this.uniswap = new Uniswap(this);
+    this.dydx_flash = new DydxFlashloan(this);
 
     this.chainlink = new ChainLinkPrices(this);
 

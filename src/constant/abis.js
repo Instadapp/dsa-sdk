@@ -32,6 +32,7 @@ module.exports = {
     curve_claim: require("../abi/connectors/curveClaim.json"),
     curve_gauge: require("../abi/connectors/curveGauge.json"),
     gelato: require("../abi/connectors/gelato.json"),
+    dydx_flash: require("../abi/connectors/dydxFlashloan.json"), // TODO - add connector ABI
   },
   read: {
     core: require("../abi/read/core.json"),

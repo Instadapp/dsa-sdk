@@ -34,6 +34,7 @@ module.exports = {
     curve_claim: "0xF5e14d35706971B6AaD7A67B1A8E9a1EF7870Be9",
     curve_gauge: "0xAf615b36Db171fD5A369A0060b9bCB88fFf0190d",
     gelato: "0x37A7009d424951dd5D5F155fA588D9a03C455163",
+    dydx_flash: "0xE5a7bdd3336245142Ad3a153838ecFB490A5e044",
   },
   read: {
     core: "0x621AD080ad3B839e7b19e040C77F05213AB71524",
