@@ -7,6 +7,7 @@ module.exports = {
     connector: "0xD6A602C01a023B98Ecfb29Df02FBA380d3B21E0c",
     events: "0x2af7ea6Cb911035f3eb1ED895Cb6692C39ecbA97",
     instapool: "0x06cb7c24990cbe6b9f99982f975f9147c000fec6",
+    dydx_flash: "0xf5b16af97B5CBa4Babe786238FF6016daE6bb890",
   },
   connectors: {
     basic: "0x6a31c5982C5Bc5533432913cf06a66b6D3333a95",
