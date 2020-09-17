@@ -153,6 +153,13 @@
     "address": "0xC011a73ee8576Fb46F5E1c5751cA3B9Fe0af2a6F",
     "decimals": 18
   },
+  "uni": {
+    "type": "token",
+    "symbol": "UNI",
+    "name": "Uniswap Token",
+    "address": "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
+    "decimals": 18
+  },
   "yfi": {
     "type": "token",
     "symbol": "YFI",
