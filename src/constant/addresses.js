@@ -48,7 +48,7 @@ module.exports = {
     curve_susd: "0x734c90119A0012eF744e3a0ee74691b4f05A2D7e",
     curve_sbtc: "0xc8ff9e290e65972a1b3fc67e1ab7451088a74752",
     curve_y: "0xaf122FB1C70b913AF467a9D924890f92c109bfc3",
-    oneInch: "0x33498ee6Db368A8344a4a8d2899c631E99adBEAE",
+    oneInch: "0x40c71a20938ff932bea18f674e73be670ea47ccf",
     dydx: "0xcb704D9505Fbbf61478F06741C75F34eA84Ec85C",
     aave: "0xe04Cd009fF68628BC663058dDAA7E5Bf7979BEaF",
     uniswap: "0x492e5f3f01d20513fc0d53ca0215b6499faec8a0",
