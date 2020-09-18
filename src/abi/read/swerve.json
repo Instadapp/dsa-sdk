@@ -1,0 +1,88 @@
+[
+  {
+    "inputs": [
+      { "internalType": "address", "name": "buyAddr", "type": "address" },
+      { "internalType": "address", "name": "sellAddr", "type": "address" },
+      { "internalType": "uint256", "name": "sellAmt", "type": "uint256" },
+      { "internalType": "uint256", "name": "slippage", "type": "uint256" }
+    ],
+    "name": "getBuyAmount",
+    "outputs": [
+      { "internalType": "uint256", "name": "buyAmt", "type": "uint256" },
+      { "internalType": "uint256", "name": "unitAmt", "type": "uint256" },
+      { "internalType": "uint256", "name": "virtualPrice", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "token", "type": "address" },
+      { "internalType": "uint256", "name": "depositAmt", "type": "uint256" },
+      { "internalType": "uint256", "name": "slippage", "type": "uint256" }
+    ],
+    "name": "getDepositAmount",
+    "outputs": [
+      { "internalType": "uint256", "name": "swerveAmt", "type": "uint256" },
+      { "internalType": "uint256", "name": "unitAmt", "type": "uint256" },
+      { "internalType": "uint256", "name": "virtualPrice", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "user", "type": "address" }
+    ],
+    "name": "getPosition",
+    "outputs": [
+      { "internalType": "uint256", "name": "userBal", "type": "uint256" },
+      { "internalType": "uint256", "name": "totalSupply", "type": "uint256" },
+      { "internalType": "uint256", "name": "virtualPrice", "type": "uint256" },
+      { "internalType": "uint256", "name": "userShare", "type": "uint256" },
+      { "internalType": "uint256", "name": "poolDaiBal", "type": "uint256" },
+      { "internalType": "uint256", "name": "poolUsdcBal", "type": "uint256" },
+      { "internalType": "uint256", "name": "poolUsdtBal", "type": "uint256" },
+      { "internalType": "uint256", "name": "poolSusdBal", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "token", "type": "address" },
+      { "internalType": "uint256", "name": "withdrawAmt", "type": "uint256" },
+      { "internalType": "uint256", "name": "slippage", "type": "uint256" }
+    ],
+    "name": "getWithdrawSwerveAmount",
+    "outputs": [
+      { "internalType": "uint256", "name": "swerveAmt", "type": "uint256" },
+      { "internalType": "uint256", "name": "unitAmt", "type": "uint256" },
+      { "internalType": "uint256", "name": "virtualPrice", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "token", "type": "address" },
+      { "internalType": "uint256", "name": "swerveAmt", "type": "uint256" },
+      { "internalType": "uint256", "name": "slippage", "type": "uint256" }
+    ],
+    "name": "getWithdrawTokenAmount",
+    "outputs": [
+      { "internalType": "uint256", "name": "tokenAmt", "type": "uint256" },
+      { "internalType": "uint256", "name": "unitAmt", "type": "uint256" },
+      { "internalType": "uint256", "name": "virtualPrice", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "name",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

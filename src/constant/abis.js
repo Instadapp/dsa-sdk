@@ -33,6 +33,7 @@ module.exports = {
     curve_gauge: require("../abi/connectors/curveGauge.json"),
     gelato: require("../abi/connectors/gelato.json"),
     dydx_flash: require("../abi/connectors/dydxFlashloan.json"),
+    swerve: require("../abi/connectors/swerve.json"),
   },
   read: {
     core: require("../abi/read/core.json"),
@@ -52,6 +53,7 @@ module.exports = {
     curve_claim: require("../abi/read/curveClaim.json"),
     chainlink: require("../abi/read/chainlink.json"),
     curve_gauge: require("../abi/read/curveGauge.json"),
+    swerve: require("../abi/read/swerve.json"),
   },
   basic: {
     erc20: require("../abi/basics/erc20.json"),
