@@ -33,7 +33,7 @@ module.exports = class OneInch {
   ) {
     let _slippage = !slippage ? 10 ** 16 : slippage * 10 ** 16;
     _slippage = String(this.math.bigNumInString(_slippage));
-    let _distribution = !distribution ? 100 : distribution;
+    let _distribution = !distribution ? 50 : distribution;
     let _disableDex = !disableDex ? 0 : disableDex;
 
     let _sellToken = this.tokens.isToken(sellToken);
