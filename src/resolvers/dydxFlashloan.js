@@ -45,7 +45,7 @@ module.exports = class DydxFlashLoan {
 
     let encodeSpellsData = this.internal.encodeSpells(spells);
     let argTypes = ["address", "uint256", "address[]", "bytes[]"];
-    return web3.eth.abi.encodeParameters(argTypes, [
+    return this.web3.eth.abi.encodeParameters(argTypes, [
       token,
       amount,
       encodeSpellsData[0],
