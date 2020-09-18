@@ -25,6 +25,7 @@ const CurveSBTC = require("./resolvers/curve_sbtc.js");
 const CurveY = require("./resolvers/curve_y.js");
 const CurveClaim = require("./resolvers/curve_claim.js");
 const CurveGauge = require("./resolvers/curve_gauge.js");
+const Swerve = require("./resolvers/swerve.js");
 const OneInch = require("./resolvers/1inch.js");
 const Dydx = require("./resolvers/dydx.js");
 const DydxFlashloan = require("./resolvers/dydxFlashloan.js");
@@ -98,6 +99,7 @@ module.exports = class DSA {
     this.aave = new Aave(this);
     this.uniswap = new Uniswap(this);
     this.dydx_flash = new DydxFlashloan(this);
+    this.swerve = new Swerve(this);
 
     // defining methods to simplify the calls for frontend developers
     this.sendTxn = this.txnUtil.send; // send transaction // node || browser

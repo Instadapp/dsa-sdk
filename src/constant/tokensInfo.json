@@ -275,10 +275,17 @@
     "decimals": 18
   },
   "crv": {
-    "type": "curvetoken",
+    "type": "token",
     "symbol": "CRV",
     "name": "Curve token",
     "address": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+    "decimals": 18
+  },
+  "swusd": {
+    "type": "swervetoken",
+    "symbol": "swUSD",
+    "name": "Swerve token",
+    "address": "0x77C6E4a580c0dCE4E5c7a17d0bc077188a83A059",
     "decimals": 18
   },
   "aeth": {
