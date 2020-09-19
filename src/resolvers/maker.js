@@ -99,7 +99,8 @@ var colInfo = {
     typeBytes:
       "0x5041585553442d41000000000000000000000000000000000000000000000000",
   },
-  "TUSD-A": { // Unavailable due to a token upgrade.
+  "TUSD-A": {
+    // Unavailable due to a token upgrade.
     token: "TUSD",
     ratio: 5 / 6,
     joinAddr: "0x4454aF7C8bb9463203b66C816220D41ED7837f44",
