@@ -33,6 +33,7 @@ const Aave = require("./resolvers/aave.js");
 const Uniswap = require("./resolvers/uniswap.js");
 const Tokens = require("./resolvers/tokens.js");
 const ChainLinkPrices = require("./resolvers/chainLink.js");
+const CurveThree = require("./resolvers/curve_three.js");
 
 // Gnosis Safe
 const GnosisSafe = require("./gnosis-safe/index.js");
@@ -100,6 +101,7 @@ module.exports = class DSA {
     this.uniswap = new Uniswap(this);
     this.dydx_flash = new DydxFlashloan(this);
     this.swerve = new Swerve(this);
+    this.curve_three = new CurveThree(this);
 
     // defining methods to simplify the calls for frontend developers
     this.sendTxn = this.txnUtil.send; // send transaction // node || browser

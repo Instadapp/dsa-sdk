@@ -37,6 +37,7 @@ module.exports = {
     gelato: "0x37A7009d424951dd5D5F155fA588D9a03C455163",
     dydx_flash: "0xE5a7bdd3336245142Ad3a153838ecFB490A5e044",
     swerve: "0x8b302dc8a97a63eb468715b8c30f7003b86e9f01",
+    curve_three: "0x1568a9D336A7aC051DCC4bdcc4A0B09299DE5Daf",
   },
   read: {
     core: "0x621AD080ad3B839e7b19e040C77F05213AB71524",
@@ -57,5 +58,6 @@ module.exports = {
     chainlink: "0xF72Ee0Cc52C119F00B19c35a4d4ee2f445573D3e",
     curve_gauge: "0x3Dfb98C045d4f4Be168bBE60ba2eb0A3ccf8fBC3",
     swerve: "0x51432D11431cE6280FF8CFC61C280b3B27E67B28",
+    curve_three: "0x65c20364071C5dd21081fd1e0D9DbC72C8a87CC0",
   },
 };
