@@ -18,6 +18,7 @@ const Account = require("./resolvers/account.js");
 const Compound = require("./resolvers/compound.js");
 const Maker = require("./resolvers/maker.js");
 const InstaPool = require("./resolvers/instapool.js");
+const InstaPoolV2 = require("./resolvers/instapool_v2.js");
 const Oasis = require("./resolvers/oasis.js");
 const Kyber = require("./resolvers/kyber.js");
 const CurveSUSD = require("./resolvers/curve_susd.js");
@@ -102,6 +103,7 @@ module.exports = class DSA {
     this.dydx_flash = new DydxFlashloan(this);
     this.swerve = new Swerve(this);
     this.curve_three = new CurveThree(this);
+    this.instapool_v2 = new InstaPoolV2(this);
 
     // defining methods to simplify the calls for frontend developers
     this.sendTxn = this.txnUtil.send; // send transaction // node || browser

@@ -38,6 +38,7 @@ module.exports = {
     dydx_flash: "0xE5a7bdd3336245142Ad3a153838ecFB490A5e044",
     swerve: "0x8b302dc8a97a63eb468715b8c30f7003b86e9f01",
     curve_three: "0x1568a9D336A7aC051DCC4bdcc4A0B09299DE5Daf",
+    instapool_v2: "0xaa3ea0b22802d68da73d5f4d3f9f1c7c238fe03a",
   },
   read: {
     core: "0x621AD080ad3B839e7b19e040C77F05213AB71524",
@@ -59,5 +60,6 @@ module.exports = {
     curve_gauge: "0x3Dfb98C045d4f4Be168bBE60ba2eb0A3ccf8fBC3",
     swerve: "0x51432D11431cE6280FF8CFC61C280b3B27E67B28",
     curve_three: "0x65c20364071C5dd21081fd1e0D9DbC72C8a87CC0",
+    instapool_v2: "0x9aa3381559db86c7970be7d5a7e10ca3d297f3b7",
   },
 };
