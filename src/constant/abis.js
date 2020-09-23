@@ -35,6 +35,7 @@ module.exports = {
     dydx_flash: require("../abi/connectors/dydxFlashloan.json"),
     swerve: require("../abi/connectors/swerve.json"),
     curve_three: require("../abi/connectors/curve_3pool.json"),
+    instapool_v2: require("../abi/connectors/instapool_v2.json"),
   },
   read: {
     core: require("../abi/read/core.json"),
@@ -56,6 +57,7 @@ module.exports = {
     curve_gauge: require("../abi/read/curveGauge.json"),
     swerve: require("../abi/read/swerve.json"),
     curve_three: require("../abi/read/curve_3pool.json"),
+    instapool_v2: require("../abi/read/instapool_v2.json"),
   },
   basic: {
     erc20: require("../abi/basics/erc20.json"),
