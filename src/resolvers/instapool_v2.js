@@ -11,20 +11,20 @@ module.exports = class DydxFlashLoan {
     }
   
     async getLiquidity(tokensArr) {
-        let _tokens = {};
+        let _tokens = [];
         let _tokensAddrArr = [];
         if (tokensArr) {
             tokensArr.forEach(x => {
                 let token = this.tokens.info[x.toLowerCase()];
                 if (!token) `${x} not found in sdk token list`;
-                _tokens[x.toLowerCase()] = token
                 _tokensAddrArr.push(token.address)
+                _tokens.push(x.toLowerCase());
             });
         } else {
-            _tokens = this.tokens.getTokenByType("token");
-            _tokensAddrArr = Object.values(this.tokens.getTokensField("address", _tokens));
+            let _atoken = this.tokens.getTokenByType("atoken");
+            _tokens = Object.values(_atoken).map(a => a.root);
+            _tokensAddrArr = _tokens.map(b => this.tokens.info[b].address);
         }
-
         var _obj = {
             protocol: "instapool_v2",
             method: "getTokensLimit",
@@ -36,7 +36,7 @@ module.exports = class DydxFlashLoan {
           .read(_obj)
           .then((res) => {
                 let _liquidityAvailable = {}
-                Object.keys(_tokens).forEach((token, i) => {
+                _tokens.forEach((token, i) => {
                     _liquidityAvailable[token] = {
                         dydx: this.tokens.toDecimal(res[i].dydx, token),
                         aave: res[i].aave / 1e18,
