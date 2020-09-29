@@ -1,34 +1,93 @@
 [
   {
-    "inputs": [],
-    "name": "connectorID",
-    "outputs": [
+    "anonymous": false,
+    "inputs": [
       {
+        "indexed": false,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
         "internalType": "uint256",
-        "name": "model",
+        "name": "times",
         "type": "uint256"
       },
       {
+        "indexed": false,
+        "internalType": "address[]",
+        "name": "cTokens",
+        "type": "address[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256[]",
+        "name": "cTknBals",
+        "type": "uint256[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256[]",
+        "name": "borrowBals",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "LogImport",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "indexed": false,
         "internalType": "uint256",
-        "name": "id",
+        "name": "amt",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "getId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "setId",
         "type": "uint256"
       }
+    ],
+    "name": "LogImportPayback",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "connectorID",
+    "outputs": [
+      { "internalType": "uint256", "name": "model", "type": "uint256" },
+      { "internalType": "uint256", "name": "id", "type": "uint256" }
     ],
     "stateMutability": "pure",
     "type": "function"
   },
   {
     "inputs": [
-      {
-        "internalType": "address[]",
-        "name": "tokens",
-        "type": "address[]"
-      },
-      {
-        "internalType": "uint256",
-        "name": "times",
-        "type": "uint256"
-      }
+      { "internalType": "address", "name": "userAccount", "type": "address" },
+      { "internalType": "address[]", "name": "tokens", "type": "address[]" },
+      { "internalType": "uint256", "name": "times", "type": "uint256" }
     ],
     "name": "importCompound",
     "outputs": [],
@@ -37,30 +96,22 @@
   },
   {
     "inputs": [
-      {
-        "internalType": "address",
-        "name": "token",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amt",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "getId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "setId",
-        "type": "uint256"
-      }
+      { "internalType": "address", "name": "userAccount", "type": "address" },
+      { "internalType": "address", "name": "token", "type": "address" },
+      { "internalType": "uint256", "name": "amt", "type": "uint256" },
+      { "internalType": "uint256", "name": "getId", "type": "uint256" },
+      { "internalType": "uint256", "name": "setId", "type": "uint256" }
     ],
     "name": "importPaybackBehalf",
     "outputs": [],
     "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "name",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
     "type": "function"
   }
 ]
