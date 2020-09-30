@@ -100,7 +100,6 @@ var colInfo = {
       "0x5041585553442d41000000000000000000000000000000000000000000000000",
   },
   "TUSD-A": {
-    // Unavailable due to a token upgrade.
     token: "TUSD",
     ratio: 5 / 6,
     joinAddr: "0x4454aF7C8bb9463203b66C816220D41ED7837f44",
@@ -109,6 +108,36 @@ var colInfo = {
     price: 0,
     typeBytes:
       "0x545553442d410000000000000000000000000000000000000000000000000000",
+  },
+  "COMP-A": {
+    token: "COMP",
+    ratio: 4 / 7,
+    joinAddr: "0xBEa7cDfB4b49EC154Ae1c0D731E4DC773A3265aA",
+    addr: "0xc00e94Cb662C3520282E6f5717214004A7f26888",
+    stabiltyRate: 0,
+    price: 0,
+    typeBytes:
+      "0x434f4d502d410000000000000000000000000000000000000000000000000000",
+  },
+  "LINK-A": {
+    token: "LINK",
+    ratio: 4 / 7,
+    joinAddr: "0xdFccAf8fDbD2F4805C174f856a317765B49E4a50",
+    addr: "0x514910771AF9Ca656af840dff83E8264EcF986CA",
+    stabiltyRate: 0,
+    price: 0,
+    typeBytes:
+      "0x4c494e4b2d410000000000000000000000000000000000000000000000000000",
+  },
+  "LRC-A": {
+    token: "LRC",
+    ratio: 4 / 7,
+    joinAddr: "0xBBbbCA6A901c926F240b89EacB641d8Aec7AEafD",
+    addr: "0x6C186404A7A238D3d6027C0299D1822c1cf5d8f1",
+    stabiltyRate: 0,
+    price: 0,
+    typeBytes:
+      "0x4c52432d41000000000000000000000000000000000000000000000000000000",
   },
 };
 

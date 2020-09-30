@@ -174,6 +174,13 @@
     "address": "0x0000000000004946c0e9F43F4Dee607b0eF1fA1c",
     "decimals": 0
   },
+  "lrc": {
+    "type": "token",
+    "symbol": "LRC",
+    "name": "Loopring Coin V2",
+    "address": "0xBBbbCA6A901c926F240b89EacB641d8Aec7AEafD",
+    "decimals": 18
+  },
   "enj": {
     "type": "token",
     "symbol": "ENJ",
