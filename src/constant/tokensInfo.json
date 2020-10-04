@@ -251,6 +251,15 @@
     "factor": 0.6,
     "root": "bat"
   },
+  "cuni": {
+    "type": "ctoken",
+    "symbol": "CUNI",
+    "name": "Compound UNI",
+    "address": "0x35A18000230DA775CAc24873d00Ff85BccdeD550",
+    "decimals": 8,
+    "factor": 0.6,
+    "root": "uni"
+  },
   "cwbtc": {
     "type": "ctoken",
     "symbol": "CWBTC",
