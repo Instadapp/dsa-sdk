@@ -266,7 +266,7 @@
     "name": "Compound WBTC",
     "address": "0xc11b1268c1a384e55c48c2391d8d480264a3a7f4",
     "decimals": 8,
-    "factor": 0.4,
+    "factor": 0.6,
     "root": "wbtc"
   },
   "curvesusd": {
