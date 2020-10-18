@@ -224,6 +224,15 @@
     "factor": 0,
     "root": "usdt"
   },
+  "ccomp": {
+    "type": "ctoken",
+    "symbol": "CCOMP",
+    "name": "Compound COMP",
+    "address": "0x70e36f6BF80a52b3B46b3aF8e106CC0ed743E8e4",
+    "decimals": 8,
+    "factor": 0.6,
+    "root": "comp"
+  },
   "czrx": {
     "type": "ctoken",
     "symbol": "CZRX",
