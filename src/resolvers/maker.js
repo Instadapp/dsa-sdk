@@ -9,6 +9,16 @@ var colInfo = {
     typeBytes:
       "0x4554482d41000000000000000000000000000000000000000000000000000000",
   },
+  "ETH-B": {
+    token: "ETH",
+    ratio: 10 / 13,
+    joinAddr: "0x08638eF1A205bE6762A8b935F5da9b700Cf7322c",
+    addr: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+    stabiltyRate: 0,
+    price: 0,
+    typeBytes:
+      "0x4554482d42000000000000000000000000000000000000000000000000000000",
+  },
   "BAT-A": {
     token: "BAT",
     ratio: 2 / 3,
