@@ -60,6 +60,6 @@ module.exports = {
     curve_gauge: "0x3Dfb98C045d4f4Be168bBE60ba2eb0A3ccf8fBC3",
     swerve: "0x51432D11431cE6280FF8CFC61C280b3B27E67B28",
     curve_three: "0x65c20364071C5dd21081fd1e0D9DbC72C8a87CC0",
-    instapool_v2: "0x9aa3381559db86c7970be7d5a7e10ca3d297f3b7",
+    instapool_v2: "0xa004a5afba04b74037e9e52ba1f7eb02b5e61509",
   },
 };
