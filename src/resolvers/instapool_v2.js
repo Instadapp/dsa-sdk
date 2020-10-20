@@ -24,10 +24,11 @@ module.exports = class DydxFlashLoan {
       let _atoken = this.tokens.getTokenByType("atoken");
       _tokens = Object.values(_atoken).map((a) => a.root);
       let _ctoken = this.tokens.getTokenByType("ctoken");
-      let _ctokenRoot = Object.values(_ctoken).filter(a => _tokens.indexOf(a.root) === -1).map(a => a.root)
-      _tokens = [..._tokens , ..._ctokenRoot ]
+      let _ctokenRoot = Object.values(_ctoken)
+        .filter((a) => _tokens.indexOf(a.root) === -1)
+        .map((a) => a.root);
+      _tokens = [..._tokens, ..._ctokenRoot];
       _tokensAddrArr = _tokens.map((b) => this.tokens.info[b].address);
-
     }
     var _obj = {
       protocol: "instapool_v2",
