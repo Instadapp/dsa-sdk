@@ -466,6 +466,15 @@
     "factor": 0.4,
     "root": "yfi"
   },
+  "auni": {
+    "type": "atoken",
+    "symbol": "AUNI",
+    "name": "Aave UNI",
+    "address": "0xB124541127A0A657f056D9Dd06188c4F1b0e5aab",
+    "decimals": 18,
+    "factor": 0.4,
+    "root": "uni"
+  },
   "azrx": {
     "type": "atoken",
     "symbol": "AZRX",
