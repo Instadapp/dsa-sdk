@@ -132,6 +132,13 @@
     "address": "0x80fB784B7eD66730e8b1DBd9820aFD29931aab03",
     "decimals": 18
   },
+  "aave": {
+    "type": "token",
+    "symbol": "AAVE",
+    "name": "AAVE Token",
+    "address": "0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9",
+    "decimals": 18
+  },
   "link": {
     "type": "token",
     "symbol": "LINK",
@@ -348,6 +355,15 @@
     "decimals": 6,
     "factor": 0,
     "root": "usdt"
+  },
+  "aaave": {
+    "type": "atoken",
+    "symbol": "AAAVE",
+    "name": "aAAVE Token",
+    "address": "0xba3D9687Cf50fE253cd2e1cFeEdE1d6787344Ed5",
+    "decimals": 18,
+    "factor": 0.5,
+    "root": "aave"
   },
   "asusd": {
     "type": "atoken",
