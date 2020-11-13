@@ -132,6 +132,13 @@
     "address": "0x80fB784B7eD66730e8b1DBd9820aFD29931aab03",
     "decimals": 18
   },
+  "bal": {
+    "type": "token",
+    "symbol": "BAL",
+    "name": "Balancer Token",
+    "address": "0xba100000625a3754423978a60c9317c58a424e3D",
+    "decimals": 18
+  },
   "aave": {
     "type": "token",
     "symbol": "AAVE",
