@@ -129,6 +129,26 @@ var colInfo = {
     typeBytes:
       "0x434f4d502d410000000000000000000000000000000000000000000000000000",
   },
+  "YFI-A": {
+    token: "YFI",
+    ratio: 4 / 7,
+    joinAddr: "0x3ff33d9162aD47660083D7DC4bC02Fb231c81677",
+    addr: "0x0bc529c00C6401aEF6D220BE8C6Ea1667F6Ad93e",
+    stabiltyRate: 0,
+    price: 0,
+    typeBytes:
+      "0x5946492d41000000000000000000000000000000000000000000000000000000",
+  },
+  "BAL-A": {
+    token: "BAL",
+    ratio: 4 / 7,
+    joinAddr: "0x4a03Aa7fb3973d8f0221B466EefB53D0aC195f55",
+    addr: "0xba100000625a3754423978a60c9317c58a424e3D",
+    stabiltyRate: 0,
+    price: 0,
+    typeBytes:
+      "0x42414c2d41000000000000000000000000000000000000000000000000000000",
+  },
   "LINK-A": {
     token: "LINK",
     ratio: 4 / 7,
