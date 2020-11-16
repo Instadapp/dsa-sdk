@@ -23,7 +23,7 @@ module.exports = {
     curve_susd: "0xC74902Ad45C8223da10EfdCfF2DeD12184e9D9b5",
     curve_sbtc: "0xe3bC928D9DAA89A0f08Cf77b227B7080B9a5105d",
     curve_y: "0x861a2250FcDBe57041289623561D5D79585DF5dc",
-    oneInch: "0x1Ed5b56aeDA6fc45d40CBE1fe1EE4DFbE7A10c16",
+    oneInch: "0xC639E779eBEDCC9394DD534a3cf8A2d164f1Ee97",
     dydx: "0x6AF6C791c869DfA65f8A2fa042fA47D1535Bef25",
     aave: "0x3fd79E82CCAc22A1c1b504e8a04bec133CB3f282",
     migrate: "0xcb5cbc3f397e0024fac67cf6dd465e02ca91c215",
@@ -39,6 +39,7 @@ module.exports = {
     swerve: "0x8b302dc8a97a63eb468715b8c30f7003b86e9f01",
     curve_three: "0x1568a9D336A7aC051DCC4bdcc4A0B09299DE5Daf",
     instapool_v2: "0x3150e5A805577366816A1ddc7330c6Ea17070c05",
+    math: "0xa007f98ab41b0b4520701cb2ac75e802c460db4c",
   },
   read: {
     core: "0x621AD080ad3B839e7b19e040C77F05213AB71524",
