@@ -13,7 +13,7 @@ module.exports = {
     basic: "0x6a31c5982C5Bc5533432913cf06a66b6D3333a95",
     auth: "0xd1aff9f2acf800c876c409100d6f39aea93fc3d9",
     authority: "0xd1aff9f2acf800c876c409100d6f39aea93fc3d9", // same address as of "auth" to not break things with upgrade
-    compound: "0x07F81230d73a78f63F0c2A3403AD281b067d28F8",
+    compound: "0x15fdd1e902cac70786fe7d31013b1a806764b5a2",
     maker: "0x6c4E4D4aB22cAB08b8498a3A232D92609e8b2d62",
     maker_old: "0xac02030d8a8F49eD04b2f52C394D3F901A10F8A9",
     instapool: "0xCeF5f3c402d4fef76A038e89a4357176963e1464",
@@ -38,7 +38,8 @@ module.exports = {
     dydx_flash: "0xE5a7bdd3336245142Ad3a153838ecFB490A5e044",
     swerve: "0x8b302dc8a97a63eb468715b8c30f7003b86e9f01",
     curve_three: "0x1568a9D336A7aC051DCC4bdcc4A0B09299DE5Daf",
-    instapool_v2: "0x3150e5A805577366816A1ddc7330c6Ea17070c05",
+    instapool_v2: "0xeb4bf86589f808f90eec8e964dbf16bd4d284905",
+    compoundImport_v2: "0x85b669261c2a65db4cd48e22ec134a09c2271568",
     math: "0xa007f98ab41b0b4520701cb2ac75e802c460db4c",
   },
   read: {

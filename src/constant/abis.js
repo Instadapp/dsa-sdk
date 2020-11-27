@@ -36,6 +36,8 @@ module.exports = {
     swerve: require("../abi/connectors/swerve.json"),
     curve_three: require("../abi/connectors/curve_3pool.json"),
     instapool_v2: require("../abi/connectors/instapool_v2.json"),
+    math: require("../abi/connectors/math.json"),
+    compoundImport_v2: require("../abi/connectors/compoundImport_v2.json"),
   },
   read: {
     core: require("../abi/read/core.json"),
