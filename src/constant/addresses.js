@@ -41,6 +41,7 @@ module.exports = {
     instapool_v2: "0xeb4bf86589f808f90eec8e964dbf16bd4d284905",
     compoundImport_v2: "0x85b669261c2a65db4cd48e22ec134a09c2271568",
     math: "0xa007f98ab41b0b4520701cb2ac75e802c460db4c",
+    aave_v2: "0xBF6E4331ffd02F7043e62788FD272aeFc712f5ee",
   },
   read: {
     core: "0x621AD080ad3B839e7b19e040C77F05213AB71524",

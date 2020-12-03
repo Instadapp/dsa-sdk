@@ -38,6 +38,7 @@ module.exports = {
     instapool_v2: require("../abi/connectors/instapool_v2.json"),
     math: require("../abi/connectors/math.json"),
     compoundImport_v2: require("../abi/connectors/compoundImport_v2.json"),
+    aave_v2: require("../abi/connectors/aave_v2.json"),
   },
   read: {
     core: require("../abi/read/core.json"),
