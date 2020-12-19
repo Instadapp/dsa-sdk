@@ -10,7 +10,7 @@ module.exports = {
     dydx_flash: "0xf5b16af97B5CBa4Babe786238FF6016daE6bb890",
   },
   connectors: {
-    basic: "0x6a31c5982C5Bc5533432913cf06a66b6D3333a95",
+    basic: "0xe5398f279175962E56fE4c5E0b62dc7208EF36c6",
     auth: "0xd1aff9f2acf800c876c409100d6f39aea93fc3d9",
     authority: "0xd1aff9f2acf800c876c409100d6f39aea93fc3d9", // same address as of "auth" to not break things with upgrade
     compound: "0x15fdd1e902cac70786fe7d31013b1a806764b5a2",
@@ -25,7 +25,7 @@ module.exports = {
     curve_y: "0x861a2250FcDBe57041289623561D5D79585DF5dc",
     oneInch: "0xC639E779eBEDCC9394DD534a3cf8A2d164f1Ee97",
     dydx: "0x6AF6C791c869DfA65f8A2fa042fA47D1535Bef25",
-    aave: "0x3fd79E82CCAc22A1c1b504e8a04bec133CB3f282",
+    aave: "0x1d662Fe55b10759CE69c3A6805259eb545BD5738",
     migrate: "0xcb5cbc3f397e0024fac67cf6dd465e02ca91c215",
     compoundImport: "0xdc9f393d5f4c12f1c1049035c20d58bd624510e3",
     uniswap: "0x62EbfF47B2Ba3e47796efaE7C51676762dC961c0",
@@ -34,15 +34,16 @@ module.exports = {
     chi: "0xb86437e80709015d05354c35e54b7c8b11a58687",
     curve_claim: "0xF5e14d35706971B6AaD7A67B1A8E9a1EF7870Be9",
     curve_gauge: "0xAf615b36Db171fD5A369A0060b9bCB88fFf0190d",
-    gelato: "0x37A7009d424951dd5D5F155fA588D9a03C455163",
+    gelato: "0x25aD59adbe00C2d80c86d01e2E05e1294DA84823",
     dydx_flash: "0xE5a7bdd3336245142Ad3a153838ecFB490A5e044",
     swerve: "0x8b302dc8a97a63eb468715b8c30f7003b86e9f01",
     curve_three: "0x1568a9D336A7aC051DCC4bdcc4A0B09299DE5Daf",
     instapool_v2: "0xeb4bf86589f808f90eec8e964dbf16bd4d284905",
     compoundImport_v2: "0x85b669261c2a65db4cd48e22ec134a09c2271568",
     math: "0xa007f98ab41b0b4520701cb2ac75e802c460db4c",
-    aave_v2: "0xBF6E4331ffd02F7043e62788FD272aeFc712f5ee",
+    aave_v2: "0x53Edf7Fc8bB9c249694EA0a2174043553b34Db27",
     aave_migrate: "0xd3914a73367F8015070f073D5C69602F3a48B80D",
+    fee: "0xB99152F8073033B318C1Bfbfaaa582029e982CE9"
   },
   read: {
     core: "0x621AD080ad3B839e7b19e040C77F05213AB71524",
