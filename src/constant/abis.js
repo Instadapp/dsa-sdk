@@ -43,6 +43,7 @@ module.exports = {
     fee: require("../abi/connectors/fee.json"),
     refinance: require("../abi/connectors/refinance.json"),
     aave_v2_import: require("../abi/connectors/aaveV2_import.json"),
+    aave_v1_import: require("../abi/connectors/aaveV1_import.json"),
   },
   read: {
     core: require("../abi/read/core.json"),
