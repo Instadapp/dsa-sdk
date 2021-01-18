@@ -45,7 +45,7 @@ module.exports = {
     aave_migrate: "0xd3914a73367F8015070f073D5C69602F3a48B80D",
     fee: "0x5fa9455cE54BD5723443C6D3D614693E3429B57F",
     refinance: "0x0D16C7134ce24D1e22D64bC7bc0B4862Faa9AdB9",
-    aave_v2_import: "0x4be993C5ceAA43BB55835151FfeD2b4b270566E5",
+    aave_v2_import: "0x2525Cf08D64342b4f55a5B80C91551B2B2D8adCd",
     aave_v1_import: "0x204703745542e4c47418a2BD6c39b5D3D56DcF6B",
   },
   read: {
