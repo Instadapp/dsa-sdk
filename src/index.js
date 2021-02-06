@@ -261,7 +261,7 @@ module.exports = class DSA {
    */
   async buildTxObj(_d) {
     if (!_d) _d = {};
-    if (!_d.authority) throw new Error("_d.authority is not found.")
+    if (!_d.authority) throw new Error("_d.authority is not found.");
     if (!_d.version) _d.version = 1;
     if (!_d.origin) _d.origin = this.origin;
     _d.to = this.address.core.index;

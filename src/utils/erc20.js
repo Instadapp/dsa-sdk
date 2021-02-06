@@ -95,7 +95,7 @@ module.exports = class Erc20 extends Erc20Resolver {
         throw new Error("'to' is not defined and instance is not set.");
     }
     if (!_d.amount) throw new Error("'amount' is not defined");
-    if (!_d.from) _d.from = await this.internal.getAddress();;
+    if (!_d.from) _d.from = await this.internal.getAddress();
 
     let txObj;
     if (
