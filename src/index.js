@@ -253,7 +253,7 @@ module.exports = class DSA {
 
   /**
    * build new DSA txObj
-   * @param {address} _d.authority (optional)
+   * @param {address} _d.authority
    * @param {address} _d.origin (optional)
    * @param {number|string} _d.gasPrice (optional) not optional in "node"
    * @param {number|string} _d.gas (optional) not optional in "node"
@@ -261,7 +261,7 @@ module.exports = class DSA {
    */
   async buildTxObj(_d) {
     if (!_d) _d = {};
-    if (!_d.authority) _d.authority = _addr;
+    if (!_d.authority) throw new Error("_d.authority is not found.")
     if (!_d.version) _d.version = 1;
     if (!_d.origin) _d.origin = this.origin;
     _d.to = this.address.core.index;

@@ -87,7 +87,6 @@ module.exports = class Erc20 extends Erc20Resolver {
    * @param {number|string} _d.gas (optional)
    */
   async transferTxObj(_d) {
-    let _addr = await this.internal.getAddress();
     let _dsa = !this.dsa ? this : this.dsa;
     if (!_d.token) throw new Error("'token' is not defined.");
     if (!_d.to) {
@@ -96,7 +95,7 @@ module.exports = class Erc20 extends Erc20Resolver {
         throw new Error("'to' is not defined and instance is not set.");
     }
     if (!_d.amount) throw new Error("'amount' is not defined");
-    if (!_d.from) _d.from = _addr;
+    if (!_d.from) _d.from = await this.internal.getAddress();;
 
     let txObj;
     if (
@@ -186,12 +185,10 @@ module.exports = class Erc20 extends Erc20Resolver {
    * @param {number|string} _d.gas (optional)
    */
   async approveTxObj(_d) {
-    let _addr = await this.internal.getAddress();
-    let _dsa = this.dsa;
     if (!_d.token) throw new Error("'token' is not defined.");
     if (!_d.to) throw new Error("'to' address is not defined");
     if (!_d.amount) throw new Error("'amount' is not defined");
-    if (!_d.from) _d.from = _addr;
+    if (!_d.from) _d.from = await this.internal.getAddress();
 
     let txObj;
     if (
