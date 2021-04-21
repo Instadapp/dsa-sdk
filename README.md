@@ -1,3 +1,3 @@
 # DeFi Smart Account SDK
 
-Be sure to learn about it from [Instadapp Docs](https://docs.instadapp.io).
+This has been archived. See the [latest SDK](https://github.com/Instadapp/dsa-connect)
